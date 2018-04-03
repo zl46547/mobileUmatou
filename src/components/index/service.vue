@@ -1,0 +1,43 @@
+<template>
+  <div class="service">
+    <ul>
+      <li><i class="icon-ok"><span>自营品牌</span></i></li>
+      <li><i class="icon-ok"><span>无忧退货</span></i></li>
+      <li><i class="icon-ok"><span>481小时快速退款</span></i></li>
+    </ul>
+  </div>
+</template>
+
+<script type="text/ecmascript-6">
+export default {}
+</script>
+
+<style lang="less" scoped>
+  @import '../../assets/fz.less';
+  @import '../../assets/index/style.css';
+
+  .service {
+    .bd();
+    ul {
+      display: -webkit-flex;
+      display: -ms-flex;
+      display: flex;
+      justify-content: space-around;
+
+      li {
+        display: -webkit-flex;
+        display: -ms-flex;
+        display: flex;
+        align-items: center;
+        padding: 3.3vw 0;
+        span {
+          .fz(font-size,28);
+          padding-left: 1vw;
+        }
+        i {
+          .fz(font-size,36);
+        }
+      }
+    }
+  }
+</style>

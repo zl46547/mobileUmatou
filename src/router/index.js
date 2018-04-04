@@ -3,7 +3,7 @@ import Router from 'vue-router'
 // 按需加载,当渲染其他页面时才加载其组件,并缓存,减少首屏加载时间
 const Index = resolve => require(['@/views/Index.vue'], resolve)
 const Detail = resolve => require(['@/views/Detail.vue'], resolve)
-// const CategoryMain = resolve => require(['@/components/category/main.vue'], resolve)
+const CategoryMain = resolve => require(['@/components/category/main.vue'], resolve)
 const Category = resolve => require(['@/views/Category.vue'], resolve)
 const Car = resolve => require(['@/views/Car.vue'], resolve)
 const User = resolve => require(['@/views/User.vue'], resolve)
@@ -26,12 +26,12 @@ export default new Router({
       name: '分类页',
       redirect: '/category/all',
       component: Category,
-//      children: [
-//        {
-//          path: '/category/:tab',
-//          component: CategoryMain
-//        }
-//      ]
+     children: [
+       {
+         path: '/category/:tab',
+         component: CategoryMain
+       }
+     ]
     },
     {
       path: '/car',

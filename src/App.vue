@@ -1,23 +1,23 @@
 <template>
-  <div>
+  <div id="app">
     <router-view></router-view>
-    <v-loanding v-show="fetchLoading"></v-loanding>
+    <v-loading v-show="fetchLoading"></v-loading>
   </div>
 </template>
 
 <script>
-import Loading from '@/common/_loading'
+  import Loading from '@/common/_loading'
 
-export default {
-  components: {
-    'VLoanding': Loading
-  },
-  computed: {
-    fetchLoading () {
-      return this.$store.state.detail.fetchLoading // 根据vuex获取loading状态
+  export default {
+    components: {
+      'v-loading': Loading
+    },
+    computed: {
+      fetchLoading() {
+        return this.$store.state.detail.fetchLoading
+      }
     }
   }
-}
 </script>
 
 <style lang="less">
@@ -136,4 +136,6 @@ export default {
   .ac {
     text-align: center;
   }
+
+
 </style>

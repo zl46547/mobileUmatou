@@ -1,12 +1,14 @@
 <template>
-  <div class="main" v-if="datas">
+  <div class="main" v-if="data">
     <h2>详细分类页</h2>
     <ul>
-      <li v-for="k in datas.categoryDetail[id]" :key="k.ProductId">
-      <router-link :to="{name:'详细页'}">
-      <!--<img v-lazy="'http://picpro-sz.34580.com/sz/ImageUrl/' +k.PictureId+ '/160.jpeg'" alt="">-->
-      <!--<span>{{k.Name}}</span>-->
-      </router-link>
+      <li v-for="k in data" :key="k.ProductId">
+        <router-link :to="{name:'详细页'}">
+          <img v-lazy="'http://picpro-sz.34580.com/sz/ImageUrl/' +k.PictureId+ '/500.jpeg'" alt="">
+          <p>{{k.ProductName}}</p>
+          <p>{{k.PvStandard}}</p>
+          <p>{{k.PeriodMoney}}</p>
+        </router-link>
       </li>
     </ul>
   </div>
@@ -16,10 +18,8 @@
   export default {
     data () {
       return {
-        datas: {
-          id: '',
-          datas:[]
-        }
+        id: '',
+        data: []
       }
     },
     mounted () {
@@ -27,10 +27,10 @@
       this.id = id
       this.$api({
         method: 'get',
-        url: '/shihang/category/categoryDetail.json'
+        url: '/shihang/category/categoryDetail/' + id + '.json'
       }).then((res) => {
         console.log(JSON.stringify(res.data))
-//        this.allData = res.data
+        this.data = res.data.Data.SourceData
       }).catch((error) => {
         console.log(error)
       })
@@ -67,8 +67,7 @@
       flex-wrap: wrap;
 
       li {
-        /*background-color: rgb(247,247,247);*/
-        width: 33%;
+        width: 50%;
         text-align: center;
         a {
           color: #666;

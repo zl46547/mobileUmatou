@@ -29,7 +29,6 @@
         method: 'get',
         url: '/shihang/category/category.json'
       }).then((res) => {
-        console.log(res.data)
         this.allData = res.data
       }).catch((error) => {
         console.log(error)

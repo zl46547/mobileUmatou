@@ -1,12 +1,12 @@
 <template>
   <div class="main" v-if="datas">
-    <h2>{{datas.category[tabIndex].Name}}</h2>
+    <h2>详细分类页</h2>
     <ul>
-      <li v-for="k in datas.category[tabIndex].subCategory" :key="k.Id">
-        <router-link :to="'/categoryDetail/'+k.Id">
-          <img v-lazy="'http://picpro-sz.34580.com/sz/ImageUrl/' +k.PictureId+ '/160.jpeg'" alt="">
-          <span>{{k.Name}}</span>
-        </router-link>
+      <li v-for="k in datas.categoryDetail[id]" :key="k.ProductId">
+      <router-link :to="{name:'详细页'}">
+      <!--<img v-lazy="'http://picpro-sz.34580.com/sz/ImageUrl/' +k.PictureId+ '/160.jpeg'" alt="">-->
+      <!--<span>{{k.Name}}</span>-->
+      </router-link>
       </li>
     </ul>
   </div>
@@ -14,10 +14,30 @@
 
 <script type="text/ecmascript-6">
   export default {
-    props: ['datas'],
-    computed: {
-      tabIndex () {
-        return this.$store.state.category.tabIndex
+    data () {
+      return {
+        datas: {
+          id: '',
+          datas:[]
+        }
+      }
+    },
+    mounted () {
+      var id = this.$route.params.id
+      this.id = id
+      this.$api({
+        method: 'get',
+        url: '/shihang/category/categoryDetail.json'
+      }).then((res) => {
+        console.log(JSON.stringify(res.data))
+//        this.allData = res.data
+      }).catch((error) => {
+        console.log(error)
+      })
+    },
+    watch: {
+      $route () {
+
       }
     }
   }

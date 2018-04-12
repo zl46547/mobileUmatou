@@ -136,6 +136,4 @@
   .ac {
     text-align: center;
   }
-
-
 </style>

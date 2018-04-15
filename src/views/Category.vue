@@ -1,23 +1,26 @@
 <template>
   <div class="wrap">
-    <v-header class="header">
+    <v-header>
       <h1 slot="title">商品分类</h1>
     </v-header>
     <section class="view">
       <v-aside :datas="allData"></v-aside>
       <router-view :datas="allData"></router-view>
     </section>
+    <v-footer></v-footer>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import Header from '@/common/_header.vue'
   import Aside from '@/components/category/aside.vue'
+  import Footer from '@/common/_footer.vue'
 
   export default {
     components: {
       'VHeader': Header,
-      'VAside': Aside
+      'VAside': Aside,
+      'VFooter': Footer
     },
     data () {
       return {
@@ -51,7 +54,8 @@
 
     .view {
       width: 100%;
-      height:100%;
+      height: 100%;
+      margin: 12vw 0 16vw 0;
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;

@@ -31,7 +31,7 @@
     height:100%;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    background-color: gold;
+    background-color: rgb(247,247,247);
     &::-webkit-scrollbar{display: none}
     >ul{
       height:100%;

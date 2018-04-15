@@ -13,7 +13,7 @@
       'v-loading': Loading
     },
     computed: {
-      fetchLoading() {
+      fetchLoading () {
         return this.$store.state.detail.fetchLoading
       }
     }

@@ -5,7 +5,10 @@ import store from '@/vuex/store.js' // vuex
 import api from '@/http/api.js' // http请求
 import Mint from 'mint-ui' // 移动端UI
 import 'mint-ui/lib/style.css'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 
+Vue.use(ElementUI)
 Vue.use(Mint)
 Vue.prototype.$api = api
 Vue.config.productionTip = false

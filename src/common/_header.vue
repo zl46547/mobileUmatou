@@ -1,6 +1,6 @@
 <template>
   <header>
-    <router-link class="icon-go" :to="{name :'首页'}" v-if="$route.matched[0].path == 'category'"></router-link>
+    <router-link class="icon-go" :to="{name :'首页'}" v-if="$route.matched[0].path == '/category'"></router-link>
     <span class="icon-go" @click="$router.go(-1)" v-else></span>
     <slot name="title"></slot>
   </header>
@@ -17,9 +17,12 @@
 @import "../assets/fz";
 
   header{
-    background-color: #F8FCFF;
+    background-color: #fdfdfd;
     text-align: center;
-    position: relative;
+    position:fixed;
+    top: 0px;
+    width:100%;
+    z-index: 9999;
     height: 12vw;
     display: flex;
     align-items: center;
@@ -29,7 +32,7 @@
       .fz(font-size,34);
       letter-spacing: .2vw;
       font-weight: 600;
-      margin-right: 36vw;
+      margin-right: 45vw;
     }
     span,a {
       display: inline-block;

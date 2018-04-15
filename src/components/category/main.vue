@@ -47,7 +47,6 @@
       flex-wrap: wrap;
 
       li {
-        /*background-color: rgb(247,247,247);*/
         width: 33%;
         text-align: center;
         a {

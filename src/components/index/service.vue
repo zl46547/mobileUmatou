@@ -3,7 +3,7 @@
     <ul>
       <li><i class="icon-ok"><span>自营品牌</span></i></li>
       <li><i class="icon-ok"><span>无忧退货</span></i></li>
-      <li><i class="icon-ok"><span>481小时快速退款</span></i></li>
+      <li><i class="icon-ok"><span>48小时快速退款</span></i></li>
     </ul>
   </div>
 </template>

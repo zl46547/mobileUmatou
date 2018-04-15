@@ -1,87 +1,30 @@
 <template>
-  <div class="main" v-if="data">
-    <h2>详细分类页</h2>
-    <ul>
-      <li v-for="k in data" :key="k.ProductId">
-        <router-link :to="{name:'详细页'}">
-          <img v-lazy="'http://picpro-sz.34580.com/sz/ImageUrl/' +k.PictureId+ '/500.jpeg'" alt="">
-          <p>{{k.ProductName}}</p>
-          <p>{{k.PvStandard}}</p>
-          <p>{{k.PeriodMoney}}</p>
-        </router-link>
-      </li>
-    </ul>
+  <div>
+    <v-header>
+      <h1 slot="title">分类详情页</h1>
+    </v-header>
+    <v-category></v-category>
+    <v-footer></v-footer>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  export default {
-    data () {
-      return {
-        id: '',
-        data: []
-      }
-    },
-    mounted () {
-      var id = this.$route.params.id
-      this.id = id
-      this.$api({
-        method: 'get',
-        url: '/shihang/category/categoryDetail/' + id + '.json'
-      }).then((res) => {
-        console.log(JSON.stringify(res.data))
-        this.data = res.data.Data.SourceData
-      }).catch((error) => {
-        console.log(error)
-      })
-    },
-    watch: {
-      $route () {
+  import Header from '@/common/_header.vue'
+  import Category from '@/components/categoryDetail/categoryDetailBody.vue'
+  import Footer from '@/common/_footer.vue'
 
-      }
+  export default {
+    components: {
+      'VHeader': Header,
+      'VCategory': Category,
+      'VFooter': Footer
+    },
+    data () {
+      return {}
     }
   }
 </script>
 
 <style lang="less" scoped>
-  .main {
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
-    flex: 9.8;
-    height: 100%;
-    &::-webkit-scrollbar {
-      display: none
-    }
-    > h2 {
-      font-size: 20px;
-      padding: 2vw 4vw;
-      color: #333;
-      letter-spacing: 2px;
-    }
-    > ul {
-      width: 100%;
-      display: -webkit-flex;
-      display: -ms-flex;
-      display: flex;
-      justify-content: flex-start;
-      flex-wrap: wrap;
 
-      li {
-        width: 50%;
-        text-align: center;
-        a {
-          color: #666;
-          display: block;
-          img {
-            display: block;
-            width: 60%;
-            margin: 4vw auto;
-          }
-          span {
-            text-align: center;
-          }
-        }
-      }
-    }
-  }
 </style>

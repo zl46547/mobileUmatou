@@ -8,6 +8,7 @@ const CategoryMain = resolve => require(['@/components/category/main.vue'], reso
 const Category = resolve => require(['@/views/Category.vue'], resolve)
 const Car = resolve => require(['@/views/Car.vue'], resolve)
 const User = resolve => require(['@/views/User.vue'], resolve)
+const ProductDetail = resolve => require(['@/views/ProductDetail.vue'], resolve)
 Vue.use(Router)
 
 export default new Router({
@@ -48,6 +49,11 @@ export default new Router({
       path: '/user',
       name: '用户页',
       component: User
+    },
+    {
+      path: '/productDetail/:id',
+      name: '商品详情',
+      component: ProductDetail
     }
   ]
 })

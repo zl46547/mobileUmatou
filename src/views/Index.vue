@@ -41,7 +41,7 @@
       'VBaseline': Baseline,
       'VFooter': Footer
     },
-    data () {
+    data() {
       return {
         swiperData: '',
         sectionOneData: '',
@@ -52,7 +52,7 @@
         sectionChickenData: ''
       }
     },
-    beforeCreate () {
+    beforeCreate() {
       /**
        * 获取轮播图数据
        */

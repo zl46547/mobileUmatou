@@ -8,10 +8,10 @@
         <i slot="icon" class="icon-category"></i>分类
       </mt-tab-item>
       <mt-tab-item id="购物车页">
-        <i slot="icon" class="icon-category"></i>购物车
+        <i slot="icon" class="icon-car"></i>购物车
       </mt-tab-item>
       <mt-tab-item id="用户页">
-        <i slot="icon" class="icon-category"></i>我的
+        <i slot="icon" class="icon-user"></i>我的
       </mt-tab-item>
     </mt-tabbar>
   </footer>

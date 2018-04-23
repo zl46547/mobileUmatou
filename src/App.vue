@@ -21,6 +21,9 @@
 </script>
 
 <style lang="less">
+  /* 加载字体样式 */
+  @import "./assets/font/iconfont.css";
+  /* 初始化页面样式 */
   html, body, #app {
     width: 100%;
     height: 100%;
@@ -135,5 +138,13 @@
 
   .ac {
     text-align: center;
+  }
+  .clearFloat:after{
+    content: '';
+    height:0;
+    line-height:0;
+    display: block;
+    visibility: hidden;
+    clear: both;
   }
 </style>

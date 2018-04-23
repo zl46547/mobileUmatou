@@ -38,8 +38,10 @@
 
 <style scoped>
   .content{
+    margin-top: 20px;
      width:100%;
      height:70vw;
+    /*margin-bottom: 2px;*/
    }
   img{
     height:100%;

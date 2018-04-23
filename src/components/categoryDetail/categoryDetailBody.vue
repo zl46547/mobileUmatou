@@ -46,12 +46,12 @@
       width: 100%;
       overflow-y: scroll;
       -webkit-overflow-scrolling: touch;
-      margin: 12vw 0 16vw 0;
-      padding: 2px;
+      margin: 12vw 0 15vw 0;
+      padding: 1px;
       a {
         display: block;
         background-color: #fff;
-        margin: 4px;
+        margin: 2px;
         color: #666;
         img {
           width: 100%;

@@ -1,52 +1,28 @@
 <template>
-  <div>
-    <!--<div class="productName">{{getProductInfo.ProductName}}</div>-->
-    <!--<div class="price">-->
-      <!--<span>¥</span>-->
-      <!--<span>{{getPrice[0]}}</span>-->
-      <!--<span>.</span>-->
-      <!--<span>{{getPrice[1]}}</span>-->
-      <!--<span>/{{getProductInfo.Unit}}</span>-->
-    <!--</div>-->
-    <!--<div class="marketPrice">-->
-      <!--市场价：-->
-      <!--<p>{{getProductInfo.DefaultMoney}}</p>-->
-      <!--<p>已售{{getProductInfo.SoldNumber}}</p>-->
-    <!--</div>-->
+  <div class="content">
+    <div>
+      <div class="productName">{{response.ProductInfo.ProductName}}</div>
+      <div class="price">
+        <span>¥</span>
+        <span>{{response.ProductInfo.PeriodMoney}}</span>
+        <span>/{{response.ProductInfo.Unit}}</span>
+      </div>
+      <div class="marketPrice clearFloat">
+        <p>市场价：</p>
+        <p>{{response.ProductInfo.DefaultMoney}}</p>
+        <p>元/{{response.ProductInfo.Unit}}</p>
+        <p>已售{{response.ProductInfo.SoldNumber}}</p>
+      </div>
+    </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
 
   export default {
-    props: ['productInfo'],
-    components: {},
-    mounted() {
-      console.log(this.productInfo)
-    },
-//    computed: {
-//      getPrice() {
-//        var vm = this
-//        var price = vm.getProductInfo.PeriodMoney.split('.')
-//        return price
-//      },
-//      getProductInfo() {
-//        var vm = this
-//        if (vm.productInfo === '') {
-//          vm.productInfo = vm.product
-//        }
-//        return vm.productInfo
-//      }
-//    },
+    props: ['response'],
     data() {
       return {
-        product: {
-          ProductName: '',
-          PeriodMoney: 0,
-          Unit: '',
-          DefaultMoney: '',
-          SoldNumber: ''
-        }
       }
     },
     methods: {}
@@ -54,6 +30,14 @@
 </script>
 
 <style scoped>
+  .content{
+    width:100%;
+    background-color: #fff;
+    margin-bottom: 2px;
+  }
+  .content>div{
+    padding: 3vw 5vw;
+  }
   .productName {
     margin-bottom: .5rem;
     font-size: 1.125rem;
@@ -61,7 +45,7 @@
   }
 
   .price {
-    font-size: .875rem;
+    font-size: 1rem;
     color: #ff3e3e;
   }
 
@@ -69,20 +53,28 @@
     font-size: 1.25rem;
   }
 
-  .price span:nth-of-type(5) {
+  .price span:nth-of-type(3) {
     color: #999;
+    letter-spacing: 2px;
   }
 
   .marketPrice {
     color: #999;
   }
 
-  .marketPrice p:nth-of-type(1) {
-    text-decoration: line-through;
+  .marketPrice p:nth-of-type(1),p:nth-of-type(2),p:nth-of-type(3)  {
     float: left;
   }
+  .marketPrice p:nth-of-type(2),p:nth-of-type(3)  {
+    text-decoration: line-through;
+    font-size:19px;
+    letter-spacing: 2px;
+  }
 
-  .marketPrice p:nth-of-type(2) {
+  .marketPrice p:nth-of-type(3)  {
+    font-size:16px;
+  }
+  .marketPrice p:nth-of-type(4) {
     float: right;
   }
 </style>

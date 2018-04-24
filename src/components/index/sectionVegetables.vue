@@ -55,4 +55,15 @@ import { Lazyload } from 'mint-ui'
       }
     }
   }
+
+  @media screen and (min-width: 768px) {
+    .sectionVegetables .sectionVegetables-banner {
+      display: block;
+      width:768px;
+      a,img {
+        width:768px;
+        height:258px;
+      }
+    }
+  }
 </style>

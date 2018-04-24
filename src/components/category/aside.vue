@@ -27,7 +27,7 @@
 
 <style lang="less" scoped>
   .aside{
-    flex: 3.2;
+    flex: 3;
     height:100%;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
@@ -44,21 +44,20 @@
           display: block;
           padding:4vw 0;
           position: relative;
-          font-size:16px;
+          font-size:3vw;
         }
         .active{
           position: relative;
-          font-size:18px;
+          font-size:4vw;
           color: #55c955;
           background-color: #fff;
           &::before{
             width:3px;
-            height:28px;
+            height:100%;
             content: "";
             position: absolute;
             left: 0;
-            top:50%;
-            margin-top: -14px;
+            top:0%;
             background-color: #55c955;
           }
         }

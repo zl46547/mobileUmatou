@@ -25,4 +25,14 @@ export default {
     height:100%;
   }
 }
+@media screen and (min-width: 768px) {
+  .mint-swipe{
+    height:404px;
+    a,img {
+      display: block;
+      width: 768px;
+      height:404px;
+    }
+  }
+}
 </style>

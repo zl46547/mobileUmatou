@@ -25,7 +25,6 @@ import { Lazyload } from 'mint-ui'
 @import "../../assets/fz.less";
 @import "../../assets/index/style.css";
   .section1 {
-    .pt();
     .section1-list {
       display: -ms-flex;
       display: -webkit-box;
@@ -55,4 +54,15 @@ import { Lazyload } from 'mint-ui'
       }
     }
   }
+
+@media screen and (min-width: 768px) {
+  .section1 .section1-banner {
+    display: block;
+    width:768px;
+    a,img {
+      width:768px;
+      height:258px;
+    }
+  }
+}
 </style>

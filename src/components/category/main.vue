@@ -27,7 +27,7 @@
   .main {
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
-    flex: 9.8;
+    flex: 12;
     height: 100%;
     &::-webkit-scrollbar {
       display: none

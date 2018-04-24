@@ -89,7 +89,6 @@ import { Lazyload } from 'mint-ui'
   @import "../../assets/index/style.css";
 
   .section2-header {
-    .pt();
     ul {
       display: -ms-flex;
       display: -webkit-box;
@@ -137,7 +136,7 @@ import { Lazyload } from 'mint-ui'
       display: -ms-flexbox;
       display: flex;
       padding: 0 6vw 6vw 6vw;
-      /*width: 380%;*/
+      width: 580%;
       li {
         margin-right: 10vw;
         width: 30vw;
@@ -181,6 +180,23 @@ import { Lazyload } from 'mint-ui'
       display: block;
       height: 38vw;
       width: 100%;
+    }
+  }
+  @media screen and (min-width: 768px) {
+    .section2 {
+      .section2-header {
+        img {
+          width: 136px;
+        }
+      }
+      .section2-banner {
+        display: block;
+        width:768px;
+        a,img {
+          width:768px;
+          height:258px;
+        }
+      }
     }
   }
 </style>

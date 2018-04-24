@@ -3,6 +3,7 @@
     <router-link class="icon-go" :to="{name :'首页'}" v-if="$route.matched[0].path == '/category'"></router-link>
     <span class="icon-go" @click="$router.go(-1)" v-else></span>
     <slot name="title"></slot>
+    <div>&nbsp;</div>
   </header>
 </template>
 
@@ -32,7 +33,6 @@
       .fz(font-size,34);
       letter-spacing: .2vw;
       font-weight: 600;
-      margin-right: 45vw;
     }
     span,a {
       display: inline-block;
@@ -43,4 +43,16 @@
       }
     }
   }
+
+@media screen and (min-width: 768px) {
+  header{
+    width:744px;
+    height: 62px;
+    margin: 0 auto;
+    padding: 0 12px;
+    h1 {
+      margin-right: 0px;
+    }
+  }
+}
 </style>

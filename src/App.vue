@@ -147,4 +147,18 @@
     visibility: hidden;
     clear: both;
   }
+
+  @media screen and (min-width: 768px) {
+    #app {
+      width: 768px;
+      margin: 0 auto;
+      height: 100%;
+      background-color: #fff;
+    }
+    html,body{
+      background-color: #f2f2f2;
+      -webkit-tap-highlight-color: #f2f2f2;
+      height: 100%;
+    }
+  }
 </style>

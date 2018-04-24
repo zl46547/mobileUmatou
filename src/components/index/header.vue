@@ -20,4 +20,10 @@ export default {}
     color: #333 !important;
     .fz(font-size, 40) !important;
   }
+
+  @media screen and (min-width: 768px) {
+    .mint-header {
+      padding: 40px 20px;
+    }
+  }
 </style>

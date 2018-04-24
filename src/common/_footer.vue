@@ -57,6 +57,7 @@
 
   .footer {
     .mint-tabbar {
+      padding: 5px 0;
       background-color: #fff;
       background-image: none;
       box-shadow: 0 0 2.2vw 0 hsla(0, 6%, 50%, .13);
@@ -69,6 +70,14 @@
             color: @cl;
           }
         }
+      }
+    }
+  }
+  @media screen and (min-width: 768px) {
+    .footer{
+      .mint-tabbar{
+        width:768px;
+        margin: 0 auto;
       }
     }
   }

@@ -13,13 +13,13 @@
   export default {
     props: ['response'],
     components: {},
-    data() {
+    data () {
       return {
         bannersList: []
       }
     },
     computed: {
-      getBannersList() {
+      getBannersList () {
         var vm = this
         if (vm.response === '') {
           vm.bannersList = []
@@ -29,22 +29,32 @@
         return this.bannersList
       }
     },
-    mounted() {
+    mounted () {
     },
-    methods: {
-    }
+    methods: {}
   }
 </script>
 
-<style scoped>
-  .content{
+<style lang="less" scoped>
+  .content {
     margin-top: 20px;
-     width:100%;
-     height:70vw;
-    /*margin-bottom: 2px;*/
-   }
-  img{
-    height:100%;
     width: 100%;
+    height: 70vw;
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .content {
+      margin-top: 56px;
+      width: 768px;
+      height: 500px;
+      /*img {*/
+        /*height: 500px;*/
+        /*width: 768px;*/
+      /*}*/
+    }
   }
 </style>

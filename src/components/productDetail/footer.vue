@@ -59,4 +59,27 @@
       }
     }
   }
+
+  @media screen and (min-width: 768px) {
+    .footer{
+      width:768px;
+      height:65px;
+      .icon{
+        i{
+          font-size:28px;
+        }
+      }
+      .addCart{
+        height:100%;
+        width:268px;
+        background-color: #f05423;
+        display: flex;
+        p{
+          margin: auto;
+          color: #fff;
+          font-weight:bold;
+        }
+      }
+    }
+  }
 </style>

@@ -64,4 +64,20 @@
       }
     }
   }
+  @media screen and (min-width: 768px) {
+    .aside{
+      >ul{
+        li{
+          a{
+            padding:16px 0;
+            position: relative;
+            font-size:16px;
+          }
+          .active{
+            font-size:16px;
+          }
+        }
+      }
+    }
+  }
 </style>

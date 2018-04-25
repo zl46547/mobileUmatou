@@ -80,8 +80,8 @@
     margin: 2px 0 80px 0;
     .rate-top {
       margin-bottom: 1px;
-      height: 40px;
-      line-height: 40px;
+      height: 11vw;
+      line-height: 11vw;
       background-color: #fff;
       padding: 5px 20px;
       font-size: 3vw;
@@ -103,7 +103,7 @@
       display: flex;
       justify-content: flex-start;
       background-color: #fff;
-      padding: 20px 10px 0px 10px;
+      padding: 2vw 1vw 0px 2vw;
       img {
         width: 15vw;
         height: 15vw;
@@ -118,7 +118,7 @@
     .rate-recommond-list-content{
       padding-bottom: 10px;
       >div{
-        padding:0 10px 10px 10px
+        padding:0 3vw 3vw 3vw
       }
       .create-time{
         display: flex;
@@ -133,13 +133,14 @@
         }
       }
       .activities-badge{
-        width:40px;
+        width:8vw;
+        font-size:2vw;
         border: 1px solid #49aa34;
         color: #49aa34;
         border-radius: 3px;
         text-align: center;
-        padding: 3px;
-        margin: 10px 10px;
+        padding: 1vw;
+        margin: 2vw 3vw;
       }
     }
   }

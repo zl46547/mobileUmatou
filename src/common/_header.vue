@@ -42,6 +42,9 @@
         color:#333;
       }
     }
+    div{
+      width:11vw;
+    }
   }
 
 @media screen and (min-width: 768px) {
@@ -52,6 +55,9 @@
     padding: 0 12px;
     h1 {
       margin-right: 0px;
+    }
+    div{
+      width:26px;
     }
   }
 }

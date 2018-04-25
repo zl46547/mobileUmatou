@@ -119,17 +119,36 @@
   }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
   .main {
     width: 100%;
     height: 100%;
     background-color: #ebebeb;
-    overflow-y: auto;
+    /*overflow-y: scroll;*/
+    -webkit-overflow-scrolling: touch;
   }
 
   .mint-navbar .mint-tab-item.is-selected {
     border-bottom: 3px solid #8BC34A;
     color: #4CAF50;
     z-index: 9999;
+  }
+
+  @media screen and (min-width: 768px) {
+    .main {
+      width: 768px;
+
+      .mint-navbar.is-fixed {
+        width: 768px;
+        height: 58px;
+        margin: auto;
+        .mint-tab-item-label {
+          padding: 6px;
+          color: inherit;
+          font-size: 18px;
+          line-height: 1;
+        }
+      }
+    }
   }
 </style>

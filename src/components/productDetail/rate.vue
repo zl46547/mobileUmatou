@@ -126,7 +126,7 @@
         height:5vw;
         line-height:5vw;
         .icon-mark{
-          font-size:20px;
+          font-size:6vw;
         }
         span{
           padding-left: 4px;
@@ -141,6 +141,48 @@
         text-align: center;
         padding: 1vw;
         margin: 2vw 3vw;
+      }
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .content {
+      .rate-top {
+        height: 55px;
+        line-height: 55px;
+        padding: 5px 20px;
+        font-size: 22px;
+      }
+      .rate-recommond-list-top {
+        display: flex;
+        justify-content: flex-start;
+        background-color: #fff;
+        padding: 10px 5px 0px 10px;
+        img {
+          width: 75px;
+          height: 75px;
+        }
+        p {
+          padding-top: 20px;
+        }
+      }
+      .rate-recommond-list-content{
+        >div{
+          padding:0 15px 15px 15px
+        }
+        .create-time{
+          height:25px;
+          line-height:25px;
+          .icon-mark{
+            font-size:30px;
+          }
+        }
+        .activities-badge{
+          width:40px;
+          font-size:10px;
+          padding: 5px;
+          margin: 10px 15px;
+        }
       }
     }
   }

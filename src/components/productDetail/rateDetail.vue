@@ -1,20 +1,8 @@
 <template>
   <div class="content">
-    <router-link :to="{name:'详情页'}">
-      <div class="rate-top">
-        <div>
-          商品评价(共{{rateResponse.length}}人评价)
-        </div>
-        <div>
-          <el-rate v-model="score" disabled show-score text-color="#ff9900" score-template="{value}"
-                   style="float: left"></el-rate>
-          <i class="el-icon-arrow-right"></i>
-        </div>
-      </div>
-    </router-link>
     <div v-if="rateResponse.length>0">
       <ul>
-        <li v-for="item in getRecommandRate" :key="item.ReviewId" >
+        <li v-for="item in rateResponse" :key="item.ReviewId" >
           <div class="rate-recommond-list-top">
             <div>
               <img v-if="item.CustomerFace !== null" :src="item.CustomerFace" alt="">
@@ -27,11 +15,19 @@
             </div>
           </div>
           <div class="rate-recommond-list-content">
-            <div class="activities-badge">推荐</div>
+            <div class="div-badge">
+              <div class="activities-badge" v-for="(tag,i) in item.Tags" :key="i" v-if="item.Tags.length>0">{{tag}}</div>
+            </div>
             <div class="reflex-context">{{item.ReflexContext}}</div>
+            <div class="rate-img">
+              <img v-for="(imgItem,i) in item.Pics" :key="i" :src="imgItem" alt="" v-if="item.Pics.length>0">
+            </div>
             <div class="create-time">
               <div>{{item.CreateTime}}</div>
               <div><i class="iconfont icon-mark"></i><span>0</span></div>
+            </div>
+            <div v-if="item.ServiceReflexs != null">
+              <p class="service-reflexs">[客服回复]:{{item.ServiceReflexs[0]}}</p>
             </div>
           </div>
         </li>
@@ -43,62 +39,13 @@
 <script type="text/ecmascript-6">
 
   export default {
-    props: ['rateResponse'],
-    mounted () {
-      this.getScore()
-    },
-    computed: {
-      getRecommandRate () {
-        var vm = this
-        var rateList = []
-        for (var i = 0; i < 3; i++) {
-          rateList.push(vm.rateResponse[i])
-        }
-        vm.rateCommandList = rateList
-        return this.rateCommandList
-      }
-    },
-    create () {
-
-    },
-    data () {
-      return {
-        score: 0,
-        rateCommandList: []
-      }
-    },
-    methods: {
-      getScore () {
-        this.score = Math.round(parseFloat(Math.random() * 2 + 3) * 100) / 100
-      }
-    }
+    props: ['rateResponse']
   }
 </script>
 
 <style lang="less" scoped>
   .content {
-    margin: 2px 0 80px 0;
-    .rate-top {
-      margin-bottom: 1px;
-      height: 40px;
-      line-height: 40px;
-      background-color: #fff;
-      padding: 5px 20px;
-      font-size: 3vw;
-      display: flex;
-      justify-content: space-between;
-      i {
-        float: left;
-        margin-left: 5px;
-        font-size: 17px;
-        font-weight: 500;
-      }
-    }
-    .rate-top div:nth-of-type(2) {
-      height: 40px;
-      position: relative;
-      top: 25%;
-    }
+    margin-top: 0px;
     .rate-recommond-list-top {
       display: flex;
       justify-content: flex-start;
@@ -132,15 +79,72 @@
           padding-left: 4px;
         }
       }
-      .activities-badge{
-        width:40px;
-        border: 1px solid #49aa34;
-        color: #49aa34;
-        border-radius: 3px;
-        text-align: center;
-        padding: 3px;
-        margin: 10px 10px;
+      .div-badge{
+        display: flex;
+        margin: 2vw 0;
+        .activities-badge{
+          width:auto;
+          border: 1px solid #49aa34;
+          color: #49aa34;
+          border-radius: 3px;
+          text-align: center;
+          padding: 0.8vw 1.5vh;
+          margin: 0 1.5vw;
+        }
+      }
+      .rate-img{
+        img{
+          width: 20vw;
+          height: 20vw;
+          border-radius: 5px;
+          margin: 0 1vw;
+        }
+      }
+      .service-reflexs{
+        color: red;
       }
     }
   }
+
+  /*@media screen and (min-width: 768px) {*/
+    /*.content {*/
+      /*margin-top: 0px;*/
+      /*.rate-top {*/
+        /*height: 55px;*/
+        /*line-height: 55px;*/
+        /*padding: 5px 20px;*/
+        /*font-size: 22px;*/
+      /*}*/
+      /*.rate-recommond-list-top {*/
+        /*display: flex;*/
+        /*justify-content: flex-start;*/
+        /*background-color: #fff;*/
+        /*padding: 10px 5px 0px 10px;*/
+        /*img {*/
+          /*width: 75px;*/
+          /*height: 75px;*/
+        /*}*/
+        /*p {*/
+          /*padding-top: 20px;*/
+        /*}*/
+      /*}*/
+      /*.rate-recommond-list-content{*/
+        /*>div{*/
+          /*padding:0 15px 15px 15px*/
+        /*}*/
+        /*.create-time{*/
+          /*height:25px;*/
+          /*line-height:25px;*/
+          /*.icon-mark{*/
+            /*font-size:30px;*/
+          /*}*/
+        /*}*/
+        /*.activities-badge{*/
+          /*font-size:10px;*/
+          /*padding: 8px 10px;*/
+          /*margin:10px 5px 5px 5px;*/
+        /*}*/
+      /*}*/
+    /*}*/
+  /*}*/
 </style>

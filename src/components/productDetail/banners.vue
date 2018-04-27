@@ -37,7 +37,7 @@
 
 <style lang="less" scoped>
   .content {
-    margin-top: 20px;
+    margin-top:0px;
     width: 100%;
     height: 70vw;
     img {
@@ -48,13 +48,8 @@
 
   @media screen and (min-width: 768px) {
     .content {
-      margin-top: 56px;
       width: 768px;
       height: 500px;
-      /*img {*/
-        /*height: 500px;*/
-        /*width: 768px;*/
-      /*}*/
     }
   }
 </style>

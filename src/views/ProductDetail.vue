@@ -1,28 +1,22 @@
 <template>
   <div class="main">
-    <mt-navbar v-model="selected" fixed>
-      <mt-tab-item id="1">商品</mt-tab-item>
-      <mt-tab-item id="2">详情</mt-tab-item>
-      <mt-tab-item id="3">评价</mt-tab-item>
-    </mt-navbar>
+    <el-menu :default-active="selected" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+      <el-menu-item index="1">商品</el-menu-item>
+      <el-menu-item index="2">详情</el-menu-item>
+      <el-menu-item index="3">评价</el-menu-item>
+    </el-menu>
 
-    <mt-tab-container v-model="selected">
-      <mt-tab-container-item id="1">
-        <div>
-          <v-banners :response="responseData"></v-banners>
-          <v-price :response="responseData"></v-price>
-          <v-service :response="responseData"></v-service>
-          <v-rate :rateResponse="rateResponse"></v-rate>
-          <v-footer></v-footer>
-        </div>
-      </mt-tab-container-item>
-      <mt-tab-container-item id="2">
-        <p style="margin-top: 100px">ddddddd</p>
-      </mt-tab-container-item>
-      <mt-tab-container-item id="3">
-        3333
-      </mt-tab-container-item>
-    </mt-tab-container>
+    <div v-if="selected == 1">
+      <v-banners :response="responseData"></v-banners>
+      <v-price :response="responseData"></v-price>
+      <v-service :response="responseData"></v-service>
+      <v-rate :rateResponse="rateResponse"></v-rate>
+      <v-footer></v-footer>
+    </div>
+    <div v-if="selected == 3">
+      <v-rate-detail :rateResponse="rateResponse"></v-rate-detail>
+      <v-footer></v-footer>
+    </div>
   </div>
 </template>
 
@@ -34,30 +28,21 @@
   import Rate from '../components/productDetail/rate.vue'
   import Footer from '../components/productDetail/footer.vue'
 
+  import RateDetail from '../components/productDetail/rateDetail.vue'
+
   export default {
     components: {
       'VBanners': Banners,
       'VPrice': Price,
       'VService': Service,
       'VRate': Rate,
-      'VFooter': Footer
+      'VFooter': Footer,
+      'VRateDetail': RateDetail
     },
     data () {
       return {
         selected: '1', // navbar切换
         rateResponse: [],
-//        rateResponse: [{
-//          'ReviewId': '1',
-//          'CreateTime': '',
-//          'CustomerName': '',
-//          'ProQuality': 0,
-//          'ReflexContext': '',
-//          'Tags': [],
-//          'Pics': [],
-//          'ReflexCount': 0,
-//          'ServiceReflexs': null,
-//          'IsMaxMember': false
-//        }],
         responseData: {
           'ProductInfo': {
             'Banners': [],
@@ -115,40 +100,48 @@
         console.log(error)
       })
     },
-    methods: {}
+    methods: {
+      handleSelect (val) {
+        this.selected = val
+      }
+    }
   }
 </script>
 
 <style lang="less" scoped>
-  .main {
-    width: 100%;
-    height: 100%;
-    background-color: #ebebeb;
-    /*overflow-y: scroll;*/
-    -webkit-overflow-scrolling: touch;
+
+  ul.el-menu-demo.el-menu--horizontal.el-menu {
+    display: flex;
+    justify-content: space-between;
   }
 
-  .mint-navbar .mint-tab-item.is-selected {
-    border-bottom: 3px solid #8BC34A;
-    color: #4CAF50;
-    z-index: 9999;
+  li.el-menu-item {
+    text-align: center;
+    width: 33%;
+  }
+
+  .el-menu--horizontal > .el-menu-item.is-active {
+    border-bottom: 2px solid #8BC34A;
+    color: #8BC34A;
+    font-size: 4vw;
+  }
+
+  li.el-menu-item[data-v-31ad9208] {
+    text-align: center;
+    width: 33%;
+    font-size: 4vw;
   }
 
   @media screen and (min-width: 768px) {
     .main {
       width: 768px;
-
-      .mint-navbar.is-fixed {
-        width: 768px;
-        height: 58px;
-        margin: auto;
-        .mint-tab-item-label {
-          padding: 6px;
-          color: inherit;
-          font-size: 18px;
-          line-height: 1;
-        }
+      .el-menu--horizontal > .el-menu-item.is-active {
+        font-size: 18px;
+      }
+      li.el-menu-item[data-v-31ad9208] {
+        font-size: 18px;
       }
     }
   }
+
 </style>

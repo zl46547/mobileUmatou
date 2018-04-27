@@ -6,8 +6,7 @@
           商品评价(共{{rateResponse.length}}人评价)
         </div>
         <div>
-          <el-rate v-model="score" disabled show-score text-color="#ff9900" score-template="{value}"
-                   style="float: left"></el-rate>
+          <el-rate v-model="score" disabled show-score text-color="#ff9900" score-template="{value}"></el-rate>
           <i class="el-icon-arrow-right"></i>
         </div>
       </div>
@@ -77,7 +76,7 @@
 
 <style lang="less" scoped>
   .content {
-    margin: 2px 0 80px 0;
+    margin: 2px 0 10vh 0;
     .rate-top {
       margin-bottom: 1px;
       height: 11vw;
@@ -88,16 +87,17 @@
       display: flex;
       justify-content: space-between;
       i {
-        float: left;
+        margin: auto 0;
         margin-left: 5px;
         font-size: 17px;
         font-weight: 500;
       }
+      .el-rate {
+        margin: auto 0;
+      }
     }
     .rate-top div:nth-of-type(2) {
-      height: 40px;
-      position: relative;
-      top: 25%;
+      display: flex;
     }
     .rate-recommond-list-top {
       display: flex;

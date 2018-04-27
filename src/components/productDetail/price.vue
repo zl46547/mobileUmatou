@@ -77,4 +77,10 @@
   .marketPrice p:nth-of-type(4) {
     float: right;
   }
+
+  @media screen and (min-width: 768px) {
+    .content>div{
+      padding: 15px 25px;
+    }
+  }
 </style>

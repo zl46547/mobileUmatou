@@ -34,17 +34,18 @@
   .footer{
     display: flex;
     width:100%;
-    height:18vw;
+    height:15vw;
     position: fixed;
     bottom: 0;
     background-color: #fff;
+    box-shadow: 0px -1px 10px #cccccc;
     .icon{
       flex: 1 1 auto;
       margin: auto;
       text-align: center;
       padding: 10px;
       i{
-        font-size:7vw;
+        font-size:5vw;
       }
     }
     .addCart{

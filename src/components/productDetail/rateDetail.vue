@@ -1,8 +1,8 @@
 <template>
-  <div class="content">
-    <div v-if="rateResponse.length>0">
+  <div class="rate-content">
+    <div v-if="formateRes">
       <ul>
-        <li v-for="item in rateResponse" :key="item.ReviewId" >
+        <li v-for="(item,i) in formateRes" :key="i">
           <div class="rate-recommond-list-top">
             <div>
               <img v-if="item.CustomerFace !== null" :src="item.CustomerFace" alt="">
@@ -16,11 +16,13 @@
           </div>
           <div class="rate-recommond-list-content">
             <div class="div-badge">
-              <div class="activities-badge" v-for="(tag,i) in item.Tags" :key="i" v-if="item.Tags.length>0">{{tag}}</div>
+              <div class="activities-badge" v-for="(tag,i) in item.Tags" :key="i" v-if="item.Tags.length>0">{{tag}}
+              </div>
             </div>
             <div class="reflex-context">{{item.ReflexContext}}</div>
             <div class="rate-img">
-              <img v-for="(imgItem,i) in item.Pics" :key="i" :src="imgItem" alt="" v-if="item.Pics.length>0">
+              <img v-for="(imgItem,i) in item.Pics" :key="i" :src="imgItem" alt="" v-if="item.Pics.length>0"
+                   @click="imageClick(item.Pics,i)">
             </div>
             <div class="create-time">
               <div>{{item.CreateTime}}</div>
@@ -39,18 +41,39 @@
 <script type="text/ecmascript-6">
 
   export default {
-    props: ['rateResponse']
+    props: ['rateResponse'],
+    /* 接口中CreateTime带有'T',该计算属性主要是去除'T' */
+    computed: {
+      formateRes () {
+        if (this.rateResponse.length > 0) {
+          this.rateResponse.forEach(function (e) {
+            e.CreateTime = e.CreateTime.replace('T', ' ')
+          })
+        }
+        return this.rateResponse
+      }
+    },
+    methods: {
+      imageClick (imageList, index) {
+        var data = {}
+        data['showBigImg'] = true
+        data['imageList'] = imageList
+        data['index'] = index
+        this.$emit('showimg', data)
+      }
+    }
   }
 </script>
 
 <style lang="less" scoped>
-  .content {
-    margin-top: 0px;
+  .rate-content {
+    padding-top: 11vh;
+    padding-bottom: 11vh;
     .rate-recommond-list-top {
       display: flex;
       justify-content: flex-start;
       background-color: #fff;
-      padding: 20px 10px 0px 10px;
+      padding: 2vh 2vw 0px 4vw;
       img {
         width: 15vw;
         height: 15vw;
@@ -62,89 +85,99 @@
         padding-top: 3.5vw;
       }
     }
-    .rate-recommond-list-content{
+    .rate-recommond-list-content {
       padding-bottom: 10px;
-      >div{
-        padding:0 10px 10px 10px
+      > div {
+        padding: 0 10px 10px 10px
       }
-      .create-time{
+      .reflex-context {
+        margin-left: 2vw;
+      }
+      .create-time {
         display: flex;
         justify-content: space-between;
-        height:5vw;
-        line-height:5vw;
-        .icon-mark{
-          font-size:20px;
+        height: 5vw;
+        line-height: 5vw;
+        .icon-mark {
+          font-size: 20px;
         }
-        span{
+        span {
           padding-left: 4px;
         }
       }
-      .div-badge{
+      .div-badge {
         display: flex;
-        margin: 2vw 0;
-        .activities-badge{
-          width:auto;
+        margin-top: 3vh;
+        .activities-badge {
           border: 1px solid #49aa34;
           color: #49aa34;
-          border-radius: 3px;
+          border-radius: 4px;
           text-align: center;
-          padding: 0.8vw 1.5vh;
-          margin: 0 1.5vw;
+          padding: 0.6vw 1.3vh;
+          margin-left: 2vw;
         }
       }
-      .rate-img{
-        img{
+      .rate-img {
+        img {
           width: 20vw;
           height: 20vw;
           border-radius: 5px;
           margin: 0 1vw;
+          cursor: pointer;
         }
       }
-      .service-reflexs{
+      .service-reflexs {
         color: red;
       }
     }
   }
 
-  /*@media screen and (min-width: 768px) {*/
-    /*.content {*/
-      /*margin-top: 0px;*/
-      /*.rate-top {*/
-        /*height: 55px;*/
-        /*line-height: 55px;*/
-        /*padding: 5px 20px;*/
-        /*font-size: 22px;*/
-      /*}*/
-      /*.rate-recommond-list-top {*/
-        /*display: flex;*/
-        /*justify-content: flex-start;*/
-        /*background-color: #fff;*/
-        /*padding: 10px 5px 0px 10px;*/
-        /*img {*/
-          /*width: 75px;*/
-          /*height: 75px;*/
-        /*}*/
-        /*p {*/
-          /*padding-top: 20px;*/
-        /*}*/
-      /*}*/
-      /*.rate-recommond-list-content{*/
-        /*>div{*/
-          /*padding:0 15px 15px 15px*/
-        /*}*/
-        /*.create-time{*/
-          /*height:25px;*/
-          /*line-height:25px;*/
-          /*.icon-mark{*/
-            /*font-size:30px;*/
-          /*}*/
-        /*}*/
-        /*.activities-badge{*/
-          /*font-size:10px;*/
-          /*padding: 8px 10px;*/
-          /*margin:10px 5px 5px 5px;*/
-        /*}*/
-      /*}*/
-    /*}*/
-  /*}*/
+  @media screen and (min-width: 768px) {
+    .rate-content {
+      padding-top: 65px;
+      padding-bottom: 65px;
+      .rate-recommond-list-top {
+        padding: 10px 5px 0px 20px;
+        img {
+          width: 75px;
+          height: 75px;
+        }
+        p {
+          padding-top: 20px;
+        }
+      }
+      .rate-recommond-list-content {
+        > div {
+          padding: 0 15px 15px 15px
+        }
+        .reflex-context {
+          margin-left: 10px;
+        }
+        .create-time {
+          height: 25px;
+          line-height: 25px;
+          .icon-mark {
+            font-size: 30px;
+          }
+          span {
+            padding-left: 4px;
+          }
+        }
+        .div-badge {
+          .activities-badge {
+            font-size: 10px;
+            padding: 5px 8px;
+            margin-left: 10px;
+          }
+        }
+        .rate-img {
+          img {
+            width: 100px;
+            height: 100px;
+            margin: 0 5px;
+          }
+        }
+      }
+    }
+  }
 </style>

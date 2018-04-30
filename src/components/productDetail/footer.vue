@@ -10,6 +10,7 @@
     </div>
     <div class="icon">
       <i class="iconfont icon-cart"></i>
+      <mt-badge size="small" type="error">10</mt-badge>
       <p>购物车</p>
     </div>
     <div class="addCart">
@@ -34,7 +35,7 @@
   .footer{
     display: flex;
     width:100%;
-    height:15vw;
+    height:10vh;
     position: fixed;
     bottom: 0;
     background-color: #fff;
@@ -46,6 +47,9 @@
       padding: 10px;
       i{
         font-size:5vw;
+      }
+      span.mint-badge.is-error.is-size-small {
+        position: absolute;
       }
     }
     .addCart{

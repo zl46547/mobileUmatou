@@ -1,25 +1,28 @@
 <template>
   <div>
-    <v-header>
-      <h1 slot="title">购物车</h1>
-    </v-header>
-    我是购物车页
+    <div>
+      <v-header></v-header>
+    </div>
+    <v-car-list></v-car-list>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import Header from '@/common/_header.vue'
+  import Header from '@/components/car/header.vue'
+  import CarList from '@/components/car/carList.vue'
 
   export default {
     components: {
-      'VHeader': Header
+      'VHeader': Header,
+      'VCarList': CarList
     },
-    data () {
+    data() {
       return {
         datas: ''
       }
     },
-    beforeCreate () {}
+    beforeCreate() {
+    }
   }
 </script>
 

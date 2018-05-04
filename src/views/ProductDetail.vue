@@ -62,7 +62,6 @@
       return {
         showImageObj: '',
         selected: '1', // navbar切换
-        detailSelected: '1',
         rateResponse: [],
         responseData: {
           'ProductInfo': {

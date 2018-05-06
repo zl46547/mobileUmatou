@@ -1,14 +1,16 @@
 <template>
-  <div>
+  <div class="content">
     <div>
-      <v-header></v-header>
+      <v-header>
+        <h1 slot="title">购物车</h1>
+      </v-header>
     </div>
     <v-car-list></v-car-list>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import Header from '@/components/car/header.vue'
+  import Header from '@/common/_header.vue'
   import CarList from '@/components/car/carList.vue'
 
   export default {
@@ -27,5 +29,9 @@
 </script>
 
 <style scoped>
-
+.content{
+  background-color:#f2f2f2;
+  width:100%;
+  height:100%;
+}
 </style>

@@ -23,7 +23,7 @@
     position:fixed;
     top: 0px;
     width:100%;
-    z-index: 9999;
+    z-index: 9;
     height: 12vw;
     display: flex;
     align-items: center;

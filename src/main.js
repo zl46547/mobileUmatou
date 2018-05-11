@@ -7,6 +7,7 @@ import Mint from 'mint-ui' // 移动端UI
 import 'mint-ui/lib/style.css'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import $ from 'jquery'
 
 Vue.use(ElementUI)
 Vue.use(Mint)
@@ -34,6 +35,7 @@ new Vue({
   el: '#app',
   router,
   store,
+  $,
   components: {App},
   template: '<App/>'
 })

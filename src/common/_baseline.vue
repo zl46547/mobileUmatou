@@ -12,7 +12,7 @@
 <style lang="less" scoped>
   div {
     text-align: center;
-    margin-bottom: 13vw;
+    margin-bottom: 10vh;
     padding:3vw 0;
     background-color: #f9f9f9;
     img {

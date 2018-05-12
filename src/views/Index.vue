@@ -1,14 +1,10 @@
 <template>
   <div>
     <v-header></v-header>
-    <v-swiper :swiperData="swiperData.sweaperList"></v-swiper>
+    <v-swiper :adverise="swiperData.Data" v-if="swiperData"></v-swiper>
     <v-service></v-service>
-    <v-section1 :section1="sectionOneData.sessionOneList"></v-section1>
-    <v-section2 :section2="sectionTwoData.sessionTwoList"></v-section2>
-    <v-section-meat :sectionMeat="sectionMeatData.sectionMeatList"></v-section-meat>
-    <v-section-vegetables :sectionVegetables="sectionVegetablesData.sectionVegetablesList"></v-section-vegetables>
-    <v-section-fish :sectionFish="sectionFishData.sectionFishList"></v-section-fish>
-    <v-section-chicken :sectionChicken="sectionChickenData.sectionChickenList"></v-section-chicken>
+    <v-flashSale :flashSale="flashSaleData.Data" v-if="flashSaleData"></v-flashSale>
+    <v-defaultHome :defaultHome="defaultHomeData.Data" v-if="defaultHomeData"></v-defaultHome>
     <v-baseline></v-baseline>
     <v-footer></v-footer>
   </div>
@@ -18,124 +14,85 @@
   import Header from '@/components/index/header.vue'
   import Swiper from '@/components/index/swiper.vue'
   import Service from '@/components/index/service.vue'
-  import Section1 from '@/components/index/section1.vue'
-  import Section2 from '@/components/index/section2.vue'
-  import SectionMeat from '@/components/index/sectionMeat.vue'
-  import SectionVegetables from '@/components/index/sectionVegetables.vue'
-  import SectionFish from '@/components/index/sectionFish.vue'
-  import SectionChicken from '@/components/index/sectionChicken.vue'
+  import FlashSale from '@/components/index/flashSale.vue'
+  import DefaultHome from '@/components/index/defaultHome.vue'
   import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
+  import api from '@/http/ajax.js'
+  import utils from '@/util/common.js'
 
   export default {
     components: {
       'VHeader': Header,
       'VSwiper': Swiper,
       'VService': Service,
-      'VSection1': Section1,
-      'VSection2': Section2,
-      'VSectionMeat': SectionMeat,
-      'VSectionVegetables': SectionVegetables,
-      'VSectionFish': SectionFish,
-      'VSectionChicken': SectionChicken,
+      'VFlashSale': FlashSale,
+      'VDefaultHome': DefaultHome,
       'VBaseline': Baseline,
       'VFooter': Footer
     },
-    data() {
+    data () {
       return {
         swiperData: '',
-        sectionOneData: '',
-        sectionTwoData: '',
-        sectionMeatData: '',
-        sectionVegetablesData: '',
-        sectionFishData: '',
-        sectionChickenData: ''
+        flashSaleData: '',
+        defaultHomeData: ''
       }
     },
-    beforeCreate() {
+    mounted () {
+      this.getAdverises()
+      this.getFlashSale()
+      this.getDefaultHome()
+    },
+    methods: {
       /**
        * 获取轮播图数据
        */
-      this.$api({
-        method: 'get',
-        url: '/shihang/sweaper.json'
-      }).then(response => {
-        this.swiperData = response.data
-      }).catch(function (error) {
-        console.log(error)
-      })
-
+      getAdverises () {
+        var vm = this
+        var url = 'https://wechatx.34580.com/sz/Home/AdvertisementPhotoshootRequest'
+        var requestData = {
+          'sourcetype': 9,
+          'json': {
+            'TypeCode': 1011,
+            'PlatForm': 1500
+          }
+        }
+        api.ajax(url, requestData, function (val) {
+          if (!utils.isEmpty(val.query.results)) {
+            vm.swiperData = val.query.results.json
+          }
+        })
+      },
       /**
-       * 获取session1 数据
+       * 获取限时抢购数据
        */
-      this.$api({
-        method: 'get',
-        url: '/shihang/session1.json'
-      }).then(response => {
-        this.sectionOneData = response.data
-      }).catch(function (error) {
-        console.log(error)
-      })
-
+      getFlashSale () {
+        var vm = this
+        var url = 'https://wechatx.34580.com/sz/Home/FlashSaleRequest'
+        var requestData = {
+          'sourcetype': 9
+        }
+        api.ajax(url, requestData, function (val) {
+          if (!utils.isEmpty(val.query.results)) {
+            vm.flashSaleData = val.query.results.json
+          }
+        })
+      },
       /**
-       * 获取session2 数据
+       * 获取首页数据
        */
-      this.$api({
-        method: 'get',
-        url: '/shihang/session2.json'
-      }).then(response => {
-        this.sectionTwoData = response.data
-      }).catch(function (error) {
-        console.log(error)
-      })
-
-      /**
-       * 获取 sectionMeat 数据
-       */
-      this.$api({
-        method: 'get',
-        url: '/shihang/sectionMeat.json'
-      }).then(response => {
-        this.sectionMeatData = response.data
-      }).catch(function (error) {
-        console.log(error)
-      })
-
-      /**
-       * 获取 sectionVegetables 数据
-       */
-      this.$api({
-        method: 'get',
-        url: '/shihang/sectionVegetables.json'
-      }).then(response => {
-        this.sectionVegetablesData = response.data
-      }).catch(function (error) {
-        console.log(error)
-      })
-
-      /**
-       * 获取 sectionFish 数据
-       */
-      this.$api({
-        method: 'get',
-        url: '/shihang/sectionFish.json'
-      }).then(response => {
-        this.sectionFishData = response.data
-      }).catch(function (error) {
-        console.log(error)
-      })
-
-      /**
-       * 获取 sectionChicken 数据
-       */
-      this.$api({
-        method: 'get',
-        url: '/shihang/sectionChicken.json'
-      }).then(response => {
-        this.sectionChickenData = response.data
-      }).catch(function (error) {
-        console.log(error)
-      })
+      getDefaultHome () {
+        var vm = this
+        var url = 'https://wechatx.34580.com/sz/Home/DefaultHomeRequest'
+        var requestData = {
+          'sourcetype': 9
+        }
+        api.ajax(url, requestData, function (val) {
+          if (!utils.isEmpty(val.query.results)) {
+            vm.defaultHomeData = val.query.results.json
+          }
+        })
+      }
     }
   }
 </script>

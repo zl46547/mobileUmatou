@@ -9,7 +9,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-export default {}
+  export default {}
 </script>
 
 <style lang="less" scoped>
@@ -19,23 +19,24 @@ export default {}
   .service {
     .bd();
     ul {
-      display: -webkit-flex;
-      display: -ms-flex;
       display: flex;
+      align-items: center;
       justify-content: space-around;
+      margin: 3vh 0;
+      font-size: 4vw;
+      span {
+        margin-left: 2vw;
+      }
+    }
+  }
 
-      li {
-        display: -webkit-flex;
-        display: -ms-flex;
-        display: flex;
-        align-items: center;
-        padding: 3.3vw 0;
+  @media screen and (min-width: 768px) {
+    .service {
+      ul {
+        margin: 25px 0;
+        font-size: 26px;
         span {
-          .fz(font-size,28);
-          padding-left: 1vw;
-        }
-        i {
-          .fz(font-size,36);
+          margin-left: 10px;
         }
       }
     }

@@ -11,7 +11,7 @@ export default {
    */
   ajax (url, params, fun) {
     if (!util.isEmpty(params)) {
-      url += '?'
+      url = 'https://wechatx.34580.com/sz' + url + '?'
       for (var key in params) {
         var value = params[key]
         if (Object.prototype.toString.call(params[key]) === '[object Object]') {
@@ -23,8 +23,6 @@ export default {
     $.ajax({
       url: 'http://query.yahooapis.com/v1/public/yql',
       dataType: 'jsonp',
-      tryCount: 0,
-      retryLimit: 3,
       beforeSend: function () {
         store.commit('SET_LOADING', true)
       },
@@ -34,21 +32,12 @@ export default {
         format: 'json'
       },
       success: function (res) {
-        console.log(this.tryCount)
         if (util.isEmpty(res.query.results)) {
-          this.tryCount++
-          if (this.tryCount <= this.retryLimit) {
-            $.ajax(this)
-            return
-          }
-          return
+          console.log('请求失败了！')
         }
         store.commit('SET_LOADING', false)
         return fun(res)
       }
     })
-  },
-  doHttp () {
-
   }
 }

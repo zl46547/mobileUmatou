@@ -123,6 +123,7 @@ import { Lazyload } from 'mint-ui'
     ul {
       display: flex;
       overflow-x: auto;
+      overflow-y: hidden;
       -webkit-overflow-scrolling: touch;
       height: 28vh;
       li {

@@ -7,7 +7,7 @@
         <p>{{item.ChildTitle}}</p>
       </div>
       <!-- 左上下 -->
-      <div class="flex" v-if="item.FloorType === '1'">
+      <div class="flex" v-if="parseInt(item.FloorType) === 1">
         <div>
           <router-link :to="{name:'详情页'}">
             <img v-lazy="item.PicAdvItems[0].BackGroundImg" alt="" class="width-50">
@@ -23,7 +23,7 @@
         </div>
       </div>
       <!-- 上下右 -->
-      <div class="flex" v-if="item.FloorType === '2'">
+      <div class="flex" v-if="parseInt(item.FloorType) === 2">
         <div>
           <router-link :to="{name:'详情页'}">
             <img v-lazy="item.PicAdvItems[0].BackGroundImg" alt="" class="width-50">
@@ -39,13 +39,13 @@
         </div>
       </div>
       <!-- 一列 -->
-      <div class="flex" v-if="item.FloorType === '7'">
+      <div class="flex" v-if="parseInt(item.FloorType) === 7">
         <router-link :to="{name:'详情页'}">
           <img v-lazy="item.PicAdvItems.BackGroundImg" alt="" class="width-100">
         </router-link>
       </div>
       <!-- 两列 -->
-      <div class="flex" v-if="item.FloorType === '6'">
+      <div class="flex" v-if="parseInt(item.FloorType) === 6">
         <router-link :to="{name:'详情页'}">
           <img v-lazy="item.PicAdvItems[0].BackGroundImg" alt="" class="width-50">
         </router-link>
@@ -54,7 +54,7 @@
         </router-link>
       </div>
       <!-- 三列 -->
-      <div class="flex" v-if="item.FloorType === '4'">
+      <div class="flex" v-if="parseInt(item.FloorType) === 4">
         <router-link :to="{name:'详情页'}">
           <img v-lazy="item.PicAdvItems[0].BackGroundImg" alt="" class="width-33">
         </router-link>

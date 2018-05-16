@@ -18,7 +18,6 @@
   import DefaultHome from '@/components/index/defaultHome.vue'
   import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
-  import api from '@/http/ajax.js'
   import utils from '@/util/common.js'
 
   export default {
@@ -49,18 +48,15 @@
        */
       getAdverises () {
         var vm = this
-        var url = 'https://wechatx.34580.com/sz/Home/AdvertisementPhotoshootRequest'
-        var requestData = {
-          'sourcetype': 9,
-          'json': {
-            'TypeCode': 1011,
-            'PlatForm': 1500
+        vm.$api({
+          method: 'get',
+          url: '/shihang/index/command/swiper.json'
+        }).then((res) => {
+          if (!utils.isEmpty(res.data)) {
+            vm.swiperData = res.data
           }
-        }
-        api.ajax(url, requestData, function (val) {
-          if (!utils.isEmpty(val.query.results)) {
-            vm.swiperData = val.query.results.json
-          }
+        }).catch((error) => {
+          console.log(error)
         })
       },
       /**
@@ -68,14 +64,15 @@
        */
       getFlashSale () {
         var vm = this
-        var url = 'https://wechatx.34580.com/sz/Home/FlashSaleRequest'
-        var requestData = {
-          'sourcetype': 9
-        }
-        api.ajax(url, requestData, function (val) {
-          if (!utils.isEmpty(val.query.results)) {
-            vm.flashSaleData = val.query.results.json
+        vm.$api({
+          method: 'get',
+          url: '/shihang/index/command/flashSale.json'
+        }).then((res) => {
+          if (!utils.isEmpty(res.data)) {
+            vm.flashSaleData = res.data
           }
+        }).catch((error) => {
+          console.log(error)
         })
       },
       /**
@@ -83,14 +80,15 @@
        */
       getDefaultHome () {
         var vm = this
-        var url = 'https://wechatx.34580.com/sz/Home/DefaultHomeRequest'
-        var requestData = {
-          'sourcetype': 9
-        }
-        api.ajax(url, requestData, function (val) {
-          if (!utils.isEmpty(val.query.results)) {
-            vm.defaultHomeData = val.query.results.json
+        vm.$api({
+          method: 'get',
+          url: '/shihang/index/command/defaultHome.json'
+        }).then((res) => {
+          if (!utils.isEmpty(res.data)) {
+            vm.defaultHomeData = res.data
           }
+        }).catch((error) => {
+          console.log(error)
         })
       }
     }

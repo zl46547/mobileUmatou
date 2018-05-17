@@ -10,7 +10,7 @@
           <p class="pvStandard">{{k.PvStandard}}</p>
           <div class="price">
             <p class="periodMoney">¥{{k.PeriodMoney}}</p>
-            <div>
+            <div @click="addCart(k)">
               <i class="iconfont icon-cart"></i>
             </div>
           </div>
@@ -21,12 +21,19 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import addCartUtil from '../../util/addCart'
 
   export default {
     data () {
       return {
         id: '',
         data: []
+      }
+    },
+    methods: {
+      addCart (val) {
+        console.log(JSON.stringify(val))
+        addCartUtil.addCart(val)
       }
     },
     mounted () {
@@ -36,7 +43,7 @@
         method: 'get',
         url: '/shihang/category/categoryDetail/' + id + '.json'
       }).then((res) => {
-        this.data = res.data.Data.SourceData
+        this.data = res.data.data.Data.SourceData
       }).catch((error) => {
         console.log(error)
       })
@@ -55,7 +62,7 @@
       -webkit-overflow-scrolling: touch;
       margin: 12vw 0 15vw 0;
       padding: 1px;
-      .detail{
+      .detail {
         background-color: #fff;
         border: 2px solid #e6e6e6;
         a {
@@ -65,7 +72,7 @@
             width: 100%;
           }
         }
-        .product-detail{
+        .product-detail {
           p {
             text-align: left;
             text-overflow: ellipsis;

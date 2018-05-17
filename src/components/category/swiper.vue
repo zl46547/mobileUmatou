@@ -29,7 +29,7 @@ export default {
 }
 @media screen and (min-width: 768px) {
   .mint-swipe{
-    height:300px;
+    height:250px;
   }
 }
 </style>

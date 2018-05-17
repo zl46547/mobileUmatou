@@ -1,5 +1,5 @@
 <template>
-  <div class="carList">
+  <div class="carList" v-if="dataList">
     <div v-for="(item,i) in dataList" :key="i"
          style="margin-bottom: 2vh;background-color: #fff;box-shadow: 0px 2px 6px #bfbfbf">
       <div class="checkbox" style="display: table;justify-content: flex-start;padding: 2vh 0">
@@ -81,50 +81,14 @@
     components: {
       'VFooter': Footer
     },
+    mounted () {
+      this.dataList = this.$store.state.car.carList
+    },
     data () {
       return {
         checkAllStatus: false,
         checkedcarsList: [], // 选中的购物车
-        'dataList': [
-          {
-            'Id': 63609304,
-            'PriceSmallTotal': 29.9,
-            'ProductId': 114277,
-            'ProductName': '圣华散养土鸡鲜全翅500g/袋',
-            'Unit': '盒',
-            'PvStandard': '500g',
-            'PictureId': 500774,
-            'DefaultMoney': 29.9,
-            'buyNum': 1,
-            'totalMoney': 29.9
-          },
-          {
-            'Id': 63609121,
-            'PriceSmallTotal': 69,
-            'ProductId': 10869,
-            'ProductVariantId': 11030,
-            'ProductName': '伊赛澳洲谷饲牛腱1000g/袋',
-            'Unit': '袋',
-            'PvStandard': '1kg/袋',
-            'PictureId': 145183,
-            'DefaultMoney': 85,
-            'buyNum': 1,
-            'totalMoney': 85
-          },
-          {
-            'Id': 63609210,
-            'PriceSmallTotal': 10.5,
-            'ProductId': 5360,
-            'ProductVariantId': 5520,
-            'ProductName': '卡士发酵乳-原味120g*3',
-            'Unit': '组',
-            'PvStandard': '120g*3/组',
-            'PictureId': 162063,
-            'DefaultMoney': 11.8,
-            'buyNum': 1,
-            'totalMoney': 11.8
-          }
-        ]
+        dataList: []
       }
     },
     methods: {
@@ -142,6 +106,8 @@
           }
           // 删除数据源内的数据
           this.dataList.splice(index, 1)
+          // 提交vuex，修改localStorage购物车列表数据
+          this.$store.commit('CAR_LIST', this.dataList)
         }, () => {
           // 取消的内容
         })
@@ -158,7 +124,11 @@
           this.checkAllStatus = true
         }
       },
-      // 改变购买数量
+      /**
+       * 改变购买数量
+       * @param val 购物车数量+1或者是-1
+       * @param index 操作的下标
+       */
       changeNum (val, index) {
         var num = this.dataList[index].buyNum + val
         if (num <= 0) {
@@ -168,7 +138,13 @@
         }
         var totalMoney = parseInt(this.dataList[index].DefaultMoney * 100 * this.dataList[index].buyNum) / 100
         this.dataList[index].totalMoney = totalMoney
+        // 提交vuex，修改localStorage购物车列表数据
+        this.$store.commit('CAR_LIST', this.dataList)
       },
+      /**
+       * 复选框
+       * @param val 当前操作的列表对象
+       */
       checkProduct (val) {
         // 已被选中的列表
         var index = -1

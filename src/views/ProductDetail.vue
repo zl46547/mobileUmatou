@@ -6,12 +6,12 @@
       <el-menu-item index="3">评价</el-menu-item>
     </el-menu>
 
-    <div v-if="selected == 1">
+    <div v-if="selected == 1 && responseData">
       <v-banners :response="responseData"></v-banners>
       <v-price :response="responseData"></v-price>
       <v-service :response="responseData"></v-service>
       <v-rate :rateResponse="rateResponse" @showimg="showbigimg" @to-detail-rate="toDetailRate"></v-rate>
-      <v-footer></v-footer>
+      <v-footer :response="responseData"></v-footer>
       <div v-if="showImageObj" @click="closeImageObj">
         <div class="bigImg">
           <div>
@@ -20,11 +20,11 @@
         </div>
       </div>
     </div>
-    <div v-if="selected == 2" class="detail">
+    <div v-if="selected == 2 && responseData" class="detail">
       <v-detail :responseData="responseData"></v-detail>
       <v-footer></v-footer>
     </div>
-    <div v-if="selected == 3">
+    <div v-if="selected == 3 && rateResponse">
       <v-rate-detail :rateResponse="rateResponse" @showimg="showbigimg"></v-rate-detail>
       <v-footer></v-footer>
       <div v-if="showImageObj" @click="closeImageObj">
@@ -63,40 +63,7 @@
         showImageObj: '',
         selected: '1', // navbar切换
         rateResponse: [],
-        responseData: {
-          'ProductInfo': {
-            'Banners': [],
-            'Number': '',
-            'Place': '',
-            'StoreName': '',
-            'Published': true,
-            'SoldNumber': 0,
-            'StockQty': 0,
-            'LastTimeInfo': '',
-            'FullDescription': '',
-            'FinanceCName': '',
-            'ProductId': 0,
-            'ProductVariantId': 0,
-            'ProductName': '',
-            'Unit': '',
-            'Weight': 0,
-            'PvStandard': '',
-            'PictureId': 0,
-            'PeriodMoney': 0,
-            'DefaultMoney': 0
-          },
-          'ProductInfoServices': [{
-            'BgColor': '',
-            'Name': '',
-            'WapUrl': ''
-          }],
-          'ProductActivities': [{
-            'TypeName': '',
-            'Descrption': '',
-            'ReferType': 0,
-            'Name': ''
-          }]
-        }
+        responseData: ''
       }
     },
     mounted () {
@@ -106,7 +73,7 @@
         method: 'get',
         url: '/shihang/productDetail/content/' + bannersId + '.json'
       }).then((res) => {
-        this.responseData = res.data.Data
+        this.responseData = res.data.data.Data
       }).catch((error) => {
         console.log(error)
       })
@@ -115,7 +82,7 @@
         method: 'get',
         url: '/shihang/productDetail/rate/' + bannersId + '.json'
       }).then((res) => {
-        this.rateResponse = res.data.Data.SourceData
+        this.rateResponse = res.data.data.Data.SourceData
       }).catch((error) => {
         console.log(error)
       })

@@ -15,8 +15,6 @@
   import Header from '@/common/_header.vue'
   import Aside from '@/components/category/aside.vue'
   import Footer from '@/common/_footer.vue'
-  import api from '@/http/ajax.js'
-  import utils from '@/util/common.js'
 
   export default {
     components: {

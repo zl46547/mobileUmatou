@@ -7,5 +7,5 @@ export const CHANGE_TOKEN = 'CHANGE_TOKEN'
 /* 分类页的aside index */
 export const CHANGE_TABINDEX = 'CHANGE_TABINDEX'
 
-/* 购物车列表编辑状态和完成状态切换 */
-export const EDIT_STATUS = 'EDIT_STATUS'
+/* 购物车列表 */
+export const CAR_LIST = 'CAR_LIST'

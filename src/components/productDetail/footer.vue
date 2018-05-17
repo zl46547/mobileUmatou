@@ -10,10 +10,10 @@
     </div>
     <div class="icon" @click="toCartPage">
       <i class="iconfont icon-cart"></i>
-      <mt-badge size="small" type="error">99+</mt-badge>
+      <mt-badge size="small" type="error">{{getCarsNum}}</mt-badge>
       <p>购物车</p>
     </div>
-    <div class="addCart">
+    <div class="addCart" @click="addCart">
       <p>加入购物车</p>
     </div>
   </div>
@@ -22,6 +22,7 @@
 <script type="text/ecmascript-6">
 
   import Util from '../../util/common'
+  import addCartUtil from '../../util/addCart'
 
   export default {
     props: ['response'],
@@ -43,8 +44,27 @@
         this.isLikeProduct = false
       }
     },
-    computed: {},
+    computed: {
+      getCarsNum () {
+        var list = this.$store.state.car.carList
+        var num = 0
+        for (var i = 0; i < list.length; i++) {
+          num += list[i].buyNum
+        }
+        return num
+      }
+    },
     methods: {
+      /**
+       * 加入购物车
+       */
+      addCart () {
+        var productInfo = this.response.ProductInfo
+        addCartUtil.addCart(productInfo)
+      },
+      /**
+       * 收藏
+       */
       onLike () {
         // 这边本应该是操作数据库的，但我这里不做后台的服务，所以直接存入localstore
         var list = Util.getLocal('LIKE_PRODUCT') || []
@@ -82,6 +102,7 @@
       margin: auto;
       text-align: center;
       padding: 10px;
+      cursor: pointer;
       i {
         font-size: 5vw;
       }
@@ -97,6 +118,7 @@
       width: 40vw;
       background-color: #f05423;
       display: flex;
+      cursor: pointer;
       p {
         margin: auto;
         color: #fff;

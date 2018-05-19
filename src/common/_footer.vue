@@ -1,16 +1,16 @@
 <template>
   <footer class="footer" @click.stop="gotoRouter">
     <mt-tabbar v-model="selected" fixed>
-      <mt-tab-item id="首页">
+      <mt-tab-item id="/">
         <i slot="icon" class="icon-index"></i>首页
       </mt-tab-item>
-      <mt-tab-item id="分类页">
+      <mt-tab-item id="/category/all">
         <i slot="icon" class="icon-category"></i>分类
       </mt-tab-item>
-      <mt-tab-item id="购物车页">
+      <mt-tab-item id="/car">
         <i slot="icon" class="icon-car"></i>购物车
       </mt-tab-item>
-      <mt-tab-item id="用户页">
+      <mt-tab-item id="/user">
         <i slot="icon" class="icon-user"></i>我的
       </mt-tab-item>
     </mt-tabbar>
@@ -28,23 +28,23 @@
     },
     methods: {
       gotoRouter () {
-        this.$router.push({name: this.selected})
+        this.$router.push(this.selected)
       }
     },
     mounted () {
-      let routerName = this.$router.name
+      let routerName = this.$route.name
       switch (routerName) {
         case '首页':
-          this.selected = '首页'
+          this.selected = '/'
           break
         case '分类页':
-          this.selected = '分类页'
+          this.selected = '/category/all'
           break
         case '购物车页':
-          this.selected = '购物车页'
+          this.selected = '/car'
           break
         case '用户页':
-          this.selected = '用户页'
+          this.selected = '/user'
           break
       }
     }
@@ -60,8 +60,8 @@
       padding: 5px 0;
       background-color: #fff;
       background-image: none;
-      box-shadow: 0 0 2.2vw 0 hsla(0, 6%, 50%, .13);
-      -webkit-box-shadow: 0 0 sla(0, 6%, 50%, .13);
+      box-shadow: 0 0 2.2vw 0 hsla(0, 6%, 50%, .23);
+      -webkit-box-shadow: 0 0 sla(0, 6%, 50%, .23);
       .is-selected {
         color: @cl;
         background-color: #fff;

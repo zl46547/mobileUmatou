@@ -32,7 +32,6 @@
     },
     methods: {
       addCart (val) {
-        console.log(JSON.stringify(val))
         addCartUtil.addCart(val)
       }
     },
@@ -55,12 +54,14 @@
   .main {
     background-color: #ebebeb;
     width: 100%;
-    height: 100%;
+    height: 82vh;
+    &::-webkit-scrollbar {
+      display: none
+    }
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     .el-row {
       width: 100%;
-      /*overflow-y: scroll;*/
-      -webkit-overflow-scrolling: touch;
-      margin: 12vw 0 15vw 0;
       padding: 1px;
       .detail {
         background-color: #fff;
@@ -118,10 +119,8 @@
 
   @media screen and (min-width: 768px) {
     .main {
-      .el-row {
-        width: 768px;
-        margin: 62px 0 70px 0;
-      }
+      height:645px;
+      width: 768px;
     }
   }
 </style>

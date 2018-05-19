@@ -20,11 +20,8 @@
   header{
     background-color: #fdfdfd;
     text-align: center;
-    position:fixed;
-    top: 0px;
     width:100%;
-    z-index: 9;
-    height: 12vw;
+    height: 8vh;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -50,7 +47,7 @@
 @media screen and (min-width: 768px) {
   header{
     width:744px;
-    height: 62px;
+    height: 80px;
     margin: 0 auto;
     padding: 0 12px;
     h1 {

@@ -1,11 +1,13 @@
 <template>
   <div>
     <v-header></v-header>
-    <v-swiper :adverise="swiperData.Data" v-if="swiperData"></v-swiper>
-    <v-service></v-service>
-    <v-flashSale :flashSale="flashSaleData.Data" v-if="flashSaleData"></v-flashSale>
-    <v-defaultHome :defaultHome="defaultHomeData.Data" v-if="defaultHomeData"></v-defaultHome>
-    <v-baseline></v-baseline>
+    <div class="content">
+      <v-swiper :adverise="swiperData.Data" v-if="swiperData"></v-swiper>
+      <v-service></v-service>
+      <v-flashSale :flashSale="flashSaleData.Data" v-if="flashSaleData"></v-flashSale>
+      <v-defaultHome :defaultHome="defaultHomeData.Data" v-if="defaultHomeData"></v-defaultHome>
+      <v-baseline></v-baseline>
+    </div>
     <v-footer></v-footer>
   </div>
 </template>
@@ -95,6 +97,13 @@
   }
 </script>
 
-<style scoped>
-
+<style lang="less" scoped>
+  .content {
+    height: 82vh;
+    &::-webkit-scrollbar {
+      display: none
+    }
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
 </style>

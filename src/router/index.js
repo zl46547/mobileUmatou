@@ -25,12 +25,12 @@ export default new Router({
     },
     {
       path: '/category',
-      name: '分类页',
       redirect: '/category/all',
       component: Category,
      children: [
        {
          path: '/category/:tab',
+         name: '分类页',
          component: CategoryMain
        }
      ]

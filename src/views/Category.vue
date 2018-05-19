@@ -93,18 +93,9 @@
     .view {
       width: 100%;
       height: 100%;
-      margin: 12vw 0 16vw 0;
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
-    }
-  }
-
-  @media screen and (min-width: 768px) {
-    .wrap {
-      .view {
-        margin: 62px 0 70px 0;
-      }
     }
   }
 </style>

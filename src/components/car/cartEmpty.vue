@@ -28,7 +28,7 @@
     img {
       width: 100%;
     }
-    >p {
+    > p {
       color: #ccc;
       width: 100%;
       text-align: center;
@@ -55,5 +55,27 @@
   }
 
   @media screen and (min-width: 768px) {
+    .cartEmpty {
+      height: 580px;
+      width: 100%;
+      img {
+        width: 70%;
+        display: block;
+        margin: auto;
+      }
+      > p {
+        width: 100%;
+        font-size: 26px;
+        padding-bottom: 20px;
+      }
+      > div {
+        width: 100%;
+        margin-top: 10px;
+        .goToShop {
+          width: 150px;
+          height: 50px;
+        }
+      }
+    }
   }
 </style>

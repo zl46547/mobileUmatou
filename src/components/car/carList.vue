@@ -89,7 +89,9 @@
       goToAccount () {
         if (this.checkedcarsList.length <= 0) {
           Toast('请先挑选商品')
+          return false
         }
+        this.$router.push({name: '提交订单'})
       },
       // 删除购物车列表
       deleteItem (index) {
@@ -219,7 +221,7 @@
         display: table;
         justify-content: flex-start;
         padding: 2vh 0;
-        width:100%;
+        width: 100%;
         .checkbox-left {
           padding: 0 2vw;
           display: table-cell;
@@ -244,16 +246,16 @@
           }
           .img-right {
             padding: 0 5vw;
-            width:100%;
+            width: 100%;
             > p {
               text-overflow: ellipsis;
               padding-bottom: 3vw;
               color: #333;
-              font-size:4vw;
+              font-size: 4vw;
             }
             .content {
               display: table;
-              width:100%;
+              width: 100%;
               .price {
                 width: 20vw;
                 display: table-cell;
@@ -318,7 +320,7 @@
         display: flex;
         align-items: center;
         p {
-          font-size:4vw;
+          font-size: 4vw;
           padding: 0 12vw
         }
       }
@@ -374,7 +376,7 @@
         height: 9vh;
         display: flex;
         text-align: center;
-        padding: 0 2vw;
+        padding: 0 4vw;
         > div {
           margin: auto
         }
@@ -410,7 +412,7 @@
               padding: 0 25px;
               > p {
                 padding-bottom: 15px;
-                font-size:24px;
+                font-size: 24px;
               }
               .content {
                 .price {
@@ -481,7 +483,7 @@
         }
         .count-btn {
           height: 65px;
-          padding: 0 10px;
+          padding: 0 50px;
         }
       }
     }

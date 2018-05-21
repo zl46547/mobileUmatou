@@ -156,7 +156,7 @@
       background-color: #fff;
     }
     html,body{
-      background-color: #f2f2f2;
+      background-color: #e1e1e1;
       -webkit-tap-highlight-color: #f2f2f2;
       height: 100%;
     }

@@ -6,9 +6,14 @@
       </v-header>
       <div class="content-body">
         <v-address></v-address>
-        <v-pannel :selectObj="payWayObj"></v-pannel>
+        <div class="pannelMargin">
+          <v-pay-way></v-pay-way>
+        </div>
         <v-order-list></v-order-list>
-        <v-pannel :selectObj="ticketObj"></v-pannel>
+        <div class="pannelMargin">
+          <v-ticket></v-ticket>
+          <v-bounce></v-bounce>
+        </div>
       </div>
     </div>
   </div>
@@ -18,27 +23,21 @@
   import Header from '@/common/_header.vue'
   import Address from '@/components/submitOrder/address.vue'
   import OrderList from '@/components/submitOrder/orderList.vue'
-  import Pannel from '@/components/submitOrder/pannel.vue'
+  import PayWay from '@/components/submitOrder/payWay.vue'
+  import Ticket from '@/components/submitOrder/ticket.vue'
+  import Bounce from '@/components/submitOrder/bounce.vue'
 
   export default {
     components: {
       'VHeader': Header,
       'VAddress': Address,
       'VOrderList': OrderList,
-      'VPannel': Pannel
+      'VPayWay': PayWay,
+      'VTicket': Ticket,
+      'VBounce': Bounce
     },
     data () {
       return {
-        payWayObj: {
-          title: '支付方式',
-          selected: '在线支付',
-          type: 'PW'
-        },
-        ticketObj: {
-          title: '发票',
-          selected: '普票',
-          type: 'FP'
-        }
       }
     },
     mounted () {
@@ -61,6 +60,9 @@
       }
       overflow-y: scroll;
       -webkit-overflow-scrolling: touch;
+      .pannelMargin{
+        margin: 2vh 0;
+      }
     }
   }
 

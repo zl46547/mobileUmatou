@@ -1,15 +1,14 @@
 <template>
-  <div style="width: 100vw;height: 100vh;background-color: rgba(129, 129, 129, 0.6);position: fixed;top: 0;left: 0;">
-    <div style="background-color: #fff;position: relative;top: 30vh;left: 0;height: 70vh;width: 100vw;">
-      <div style="display: flex;justify-content: space-between;padding: 3vw">
-        <div style="font-size: 5vw;font-weight: bold;"><slot name="title"></slot></div>
-        <div style="font-size: 4vw;cursor: pointer" @click="closeModal">X</div>
+  <div class="modal">
+    <div>
+      <div class="modal-top">
+        <div>
+          <slot name="title"></slot>
+        </div>
+        <div class="close" @click="closeModal">X</div>
       </div>
-      <div style="height: 52vh;">
+      <div class="modalContent">
         <slot name="content"></slot>
-      </div>
-      <div style="cursor:pointer;margin:auto;width: 60vw;height: 45px;background-color: #ff2b1c;display: flex;border-radius: 90px;align-self: flex-end">
-        <p style="margin: auto;color: #fff;">确定</p>
       </div>
     </div>
   </div>
@@ -27,7 +26,62 @@
 </script>
 
 <style lang="less" scoped>
+  .modal {
+    z-index: 9;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(129, 129, 129, 0.6);
+    left: 50%;
+    transform: translate(-50%);
+    position: fixed;
+    top: 0;
+    > div {
+      background-color: #fff;
+      position: absolute;
+      top: 30vh;
+      left: 0;
+      height: 70vh;
+      width: 100vw;
+      .modal-top {
+        display: flex;
+        justify-content: space-between;
+        padding: 3vw;
+        > div {
+          font-size: 5vw;
+          font-weight: bold;
+        }
+        .close {
+          font-size: 4vw;
+          cursor: pointer
+        }
+      }
+      .modalContent{
+        height:52vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        &::-webkit-scrollbar {
+          display: none
+        }
+      }
+    }
+  }
 
   @media screen and (min-width: 768px) {
+    .modal {
+      width: 768px;
+      height: 100vh;
+      > div {
+        width: 768px;
+        .modal-top {
+          padding: 20px;
+          > div {
+            font-size: 22px;
+          }
+          .close {
+            font-size: 30px;
+          }
+        }
+      }
+    }
   }
 </style>

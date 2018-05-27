@@ -28,7 +28,7 @@
   export default {
     components: {},
     mounted () {
-      this.dataList = this.$store.state.car.carList
+      this.dataList = this.$store.state.car.selectedCarList
     },
     data () {
       return {

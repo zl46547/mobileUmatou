@@ -1,6 +1,6 @@
 <template>
   <div class="navBar">
-    <div class="navBarItem" v-for="(item,i) in navBarList"
+    <div class="navBarItem" v-for="(item,i) in nav_bar_list"
          :key="i" :class="{'isActive':i === activeItem}"
          @click="clickItem(i)">{{item.name}}({{item.num}})
     </div>
@@ -10,18 +10,9 @@
 <script type="text/ecmascript-6">
 
   export default {
+    props: ['nav_bar_list'],
     data () {
       return {
-        navBarList: [
-          {
-            name: '可用优惠券',
-            num: 1
-          },
-          {
-            name: '不可用优惠券',
-            num: 5
-          }
-        ],
         activeItem: 0
       }
     },
@@ -42,7 +33,7 @@
     .navBarItem {
       padding: 1vh 2vw;
       font-size: 4vw;
-      width:120px;
+      width: 120px;
       text-align: center;
     }
     .isActive {

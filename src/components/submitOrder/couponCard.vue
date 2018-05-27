@@ -1,18 +1,18 @@
 <template>
-    <div class="sawtooth" style="display: flex;align-items: center;">
-      <div class="par">
-        <sub class="sign">￥</sub><span>{{coupon.Amount}}</span><sub>优惠券</sub>
-        <p>{{coupon.Description}}</p></div>
-      <div class="copy">
-        副券<p>{{coupon.BeginTime}}<br>{{coupon.EndTime}}</p>
-      </div>
+  <div class="sawtooth" style="display: flex;align-items: center;" :style="{'background-color':coupon.backgroundColor}">
+    <div class="par">
+      <sub class="sign">￥</sub><span>{{coupon.Amount}}</span><sub>优惠券</sub>
+      <p>{{coupon.Description}}</p></div>
+    <div class="copy">
+      副券<p>{{coupon.BeginTime}}<br>{{coupon.EndTime}}</p>
     </div>
+  </div>
 </template>
 
 <script type="text/ecmascript-6">
 
   export default {
-    props:['coupon'],
+    props: ['coupon'],
     data () {
       return {}
     },
@@ -26,9 +26,8 @@
 
   .sawtooth {
     position: relative;
-    width:80vw;
-    height:23vw;
-    background-color: #D24161;
+    width: 80vw;
+    height: 23vw;
     /* 相对定位，方便让before和after伪元素绝对定位偏移 */
     /* 把超出p的部分隐藏起来 */
     overflow: hidden;
@@ -73,6 +72,7 @@
     font-size: 10vw;
     color: #fff;
     margin-right: 2vw;
+    vertical-align: middle;
   }
 
   .sawtooth .par .sign {
@@ -81,7 +81,7 @@
 
   .sawtooth .par sub {
     top: -1vw;
-    font-size:5vw;
+    font-size: 5vw;
     color: rgba(255, 255, 255, .8);
   }
 
@@ -90,7 +90,7 @@
     padding: 3vw 2vw;
     width: 30vw;
     vertical-align: text-bottom;
-    font-family:"Microsoft Himalaya";
+    font-family: "Microsoft Himalaya";
     font-size: 7vw;
     color: rgb(255, 255, 255);
   }

@@ -91,6 +91,7 @@
           Toast('请先挑选商品')
           return false
         }
+        this.$store.commit('SELECT_CAR_LIST', this.checkedcarsList)
         this.$router.push({name: '提交订单'})
       },
       // 删除购物车列表

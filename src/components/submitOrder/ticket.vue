@@ -10,11 +10,14 @@
       <div slot="content">
         <div class="modalContent">
           <div class="subTitle">发票类型</div>
-          <v-radio :radioList="ticketTypeList" :hasSelected="ticketTypeSelected" @radio-selected="typeRadioSelected"></v-radio>
+          <v-radio :radioList="ticketTypeList" :hasSelected="ticketTypeSelected"
+                   @radio-selected="typeRadioSelected"></v-radio>
           <div class="subTitle">发票抬头</div>
-          <v-radio :radioList="ticketTitle" :hasSelected="ticketTitleSelected" @radio-selected="titleRadioSelected"></v-radio>
+          <v-radio :radioList="ticketTitle" :hasSelected="ticketTitleSelected"
+                   @radio-selected="titleRadioSelected"></v-radio>
           <div class="subTitle">发票内容</div>
-          <v-radio :radioList="ticketContent" :hasSelected="ticketContentSelected" @radio-selected="contentRadioSelected"></v-radio>
+          <v-radio :radioList="ticketContent" :hasSelected="ticketContentSelected"
+                   @radio-selected="contentRadioSelected"></v-radio>
         </div>
         <div class="comfirm" @click="comfirm">
           <p>确定</p>
@@ -131,8 +134,10 @@
     }
     .modalContent {
       padding: 0 3vw;
-      .subTitle{
-        font-size: 4vw;font-weight: bold;padding: 1vh 0;
+      .subTitle {
+        font-size: 4vw;
+        font-weight: bold;
+        padding: 1vh 0;
       }
     }
     .comfirm {
@@ -155,5 +160,32 @@
   }
 
   @media screen and (min-width: 768px) {
+    .ticket {
+      padding: 20px 25px;
+      p {
+        font-size: 24px;
+        margin-bottom: 15px;
+      }
+      > div {
+        .ticketSelected {
+          font-size: 24px;
+        }
+        .iconfont {
+          font-size: 24px;
+        }
+      }
+      .modalContent {
+        padding: 0 15px;
+        .subTitle {
+          font-size: 24px;
+          padding: 10px 0;
+        }
+      }
+      .comfirm {
+        bottom: 20px;
+        width: 300px;
+        height: 40px;
+      }
+    }
   }
 </style>

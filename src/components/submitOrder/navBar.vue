@@ -33,7 +33,7 @@
     .navBarItem {
       padding: 1vh 2vw;
       font-size: 4vw;
-      width: 120px;
+      width: 35vw;
       text-align: center;
     }
     .isActive {
@@ -43,5 +43,12 @@
   }
 
   @media screen and (min-width: 768px) {
+    .navBar {
+      .navBarItem {
+        padding: 10px 15px;
+        font-size: 24px;
+        width: 180px;
+      }
+    }
   }
 </style>

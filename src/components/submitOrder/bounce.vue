@@ -10,23 +10,21 @@
       <div slot="content">
         <div class="modalContent">
           <v-nav-bar @clicked-nav-bar="clickedNavBar" :nav_bar_list="navBarList"></v-nav-bar>
-          <div v-if="parseInt(activeNavBar) === 0" class="navbarBody">
+          <div v-if="parseInt(activeNavBar) === 0" class="navbarBody-one">
             <div v-if="usefulCoupon">
-              <div v-for="(item,i) in usefulCoupon" :key="i" style="display: table;margin: 1.9vh auto" @click="checkCoupon(item)">
-                <div style="display:table-cell;vertical-align:middle;padding-right: 2vw">
-                  <i class="icon iconfont icon-round" style="font-size: 6vw;"
-                     v-if="item.Id !== checkedItem.Id"></i>
-                  <i class="icon iconfont icon-roundcheck" style="font-size: 6vw;color: #ff2b1c;"
-                     v-if="item.Id === checkedItem.Id"></i>
+              <div class="usefulCoupon" v-for="(item,i) in usefulCoupon" :key="i" @click="checkCoupon(item)">
+                <div class="checkbox">
+                  <i class="icon iconfont icon-round" v-if="item.Id !== checkedItem.Id"></i>
+                  <i class="icon iconfont icon-roundcheck" v-if="item.Id === checkedItem.Id"></i>
                 </div>
-                <div style="display: table-cell;vertical-align:middle;">
+                <div class="couponCard">
                   <v-coupon-card :coupon="item"></v-coupon-card>
                 </div>
               </div>
             </div>
           </div>
-          <div v-if="parseInt(activeNavBar) === 1">
-            <div v-for="(item,i) in unUsefulCoupon" :key="i" style="display: table;margin: 1.9vh auto">
+          <div v-if="parseInt(activeNavBar) === 1" class="navbarBody-two">
+            <div v-for="(item,i) in unUsefulCoupon" :key="i">
               <div v-if="unUsefulCoupon">
                 <v-coupon-card :coupon="item"></v-coupon-card>
               </div>
@@ -157,23 +155,6 @@
 </script>
 
 <style lang="less" scoped>
-  .aspectration {
-    position: relative;
-  }
-
-  .aspectration:after {
-    content: "";
-    display: block;
-    padding-top: 56.25%;
-  }
-
-  .content {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
 
   .bounce {
     padding: 3vw;
@@ -196,13 +177,38 @@
       }
     }
     .modalContent {
-      .navbarBody {
+      .navbarBody-one {
         height: 46vh;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
         &::-webkit-scrollbar {
           display: none
         }
+        .usefulCoupon {
+          display: table;
+          margin: 1.9vh auto;
+          transform: translate(-3%);
+          .checkbox {
+            display: table-cell;
+            vertical-align: middle;
+            padding-right: 2vw;
+            font-weight:bold;
+            .iconfont {
+              font-size: 6vw;
+            }
+            .icon-roundcheck {
+              color: #ff2b1c;
+            }
+          }
+          .couponCard {
+            display: table-cell;
+            vertical-align: middle;
+          }
+        }
+      }
+      .navbarBody-two > div {
+        display: table;
+        margin: 1.9vh auto;
       }
     }
     .comfirm {
@@ -223,5 +229,43 @@
       }
     }
   }
-
+  @media screen and (min-width: 768px) {
+    .bounce {
+      padding: 20px 25px;
+      p {
+        font-size: 24px;
+        margin-bottom: 15px;
+      }
+      > div {
+        .bounceSelected {
+          font-size: 24px;
+        }
+        .iconfont {
+          font-size: 24px;
+        }
+      }
+      .modalContent {
+        .navbarBody-one {
+          height: 335px;
+          .usefulCoupon {
+            margin: 15px auto;
+            .checkbox {
+              padding-right: 10px;
+              .iconfont {
+                font-size: 30px;
+              }
+            }
+          }
+        }
+        .navbarBody-two > div {
+          margin: 15px auto;
+        }
+      }
+      .comfirm {
+        bottom: 20px;
+        width: 460px;
+        height: 60px;
+      }
+    }
+  }
 </style>

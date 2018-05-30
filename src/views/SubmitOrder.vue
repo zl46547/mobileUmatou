@@ -14,6 +14,16 @@
           <v-ticket></v-ticket>
           <v-bounce></v-bounce>
         </div>
+        <div class="pannelMargin" style="padding: 2vh 3vw">
+          <div style="display: flex;justify-content: space-between;align-items: center;font-size: 4vw;margin: 1vh 0 ">
+            <p>商品金额</p>
+            <p style="font-size: 4.5vw;font-weight: bold;">¥39.90</p>
+          </div>
+          <div style="display: flex;justify-content: space-between;align-items: center;font-size: 4vw;margin: 1vh 0 ">
+            <p>运费</p>
+            <p style="font-size: 4.5vw;font-weight: bold;color: #ff2b1c;">+ ¥10.00</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -62,14 +72,23 @@
       -webkit-overflow-scrolling: touch;
       .pannelMargin{
         margin: 2vh 0;
+        background-color: #fff;
+        box-shadow: 0 2px 6px #bfbfbf;
       }
     }
   }
 
   @media screen and (min-width: 768px) {
     .content {
+      background-color: #f2f2f2;
+      width: 768px;
       h1 {
-        font-size: 30px;
+        font-size: 32px;
+      }
+      .content-body {
+        .pannelMargin{
+          margin: 15px 0;
+        }
       }
     }
   }

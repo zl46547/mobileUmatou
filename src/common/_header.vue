@@ -21,7 +21,7 @@
     background-color: #fdfdfd;
     text-align: center;
     width:100%;
-    height: 8vh;
+    height: 9vh;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -47,7 +47,6 @@
 @media screen and (min-width: 768px) {
   header{
     width:744px;
-    height: 80px;
     margin: 0 auto;
     padding: 0 12px;
     h1 {

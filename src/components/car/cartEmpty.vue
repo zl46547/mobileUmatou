@@ -3,8 +3,8 @@
     <img src="../../assets/images/emptyCart.png"/>
     <p>您的购物车空空如也</p>
     <div>
-      <div class="goToShop">
-        <p @click="goHome">去逛逛</p>
+      <div class="goToShop" @click="goHome">
+        <p>去逛逛</p>
       </div>
     </div>
   </div>

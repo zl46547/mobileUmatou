@@ -2,7 +2,9 @@
   <div class="ticket">
     <p>发票</p>
     <div>
-      <div class="ticketSelected">{{ticketTypeSelected}}({{ticketContentSelected}} - {{ticketTitleSelected}})</div>
+      <div class="ticketSelected">
+        {{selectedItem.ticketType}}({{selectedItem.ticketContent}} - {{selectedItem.ticketTitle}})
+      </div>
       <i class="iconfont icon-more" @click="showModal()"></i>
     </div>
     <v-modal v-if="openModal" @close-modal="closeMoadl">
@@ -10,13 +12,13 @@
       <div slot="content">
         <div class="modalContent">
           <div class="subTitle">发票类型</div>
-          <v-radio :radioList="ticketTypeList" :hasSelected="ticketTypeSelected"
+          <v-radio :radioList="ticketTypeList" :hasSelected="selectedItem.ticketType"
                    @radio-selected="typeRadioSelected"></v-radio>
           <div class="subTitle">发票抬头</div>
-          <v-radio :radioList="ticketTitle" :hasSelected="ticketTitleSelected"
+          <v-radio :radioList="ticketTitle" :hasSelected="selectedItem.ticketTitle"
                    @radio-selected="titleRadioSelected"></v-radio>
           <div class="subTitle">发票内容</div>
-          <v-radio :radioList="ticketContent" :hasSelected="ticketContentSelected"
+          <v-radio :radioList="ticketContent" :hasSelected="selectedItem.ticketContent"
                    @radio-selected="contentRadioSelected"></v-radio>
         </div>
         <div class="comfirm" @click="comfirm">
@@ -34,11 +36,13 @@
   export default {
     data () {
       return {
-        ticketTypeSelected: '普通发票',
+        selectedItem: {
+          ticketType: '普通发票',
+          ticketTitle: '个人',
+          ticketContent: '商品明细'
+        },
         ticketTypeTempSelected: '普通发票',
-        ticketTitleSelected: '个人',
         ticketTitleTempSelected: '个人',
-        ticketContentSelected: '商品明细',
         ticketContentTempSelected: '商品明细',
         openModal: false,
         ticketTypeList: [
@@ -82,15 +86,19 @@
       'VRadio': Radio
     },
     computed: {},
+    mounted () {
+      var selectedTicket = `${this.selectedItem.ticketType}(${this.selectedItem.ticketContent} - ${this.selectedItem.ticketTitle})`
+      this.$emit('selected-ticket', selectedTicket)
+    },
     methods: {
       showModal () {
         this.openModal = true
       },
       closeMoadl (val) {
         this.openModal = val
-        this.ticketTypeTempSelected = this.ticketTypeSelected
-        this.ticketTitleTempSelected = this.ticketTitleSelected
-        this.ticketContentTempSelected = this.ticketContentSelected
+        this.ticketTypeTempSelected = this.selectedItem.ticketType
+        this.ticketTitleTempSelected = this.selectedItem.ticketTitle
+        this.ticketContentTempSelected = this.selectedItem.ticketContent
       },
       typeRadioSelected (val) {
         this.ticketTypeTempSelected = val
@@ -103,9 +111,11 @@
       },
       comfirm () {
         this.openModal = false
-        this.ticketTypeSelected = this.ticketTypeTempSelected
-        this.ticketTitleSelected = this.ticketTitleTempSelected
-        this.ticketContentSelected = this.ticketContentTempSelected
+        this.selectedItem.ticketType = this.ticketTypeTempSelected
+        this.selectedItem.ticketTitle = this.ticketTitleTempSelected
+        this.selectedItem.ticketContent = this.ticketContentTempSelected
+        var selectedTicket = `${this.selectedItem.ticketType}(${this.selectedItem.ticketContent} - ${this.selectedItem.ticketTitle})`
+        this.$emit('selected-ticket', selectedTicket)
       }
     }
   }
@@ -184,7 +194,7 @@
       .comfirm {
         bottom: 20px;
         width: 300px;
-        height: 40px;
+        height: 50px;
       }
     }
   }

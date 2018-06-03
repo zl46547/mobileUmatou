@@ -11,6 +11,7 @@
         <div class="modalContent">
           <v-nav-bar @clicked-nav-bar="clickedNavBar" :nav_bar_list="navBarList"></v-nav-bar>
           <div v-if="parseInt(activeNavBar) === 0" class="navbarBody-one">
+            <!-- 可使用的优惠券 -->
             <div v-if="usefulCoupon">
               <div class="usefulCoupon" v-for="(item,i) in usefulCoupon" :key="i" @click="checkCoupon(item)">
                 <div class="checkbox">
@@ -25,6 +26,7 @@
           </div>
           <div v-if="parseInt(activeNavBar) === 1" class="navbarBody-two">
             <div v-for="(item,i) in unUsefulCoupon" :key="i">
+              <!-- 不可使用的优惠券 -->
               <div v-if="unUsefulCoupon">
                 <v-coupon-card :coupon="item"></v-coupon-card>
               </div>
@@ -145,6 +147,7 @@
         } else {
           this.comfirmSelectedItem = this.checkedItem
         }
+        this.$emit('comfirm-selected-item', this.comfirmSelectedItem)
         this.openModal = false
       },
       clickedNavBar (val) {
@@ -192,7 +195,7 @@
             display: table-cell;
             vertical-align: middle;
             padding-right: 2vw;
-            font-weight:bold;
+            font-weight: bold;
             .iconfont {
               font-size: 6vw;
             }
@@ -206,14 +209,22 @@
           }
         }
       }
-      .navbarBody-two > div {
-        display: table;
-        margin: 1.9vh auto;
+      .navbarBody-two {
+        height: 46vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        &::-webkit-scrollbar {
+          display: none
+        }
+        > div {
+          display: table;
+          margin: 1.9vh auto;
+        }
       }
     }
     .comfirm {
       position: absolute;
-      bottom: 3vh;
+      bottom: 2vh;
       left: 50%;
       transform: translate(-50%);
       cursor: pointer;
@@ -229,6 +240,7 @@
       }
     }
   }
+
   @media screen and (min-width: 768px) {
     .bounce {
       padding: 20px 25px;
@@ -257,14 +269,17 @@
             }
           }
         }
-        .navbarBody-two > div {
-          margin: 15px auto;
+        .navbarBody-two {
+          height: 335px;
+          > div {
+            margin: 15px auto;
+          }
         }
       }
       .comfirm {
         bottom: 20px;
-        width: 460px;
-        height: 60px;
+        width: 300px;
+        height: 50px;
       }
     }
   }

@@ -46,6 +46,9 @@
       'VRadio': Radio
     },
     computed: {},
+    mounted () {
+      this.$emit('pay-way-selected', this.payWaySelected)
+    },
     methods: {
       showModal () {
         this.openModal = true
@@ -60,6 +63,7 @@
       comfirm () {
         this.openModal = false
         this.payWaySelected = this.tempSelected
+        this.$emit('pay-way-selected', this.payWaySelected)
       }
     }
   }
@@ -127,9 +131,9 @@
         padding: 0 30px;
       }
       .comfirm {
-        height: 60px;
         bottom: 30px;
         width: 300px;
+        height: 50px;
       }
     }
   }

@@ -43,13 +43,13 @@
       .par {
         display: table;
         p {
-          font-size: 5vw;
+          font-size: 4.5vw;
           color: rgba(255, 255, 255, .8);
           vertical-align: bottom;
           display: table-cell;
         }
         .amount {
-          font-size: 10vw;
+          font-size: 9.5vw;
           color: #fff;
           padding-right: 1vw;
           line-height: 0.8;

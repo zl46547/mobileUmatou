@@ -12,3 +12,6 @@ export const CAR_LIST = 'CAR_LIST'
 
 /* 选中的购物车列表，提交订单 */
 export const SELECT_CAR_LIST = 'SELECT_CAR_LIST'
+
+/* 提交订单 */
+export const SUBMIT_ORDER = 'SUBMIT_ORDER'

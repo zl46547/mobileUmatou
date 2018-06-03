@@ -5,6 +5,7 @@ import detail from './modules/detail'
 import login from './modules/login'
 import category from './modules/category'
 import car from './modules/car'
+import orderList from './modules/orderList'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -12,6 +13,7 @@ export default new Vuex.Store({
     detail,
     login,
     category,
-    car
+    car,
+    orderList
   }
 })

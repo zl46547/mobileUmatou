@@ -15,3 +15,6 @@ export const SELECT_CAR_LIST = 'SELECT_CAR_LIST'
 
 /* 提交订单 */
 export const SUBMIT_ORDER = 'SUBMIT_ORDER'
+
+/* 提交订单 */
+export const MY_ORDERS = 'MY_ORDERS'

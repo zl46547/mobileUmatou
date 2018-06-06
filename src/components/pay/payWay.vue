@@ -64,7 +64,7 @@
     },
     methods: {
       init () {
-        var params = this.$route.params
+        var params = this.$store.state.orderList.submitOrder
         this.payAmmount = params.finalPrice
         this.orderNo = params.orderNo
       },
@@ -72,7 +72,7 @@
        * 获取剩余支付时间
        */
       getRemainTime () {
-        var params = this.$route.params
+        var params = this.$store.state.orderList.submitOrder
         var nowTime = new Date().getTime()
         var endTime = new Date(params.deadTime).getTime()
         var remainTime = endTime - nowTime
@@ -91,6 +91,7 @@
             second = '0' + second
           }
           this.remainTime = `${minute}:${second}`
+          this.$emit('remain-time', remainTime)
         }, 1000)
       },
       onChecked (val) {

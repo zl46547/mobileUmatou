@@ -5,13 +5,17 @@
         <h1 slot="title">支付订单</h1>
       </v-header>
       <div class="content-body">
-        <v-pay-way></v-pay-way>
+        <v-pay-way @remain-time="getRemainTime"></v-pay-way>
       </div>
-      <div class="footer">
-        <div>
+      <div class="footer" @click="comfirmPay"
+           :class="{'enable':parseInt(remainTime)>0,'disable':parseInt(remainTime)<=0}">
+        <div v-if="parseInt(remainTime)>0">
           <span>确认支付</span>
           <span>¥</span>
-          <span>34.90</span>
+          <span>{{submitOrder.finalPrice}}</span>
+        </div>
+        <div v-if="parseInt(remainTime)<=0">
+          <span>订单已过期</span>
         </div>
       </div>
     </div>
@@ -28,13 +32,71 @@
       'VHeader': Header
     },
     data () {
-      return {}
+      return {
+        submitOrder: '',
+        myOrders: '',
+        carList: '',
+        remainTime: 1
+      }
     },
     mounted () {
-      var a = this.$store.state.orderList.submitOrder
-      console.log(JSON.stringify(a))
+      this.submitOrder = this.$store.state.orderList.submitOrder
+      this.myOrders = this.$store.state.orderList.myOrders
+      this.carList = this.$store.state.car.carList
     },
-    methods: {}
+    methods: {
+      /**
+       * 获取剩余时间
+       * @param val 剩余时间
+       */
+      getRemainTime (val) {
+        this.remainTime = val
+      },
+      /**
+       * 确认支付
+       * @returns {boolean}
+       */
+      comfirmPay () {
+        if (parseInt(this.remainTime) <= 0) {
+          return false
+        }
+        // 获取我的订单,并将提交的订单加入到我的订单中
+        // 判断是提交订单还是支付成功后修改订单状态
+        var index = 0
+        for (var i = 0; i < this.myOrders.length; i++) {
+          if (this.myOrders[i].orderNo === this.submitOrder.orderNo) {
+            index = i
+            break
+          }
+        }
+        this.myOrders[index].orderStatus = 'PS'
+        this.$notify({
+          title: '交易完成',
+          message: '订单支付成功',
+          type: 'success',
+          duration: 2000
+        })
+        this.delCarList(this.submitOrder.orderList)
+      },
+      /**
+       * 删除已支付成功的商品
+       * @param orderList 支付成功的商品
+       */
+      delCarList (orderList) {
+        if (orderList.length > 0) {
+          var submitOrderIdList = orderList.select(function (t) {
+            return t.ProductId
+          })
+          var carlist = this.carList
+          submitOrderIdList.forEach(function (e) {
+            carlist.removeAll(function (t) {
+              return parseInt(t.ProductId) === parseInt(e)
+            })
+          })
+          this.$store.commit('CAR_LIST', carlist)
+        }
+      }
+    }
   }
 </script>
 
@@ -53,6 +115,14 @@
       overflow-y: scroll;
       -webkit-overflow-scrolling: touch;
     }
+    .enable {
+      background-color: #ff3b00;
+      cursor: pointer;
+    }
+    .disable {
+      background-color: #c4c4c4;
+      cursor: not-allowed;
+    }
     .footer {
       position: fixed;
       bottom: 0;
@@ -60,9 +130,7 @@
       box-shadow: 0 0 2.2vw 0 hsla(0, 6%, 50%, .23);
       align-items: center;
       height: 9vh;
-      background-color: #ff3b00;
       width: 100vw;
-      cursor: pointer;
       > div {
         display: flex;
         margin: auto;

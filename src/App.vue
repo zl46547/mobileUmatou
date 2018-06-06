@@ -147,7 +147,25 @@
     visibility: hidden;
     clear: both;
   }
-
+  .el-notification.right {
+    top: 40% !important;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 60vw;
+    .el-notification__icon {
+      font-size: 7vw;
+    }
+    .el-notification__group {
+      margin-left: 5vw;
+      .el-notification__title {
+        font-size: 5vw;
+      }
+      .el-notification__content {
+        font-size: 4vw;
+        margin: 3vw 0 0;
+      }
+    }
+  }
   @media screen and (min-width: 768px) {
     #app {
       width: 768px;
@@ -159,6 +177,22 @@
       background-color: #e1e1e1;
       -webkit-tap-highlight-color: #f2f2f2;
       height: 100%;
+    }
+    .el-notification.right {
+      width: 460px;
+      .el-notification__icon {
+        font-size: 32px;
+      }
+      .el-notification__group {
+        margin-left: 24px;
+        .el-notification__title {
+          font-size: 26px;
+        }
+        .el-notification__content {
+          font-size: 20px;
+          margin: 16px 0 0;
+        }
+      }
     }
   }
 </style>

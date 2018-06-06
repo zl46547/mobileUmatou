@@ -97,15 +97,6 @@
       // 删除购物车列表
       deleteItem (index) {
         MessageBox.confirm('确定执行此操作?').then(action => {
-          // 删除选中列表内的数据
-          if (this.checkedcarsList.length > 0) {
-            for (var i = 0; i < this.checkedcarsList.length; i++) {
-              if ((JSON.stringify(this.checkedcarsList[i]) === (JSON.stringify(this.dataList[index])))) {
-                this.checkedcarsList.splice(i, 1)
-                break
-              }
-            }
-          }
           // 删除数据源内的数据
           this.dataList.splice(index, 1)
           // 如果全部删除了，就把全选状态改为false
@@ -212,7 +203,7 @@
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
     width: 100vw;
-    height: 74vh;
+    height: 72vh;
     margin-top: 1px;
     > div {
       margin-bottom: 2vh;
@@ -387,7 +378,7 @@
 
   @media screen and (min-width: 768px) {
     .carList {
-      height: 570px;
+      height: 578px;
       width: 768px;
       > div {
         margin-bottom: 10px;
@@ -483,7 +474,7 @@
           }
         }
         .count-btn {
-          height: 65px;
+          height: 75px;
           padding: 0 50px;
         }
       }

@@ -8,6 +8,7 @@ import 'mint-ui/lib/style.css'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import $ from 'jquery'
+import linq from 'linqjs'
 
 Vue.use(ElementUI)
 Vue.use(Mint)
@@ -36,6 +37,7 @@ new Vue({
   router,
   store,
   $,
+  linq,
   components: {App},
   template: '<App/>'
 })

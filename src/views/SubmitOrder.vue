@@ -72,7 +72,7 @@
     },
     computed: {
       getFinalPrice () {
-        var finalPrice = this.totalPrice + 10 - this.bounce.Amount
+        var finalPrice = parseFloat(this.totalPrice) + 10 - (parseFloat(this.bounce.Amount) || 0)
         return finalPrice
       }
     },
@@ -116,10 +116,10 @@
           payWay: this.payWay, // 支付方式
           ticket: this.ticket, // 发票
           orderNo: `UMT${new Date().getTime()}`, // 订单号
-          orderStatus: 'OS'// OS:下单成功；OF:下单失败；PS：支付成功；PF：支付失败
+          orderStatus: 'OS' // OS:下单成功；OF:下单失败；PS：支付成功；PF：支付失败
         }
         this.$store.commit('SUBMIT_ORDER', params)
-        this.$router.push({name: '支付订单', params: params})
+        this.$router.push({name: '支付订单'})
       }
     }
   }

@@ -2,7 +2,7 @@ import Util from '../../util/common'
 import * as types from '../types'
 
 const state = {
-  carList: Util.getLocal('CAR_LIST'), // 编辑状态
+  carList: Util.getLocal('CAR_LIST') || [], // 编辑状态
   selectedCarList: [] // 选中的购物车列表
 }
 

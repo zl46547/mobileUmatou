@@ -1,6 +1,6 @@
 <template>
-  <div v-if="defaultHome">
-    <div class="defaultHome" v-for="item in defaultHome.FloorInfo.FixedHomeFloors" :key="item.Id">
+  <div >
+    <div class="defaultHome" v-for="item in defaultHome.FloorInfo.ConfigHomeFloors" :key="item.Id" v-if="defaultHome">
       <!-- 小标题 -->
       <div class="title" v-if="item.ChildTitle">
         <p>{{item.FatherTitle}}</p>
@@ -41,7 +41,7 @@
       <!-- 一列 -->
       <div class="flex" v-if="parseInt(item.FloorType) === 7">
         <router-link :to="{name:'详情页'}">
-          <img v-lazy="item.PicAdvItems.BackGroundImg" alt="" class="width-100">
+          <img v-lazy="item.PicAdvItems[0].BackGroundImg" alt="" class="width-100">
         </router-link>
       </div>
       <!-- 两列 -->

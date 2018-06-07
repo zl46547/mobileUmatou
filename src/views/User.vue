@@ -1,18 +1,17 @@
 <template>
   <div>
     <div class="content">
-      <div style="position: relative">
-        <img v-if="hour>17 || (hour>=0 && hour<6)" src="../assets/images/user_bg_night.png" style="width: 100vw;"/>
-        <img src="../assets/images/user_bg_day.png" v-else style="width: 100vw;"/>
-        <div
-          style="width: 100vw;margin: 0 auto;text-align: center;position: absolute;top: 50%;transform: translate(0,-50%);color: #fff;">
-          <div>
-            <img src="../assets/images/face.png" style="border-radius: 50%;width: 15vw;height: 15vw;"/>
+      <div class="section-one">
+        <img v-if="hour>17 || (hour>=0 && hour<6)" src="../assets/images/user_bg_night.png"/>
+        <img src="../assets/images/user_bg_day.png" v-else/>
+        <div class="user-info">
+          <div class="img-face">
+            <img src="../assets/images/face.png"/>
           </div>
-          <p style="margin: 1vh 0 ">15606130737</p>
-          <div style="vertical-align: middle;height: 3vh;line-height: 3vh;">
-            <img src="../assets/images/vip.png" style="width: 5vw;"/>
-            <span style="font-size: 1.2vw;">出入码头</span>
+          <p>15606130737</p>
+          <div class="vip">
+            <img src="../assets/images/vip.png"/>
+            <span>出入码头</span>
           </div>
         </div>
       </div>
@@ -22,13 +21,18 @@
           <p>{{item.name}}</p>
         </div>
       </div>
-      <div class="section-three" style="margin: 2vh 0;display: flex;align-items: center;justify-content: space-around">
-        <div v-for="item in myAccountList" :key="item.id">
-            <p>{{item.value}}</p>
-            <p>{{item.name}}</p>
+      <div class="section-three">
+        <div class="myAccount" v-for="item in myAccountList" :key="item.id">
+          <p>{{item.value}}</p>
+          <p>{{item.name}}</p>
         </div>
       </div>
-      <!--<div class="section-four"></div>-->
+      <div class="section-four">
+        <div class="function" v-for="item in functionList" :key="item.id">
+          <i class="iconfont" :class="item.icon" :style="{'color':item.color}"></i>
+          <p>{{item.name}}</p>
+        </div>
+      </div>
     </div>
     <v-footer></v-footer>
   </div>
@@ -60,7 +64,7 @@
           },
           {
             name: '待收货',
-            icon: 'icon-deliver'
+            icon: 'icon-daifahuo'
           },
           {
             name: '待评价',
@@ -75,7 +79,7 @@
           {
             id: '0',
             name: '码头币',
-            value: '520'
+            value: '2亿'
           },
           {
             id: '1',
@@ -91,7 +95,64 @@
             id: '3',
             name: '优惠券',
             value: '2'
+          }
+        ],
+        functionList: [
+          {
+            name: '充值',
+            icon: 'icon-chongzhi0101',
+            color: '#ff7314'
           },
+          {
+            name: '地址管理',
+            icon: 'icon-dizhi-01',
+            color: '#24acff'
+          },
+          {
+            name: '收藏',
+            icon: 'icon-like',
+            color: '#ff4646'
+          },
+          {
+            name: '浏览足迹',
+            icon: 'icon-footprint',
+            color: '#b3886f'
+          },
+          {
+            name: '主题',
+            icon: 'icon-skin',
+            color: '#df16ff'
+          },
+          {
+            name: '会员中心',
+            icon: 'icon-huiyuan',
+            color: '#ffdb19'
+          },
+          {
+            name: '发票申请',
+            icon: 'icon-iconset0266',
+            color: '#c46c3a'
+          },
+          {
+            name: '客户服务',
+            icon: 'icon-kefunv',
+            color: '#ec618d'
+          },
+          {
+            name: '体验店',
+            icon: 'icon-tiyandian',
+            color: '#ffef52'
+          },
+          {
+            name: '新手礼物',
+            icon: 'icon-weibiaoti-',
+            color: '#ffa24a'
+          },
+          {
+            name: '帮助中心',
+            icon: 'icon-question',
+            color: '#cb8439'
+          }
         ]
       }
     },
@@ -99,24 +160,172 @@
   }
 </script>
 
-<style scoped>
-  .section-two {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 2vh 0 1vh 0
+<style lang="less" scoped>
+  .content {
+    background-color: #f2f2f2;
+    height: 92vh;
+    &::-webkit-scrollbar {
+      display: none
+    }
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    .section-one {
+      position: relative;
+      > img {
+        width: 100vw;
+      }
+      .user-info {
+        width: 100vw;
+        margin: 0 auto;
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        color: #fff;
+        .img-face {
+          img {
+            border-radius: 50%;
+            width: 18vw;
+            height: 18vw;
+          }
+        }
+        p {
+          margin: 1vh 0;
+          font-size: 4.5vw;
+        }
+        .vip {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          img {
+            width: 5vw;
+            height: 5vw;
+            margin-right: 5px;
+          }
+          span {
+            font-size: 3.3vw;
+          }
+        }
+      }
+    }
+    .section-two {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 2vh 0 1vh 0;
+      background-color: #fff;
+      .orderService {
+        text-align: center;
+        cursor: pointer;
+        .iconfont {
+          font-size: 7vw;
+        }
+        p {
+          margin-top: 1vh;
+          font-size: 2vw;
+        }
+      }
+    }
+    .section-three {
+      margin: 2vh 0;
+      padding: 2vh 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      font-size: 4.2vw;
+      background-color: #fff;
+      .myAccount {
+        cursor: pointer;
+        p {
+          text-align: center;
+        }
+      }
+    }
+    .section-four {
+      padding: 2vh 0;
+      display: flex;
+      align-items: center;
+      font-size: 4.2vw;
+      background-color: #fff;
+      flex-wrap: wrap;
+      .function {
+        cursor: pointer;
+        width: 25vw;
+        text-align: center;
+        padding: 1.1vh 0;
+        .iconfont {
+          font-size: 7vw;
+          margin-bottom: 10px;
+        }
+        p {
+          text-align: center;
+          font-size: 4.2vw;
+          margin-top: 5px;
+        }
+      }
+    }
   }
 
-  .section-two .orderService {
-    text-align: center;
-  }
-
-  .section-two .orderService .iconfont {
-    font-size: 7vw;
-  }
-
-  .section-two .orderService p {
-    margin-top: 1vh;
-    font-size: 2vw;
+  @media screen and (min-width: 768px) {
+    .content {
+      .section-one {
+        > img {
+          width: 768px;
+        }
+        .user-info {
+          width: 768px;
+          .img-face {
+            img {
+              width: 80px;
+              height: 80px;
+            }
+          }
+          p {
+            margin: 8px 0;
+            font-size: 25px;
+          }
+          .vip {
+            img {
+              width: 28px;
+              height: 28px;
+            }
+            span {
+              font-size: 20px;
+            }
+          }
+        }
+      }
+      .section-two {
+        padding: 20px 0 10px 0;
+        .orderService {
+          .iconfont {
+            font-size: 35px;
+          }
+          p {
+            margin-top: 8px;
+            font-size: 12px;
+          }
+        }
+      }
+      .section-three {
+        margin: 15px 0;
+        padding: 15px 0;
+        font-size: 20px;
+      }
+      .section-four {
+        padding: 20px 0;
+        font-size: 24px;
+        .function {
+          width: 25%;
+          padding: 10px 0;
+          .iconfont {
+            font-size: 35px;
+          }
+          p {
+            font-size: 18px;
+          }
+        }
+      }
+    }
   }
 </style>

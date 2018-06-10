@@ -24,7 +24,7 @@
         <li v-for="k in flashSale.FlashSaleProducts" :key="k.id">
           <div>
             <router-link :to="{name:'详情页'}">
-              <img v-lazy="'http://picpro-sz.34580.com/sz/ImageUrl/'+k.PictureId+'/160.jpeg'" alt="">
+              <img :src="'http://picpro-sz.34580.com/sz/ImageUrl/'+k.PictureId+'/200.jpeg'" alt="">
               <p>{{k.ProductName}}</p>
               <div class="price">
                 <span class="flashSale-list-price">￥{{k.PeriodMoney}}</span>

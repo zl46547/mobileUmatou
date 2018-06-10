@@ -3,9 +3,9 @@
     <div class="carList" v-if="dataList.length>0">
       <div v-for="(item,i) in dataList" :key="i">
         <div class="checkbox">
-          <div class="checkbox-left" @click="checkProduct(item)">
-            <i class="icon iconfont icon-round" v-if="getCheckedItem.indexOf(item.ProductName)<0"></i>
-            <i class="icon iconfont icon-roundcheck" v-if="getCheckedItem.indexOf(item.ProductName)>=0"></i>
+          <div class="checkbox-left" @click="checkProduct(i)">
+            <i class="icon iconfont icon-round" v-if="!item.checked"></i>
+            <i class="icon iconfont icon-roundcheck" v-if="item.checked"></i>
           </div>
           <div class="checkbox-right">
             <div>
@@ -47,16 +47,18 @@
     <div class="totalCount">
       <div>
         <div class="checkAll">
-          <i class="icon iconfont icon-round" v-if="!checkAllStatus" @click="checkAll"></i>
-          <i class="icon iconfont icon-roundcheck" v-if="checkAllStatus" @click="checkAll"></i>
-          <p>全选</p>
+          <div class="checkAll-btn" v-if="this.dataList.length>0" @click="checkAll">
+            <i class="icon iconfont icon-round" v-if="!checkAllStatus"></i>
+            <i class="icon iconfont icon-roundcheck" v-if="checkAllStatus"></i>
+            <span>全选</span>
+          </div>
           <div>
             <span class="count">合计：</span>
-            <span class="money">¥{{getLastTotalMoney}}</span>
+            <span class="money">¥{{lastTotalMoney}}</span>
           </div>
         </div>
         <div class="count-btn" @click="goToAccount">
-          <div><span>去结算</span><span>（{{checkedcarsList.length}}）</span></div>
+          <div><span>去结算</span><span>（{{isCheckedList.length}}）</span></div>
         </div>
       </div>
     </div>
@@ -67,7 +69,7 @@
 
 <script type="text/ecmascript-6">
   import Footer from '@/common/_footer.vue'
-  import { MessageBox, Toast } from 'mint-ui'
+  import { Toast } from 'mint-ui'
   import cartEmpty from '@/components/car/cartEmpty.vue'
 
   export default {
@@ -77,6 +79,7 @@
     },
     mounted () {
       this.dataList = this.$store.state.car.carList
+      this.whetherIsCheckAll()
     },
     data () {
       return {
@@ -87,16 +90,25 @@
     },
     methods: {
       goToAccount () {
-        if (this.checkedcarsList.length <= 0) {
+        if (this.isCheckedList.length <= 0) {
           Toast('请先挑选商品')
           return false
         }
-        this.$store.commit('SELECT_CAR_LIST', this.checkedcarsList)
+        this.$store.commit('SELECT_CAR_LIST', this.isCheckedList)
+        // 结算后商品不再默认选中
+        this.dataList.forEach(function (e) {
+          e.checked = false
+        })
+        this.$store.commit('CAR_LIST', this.dataList)
         this.$router.push({name: '提交订单'})
       },
       // 删除购物车列表
       deleteItem (index) {
-        MessageBox.confirm('确定执行此操作?').then(action => {
+        this.$confirm('确认删除该商品?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
           // 删除数据源内的数据
           this.dataList.splice(index, 1)
           // 如果全部删除了，就把全选状态改为false
@@ -105,24 +117,23 @@
           }
           // 提交vuex，修改localStorage购物车列表数据
           this.$store.commit('CAR_LIST', this.dataList)
-        }, () => {
-          // 取消的内容
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          })
+        }).catch(() => {
         })
       },
       checkAll () {
         if (this.checkAllStatus) {
-          this.checkedcarsList = []
+          this.dataList.forEach(function (e) {
+            e.checked = false
+          })
           this.checkAllStatus = false
         } else {
-          // 如果购物车列表为空，则不能触发全选操作
-          if (this.dataList.length <= 0) {
-            this.checkAllStatus = false
-            return false
-          }
-          // 这里不能直接写成：this.checkedcarsList = this.dataList
-          // 一个对象赋值给另一个对象会存在指向性问题，两个对象指向同一块内存区域
-          // 当修改一处值时，另一处也会跟着改
-          this.checkedcarsList = JSON.parse(JSON.stringify(this.dataList))
+          this.dataList.forEach(function (e) {
+            e.checked = true
+          })
           this.checkAllStatus = true
         }
       },
@@ -147,25 +158,19 @@
        * 复选框
        * @param val 当前操作的列表对象
        */
-      checkProduct (val) {
-        // 已被选中的列表
-        var index = -1
-        if (this.checkedcarsList.length > 0) {
-          for (var i = 0; i < this.checkedcarsList.length; i++) {
-            if ((JSON.stringify(this.checkedcarsList[i]) === (JSON.stringify(val)))) {
-              index = i
-              break
-            }
-          }
-        }
-        if (index >= 0) {
-          // 表示已在选中列表中，此时应该是将其移除
-          this.checkedcarsList.splice(index, 1)
-        } else {
-          this.checkedcarsList.push(val)
-        }
+      checkProduct (i) {
+        this.dataList[i].checked = !this.dataList[i].checked
+        this.whetherIsCheckAll()
+      },
+      /**
+       * 判断全选的状态
+       */
+      whetherIsCheckAll() {
         // 修改全选的状态
-        if (this.dataList.length === this.checkedcarsList.length) {
+        var notCheckedList = this.dataList.where(function (t) {
+          return t.checked === false
+        })
+        if (notCheckedList.length <= 0) {
           this.checkAllStatus = true
         } else {
           this.checkAllStatus = false
@@ -173,20 +178,17 @@
       }
     },
     computed: {
-      getCheckedItem () {
-        var list = []
-        if (this.checkedcarsList.length > 0) {
-          this.checkedcarsList.forEach(function (e) {
-            list.push(e.ProductName)
-          })
-        }
-        return list
+      isCheckedList () {
+        var checkedList = this.dataList.where(function (t) {
+          return t.checked === true
+        })
+        return checkedList
       },
-      getLastTotalMoney () {
+      lastTotalMoney () {
         var money = 0
-        if (this.checkedcarsList.length > 0) {
-          this.checkedcarsList.forEach(function (e) {
-            money += e.totalMoney
+        if (this.isCheckedList.length > 0) {
+          money = this.isCheckedList.sum(function (t) {
+            return t.totalMoney
           })
         }
         return parseInt(money * 100) / 100
@@ -196,6 +198,7 @@
 </script>
 
 <style lang="less" scoped>
+
   .carList {
     &::-webkit-scrollbar {
       display: none
@@ -218,6 +221,7 @@
           padding: 0 2vw;
           display: table-cell;
           vertical-align: middle;
+          cursor: pointer;
           .icon-round {
             font-size: 6vw;
           }
@@ -330,25 +334,25 @@
         margin: auto 0;
         display: table;
         padding-left: 2vw;
-        .icon-round {
-          font-size: 6vw;
-          display: table-cell;
-          vertical-align: bottom
-        }
-        .icon-roundcheck {
-          display: table-cell;
-          vertical-align: bottom;
-          font-size: 6vw;
-          color: #00d300;
-        }
-        p {
-          padding: 0 5vw 0 3vw;
-          display: table-cell;
-          vertical-align: bottom
+        .checkAll-btn{
+          cursor: pointer;
+          display: table-cell;vertical-align:middle;
+          .icon-round {
+            font-size: 6vw;
+          }
+          .icon-roundcheck {
+            font-size: 6vw;
+            color: #00d300;
+          }
+          span {
+            font-size: 5vw;
+            padding-left: 2vw;
+          }
         }
         > div {
           display: table;
           .count {
+            padding-left: 5vw;
             font-size: 6vw;
             display: table-cell;
             vertical-align: middle
@@ -377,6 +381,10 @@
   }
 
   @media screen and (min-width: 768px) {
+    .el-message-box {
+      width: 480px;
+    }
+
     .carList {
       height: 578px;
       width: 768px;
@@ -455,14 +463,17 @@
       > div {
         .checkAll {
           padding-left: 10px;
-          .icon-round {
-            font-size: 30px;
-          }
-          .icon-roundcheck {
-            font-size: 30px;
-          }
-          p {
-            padding: 0 25px 0 15px;
+          .checkAll-btn{
+            .icon-round {
+              font-size: 30px;
+            }
+            .icon-roundcheck {
+              font-size: 30px;
+            }
+            span {
+              font-size:24px;
+              padding-left: 10px;
+            }
           }
           > div {
             .count {

@@ -166,6 +166,10 @@
       }
     }
   }
+  /* 修改messagebox默认样式 */
+  .el-message-box {
+    width: 80vw;
+  }
   @media screen and (min-width: 768px) {
     #app {
       width: 768px;
@@ -193,6 +197,10 @@
           margin: 16px 0 0;
         }
       }
+    }
+    /* 修改messagebox默认样式 */
+    .el-message-box {
+      width: 480px;
     }
   }
 </style>

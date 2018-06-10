@@ -10,12 +10,23 @@ const mutations = {
   [types.SUBMIT_ORDER] (state, res) {
     // 获取我的订单,并将提交的订单加入到我的订单中
     var myOrders = state.myOrders
-    myOrders.unshift(res)
-    Util.setLocal('MY_ORDERS', myOrders)
+    // 根据订单号判断该订单是否存在
+    var isExit = []
+    if (myOrders.length > 0) {
+      isExit = myOrders.where(function (t) {
+        return t.orderNo === res.orderNo
+      })
+    }
+    if (isExit.length <= 0) {
+      myOrders.unshift(res)
+    }
+    state.myOrders = myOrders
     state.submitOrder = res
+    Util.setLocal(myOrders, 'MY_ORDERS')
   },
   [types.MY_ORDERS] (state, res) {
-    state.submitOrder = res
+    state.myOrders = res
+    Util.setLocal(res, 'MY_ORDERS')
   }
 }
 

@@ -35,14 +35,12 @@
       return {
         submitOrder: '',
         myOrders: '',
-        carList: '',
         remainTime: 1
       }
     },
     mounted () {
       this.submitOrder = this.$store.state.orderList.submitOrder
       this.myOrders = this.$store.state.orderList.myOrders
-      this.carList = this.$store.state.car.carList
     },
     methods: {
       /**
@@ -76,25 +74,10 @@
           type: 'success',
           duration: 2000
         })
-        this.delCarList(this.submitOrder.orderList)
-      },
-      /**
-       * 删除已支付成功的商品
-       * @param orderList 支付成功的商品
-       */
-      delCarList (orderList) {
-        if (orderList.length > 0) {
-          var submitOrderIdList = orderList.select(function (t) {
-            return t.ProductId
-          })
-          var carlist = this.carList
-          submitOrderIdList.forEach(function (e) {
-            carlist.removeAll(function (t) {
-              return parseInt(t.ProductId) === parseInt(e)
-            })
-          })
-          this.$store.commit('CAR_LIST', carlist)
-        }
+        var router = this.$router
+        setTimeout(function () {
+          router.replace({name: '我的订单', params: {type: 'PS'}})
+        }, 2000)
       }
     }
   }

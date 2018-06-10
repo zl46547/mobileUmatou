@@ -119,7 +119,27 @@
           orderStatus: 'OS' // OS:下单成功；OF:下单失败；PS：支付成功；PF：支付失败
         }
         this.$store.commit('SUBMIT_ORDER', params)
+        // 从购物车中删除已经提交的订单
+        this.delCarList(params.orderList)
         this.$router.push({name: '支付订单'})
+      },
+      /**
+       * 删除已下单成功的商品
+       * @param orderList 支付成功的商品
+       */
+      delCarList (orderList) {
+        if (orderList.length > 0) {
+          var submitOrderIdList = orderList.select(function (t) {
+            return t.ProductId
+          })
+          var carlist = this.$store.state.car.carList
+          submitOrderIdList.forEach(function (e) {
+            carlist.removeAll(function (t) {
+              return parseInt(t.ProductId) === parseInt(e)
+            })
+          })
+          this.$store.commit('CAR_LIST', carlist)
+        }
       }
     }
   }

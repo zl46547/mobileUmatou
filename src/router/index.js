@@ -11,6 +11,7 @@ const User = resolve => require(['@/views/User.vue'], resolve)
 const ProductDetail = resolve => require(['@/views/ProductDetail.vue'], resolve)
 const SubmitOrder = resolve => require(['@/views/SubmitOrder.vue'], resolve)
 const Pay = resolve => require(['@/views/Pay.vue'], resolve)
+const AllOrders = resolve => require(['@/views/AllOrders.vue'], resolve)
 Vue.use(Router)
 
 export default new Router({
@@ -66,6 +67,11 @@ export default new Router({
       path: '/pay',
       name: '支付订单',
       component: Pay
+    },
+    {
+      path: '/allOrders',
+      name: '我的订单',
+      component: AllOrders
     }
   ]
 })

@@ -11,15 +11,17 @@
           <p>15606130737</p>
           <div class="vip">
             <img src="../assets/images/vip.png"/>
-            <span>出入码头</span>
+            <span>初入码头</span>
           </div>
         </div>
       </div>
       <div class="section-two">
-        <div class="orderService" v-for="item in orderServiceList" :key="item.name">
-          <i class="iconfont" :class="item.icon"></i>
-          <p>{{item.name}}</p>
-        </div>
+          <div class="orderService" v-for="item in orderServiceList" :key="item.name" @click="toMyOrders(item.name)">
+            <el-badge :value="200" :max="99" class="bage">
+              <i class="iconfont" :class="item.icon"></i>
+              <p>{{item.name}}</p>
+            </el-badge>
+          </div>
       </div>
       <div class="section-three">
         <div class="myAccount" v-for="item in myAccountList" :key="item.id">
@@ -59,12 +61,12 @@
             icon: 'icon-single'
           },
           {
-            name: '待发货',
-            icon: 'icon-icon2'
+            name: '待付款',
+            icon: 'icon-pay'
           },
           {
             name: '待收货',
-            icon: 'icon-daifahuo'
+            icon: 'icon-deliver'
           },
           {
             name: '待评价',
@@ -79,7 +81,7 @@
           {
             id: '0',
             name: '码头币',
-            value: '2亿'
+            value: '200'
           },
           {
             id: '1',
@@ -156,7 +158,33 @@
         ]
       }
     },
-    beforeCreate () {}
+    methods: {
+      /**
+       * 跳转到我的订单
+       * @param val 订单类型（ALL：全部订单；OS：下单成功，待付款；PS：支付成功，待收货；FS：交易完成，待评价；RF：退货中）
+       */
+      toMyOrders (val) {
+        var type = ''
+        switch (val) {
+          case '全部订单':
+            type = 'ALL'
+            break
+          case '待付款':
+            type = 'OS'
+            break
+          case '待收货':
+            type = 'PS'
+            break
+          case '待评价':
+            type = 'FS'
+            break
+          case '轻松退':
+            type = 'RF'
+            break
+        }
+        this.$router.push({name: '我的订单', params: {type: type}})
+      }
+    }
   }
 </script>
 
@@ -245,7 +273,6 @@
       padding: 2vh 0;
       display: flex;
       align-items: center;
-      font-size: 4.2vw;
       background-color: #fff;
       flex-wrap: wrap;
       .function {
@@ -259,7 +286,7 @@
         }
         p {
           text-align: center;
-          font-size: 4.2vw;
+          font-size: 3.8vw;
           margin-top: 5px;
         }
       }

@@ -3,7 +3,7 @@
     <el-row>
       <el-col :span="12" v-for="k in data" :key="k.ProductId" class="detail">
         <router-link :to="'/productDetail/'+k.ProductId">
-          <img v-lazy="'http://picpro-sz.34580.com/sz/ImageUrl/' +k.PictureId+ '/500.jpeg'" alt="">
+          <img :src="'http://picpro-sz.34580.com/sz/ImageUrl/' +k.PictureId+ '/500.jpeg'" alt="">
         </router-link>
         <div class="product-detail">
           <p class="productName">{{k.ProductName}}</p>
@@ -54,7 +54,7 @@
   .main {
     background-color: #ebebeb;
     width: 100%;
-    height: 82vh;
+    height: 81vh;
     &::-webkit-scrollbar {
       display: none
     }
@@ -119,8 +119,43 @@
 
   @media screen and (min-width: 768px) {
     .main {
-      height:645px;
+      background-color: #ebebeb;
       width: 768px;
+      height: 645px;
+      .el-row {
+        width: 768px;
+        .detail {
+          a {
+            img {
+              width: 384px;
+            }
+          }
+          .product-detail {
+            p {
+              margin-left: 15px;
+            }
+            .productName {
+              font-size: 18px;
+            }
+            .pvStandard {
+              font-size: 16px;
+            }
+            .price {
+              .periodMoney {
+                font-size: 18px;
+              }
+              > div {
+                width: 24px;
+                height: 24px;
+                margin: 10px;
+                i {
+                  font-size: 12px;
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 </style>

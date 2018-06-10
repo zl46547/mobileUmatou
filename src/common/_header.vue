@@ -1,7 +1,8 @@
 <template>
   <header>
     <router-link class="icon-go" :to="{name :'首页'}" v-if="$route.matched[0].path == '/category'"></router-link>
-    <span class="icon-go" @click="$router.go(-1)" v-else></span>
+    <router-link class="icon-go" :to="{name :'用户页'}" v-if="$route.matched[0].path == '/allOrders'"></router-link>
+    <span class="icon-go" @click="$router.go(-1)" v-if="$route.matched[0].path != '/category' && $route.matched[0].path != '/allOrders'"></span>
     <slot name="title"></slot>
     <div>&nbsp;</div>
   </header>
@@ -20,12 +21,15 @@
   header{
     background-color: #fdfdfd;
     text-align: center;
-    width:100%;
+    width:100vw;
     height: 9vh;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 4vw;
+    .icon-go{
+      margin-left: 3vw;
+      cursor: pointer;
+    }
     h1 {
       .fz(font-size,34);
       letter-spacing: .2vw;
@@ -49,8 +53,12 @@
     width:744px;
     margin: 0 auto;
     padding: 0 12px;
+    .icon-go{
+      margin-left: 18px;
+    }
     h1 {
       margin-right: 0px;
+      font-size:20px;
     }
     div{
       width:26px;

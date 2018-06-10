@@ -24,7 +24,7 @@
 
 <style lang="less" scoped>
   .cartEmpty {
-    height: 74vh;
+    height: 72vh;
     img {
       width: 100%;
     }

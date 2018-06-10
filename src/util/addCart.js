@@ -27,12 +27,14 @@ export default {
       cartItem['DefaultMoney'] = productInfo.DefaultMoney
       cartItem['buyNum'] = 1
       cartItem['totalMoney'] = productInfo.DefaultMoney
-      list.push(cartItem)
+      cartItem['checked'] = true
+      list.unshift(cartItem)
     }
     store.commit('CAR_LIST', list)
     Message({
       message: '成功加入购物车！',
-      type: 'success'
+      type: 'success',
+      duration: 800
     })
   }
 }

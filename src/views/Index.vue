@@ -5,7 +5,7 @@
       <v-swiper :adverise="swiperData.Data" v-if="swiperData"></v-swiper>
       <v-service></v-service>
       <v-flashSale :flashSale="flashSaleData.Data" v-if="flashSaleData"></v-flashSale>
-      <v-defaultHome :defaultHome="defaultHomeData.Data" v-if="defaultHomeData"></v-defaultHome>
+      <v-defaultHome :defaultHome="defaultHomeData" v-if="defaultHomeData"></v-defaultHome>
       <v-baseline></v-baseline>
     </div>
     <v-footer></v-footer>
@@ -86,8 +86,30 @@
           method: 'get',
           url: '/shihang/index/command/defaultHome.json'
         }).then((res) => {
-          if (!utils.isEmpty(res.data)) {
-            vm.defaultHomeData = res.data
+          if (!utils.isEmpty(res.data.Data.FloorInfo.ConfigHomeFloors)) {
+            var defaultHomeData = res.data.Data.FloorInfo.ConfigHomeFloors
+            defaultHomeData.forEach(function (e) {
+              e.PicAdvItems.forEach(function (t) {
+                switch (t.JumpType) {
+                  case 4:
+                    t.routerlink = `/productDetail/${t.JumpValue}`
+                    break
+                  case 5:
+                    t.routerlink = `/categoryDetail/${t.JumpValue}`
+                    break
+                }
+              })
+            })
+            vm.defaultHomeData = defaultHomeData
+//            var test = res.data.Data.FloorInfo.ConfigHomeFloors
+//            var newTest = test.where(function (t) {
+//              if (Object.prototype.toString.call(t.PicAdvItems) === '[object Array]') {
+//                return t.PicAdvItems[0].JumpType === 4 || t.PicAdvItems[0].JumpType === 5
+//              }
+//            }).distinct(function (a, b) {
+//              return a.Id === b.Id
+//            })
+//            console.log(JSON.stringify(newTest))
           }
         }).catch((error) => {
           console.log(error)

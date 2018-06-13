@@ -1,5 +1,5 @@
 <template>
-    <div v-if='adverise'>
+    <div v-if='adverise'>{{adverise}}
       <mt-swipe :auto="4000" :interval="4000">
         <mt-swipe-item v-for="k in adverise" :key="k.Id">
           <router-link :to="{ name: '详情页'}">

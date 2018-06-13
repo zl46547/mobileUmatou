@@ -1,29 +1,24 @@
 <template>
   <section class="flashSale" v-if="flashSale">
     <div class="flashSale-header">
-      <ul>
-        <li>
-          <img src="../../assets/images/timeoutBuy.png" alt="a">
-        </li>
-        <li></li>
-        <li>
-          <div class="time">
-            剩
-            <span class="time-num">{{getTime.hour}}</span>
-            <span class="time-col">:</span>
-            <span class="time-num">{{getTime.min}}</span>
-            <span class="time-col">:</span>
-            <span class="time-num">{{getTime.seconds}}</span>
-            结束
-          </div>
-        </li>
-      </ul>
+      <div class="flashSale-logo">
+        <img src="../../assets/images/timeoutBuy.png" alt="a">
+      </div>
+      <div class="time">
+        <span class="time-col">剩</span>
+        <span class="time-num">{{getTime.hour}}</span>
+        <span class="time-col">:</span>
+        <span class="time-num">{{getTime.min}}</span>
+        <span class="time-col">:</span>
+        <span class="time-num">{{getTime.seconds}}</span>
+        <span class="time-col">结束</span>
+      </div>
     </div>
     <div class="flashSale-list">
       <ul>
         <li v-for="k in flashSale.FlashSaleProducts" :key="k.id">
           <div>
-            <router-link :to="{name:'详情页'}">
+            <router-link :to="`/productDetail/${k.ProductId}`">
               <img :src="'http://picpro-sz.34580.com/sz/ImageUrl/'+k.PictureId+'/200.jpeg'" alt="">
               <p>{{k.ProductName}}</p>
               <div class="price">
@@ -39,6 +34,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import utils from '../../util/common.js'
 
   export default {
     props: ['flashSale'],
@@ -63,7 +59,8 @@
     methods: {
       formateTime () {
         var nowTime = new Date().getTime()
-        var endTime = new Date(this.flashSale.EndTime.replace('T', ' ')).getTime()
+        var nowTimeStr = utils.dateFormate(new Date(), 'yyyy-MM-dd')
+        var endTime = new Date(nowTimeStr + ' 23:59:59').getTime()
         var remainTime = endTime - nowTime
         setInterval(() => {
           remainTime -= 1000
@@ -88,33 +85,31 @@ import { Lazyload } from 'mint-ui'
   @import "../../assets/index/style.css";
 
   .flashSale-header {
-    ul {
-      display: flex;
-      justify-content: space-around;
-      img {
-        width: 28vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 3vw;
+    img {
+      width: 28vw;
+    }
+    .time {
+      display: flex;align-items: center;
+      .time-num {
+        text-align: center;
+        padding: 0.6vw;
+        border: 1px solid #aaa;
+        color: #666;
+        border-radius: 0.5vw;
+        font-size:4vw;
+        letter-spacing: 0.3vw;
       }
-      .time {
-        position: relative;
-        top: 28%;
-        .time-num {
-          display: inline-block;
-          text-align: center;
-          padding: 0.6vw;
-          border: 1px solid #aaa;
-          color: #666;
-          border-radius: 0.5vw;
-          .fz(font-size, 26);
-          letter-spacing: 0.3vw;
-        }
-        .time-col {
-          color: #333;
-          width: 2vw;
-          display: inline-block;
-          text-align: center;
-          font-weight: 700;
-          .fz(font-size, 20);
-        }
+      .time-col {
+        color: #666;
+        font-family:"Microsoft Himalaya";
+        padding: 1vw;
+        text-align: center;
+        /*font-weight: 700;*/
+        font-size:4.2vw;
       }
     }
   }
@@ -141,7 +136,7 @@ import { Lazyload } from 'mint-ui'
             text-overflow: ellipsis;
             white-space: nowrap
           }
-          .price{
+          .price {
             text-align: center;
             .flashSale-list-price {
               color: #b4282d;
@@ -160,8 +155,20 @@ import { Lazyload } from 'mint-ui'
   @media screen and (min-width: 768px) {
     .flashSale {
       .flashSale-header {
+        padding: 0 25px;
         img {
           width: 136px;
+        }
+        .time {
+          .time-num {
+            padding: 4px;
+            letter-spacing: 2px;
+            font-size:24px;
+          }
+          .time-col {
+            padding: 4px;
+            font-size:28px;
+          }
         }
       }
       .flashSale-list {
@@ -184,6 +191,19 @@ import { Lazyload } from 'mint-ui'
               }
             }
           }
+        }
+        ul::-webkit-scrollbar {/*滚动条整体样式*/
+          width: 1px;     /*高宽分别对应横竖滚动条的尺寸*/
+          height: 8px;
+        }
+        ul::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+          border-radius: 8px;
+          background-color: #7599ff;
+        }
+        ul::-webkit-scrollbar-track {/*滚动条里面轨道*/
+          -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+          border-radius: 10px;
+          background: #EDEDED;
         }
       }
     }

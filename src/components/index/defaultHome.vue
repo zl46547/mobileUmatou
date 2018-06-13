@@ -1,6 +1,6 @@
 <template>
   <div >
-    <div class="defaultHome" v-for="item in defaultHome.FloorInfo.ConfigHomeFloors" :key="item.Id" v-if="defaultHome">
+    <div class="defaultHome" v-for="item in defaultHome" :key="item.Id" v-if="defaultHome">
       <!-- 小标题 -->
       <div class="title" v-if="item.ChildTitle">
         <p>{{item.FatherTitle}}</p>
@@ -40,28 +40,28 @@
       </div>
       <!-- 一列 -->
       <div class="flex" v-if="parseInt(item.FloorType) === 7">
-        <router-link :to="{name:'详情页'}">
+        <router-link :to="item.PicAdvItems[0].routerlink">
           <img :src="item.PicAdvItems[0].BackGroundImg" alt="" class="width-100">
         </router-link>
       </div>
       <!-- 两列 -->
       <div class="flex" v-if="parseInt(item.FloorType) === 6">
-        <router-link :to="{name:'详情页'}">
+        <router-link :to="item.PicAdvItems[0].routerlink">
           <img :src="item.PicAdvItems[0].BackGroundImg" alt="" class="width-50">
         </router-link>
-        <router-link :to="{name:'详情页'}">
+        <router-link :to="item.PicAdvItems[1].routerlink">
           <img :src="item.PicAdvItems[1].BackGroundImg" alt="" class="width-50">
         </router-link>
       </div>
       <!-- 三列 -->
       <div class="flex" v-if="parseInt(item.FloorType) === 4">
-        <router-link :to="{name:'详情页'}">
+        <router-link :to="item.PicAdvItems[0].routerlink">
           <img :src="item.PicAdvItems[0].BackGroundImg" alt="" class="width-33">
         </router-link>
-        <router-link :to="{name:'详情页'}">
+        <router-link :to="item.PicAdvItems[1].routerlink">
           <img :src="item.PicAdvItems[1].BackGroundImg" alt="" class="width-33">
         </router-link>
-        <router-link :to="{name:'详情页'}">
+        <router-link :to="item.PicAdvItems[2].routerlink">
           <img :src="item.PicAdvItems[2].BackGroundImg" alt="" class="width-33">
         </router-link>
       </div>

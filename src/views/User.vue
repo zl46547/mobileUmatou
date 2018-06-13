@@ -16,12 +16,12 @@
         </div>
       </div>
       <div class="section-two">
-          <div class="orderService" v-for="item in orderServiceList" :key="item.name" @click="toMyOrders(item.name)">
-            <el-badge :value="200" :max="99" class="bage">
-              <i class="iconfont" :class="item.icon"></i>
-              <p>{{item.name}}</p>
-            </el-badge>
-          </div>
+        <div class="orderService" style="position: relative" v-for="item in orderServiceList" :key="item.name"
+             @click="toMyOrders(item.name)">
+          <i class="iconfont" :class="item.icon"></i>
+          <p>{{item.name}}</p>
+          <div class="bage" v-if="item.num>0">{{item.num}}</div>
+        </div>
       </div>
       <div class="section-three">
         <div class="myAccount" v-for="item in myAccountList" :key="item.id">
@@ -51,6 +51,7 @@
     },
     mounted () {
       this.hour = new Date().getHours()
+      this.getOrderServiceNum()
     },
     data () {
       return {
@@ -58,23 +59,28 @@
         orderServiceList: [
           {
             name: '全部订单',
-            icon: 'icon-single'
+            icon: 'icon-single',
+            num: 0
           },
           {
             name: '待付款',
-            icon: 'icon-pay'
+            icon: 'icon-pay',
+            num: 0
           },
           {
             name: '待收货',
-            icon: 'icon-deliver'
+            icon: 'icon-deliver',
+            num: 0
           },
           {
             name: '待评价',
-            icon: 'icon-daipingjia20'
+            icon: 'icon-daipingjia20',
+            num: 0
           },
           {
             name: '轻松退',
-            icon: 'icon-tianmaojisutuikuan'
+            icon: 'icon-tianmaojisutuikuan',
+            num: 0
           }
         ],
         myAccountList: [
@@ -159,6 +165,33 @@
       }
     },
     methods: {
+      getOrderServiceNum () {
+        var allOrders = this.$store.state.orderList.myOrders
+        var allNum = allOrders.length
+        if (allNum > 0) {
+          var ps = allOrders.where(function (t) {
+            return t.orderStatus === 'PS'
+          })
+          var psNum = ps.length
+          var fs = allOrders.where(function (t) {
+            return t.orderStatus === 'FS'
+          })
+          var fsNum = fs.length
+          var rf = allOrders.where(function (t) {
+            return t.orderStatus === 'RF'
+          })
+          var rfNum = rf.length
+          var os = allOrders.where(function (t) {
+            return t.orderStatus === 'OS'
+          })
+          var osNum = os.length
+          // this.orderServiceList[0].num = allNum  全部订单不显示数量
+          this.orderServiceList[1].num = osNum
+          this.orderServiceList[2].num = psNum
+          this.orderServiceList[3].num = fsNum
+          this.orderServiceList[4].num = rfNum
+        }
+      },
       /**
        * 跳转到我的订单
        * @param val 订单类型（ALL：全部订单；OS：下单成功，待付款；PS：支付成功，待收货；FS：交易完成，待评价；RF：退货中）
@@ -252,6 +285,17 @@
           margin-top: 1vh;
           font-size: 2vw;
         }
+        .bage {
+          font-size: 12px;
+          height: 2vh;
+          position: absolute;
+          top: -9px;
+          left: 8vw;
+          padding: 3px 6px;
+          background-color: #ec2828;
+          border-radius: 90px;
+          color: #fff;
+        }
       }
     }
     .section-three {
@@ -331,6 +375,11 @@
           p {
             margin-top: 8px;
             font-size: 12px;
+          }
+          .bage {
+            height: 15px;
+            top: -9px;
+            left: 40px;
           }
         }
       }

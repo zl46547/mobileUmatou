@@ -165,7 +165,7 @@
       /**
        * 判断全选的状态
        */
-      whetherIsCheckAll() {
+      whetherIsCheckAll () {
         // 修改全选的状态
         var notCheckedList = this.dataList.where(function (t) {
           return t.checked === false
@@ -188,10 +188,10 @@
         var money = 0
         if (this.isCheckedList.length > 0) {
           money = this.isCheckedList.sum(function (t) {
-            return t.totalMoney
+            return Math.round(t.totalMoney * 10) / 10
           })
         }
-        return parseInt(money * 100) / 100
+        return parseInt(money * 10) / 10
       }
     }
   }
@@ -334,9 +334,10 @@
         margin: auto 0;
         display: table;
         padding-left: 2vw;
-        .checkAll-btn{
+        .checkAll-btn {
           cursor: pointer;
-          display: table-cell;vertical-align:middle;
+          display: table-cell;
+          vertical-align: middle;
           .icon-round {
             font-size: 6vw;
           }
@@ -463,7 +464,7 @@
       > div {
         .checkAll {
           padding-left: 10px;
-          .checkAll-btn{
+          .checkAll-btn {
             .icon-round {
               font-size: 30px;
             }
@@ -471,7 +472,7 @@
               font-size: 30px;
             }
             span {
-              font-size:24px;
+              font-size: 24px;
               padding-left: 10px;
             }
           }

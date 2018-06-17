@@ -62,7 +62,7 @@
         </div>
         <p>您还没有相关的订单</p>
         <p>可以去看看有哪些想买</p>
-        <div class="goToBuy">随便逛逛</div>
+        <div class="goToBuy" @click="goToBuy">随便逛逛</div>
       </div>
     </div>
   </div>
@@ -114,6 +114,12 @@
       this.handleSelect(type)
     },
     methods: {
+      /**
+       * 随便逛逛
+       */
+      goToBuy () {
+        this.$router.push({name: '首页'})
+      },
       /**
        * 初始化数据,将订单状态码转换成中文
        */
@@ -286,6 +292,7 @@
               display: flex;
               img {
                 width: 20vw;
+                padding: 3px;
               }
             }
             p {
@@ -294,7 +301,7 @@
             }
           }
           > div:nth-of-type(2) {
-            .iconfont{
+            .iconfont {
               font-size: 4.2vw
             }
           }
@@ -394,7 +401,7 @@
               }
             }
             > div:nth-of-type(2) {
-              .iconfont{
+              .iconfont {
                 font-size: 30px;
               }
             }
@@ -435,7 +442,7 @@
           .goToBuy {
             width: 140px;
             padding: 8px 16px;
-            font-size:24px;
+            font-size: 24px;
           }
         }
       }

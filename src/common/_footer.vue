@@ -64,10 +64,12 @@
       -webkit-box-shadow: 0 0 sla(0, 6%, 50%, .23);
       .is-selected {
         color: @cl;
+        font-weight:bold;
         background-color: #fff;
         i {
           &::before {
             color: @cl;
+            font-weight:bold;
           }
         }
       }

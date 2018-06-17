@@ -22,11 +22,11 @@
     </div>
     <div v-if="selected == 2 && responseData" class="detail">
       <v-detail :responseData="responseData"></v-detail>
-      <v-footer></v-footer>
+      <v-footer :response="responseData"></v-footer>
     </div>
     <div v-if="selected == 3 && rateResponse">
       <v-rate-detail :rateResponse="rateResponse" @showimg="showbigimg"></v-rate-detail>
-      <v-footer></v-footer>
+      <v-footer :response="responseData"></v-footer>
       <div v-if="showImageObj" @click="closeImageObj">
         <div class="bigImg">
           <div>

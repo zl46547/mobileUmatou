@@ -72,7 +72,7 @@
     },
     computed: {
       getFinalPrice () {
-        var finalPrice = parseFloat(this.totalPrice) + 10 - (parseFloat(this.bounce.Amount) || 0)
+        var finalPrice = (Math.round(this.totalPrice * 10) / 10) + 10 - (parseFloat(this.bounce.Amount) || 0)
         return finalPrice
       }
     },
@@ -101,7 +101,7 @@
         checkedcarsList.forEach(function (e) {
           money += e.totalMoney
         })
-        this.totalPrice = parseInt(money * 100) / 100
+        this.totalPrice = Math.round(money * 10) / 10
       },
       /**
        * 提交订单
@@ -109,7 +109,7 @@
       submitOrder () {
         var params = {
           orderList: this.$store.state.car.selectedCarList, // 订单列表
-          finalPrice: this.getFinalPrice, // 最终价格
+          finalPrice: parseInt(this.getFinalPrice * 10) / 10, // 最终价格
           submitTime: utils.dateFormate(new Date(), 'yyyy-MM-dd HH:mm:ss'), // 订单提交时间
           deadTime: utils.timestampToTime(new Date().getTime() + 15 * 60 * 1000, 'yyyy-MM-dd HH:mm:ss'), // 截止日期
           bounce: this.bounce.Amount, // 优惠券

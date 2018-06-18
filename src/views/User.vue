@@ -30,7 +30,7 @@
         </div>
       </div>
       <div class="section-four">
-        <div class="function" v-for="item in functionList" :key="item.id">
+        <div class="function" v-for="item in functionList" :key="item.id" @click="showFunction()">
           <i class="iconfont" :class="item.icon" :style="{'color':item.color}"></i>
           <p>{{item.name}}</p>
         </div>
@@ -96,8 +96,8 @@
           },
           {
             id: '2',
-            name: '码头花呗',
-            value: '20000'
+            name: '红包',
+            value: '40.5'
           },
           {
             id: '3',
@@ -165,6 +165,9 @@
       }
     },
     methods: {
+      /**
+       * 获取订单数量
+       */
       getOrderServiceNum () {
         var allOrders = this.$store.state.orderList.myOrders
         var allNum = allOrders.length
@@ -216,6 +219,12 @@
             break
         }
         this.$router.push({name: '我的订单', params: {type: type}})
+      },
+      showFunction () {
+        this.$message({
+          message: '该功能暂未开发！',
+          type: 'warning'
+        })
       }
     }
   }

@@ -16,7 +16,7 @@
       <div v-for="k in categoryList.Data.SubCategories" :key="k.Id">
         <div class="subTitle">
           <p>{{k.MetaKeywords}}</p>
-          <div><span>全部商品</span><i class="icon iconfont icon-right"></i></div>
+          <div @click="allProduct"><span>全部商品</span><i class="icon iconfont icon-right"></i></div>
         </div>
         <div class="subContent">
           <div class="item" v-for="item in k.SmallCategories" :key="item.Id">
@@ -70,6 +70,12 @@
           vm.categoryList = res.data
         }).catch((error) => {
           console.log(error)
+        })
+      },
+      allProduct () {
+        this.$message({
+          message: '该功能暂未开发！',
+          type: 'warning'
         })
       }
     },

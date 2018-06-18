@@ -7,35 +7,39 @@
       <div class="content-body">
         <v-pay-way @remain-time="getRemainTime"></v-pay-way>
       </div>
-      <div class="footer" @click="comfirmPay"
-           :class="{'enable':parseInt(remainTime)>0,'disable':parseInt(remainTime)<=0}">
-        <div v-if="parseInt(remainTime)>0">
-          <span>确认支付</span>
-          <span>¥</span>
-          <span>{{submitOrder.finalPrice}}</span>
-        </div>
-        <div v-if="parseInt(remainTime)<=0">
-          <span>订单已过期</span>
-        </div>
+    </div>
+    <div class="footer" @click="showSupport()"
+         :class="{'enable':parseInt(remainTime)>0,'disable':parseInt(remainTime)<=0}">
+      <div v-if="parseInt(remainTime)>0">
+        <span>确认支付</span>
+        <span>¥</span>
+        <span>{{submitOrder.finalPrice}}</span>
+      </div>
+      <div v-if="parseInt(remainTime)<=0">
+        <span>订单已过期</span>
       </div>
     </div>
+    <v-support :modal="dialogVisible" @close-modal="closeModal"></v-support>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import PayWay from '@/components/pay/payWay.vue'
+  import Support from '@/components/pay/support.vue'
   import Header from '@/common/_header.vue'
 
   export default {
     components: {
       'VPayWay': PayWay,
-      'VHeader': Header
+      'VHeader': Header,
+      'VSupport': Support
     },
     data () {
       return {
         submitOrder: '',
         myOrders: '',
-        remainTime: 1
+        remainTime: 1,
+        dialogVisible: false
       }
     },
     mounted () {
@@ -55,11 +59,7 @@
        * @returns {boolean}
        */
       comfirmPay () {
-        if (parseInt(this.remainTime) <= 0) {
-          return false
-        }
         // 获取我的订单,并将提交的订单加入到我的订单中
-        // 判断是提交订单还是支付成功后修改订单状态
         var index = 0
         for (var i = 0; i < this.myOrders.length; i++) {
           if (this.myOrders[i].orderNo === this.submitOrder.orderNo) {
@@ -78,6 +78,24 @@
         setTimeout(function () {
           router.replace({name: '我的订单', params: {type: 'PS'}})
         }, 2000)
+      },
+      /**
+       * 显示赞赏码对话框
+       * @returns {boolean}
+       */
+      showSupport () {
+        if (parseInt(this.remainTime) <= 0) {
+          return false
+        }
+        this.dialogVisible = true
+      },
+      /**
+       * 关闭赞赏码对话框
+       * @param val
+       */
+      closeModal (val) {
+        this.dialogVisible = false
+        this.comfirmPay()
       }
     }
   }

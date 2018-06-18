@@ -1,13 +1,14 @@
 <template>
   <div>
     <v-header></v-header>
-    <div class="content">
+    <div class="content" @mousewheel="getScorlTop()">
       <v-swiper :adverise="swiperData.Data" v-if="swiperData"></v-swiper>
       <v-service></v-service>
       <v-flashSale :flashSale="flashSaleData.Data" v-if="flashSaleData"></v-flashSale>
       <v-defaultHome :defaultHome="defaultHomeData" v-if="defaultHomeData"></v-defaultHome>
       <v-baseline></v-baseline>
     </div>
+    <v-back-to-top v-show="showBackToTop" @hide="getScorlTop"></v-back-to-top>
     <v-footer></v-footer>
   </div>
 </template>
@@ -20,6 +21,7 @@
   import DefaultHome from '@/components/index/defaultHome.vue'
   import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
+  import BackToTop from '@/common/_backToTop.vue'
   import utils from '@/util/common.js'
 
   export default {
@@ -30,13 +32,15 @@
       'VFlashSale': FlashSale,
       'VDefaultHome': DefaultHome,
       'VBaseline': Baseline,
-      'VFooter': Footer
+      'VFooter': Footer,
+      'VBackToTop': BackToTop
     },
     data () {
       return {
         swiperData: '',
         flashSaleData: '',
-        defaultHomeData: ''
+        defaultHomeData: '',
+        showBackToTop: false
       }
     },
     mounted () {
@@ -114,6 +118,14 @@
         }).catch((error) => {
           console.log(error)
         })
+      },
+      getScorlTop () {
+        var top = document.getElementsByClassName('content')[0].scrollTop
+        if (top > 400) {
+          this.showBackToTop = true
+        } else {
+          this.showBackToTop = false
+        }
       }
     }
   }

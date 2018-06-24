@@ -1,7 +1,7 @@
 # 前言
 本项目是基于vue2.0开发的一个移动端、PC端在线网上购物平台,包含了从商品的浏览、商品的详情、加入购物车、提交订单、支付、查看订单等一套完整的购物流程，部分小功能后期逐步完善。
 
-该项目是由(vue2.0+vuex+vue-router+vue-resource+webpack)完成的，因为是第一次使用前端框架做项目，有些地方做的还不是那么完美还存在一些小BUG，不过后期我会努力完善的.
+该项目是由(vue2.0+vuex+vue-router+vue-resource+webpack+less)完成的，因为是第一次使用前端框架做项目，有些地方做的还不是那么完美还存在一些小BUG，不过后期我会努力完善的.
 
 写完这个项目我学到了很多收获了很多知识尤其对vue组件指令、渲染数据、计算属性、绑定事件以及vuex状态管理、vue-router路由的使用有了一定了解.
 
@@ -21,9 +21,10 @@
 
 > [Element UI] 同样是由饿了么前端团队推出的 Element UI 一套基于 Vue 2.0 的桌面端组件库。
 
+> [LESS] Less CSS预编译语言，扩充了 CSS 语言,增加了诸如变量、混合(mixin)、运算、函数等。
 
 # 项目预览
-:point_right: [在线预览]https://zl46547.github.io/umatou/#/<br>
+:point_right: [在线预览]http://zl46547.coding.me/umaTouMobile<br>
 
 # 基本功能
 > 首页:

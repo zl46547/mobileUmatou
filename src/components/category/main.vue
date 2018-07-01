@@ -6,8 +6,10 @@
     <div class="hotCategory" v-if="pathId === '0' && categoryList.Data">
       <div class="category-list" v-for="k in categoryList.Data.HotCategoryList" :key="k.Id">
         <router-link :to="'/categoryDetail/'+k.Id">
-          <img :src="'http://picpro-sz.34580.com/sz/ImageUrl/' +k.PictureId+ '/160.jpeg'" alt="">
-          <span>{{k.Name}}</span>
+          <div>
+            <img :src="'http://picpro-sz.34580.com/sz/ImageUrl/' +k.PictureId+ '/160.jpeg'" alt="">
+          </div>
+          <p>{{k.Name}}</p>
         </router-link>
       </div>
     </div>
@@ -21,8 +23,10 @@
         <div class="subContent">
           <div class="item" v-for="item in k.SmallCategories" :key="item.Id">
             <router-link :to="'/categoryDetail/'+item.Id">
-              <img :src="'http://picpro-sz.34580.com/sz/ImageUrl/' +item.PictureId+ '/160.jpeg'" alt="">
-              <span>{{item.Name}}</span>
+              <div>
+                <img :src="'http://picpro-sz.34580.com/sz/ImageUrl/' +item.PictureId+ '/160.jpeg'" alt="">
+              </div>
+              <p>{{item.Name}}</p>
             </router-link>
           </div>
         </div>
@@ -127,10 +131,12 @@
           display: block;
           img {
             display: block;
-            width: 60%;
-            margin: 4vw auto;
+            width: 80%;
+            margin: 0 auto;
           }
-          span {
+          p {
+            font-size: 4.2vw;
+            padding: 2vh 0;
             text-align: center;
           }
         }
@@ -164,9 +170,13 @@
           width: 33%;
           text-align: center;
           img {
-            display: block;
-            width: 60%;
-            margin: 4vw auto;
+            width: 80%;
+            margin: 0 auto;
+          }
+          p {
+            font-size: 4.2vw;
+            padding: 2vh 0;
+            text-align: center;
           }
         }
       }
@@ -186,12 +196,16 @@
         height: 250px;
       }
       > .hotCategory {
-        height: 400px;
+        height: 410px;
         .category-list {
           padding: 10px 0;
           a {
             img {
-              margin: 20px auto;
+              margin: 0 auto;
+            }
+            p {
+              font-size: 24px;
+              padding: 14px 0;
             }
           }
         }
@@ -206,16 +220,20 @@
         .subContent {
           .item {
             img {
-              margin: 20px auto;
+              margin: 0 auto;
+            }
+            p {
+              font-size: 24px;
+              padding: 14px 0;
             }
           }
         }
       }
       .height-60 {
-        height: 400px;
+        height: 410px;
       }
       .height-82 {
-        height: 600px;
+        height: 660px;
       }
     }
   }

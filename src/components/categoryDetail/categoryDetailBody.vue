@@ -93,6 +93,7 @@
           .price {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             .periodMoney {
               font-size: 3vw;
               color: #f05423;
@@ -104,6 +105,7 @@
               border-radius: 50%;
               display: flex;
               margin: 1vw;
+              cursor: pointer;
               align-items: center;
               i {
                 font-size: 2vw;
@@ -142,14 +144,14 @@
             }
             .price {
               .periodMoney {
-                font-size: 18px;
+                font-size: 24px;
               }
               > div {
-                width: 24px;
-                height: 24px;
+                width: 35px;
+                height: 35px;
                 margin: 10px;
                 i {
-                  font-size: 12px;
+                  font-size: 24px;
                 }
               }
             }

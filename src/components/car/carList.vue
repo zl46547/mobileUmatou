@@ -20,13 +20,13 @@
                 </div>
                 <div class="operate">
                   <div class="inputNumber">
-                    <div>
-                      <p @click="changeNum(-1,i)">-</p>
+                    <div @click="changeNum(-1,i)">
+                      <p>-</p>
                     </div>
                     <div>
                       <p>{{item.buyNum}}</p></div>
-                    <div>
-                      <p @click="changeNum(1,i)">+</p></div>
+                    <div @click="changeNum(1,i,$event)">
+                      <p>+</p></div>
                   </div>
                   <div class="delete">
                     <p @click="deleteItem(i)">删除</p>
@@ -44,7 +44,7 @@
     <!-- 购物车为空 -->
     <v-cart-empty v-if="dataList.length<=0"></v-cart-empty>
     <!-- 合计 -->
-    <div class="totalCount">
+    <div class="totalCount" v-if="dataList.length>0">
       <div>
         <div class="checkAll">
           <div class="checkAll-btn" v-if="this.dataList.length>0" @click="checkAll">
@@ -64,6 +64,8 @@
     </div>
     <!-- 脚部 -->
     <v-footer></v-footer>
+    <!-- 购物车 -->
+    <v-fix-car ref="ball" v-if="dataList.length>0"></v-fix-car>
   </div>
 </template>
 
@@ -71,10 +73,12 @@
   import Footer from '@/common/_footer.vue'
   import { Toast } from 'mint-ui'
   import cartEmpty from '@/components/car/cartEmpty.vue'
+  import fixCar from '@/components/car/fixCar.vue'
 
   export default {
     components: {
       'VFooter': Footer,
+      'VFixCar': fixCar,
       'VCartEmpty': cartEmpty
     },
     mounted () {
@@ -141,8 +145,9 @@
        * 改变购买数量
        * @param val 购物车数量+1或者是-1
        * @param index 操作的下标
+       * @param event click事件
        */
-      changeNum (val, index) {
+      changeNum (val, index, event) {
         var num = this.dataList[index].buyNum + val
         if (num <= 0) {
           this.dataList[index].buyNum = 1
@@ -153,6 +158,9 @@
         this.dataList[index].totalMoney = totalMoney
         // 提交vuex，修改localStorage购物车列表数据
         this.$store.commit('CAR_LIST', this.dataList)
+        if (event) {
+          this.$refs.ball.drop(event.target)
+        }
       },
       /**
        * 复选框
@@ -387,7 +395,7 @@
     }
 
     .carList {
-      height: 578px;
+      height: 440px;
       width: 768px;
       > div {
         margin-bottom: 10px;

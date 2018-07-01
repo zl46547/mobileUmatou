@@ -109,12 +109,12 @@
           {
             name: '充值',
             icon: 'icon-chongzhi0101',
-            color: '#ff7314'
+            color: '#c14089'
           },
           {
             name: '地址管理',
             icon: 'icon-dizhi-01',
-            color: '#24acff'
+            color: '#e5cf0d'
           },
           {
             name: '收藏',
@@ -124,42 +124,42 @@
           {
             name: '浏览足迹',
             icon: 'icon-footprint',
-            color: '#b3886f'
+            color: '#59678c'
           },
           {
             name: '主题',
             icon: 'icon-skin',
-            color: '#df16ff'
+            color: '#9a7fd1'
           },
           {
             name: '会员中心',
             icon: 'icon-huiyuan',
-            color: '#ffdb19'
+            color: '#588dd5'
           },
           {
             name: '发票申请',
             icon: 'icon-iconset0266',
-            color: '#c46c3a'
+            color: '#7eb00a'
           },
           {
             name: '客户服务',
             icon: 'icon-kefunv',
-            color: '#ec618d'
+            color: '#5ab1ef'
           },
           {
             name: '体验店',
             icon: 'icon-tiyandian',
-            color: '#ffef52'
+            color: '#97b552'
           },
           {
             name: '新手礼物',
             icon: 'icon-weibiaoti-',
-            color: '#ffa24a'
+            color: '#ffb980'
           },
           {
-            name: '帮助中心',
-            icon: 'icon-question',
-            color: '#cb8439'
+            name: '关于我们',
+            icon: 'icon-tiyandian',
+            color: '#2ec7c9'
           }
         ]
       }

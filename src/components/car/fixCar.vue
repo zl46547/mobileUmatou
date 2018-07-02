@@ -1,10 +1,12 @@
 <template>
   <div class="fixCar">
-    <i class="icon iconfont icon-cart"></i>
-    <div class="num">
-      <span>{{carListNUm}}</span>
+    <div class="cartContainer" :class="{move_in_cart:receiveInCart}" ref="cartContainer">
+      <i class="icon iconfont icon-cart"></i>
+      <div class="num">
+        <span>{{carListNUm}}</span>
+      </div>
     </div>
-    <vshop-cart-balls ref="ball"></vshop-cart-balls>
+    <vshop-cart-balls ref="ball" @receive="receiveBall"></vshop-cart-balls>
   </div>
 </template>
 
@@ -13,6 +15,11 @@
   export default {
     components: {
       'VshopCartBalls': shopCartBalls
+    },
+    data() {
+      return {
+        receiveInCart: false // 购物车组件下落的圆点是否到达目标位置
+      }
     },
     computed: {
       carListNUm() {
@@ -32,6 +39,13 @@
     methods: {
       drop(target) {
         this.$refs.ball.drop(target)
+      },
+      receiveBall(val) {
+        this.receiveInCart = true
+        // 监听购物车，当购物车动画结束后才将receiveInCart变为false
+        this.$refs.cartContainer.addEventListener('animationend', () => {
+          this.receiveInCart = false
+        })
       }
     }
   }
@@ -45,31 +59,33 @@
     cursor: pointer;
     position: fixed;
     left: 50%;
-    transform: translateX(-49vw);
-    bottom: 22vh;
+    margin-left: -48%;
+    bottom: 20vh;
     font-size: 2vw;
-    width: 14vw;
-    height: 14vw;
-    border-radius: 50%;
-    background-color: #ffaa2c;
-    display: flex;
-    .iconfont {
-      margin: auto;
-      font-size: 6.2vw;
-      color: #fff;
-    }
-    .num {
-      position: absolute;
-      right: -1vw;
-      top: -1vw;
-      width: 5vw;
-      height: 5vw;
-      display: flex;
+    .cartContainer{
+      width: 14vw;
+      height: 14vw;
       border-radius: 50%;
-      background-color: #ff2c01;
-      color: #fff;
-      span {
+      background-color: #ffaa2c;
+      display: flex;
+      .iconfont {
         margin: auto;
+        font-size: 6.2vw;
+        color: #fff;
+      }
+      .num {
+        position: absolute;
+        right: -1vw;
+        top: -1vw;
+        width: 5vw;
+        height: 5vw;
+        display: flex;
+        border-radius: 50%;
+        background-color: #ff2c01;
+        color: #fff;
+        span {
+          margin: auto;
+        }
       }
     }
   }
@@ -77,20 +93,44 @@
   @media screen and (min-width: 768px) {
     .fixCar {
       left: 50%;
-      transform: translateX(-355px);
+      margin-left: -360px;
       bottom: 120px;
-      font-size: 20px;
-      width: 70px;
-      height: 70px;
-      .iconfont {
-        font-size: 46px;
+      .cartContainer{
+        font-size: 20px;
+        width: 70px;
+        height: 70px;
+        .iconfont {
+          font-size: 46px;
+        }
+        .num {
+          right: -7px;
+          top: -8px;
+          width: 30px;
+          height: 30px;
+        }
       }
-      .num {
-        right: -7px;
-        top: -8px;
-        width: 30px;
-        height: 30px;
-      }
+    }
+  }
+
+  .move_in_cart {
+    animation: mymove .5s ease-in-out;
+  }
+
+  @keyframes mymove {
+    0% {
+      transform: scale(1)
+    }
+    25% {
+      transform: scale(.8)
+    }
+    50% {
+      transform: scale(1.1)
+    }
+    75% {
+      transform: scale(.9)
+    }
+    100% {
+      transform: scale(1)
     }
   }
 </style>

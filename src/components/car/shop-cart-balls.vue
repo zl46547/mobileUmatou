@@ -86,7 +86,18 @@
         if (ball) {
           ball.show = false
           el.style.display = 'none' // 隐藏小球
+          el.addEventListener('transitionend', () => {
+            this.listenInCart()
+          })
+//          el.children[0].addEventListener('webkitAnimationEnd', () => {
+//            this.listenInCart()
+//          })
         }
+      },
+      // 监听圆点是否进入购物车
+      listenInCart() {
+        this.receiveInCart = true
+        this.$emit('receive', true)
       }
     }
   }
@@ -102,8 +113,8 @@
       z-index: 200;
       transition: all .58s cubic-bezier(0.49, -0.69, 0.75, 0.41);
       .inner {
-        width: 12px;
-        height: 12px;
+        width: 2vw;
+        height: 2vw;
         border-radius: 50%;
         background: rgb(220, 40, 30);
         transition: all .6s linear;

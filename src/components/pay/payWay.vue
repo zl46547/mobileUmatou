@@ -64,8 +64,8 @@
     },
     methods: {
       init () {
-        var params = this.$store.state.orderList.submitOrder
-        this.payAmmount = Math.round(params.finalPrice * 10) / 10
+        var params = this.$store.state.orderList.submitOrder || 0
+        this.payAmmount = params.finalPrice
         this.orderNo = params.orderNo
       },
       /**

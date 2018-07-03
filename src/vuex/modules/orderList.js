@@ -25,8 +25,18 @@ const mutations = {
     Util.setLocal(myOrders, 'MY_ORDERS')
   },
   [types.MY_ORDERS] (state, res) {
-    state.myOrders = res
-    Util.setLocal(res, 'MY_ORDERS')
+    if (res.isUpdate) {
+      for (var i = 0; i < state.myOrders.length; i++) {
+        for (var j = 0; j < res.allOrders.length; j++) {
+          if (state.myOrders[i].orderNo === res.allOrders[j].orderNo) {
+            state.myOrders[i] = res.allOrders[j]
+          }
+        }
+      }
+    } else {
+      state.myOrders = res.allOrders
+    }
+    Util.setLocal(state.myOrders, 'MY_ORDERS')
   }
 }
 

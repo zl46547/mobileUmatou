@@ -41,7 +41,7 @@
             <div v-if="item.orderStatus == 'OS' && item.orderStatusName === '订单过期'" @click="goToReOrder(item)">
               <v-order-button :button="reOrderButton"></v-order-button>
             </div>
-            <div v-if="item.orderStatus == 'PS'">
+            <div v-if="item.orderStatus == 'PS'" @click="goToComfirm(item)">
               <v-order-button :button="comfirmButton"></v-order-button>
             </div>
             <div v-if="item.orderStatus == 'FS'">
@@ -108,7 +108,7 @@
     },
     computed: {},
     mounted () {
-      this.initData()
+//      this.initData()
       var type = this.$route.params.type || 'ALL'
       this.selected = type
       this.handleSelect(type)
@@ -123,10 +123,17 @@
       /**
        * 初始化数据,将订单状态码转换成中文
        */
-      initData () {
+      initData (type) {
         var allOrders = this.$store.state.orderList.myOrders
         if (allOrders.length > 0) {
-          allOrders.forEach(function (e) {
+          if (type === 'ALL') {
+            this.allOrders = allOrders
+          } else {
+            this.allOrders = allOrders.where(function (t) {
+              return t.orderStatus === type
+            })
+          }
+          this.allOrders.forEach(function (e) {
             switch (e.orderStatus) {
               case 'OS':
                 // 判断订单是否过期
@@ -151,8 +158,6 @@
             }
           })
         }
-        this.allOrders = allOrders
-        this.tempAllOrders = allOrders
       },
       /**
        * tab切换事件
@@ -160,14 +165,15 @@
        */
       handleSelect (orderStatus) {
         this.selected = orderStatus
-        if (orderStatus === 'ALL') {
-          this.allOrders = this.tempAllOrders
-        } else {
-          var allOrders = this.tempAllOrders.where(function (t) {
-            return t.orderStatus === orderStatus
-          })
-          this.allOrders = allOrders
-        }
+        this.initData(orderStatus)
+//        if (orderStatus === 'ALL') {
+//          this.allOrders = this.tempAllOrders
+//        } else {
+//          var allOrders = this.tempAllOrders.where(function (t) {
+//            return t.orderStatus === orderStatus
+//          })
+//          this.allOrders = allOrders
+//        }
       },
       /**
        * 删除订单提示框
@@ -193,10 +199,11 @@
         this.allOrders.removeAll(function (t) {
           return t.orderNo === val.orderNo
         })
-        this.tempAllOrders.removeAll(function (t) {
-          return t.orderNo === val.orderNo
-        })
-        this.$store.commit('MY_ORDERS', this.tempAllOrders)
+        var res = {
+          isUpdate: false,
+          allOrders: this.allOrders
+        }
+        this.$store.commit('MY_ORDERS', res)
       },
       /**
        * 跳转到支付页面
@@ -226,6 +233,36 @@
           callback: action => {
             this.$router.push({name: '购物车页'})
           }
+        })
+      },
+      /**
+       * 确认收货
+       * @param val
+       */
+      goToComfirm(val) {
+        this.$confirm('确认收货后将无法发起退货，是否继续操作?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.allOrders.forEach(function (t) {
+            if (t.orderNo === val.orderNo) {
+              t.orderStatus = 'FS'
+              t.orderStatusName = '交易完成'
+            }
+          })
+          var res = {
+            isUpdate: true,
+            allOrders: this.allOrders
+          }
+          this.$store.commit('MY_ORDERS', res)
+          this.$message({
+            type: 'success',
+            message: '确认收货成功!',
+            duration: 2000
+          })
+          this.handleSelect('FS')
+        }).catch(() => {
         })
       }
     }

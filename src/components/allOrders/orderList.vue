@@ -253,15 +253,15 @@
           })
           var res = {
             isUpdate: true,
-            allOrders: this.allOrders
+            allOrders: val
           }
           this.$store.commit('MY_ORDERS', res)
-          this.$message({
-            type: 'success',
-            message: '确认收货成功!',
-            duration: 2000
-          })
-          this.handleSelect('FS')
+//          this.$message({
+//            type: 'success',
+//            message: '确认收货成功!',
+//            duration: 2000
+//          })
+//          this.handleSelect('FS')
         }).catch(() => {
         })
       }

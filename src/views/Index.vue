@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="index" style="height: 100%;">
     <v-header></v-header>
     <div class="content" @mousewheel="getScorlTop()">
       <v-swiper :adverise="swiperData.Data" v-if="swiperData"></v-swiper>
@@ -132,12 +132,17 @@
 </script>
 
 <style lang="less" scoped>
-  .content {
-    height: 85vh;
-    &::-webkit-scrollbar {
-      display: none
+  .index{
+    position: relative;
+    overflow: hidden;
+    .content {
+      margin-top: 10vh;
+      height: 85vh;
+      &::-webkit-scrollbar {
+        display: none
+      }
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
     }
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
   }
 </style>

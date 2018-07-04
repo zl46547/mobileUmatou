@@ -18,28 +18,37 @@
   @import '../../assets/font/iconfont.css';
 
   header {
+    position: absolute;
+    left: 0;
+    top:0;
+    width:100%;
+    height:10vh;
     display: flex;
     align-items: center;
     font-size: 4vw;
-    padding: 8px;
-    .address{
-      margin: 0 5px;
-    }
+    padding: 0 20px;
+    margin-bottom: 2vh;
+    box-shadow: 0 0.2vh 4vh  rgba(135, 120, 120, 0.23);
     .icon-back{
-      transform: rotate(-90deg);margin-right: 10px;
+      transform: rotate(-90deg);
+      font-size:3vw;
+      margin-right:20px;
     }
     .search{
       cursor: text;
       border-radius:90px;background-color: #eee;width: 80%;text-align: center;
       img{
-        width: 40%;margin: 5px 0;
+        width: 30%;padding: 5px 0;
       }
     }
   }
 
   @media screen and (min-width: 768px) {
     header {
-      font-size: 24px;
+      font-size: 28px;
+      .icon-back{
+        font-size:22px;
+      }
     }
   }
 </style>

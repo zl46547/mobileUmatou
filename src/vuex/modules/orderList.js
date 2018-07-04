@@ -26,13 +26,11 @@ const mutations = {
   },
   [types.MY_ORDERS] (state, res) {
     if (res.isUpdate) {
-      for (var i = 0; i < state.myOrders.length; i++) {
-        for (var j = 0; j < res.allOrders.length; j++) {
-          if (state.myOrders[i].orderNo === res.allOrders[j].orderNo) {
-            state.myOrders[i] = res.allOrders[j]
-          }
+      state.myOrders.forEach(function (e) {
+        if (e.orderNo === res.orderNo) {
+          e = res
         }
-      }
+      })
     } else {
       state.myOrders = res.allOrders
     }

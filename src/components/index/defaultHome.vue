@@ -79,7 +79,6 @@
 import { Lazyload } from 'mint-ui'
 <style lang="less" scoped>
   @import "../../assets/fz.less";
-  @import "../../assets/index/style.css";
 
   .defaultHome {
     background-color: #fff;

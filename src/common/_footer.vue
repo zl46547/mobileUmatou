@@ -2,16 +2,16 @@
   <footer class="footer" @click.stop="gotoRouter">
     <mt-tabbar v-model="selected" fixed>
       <mt-tab-item id="/">
-        <i slot="icon" class="icon-index"></i>首页
+        <i slot="icon" class="iconfont icon-home"></i>首页
       </mt-tab-item>
       <mt-tab-item id="/category/all">
-        <i slot="icon" class="icon-category"></i>分类
+        <i slot="icon" class="iconfont icon-cascades"></i>分类
       </mt-tab-item>
       <mt-tab-item id="/car">
-        <i slot="icon" class="icon-car"></i>购物车
+        <i slot="icon" class="iconfont icon-icon01"></i>购物车
       </mt-tab-item>
       <mt-tab-item id="/user">
-        <i slot="icon" class="icon-user"></i>我的
+        <i slot="icon" class="iconfont icon-profile"></i>我的
       </mt-tab-item>
     </mt-tabbar>
   </footer>
@@ -52,7 +52,7 @@
 </script>
 
 <style lang="less" scoped>
-  @import "../assets/index/style.css";
+  @import "../assets/font/iconfont.css";
   @import "../assets/fz.less";
 
   .footer {

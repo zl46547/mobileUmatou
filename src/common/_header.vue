@@ -1,8 +1,8 @@
 <template>
   <header>
-    <router-link class="icon-go" :to="{name :'首页'}" v-if="$route.matched[0].path == '/category'"></router-link>
-    <router-link class="icon-go" :to="{name :'用户页'}" v-if="$route.matched[0].path == '/allOrders'"></router-link>
-    <span class="icon-go" @click="$router.go(-1)" v-if="$route.matched[0].path != '/category' && $route.matched[0].path != '/allOrders'"></span>
+    <router-link class="iconfont icon-back" :to="{name :'首页'}" v-if="$route.matched[0].path == '/category'"></router-link>
+    <router-link class="iconfont icon-back" :to="{name :'用户页'}" v-if="$route.matched[0].path == '/allOrders'"></router-link>
+    <span class="iconfont icon-back" @click="$router.go(-1)" v-if="$route.matched[0].path != '/category' && $route.matched[0].path != '/allOrders'"></span>
     <slot name="title"></slot>
     <div>&nbsp;</div>
   </header>
@@ -15,14 +15,14 @@
 </script>
 
 <style lang="less" scoped>
-@import "../assets/index/style.css";
+@import "../assets/font/iconfont.css";
 @import "../assets/fz";
 
   header{
     background-color: #fdfdfd;
     text-align: center;
     width:100vw;
-    height: 9vh;
+    height: 8vh;
     display: flex;
     align-items: center;
     justify-content: space-between;

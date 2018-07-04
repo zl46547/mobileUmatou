@@ -1,9 +1,9 @@
 <template>
   <div class="service">
     <ul>
-      <li><i class="icon-ok"><span>自营品牌</span></i></li>
-      <li><i class="icon-ok"><span>无忧退货</span></i></li>
-      <li><i class="icon-ok"><span>48小时快速退款</span></i></li>
+      <li><i class="iconfont icon-safe"><span>自营品牌</span></i></li>
+      <li><i class="iconfont icon-ok"><span>无忧退货</span></i></li>
+      <li><i class="iconfont icon-ok"><span>48小时快速退款</span></i></li>
     </ul>
   </div>
 </template>
@@ -14,7 +14,7 @@
 
 <style lang="less" scoped>
   @import '../../assets/fz.less';
-  @import '../../assets/index/style.css';
+  @import '../../assets/font/iconfont.css';
 
   .service {
     .bd();

@@ -1,29 +1,45 @@
 <template>
-  <mt-header title="优鲜码头">
-    <router-link :to="{name:''}" slot="right">
-      <mt-button icon="search"></mt-button>
-    </router-link>
-  </mt-header>
+  <header>
+    <div class="address">
+      苏州
+    </div>
+    <i class="iconfont icon-back"></i>
+    <div class="search">
+      <img src="../../assets/images/search.png"/>
+    </div>
+  </header>
 </template>
 
 <script type="text/ecmascript-6">
-export default {}
+  export default {}
 </script>
 
 <style lang="less" scoped>
-  @import '../../assets/fz.less';
-  @import '../../assets/index/style.css';
+  @import '../../assets/font/iconfont.css';
 
-  .mint-header {
-    padding: 6.8vw 4.8vw;
-    background-color: #fff;
-    color: #333 !important;
-    .fz(font-size, 40) !important;
+  header {
+    display: flex;
+    align-items: center;
+    font-size: 4vw;
+    padding: 8px;
+    .address{
+      margin: 0 5px;
+    }
+    .icon-back{
+      transform: rotate(-90deg);margin-right: 10px;
+    }
+    .search{
+      cursor: text;
+      border-radius:90px;background-color: #eee;width: 80%;text-align: center;
+      img{
+        width: 40%;margin: 5px 0;
+      }
+    }
   }
 
   @media screen and (min-width: 768px) {
-    .mint-header {
-      padding: 40px 20px;
+    header {
+      font-size: 24px;
     }
   }
 </style>

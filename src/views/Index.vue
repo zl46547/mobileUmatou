@@ -136,7 +136,7 @@
     position: relative;
     overflow: hidden;
     .content {
-      margin-top: 10vh;
+      margin-top: 8vh;
       height: 85vh;
       &::-webkit-scrollbar {
         display: none

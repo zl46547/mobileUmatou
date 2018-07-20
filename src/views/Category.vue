@@ -82,17 +82,9 @@
     width: 100%;
     height: 100%;
     overflow-y: hidden;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex; // 将对象作为弹性伸缩盒显示。
-    -webkit-box-orient: vertical; // 属性规定框的子元素应该被水平或垂直排列。
-    -webkit-box-direction: normal;
-    -ms-flex-flow: column nowrap;
-    flex-flow: column nowrap;
-
     .view {
-      width: 100%;
-      height: 100%;
+      margin-top: 8vh;
+      height:84vh;
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;

@@ -22,17 +22,17 @@
     left: 0;
     top:0;
     width:100%;
-    height:10vh;
+    height:8vh;
     display: flex;
     align-items: center;
     font-size: 4vw;
-    padding: 0 20px;
-    margin-bottom: 2vh;
-    box-shadow: 0 0.2vh 4vh  rgba(135, 120, 120, 0.23);
+    padding-left:4vw;
+    z-index: 999;
+    box-shadow: 0 0.5px 20px rgb(221, 221, 221);
     .icon-back{
       transform: rotate(-90deg);
       font-size:3vw;
-      margin-right:20px;
+      margin-right:2vw;
     }
     .search{
       cursor: text;
@@ -46,8 +46,10 @@
   @media screen and (min-width: 768px) {
     header {
       font-size: 28px;
+      padding-left:28px;
       .icon-back{
         font-size:22px;
+        margin-right:14px;
       }
     }
   }

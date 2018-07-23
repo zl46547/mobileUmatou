@@ -1,5 +1,5 @@
 <template>
-  <div class="index" style="height: 100%;">
+  <div class="index">
     <v-header></v-header>
     <div class="content" @mousewheel="getScorlTop()">
       <v-swiper :adverise="swiperData.Data" v-if="swiperData"></v-swiper>
@@ -133,6 +133,7 @@
 
 <style lang="less" scoped>
   .index{
+    height: 100%;
     position: relative;
     overflow: hidden;
     .content {

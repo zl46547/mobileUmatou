@@ -73,6 +73,8 @@
 
 <style lang="less" scoped>
   #adverise {
+    height:92vh;
+    margin-top: 8vh;
     .cover {
       img {
         width: 100vw;

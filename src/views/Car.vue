@@ -32,6 +32,7 @@
 <style scoped>
   .content {
     background-color: #f2f2f2;
+    overflow: hidden;
     width: 100%;
   }
 </style>

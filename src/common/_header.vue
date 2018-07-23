@@ -26,75 +26,44 @@
 
 <style lang="less" scoped>
   @import "../assets/font/iconfont.css";
-  @import "../assets/fz";
 
   header {
     position: absolute;
-    left: 0;
+    left: 50%;
     top:0;
+    margin-left: -50%;
     width:100%;
     height:8vh;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 4vw;
-    padding-left:4vw;
     z-index: 999;
     background-color: #fafafa;
     box-shadow: 0 0.5px 20px rgb(221, 221, 221);
     .icon-back{
-      margin-right:2vw;
+      cursor: pointer;
+      padding-left:4vw;
+      font-size: 4vw;
     }
     h1 {
-      .fz(font-size, 34);
+      font-size:4.5vw;
       letter-spacing: .2vw;
       font-weight: 600;
     }
   }
-    /*background-color: #fdfdfd;
-    text-align: center;
-    padding: 0 2vw;
-    width: 100vw;
-    height: 8vh;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    .icon-go {
-      margin-left: 3vw;
-      cursor: pointer;
-    }
-    h1 {
-      .fz(font-size, 34);
-      letter-spacing: .2vw;
-      font-weight: 600;
-    }
-    span, a {
-      display: inline-block;
-      .fz(font-size, 46);
-      &::before {
-        color: #333;
-      }
-    }
-    div {
-      width: 11vw;
-    }*/
-  /*}*/
 
   @media screen and (min-width: 768px) {
-    /*header {*/
-      /*width: 744px;*/
-      /*margin: 0 auto;*/
-      /*padding: 0 12px;*/
-      /*.icon-go {*/
-        /*margin-left: 18px;*/
-      /*}*/
-      /*h1 {*/
-        /*margin-right: 0px;*/
-        /*font-size: 20px;*/
-      /*}*/
-      /*div {*/
-        /*width: 26px;*/
-      /*}*/
-    /*}*/
+    header {
+      margin-left: -384px;
+      width:768px;
+      font-size: 30px;
+      .icon-back{
+        padding-left:28px;
+        font-size: 24px;
+      }
+      h1 {
+        font-size:26px;
+      }
+    }
   }
 </style>

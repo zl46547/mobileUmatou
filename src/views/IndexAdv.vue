@@ -52,8 +52,8 @@
 <style lang="less" scoped>
   .indexAdv {
     width: 100%;
+    overflow: hidden;
     .content-body {
-      height: 91vh;
       &::-webkit-scrollbar {
         display: none
       }

@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="subCategory" v-if="pathId !== '0' && categoryList.Data"
-         :class="{'height-60':getRanderAdvertisements.length > 0,'height-82':getRanderAdvertisements.length <= 0}">
+         :class="{'height-60':getRanderAdvertisements.length > 0,'height-84':getRanderAdvertisements.length <= 0}">
       <div v-for="k in categoryList.Data.SubCategories" :key="k.Id">
         <div class="subTitle">
           <p>{{k.MetaKeywords}}</p>
@@ -107,9 +107,6 @@
 <style lang="less" scoped>
   .main {
     width: 78vw;
-    > .randerAdvertise {
-      height: 22vh;
-    }
     > .hotCategory {
       &::-webkit-scrollbar {
         display: none
@@ -149,9 +146,11 @@
       overflow-y: scroll;
       -webkit-overflow-scrolling: touch;
       width: 100%;
+      height: 60vh;
       .subTitle {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         margin: 5vh 5vw 0 5vw;
         > p {
           color: #333;
@@ -184,25 +183,18 @@
     .height-60 {
       height: 60vh;
     }
-    .height-82 {
-      height: 82vh;
+    .height-84 {
+      height: 84vh;
     }
   }
 
   @media screen and (min-width: 768px) {
     .main {
       width: 630px;
-      > .randerAdvertise {
-        height: 250px;
-      }
       > .hotCategory {
-        height: 410px;
         .category-list {
           padding: 10px 0;
           a {
-            img {
-              margin: 0 auto;
-            }
             p {
               font-size: 24px;
               padding: 14px 0;
@@ -212,28 +204,19 @@
       }
       > .subCategory {
         .subTitle {
-          margin: 30px 25px 0 25px;
+          margin: 5vh 25px 0 25px;
           > p {
             font-size: 25px;
           }
         }
         .subContent {
           .item {
-            img {
-              margin: 0 auto;
-            }
             p {
               font-size: 24px;
               padding: 14px 0;
             }
           }
         }
-      }
-      .height-60 {
-        height: 410px;
-      }
-      .height-82 {
-        height: 660px;
       }
     }
   }

@@ -1,19 +1,12 @@
 <template>
   <footer class="footer" @click.stop="gotoRouter">
-    <mt-tabbar v-model="selected" fixed>
-      <mt-tab-item id="/">
-        <i slot="icon" class="iconfont icon-home"></i>首页
-      </mt-tab-item>
-      <mt-tab-item id="/category/all">
-        <i slot="icon" class="iconfont icon-cascades"></i>分类
-      </mt-tab-item>
-      <mt-tab-item id="/car">
-        <i slot="icon" class="iconfont icon-icon01"></i>购物车
-      </mt-tab-item>
-      <mt-tab-item id="/user">
-        <i slot="icon" class="iconfont icon-profile"></i>我的
-      </mt-tab-item>
-    </mt-tabbar>
+    <div class="tabbar">
+      <div class="tabbar-item" v-for="item in tabbarItem" :key="item.name"
+           :class="{'isSelected':item.url === selected}" @click="selectMenu(item.url)">
+        <i :class="[`${item.icon}`]" class="iconfont"></i><br/>
+        <span class="tabbar-item-name">{{item.name}}</span>
+      </div>
+    </div>
   </footer>
 </template>
 
@@ -23,15 +16,42 @@
     components: {},
     data () {
       return {
-        selected: ''
+        selected: '/',
+        tabbarItem: [
+          {
+            name: '首页',
+            icon: 'icon-home',
+            url: '/'
+          },
+          {
+            name: '分类',
+            icon: 'icon-cascades',
+            url: '/category/all'
+          },
+          {
+            name: '购物车',
+            icon: 'icon-icon01',
+            url: '/car'
+          },
+          {
+            name: '我的',
+            icon: 'icon-profile',
+            url: '/user'
+          }
+        ]
       }
     },
     methods: {
       gotoRouter () {
         this.$router.push(this.selected)
+      },
+      selectMenu(val) {
+        this.selected = val
+        this.$store.commit('SELECT_MENU', val)
       }
     },
     mounted () {
+      this.selected = this.$store.state.common.selectMenu
       let routerName = this.$route.name
       switch (routerName) {
         case '首页':
@@ -56,30 +76,51 @@
   @import "../assets/fz.less";
 
   .footer {
-    .mint-tabbar {
-      padding: 5px 0;
+    width: 100%;
+    height: 8vh;
+    background-color: #fff;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    margin-left: -50%;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 -0.5px 20px rgb(221, 221, 221);
+    .tabbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      width: 100%;
+      > div {
+        text-align: center;
+        .tabbar-item-name {
+          font-size: 1vw;
+        }
+      }
+    }
+    .isSelected {
+      color: @cl;
+      font-weight: bold;
       background-color: #fff;
-      background-image: none;
-      box-shadow: 0 0 2.2vw 0 hsla(0, 6%, 50%, .23);
-      -webkit-box-shadow: 0 0 sla(0, 6%, 50%, .23);
-      .is-selected {
-        color: @cl;
-        font-weight:bold;
-        background-color: #fff;
-        i {
-          &::before {
-            color: @cl;
-            font-weight:bold;
-          }
+      i {
+        &::before {
+          color: @cl;
+          font-weight: bold;
         }
       }
     }
   }
+
   @media screen and (min-width: 768px) {
-    .footer{
-      .mint-tabbar{
-        width:768px;
-        margin: 0 auto;
+    .footer {
+      width: 768px;
+      margin-left: -384px;
+      .tabbar {
+        > div {
+          .tabbar-item-name {
+            font-size: 12px;
+          }
+        }
       }
     }
   }

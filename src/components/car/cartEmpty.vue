@@ -26,7 +26,8 @@
 
 <style lang="less" scoped>
   .cartEmpty {
-    height: 81vh;
+    height: 84vh;
+    margin-top: 8vh;
     display: flex;
     >div{
       margin: auto;
@@ -62,7 +63,6 @@
 
   @media screen and (min-width: 768px) {
     .cartEmpty {
-      height: 570px;
       width: 100%;
       >div{
         > p {
@@ -75,7 +75,6 @@
           margin-top: 10px;
           .goToShop {
             width: 150px;
-            height: 50px;
           }
         }
       }

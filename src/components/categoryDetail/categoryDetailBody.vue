@@ -54,7 +54,7 @@
   .main {
     background-color: #ebebeb;
     width: 100%;
-    height: 81vh;
+    height:84vh;
     &::-webkit-scrollbar {
       display: none
     }
@@ -99,8 +99,8 @@
               color: #f05423;
             }
             > div {
-              width: 4vw;
-              height: 4vw;
+              width: 5vw;
+              height: 5vw;
               border: 1px solid #ccc;
               border-radius: 50%;
               display: flex;
@@ -123,15 +123,9 @@
     .main {
       background-color: #ebebeb;
       width: 768px;
-      height: 645px;
       .el-row {
         width: 768px;
         .detail {
-          a {
-            img {
-              width: 384px;
-            }
-          }
           .product-detail {
             p {
               margin-left: 15px;
@@ -148,7 +142,7 @@
               }
               > div {
                 width: 35px;
-                height: 35px;
+                height:35px;
                 margin: 10px;
                 i {
                   font-size: 24px;

@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div id="category-detail">
     <v-header>
       <h1 slot="title">分类详情页</h1>
     </v-header>
-    <v-category></v-category>
+    <v-category class="category-main"></v-category>
     <v-footer></v-footer>
   </div>
 </template>
@@ -26,5 +26,10 @@
 </script>
 
 <style lang="less" scoped>
-
+  #category-detail{
+    overflow: hidden;
+    .category-main{
+      margin-top: 8vh;
+    }
+  }
 </style>

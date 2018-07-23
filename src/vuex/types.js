@@ -18,3 +18,6 @@ export const SUBMIT_ORDER = 'SUBMIT_ORDER'
 
 /* 提交订单 */
 export const MY_ORDERS = 'MY_ORDERS'
+
+/* _footer选中的菜单 */
+export const SELECT_MENU = 'SELECT_MENU'

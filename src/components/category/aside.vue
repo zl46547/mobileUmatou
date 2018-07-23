@@ -38,8 +38,7 @@
 <style lang="less" scoped>
   .aside {
     width:22vw;
-    height: 100%;
-    overflow-y: auto;
+    height: 84vh;
     -webkit-overflow-scrolling: touch;
     background-color: rgb(247, 247, 247);
     &::-webkit-scrollbar {

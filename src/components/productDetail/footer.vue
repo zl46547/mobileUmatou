@@ -1,17 +1,17 @@
 <template>
   <div class="footer">
     <div class="icon" @click="toService">
-      <i class="iconfont icon-kefu"></i>
-      <p>客服</p>
+      <i class="iconfont icon-kefu"></i><br>
+      <span class="icon-text">客服</span>
     </div>
     <div class="icon" @click="onLike">
-      <i class="iconfont icon-favor" :class="{myLikeProduct:isLikeProduct}"></i>
-      <p :class="{myLikeProduct:isLikeProduct}">收藏</p>
+      <i class="iconfont icon-favor" :class="{myLikeProduct:isLikeProduct}"></i><br>
+      <span :class="{myLikeProduct:isLikeProduct}" class="icon-text">收藏</span>
     </div>
-    <div class="icon" @click="toCartPage">
-      <i class="iconfont icon-cart"></i>
-      <mt-badge size="small" type="error">{{getCarsNum}}</mt-badge>
-      <p>购物车</p>
+    <div class="icon add-cart" style="position: relative;" @click="toCartPage">
+      <i class="iconfont icon-cart"></i><br>
+      <div class="badge">{{getCarsNum}}</div>
+      <span class="icon-text">购物车</span>
     </div>
     <div class="addCart" @click="addCart">
       <p>加入购物车</p>
@@ -90,32 +90,43 @@
 
 <style lang="less" scoped>
   .footer {
-    display: flex;
     width: 100%;
-    height: 10vh;
+    height: 8vh;
+    background-color: #fff;
     position: fixed;
     bottom: 0;
-    background-color: #fff;
-    box-shadow: 0px -1px 10px #cccccc;
+    left: 50%;
+    margin-left: -50%;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 -0.5px 20px rgb(221, 221, 221);
     .icon {
-      flex: 1 1 auto;
       margin: auto;
       text-align: center;
-      padding: 10px;
       cursor: pointer;
       i {
         font-size: 5vw;
       }
+      .icon-text{
+        font-size:1vw;
+      }
       .myLikeProduct {
         color: #ff1908;
       }
-      span.mint-badge.is-error.is-size-small {
+      .badge {
         position: absolute;
+        right: -3vw;
+        top: -2.4vh;
+        background-color: #ff1908;
+        color: #fff;
+        padding: 1.5px 5px;
+        font-size:2vh;
+        border-radius: 90px;
       }
     }
     .addCart {
       height: 100%;
-      width: 40vw;
+      width: 40%;
       background-color: #f05423;
       display: flex;
       cursor: pointer;
@@ -130,19 +141,22 @@
   @media screen and (min-width: 768px) {
     .footer {
       width: 768px;
-      height: 65px;
+      margin-left: -384px;
       .icon {
         cursor: pointer;
         i {
           font-size: 28px;
         }
+        .icon-text{
+          font-size:12px;
+        }
+        .badge {
+          right: -22px;
+        }
       }
       .addCart {
-        cursor: pointer;
-        height: 100%;
         width: 268px;
         background-color: #f05423;
-        display: flex;
         p {
           margin: auto;
           color: #fff;

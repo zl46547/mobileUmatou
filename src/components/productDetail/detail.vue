@@ -1,14 +1,16 @@
 <template>
   <div class="detail-content">
-    <ul>
-      <li :class="{active:i == isActive}" @click="getActive(item.index)" v-for="(item,i) in tabs" :key="i">
-        {{item.name}}
-      </li>
-    </ul>
-    <div class="introduce" v-if="nowIndex == 0">
-      <img :src="getImageUrl" alt="">
-    </div>
-    <div class="standard" v-if="nowIndex == 1">
+    <!--<ul>-->
+      <!--<li :class="{active:i == isActive}" @click="getActive(item.index)" v-for="(item,i) in tabs" :key="i">-->
+        <!--{{item.name}}-->
+      <!--</li>-->
+    <!--</ul>-->
+    <!-- 产品规格 -->
+    <div class="standard">
+      <header style="display: flex;align-items: baseline;padding: 2vh 3vw">
+        <p style="font-size: 4.5vw;border-left: 7px solid #90c320;padding:0 5px 0 10px;word-break: break-all;white-space: nowrap;">产品规格</p>
+        <p style="font-size: 1vw;width: 80%;border-bottom: 1px solid #cccccc">Product Standard</p>
+      </header>
       <div class="standard-list">
         <div class="product-name">商品名称</div>
         <div>{{responseData.ProductInfo.ProductName}}</div>
@@ -38,6 +40,9 @@
         <div>{{responseData.ProductInfo.LastTimeInfo}}</div>
       </div>
     </div>
+    <div class="introduce">
+      <img :src="getImageUrl" alt="">
+    </div>
   </div>
 </template>
 
@@ -48,14 +53,16 @@
     data () {
       return {
         nowIndex: 0,
-        tabs: [{
-          name: '介绍',
-          index: '0'
-        },
+        tabs: [
+          {
+            name: '介绍',
+            index: '0'
+          },
           {
             name: '规格',
             index: '1'
-          }]
+          }
+        ]
       }
     },
     computed: {
@@ -81,15 +88,10 @@
 
 <style lang="less" scoped>
   .detail-content {
-    padding-top: 14vh;
-    padding-bottom: 11vh;
     ul {
       position: fixed;
-      top:9vh;
       padding: 1vh 0;
-      display: -ms-flexbox;
       display: flex;
-      -ms-flex-pack: center;
       width: 100%;
       height: 6vh;
       li {
@@ -101,12 +103,13 @@
       }
     }
     .standard {
-      margin-top: 3vh;
+      margin-bottom: 1px;
+      padding: 1vh 0;
+      background-color: #fff;
       .standard-list {
         font-size: 3vw;
         display: flex;
-        padding: 2vh 0;
-        border-top: 1px solid rgba(224, 216, 216, 0.55);
+        padding-bottom: 2vh;
         align-items: center;
         height: 4vh;
         .product-name {
@@ -133,10 +136,10 @@
       padding-bottom: 65px;
       ul {
         height: 30px;
-        width:768px;
-        top:60px;
+        width: 768px;
+        top: 60px;
         padding: 10px 0;
-        li{
+        li {
           font-size: 10px;
         }
       }
@@ -145,7 +148,7 @@
         > .standard-list {
           font-size: 16px;
           height: 30px;
-          line-height:30px;
+          line-height: 30px;
           .product-name {
             width: 100px;
             margin-left: 40px;

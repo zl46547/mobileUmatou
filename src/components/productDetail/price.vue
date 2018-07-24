@@ -33,7 +33,7 @@
   .content{
     width:100%;
     background-color: #fff;
-    margin-bottom: 2px;
+    margin-bottom: 1px;
   }
   .content>div{
     padding: 3vw 5vw;

@@ -223,7 +223,7 @@
         }
         margin-bottom: 2vh;
         background-color: #fff;
-        box-shadow: 0px 2px 6px #bfbfbf;
+        box-shadow: 0 2px 6px #bfbfbf;
         .checkbox {
           display: table;
           justify-content: flex-start;

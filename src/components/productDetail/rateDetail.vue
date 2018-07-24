@@ -3,6 +3,7 @@
     <div v-if="formateRes">
       <ul>
         <li v-for="(item,i) in formateRes" :key="i">
+          <!-- 头像、昵称、评论星级 -->
           <div class="rate-recommond-list-top">
             <div>
               <img v-if="item.CustomerFace !== null" :src="item.CustomerFace" alt="">
@@ -15,25 +16,38 @@
             </div>
           </div>
           <div class="rate-recommond-list-content">
+            <!-- 评论标签 -->
             <div class="div-badge">
               <div class="activities-badge" v-for="(tag,i) in item.Tags" :key="i" v-if="item.Tags.length>0">{{tag}}
               </div>
             </div>
+            <!-- 评论内容 -->
             <div class="reflex-context">{{item.ReflexContext}}</div>
+            <!-- 附图 -->
             <div class="rate-img">
               <img v-for="(imgItem,i) in item.Pics" :key="i" :src="imgItem" alt="" v-if="item.Pics.length>0"
                    @click="imageClick(item.Pics,i)">
             </div>
+            <!-- 评论时间、游客回复 -->
             <div class="create-time">
               <div>{{item.CreateTime}}</div>
               <div><i class="iconfont icon-mark"></i><span>0</span></div>
             </div>
+            <!-- 客服回复 -->
             <div v-if="item.ServiceReflexs != null">
               <p class="service-reflexs">[客服回复]:{{item.ServiceReflexs[0]}}</p>
             </div>
           </div>
         </li>
       </ul>
+      <!-- 显示大图 -->
+      <div v-if="showImageObj" @click="closeImageObj">
+        <div class="bigImg">
+          <div>
+            <img :src="showImageObj.imageList[showImageObj.index]" alt="">
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -53,13 +67,30 @@
         return this.rateResponse
       }
     },
+    data() {
+      return {
+        showImageObj: ''
+      }
+    },
     methods: {
+      /**
+       * 点击图片，显示大图
+       * @param imageList 所有的图片列表
+       * @param index 点击的图片下标
+       */
       imageClick (imageList, index) {
+        var vm = this
         var data = {}
         data['showBigImg'] = true
         data['imageList'] = imageList
         data['index'] = index
-        this.$emit('showimg', data)
+        vm.showImageObj = data
+      },
+      /**
+       * 关闭图片
+       */
+      closeImageObj () {
+        this.showImageObj = ''
       }
     }
   }
@@ -67,13 +98,10 @@
 
 <style lang="less" scoped>
   .rate-content {
-    padding-top: 11vh;
-    padding-bottom: 11vh;
     .rate-recommond-list-top {
       display: flex;
-      justify-content: flex-start;
       background-color: #fff;
-      padding: 2vh 2vw 0px 4vw;
+      padding: 2vh 2vw 0 4vw;
       img {
         width: 15vw;
         height: 15vw;
@@ -130,12 +158,35 @@
         color: red;
       }
     }
+    /* 显示大图 */
+    .bigImg {
+      z-index: 99;
+      overflow: hidden;
+      width: 100vw;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      background-color: rgba(3, 3, 3, 0.5);
+      > div {
+        display: flex;
+        width: 100vw;
+        height: 100vw;
+        background-color: red;
+        position: relative;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        img {
+          margin: auto;
+          width: 100%;
+          height: 100vw;
+        }
+      }
+    }
   }
 
   @media screen and (min-width: 768px) {
     .rate-content {
-      padding-top: 65px;
-      padding-bottom: 65px;
       .rate-recommond-list-top {
         padding: 10px 5px 0px 20px;
         img {
@@ -175,6 +226,19 @@
             width: 100px;
             height: 100px;
             margin: 0 5px;
+          }
+        }
+      }
+      /* 显示大图 */
+      .bigImg {
+        width: 768px;
+        > div {
+          width: 768px;;
+          height: 768px;;
+          img {
+            margin: auto;
+            width: 768px;
+            height: 768px;
           }
         }
       }

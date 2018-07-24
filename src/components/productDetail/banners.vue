@@ -37,9 +37,8 @@
 
 <style lang="less" scoped>
   .content {
-    padding-top:7vh;
     width: 100%;
-    height: 70vw;
+    height: 35vh;
     img {
       height: 100%;
       width: 100%;
@@ -48,9 +47,7 @@
 
   @media screen and (min-width: 768px) {
     .content {
-      padding-top:45px;
       width: 768px;
-      height: 500px;
     }
   }
 </style>

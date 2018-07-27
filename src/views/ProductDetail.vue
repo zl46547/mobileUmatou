@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <v-menu-select :menuItems="menus" @menu-selected="menuSelected"></v-menu-select>
+    <v-menu-select :menuItems="menus" @menu-selected="menuSelected" :selected="selected"></v-menu-select>
     <!-- 商品页 -->
     <div v-if="selected == 0 && responseData" class="product">
       <v-banners :response="responseData"></v-banners>
@@ -45,7 +45,7 @@
     data () {
       return {
         showImageObj: '',
-        selected: 0, // navbar切换
+        selected: '0', // navbar切换
         rateResponse: [],
         responseData: '',
         menus: [

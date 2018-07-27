@@ -38,15 +38,17 @@
     > div {
       background-color: #fff;
       position: absolute;
-      top: 30vh;
+      bottom: 0;
       left: 0;
       height: 70vh;
       width: 100vw;
       .modal-top {
+        height:8vh;
         display: flex;
         justify-content: space-between;
-        padding: 3vw;
         > div {
+          margin: auto 0;
+          padding: 0 20px;
           font-size: 5vw;
           font-weight: bold;
         }
@@ -56,7 +58,7 @@
         }
       }
       .modalContent{
-        height:52vh;
+        height:62vh;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
         &::-webkit-scrollbar {
@@ -69,11 +71,9 @@
   @media screen and (min-width: 768px) {
     .modal {
       width: 768px;
-      height: 100vh;
       > div {
         width: 768px;
         .modal-top {
-          padding: 20px;
           > div {
             font-size: 22px;
           }

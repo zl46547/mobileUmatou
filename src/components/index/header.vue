@@ -25,7 +25,7 @@
     height:8vh;
     display: flex;
     align-items: center;
-    font-size: 4vw;
+    font-size: 3vw;
     padding-left:4vw;
     z-index: 999;
     box-shadow: 0 0.5px 20px rgb(221, 221, 221);
@@ -37,15 +37,17 @@
     .search{
       cursor: text;
       border-radius:90px;background-color: #eee;width: 80%;text-align: center;
+      height:6vh;
       img{
-        width: 30%;padding: 5px 0;
+        height:4vh; padding: 1vh 0;
       }
     }
   }
 
   @media screen and (min-width: 768px) {
     header {
-      font-size: 28px;
+      font-size: 22px;
+      font-family:"Microsoft Himalaya";
       padding-left:28px;
       .icon-back{
         font-size:22px;

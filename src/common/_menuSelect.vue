@@ -68,7 +68,7 @@
       display: flex;
       font-size: 2vw;
       cursor: pointer;
-      border-bottom: 2px solid #fff;
+      border-bottom: 2px solid #fafafa;
       P {
         margin: auto;
       }
@@ -83,6 +83,9 @@
     .menu {
       margin-left: -384px;
       width: 768px;
+      .menu-item {
+        font-size: 18px;
+      }
     }
   }
 </style>

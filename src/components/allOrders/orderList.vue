@@ -1,12 +1,8 @@
 <template>
   <div class="myOrders">
-    <el-menu :default-active="selected" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-      <el-menu-item index="ALL">全部订单</el-menu-item>
-      <el-menu-item index="OS">待付款</el-menu-item>
-      <el-menu-item index="PS">待收货</el-menu-item>
-      <el-menu-item index="FS">待评价</el-menu-item>
-      <el-menu-item index="RF">轻松退</el-menu-item>
-    </el-menu>
+    <!-- 顶部菜单 -->
+    <v-menu-select :menuItems="menus" @menu-selected="handleSelect" :selected="selected"></v-menu-select>
+    <!-- 订单列表 -->
     <div class="orderList">
       <div class="myorder-item" v-if="allOrders.length>0" v-for="(item,i) in allOrders"
            :class="{'firstItem':i==0}" :key="i">
@@ -70,10 +66,33 @@
 
 <script type="text/ecmascript-6">
   import OrderButton from '@/components/allOrders/orderButton.vue'
+  import MenuSelect from '@/common/_menuSelect.vue'
 
   export default {
     data () {
       return {
+        menus: [
+          {
+            name: '全部订单',
+            label: 'ALL'
+          },
+          {
+            name: '待付款',
+            label: 'OS'
+          },
+          {
+            name: '待收货',
+            label: 'PS'
+          },
+          {
+            name: '待评价',
+            label: 'FS'
+          },
+          {
+            name: '轻松退',
+            label: 'RF'
+          }
+        ],
         selected: 'ALL',
         allOrders: [],
         tempAllOrders: [],
@@ -104,11 +123,11 @@
       }
     },
     components: {
-      'VOrderButton': OrderButton
+      'VOrderButton': OrderButton,
+      'VMenuSelect': MenuSelect
     },
     computed: {},
     mounted () {
-//      this.initData()
       var type = this.$route.params.type || 'ALL'
       this.selected = type
       this.handleSelect(type)
@@ -180,30 +199,32 @@
        * @param val 删除的对象
        */
       delOrderAlert (val) {
-        this.$alert('确认删除该订单？', '提示', {
+        var vm = this
+        vm.$confirm('确认删除该订单?', '提示', {
           confirmButtonText: '确定',
-          callback: action => {
-            this.delOrder(val)
-            this.$message({
-              type: 'success',
-              message: '删除成功!'
-            })
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(
+          () => {
+            vm.delOrder(val)
           }
-        })
+        ).catch(() => {})
       },
       /**
        * 删除订单
        * @param val 删除的对象
        */
       delOrder (val) {
-        this.allOrders.removeAll(function (t) {
+        var vm = this
+        vm.allOrders.removeAll(function (t) {
           return t.orderNo === val.orderNo
         })
         var res = {
           isUpdate: false,
-          allOrders: this.allOrders
+          allOrders: vm.allOrders
         }
-        this.$store.commit('MY_ORDERS', res)
+        vm.$store.commit('MY_ORDERS', res)
+        vm.initData(vm.selected)
       },
       /**
        * 跳转到支付页面
@@ -240,12 +261,13 @@
        * @param val
        */
       goToComfirm(val) {
-        this.$confirm('确认收货后将无法发起退货，是否继续操作?', '提示', {
+        var vm = this
+        vm.$confirm('确认收货后将无法发起退货，是否继续操作?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.allOrders.forEach(function (t) {
+          vm.allOrders.forEach(function (t) {
             if (t.orderNo === val.orderNo) {
               t.orderStatus = 'FS'
               t.orderStatusName = '交易完成'
@@ -255,13 +277,14 @@
             isUpdate: true,
             allOrders: val
           }
-          this.$store.commit('MY_ORDERS', res)
-//          this.$message({
+          vm.$store.commit('MY_ORDERS', res)
+          vm.initData(vm.selected)
+//          vm.$message({
 //            type: 'success',
 //            message: '确认收货成功!',
 //            duration: 2000
 //          })
-//          this.handleSelect('FS')
+//          vm.handleSelect('FS')
         }).catch(() => {
         })
       }
@@ -271,19 +294,8 @@
 
 <style lang="less" scoped>
   .myOrders {
-    /* 修改tab切换默认样式 */
-    li.el-menu-item {
-      text-align: center;
-      width: 20%;
-      padding: 0%;
-      height: 55px;
-    }
-    .el-menu--horizontal > .el-menu-item.is-active {
-      border-bottom: 2px solid #8BC34A;
-      color: #8BC34A;
-    }
     .orderList {
-      height: 82vh;
+      height: 92vh;
       &::-webkit-scrollbar {
         display: none
       }
@@ -414,7 +426,6 @@
         height: 65px;
       }
       .orderList {
-        height: 82vh;
         .myorder-item {
           margin-bottom: 15px;
           .orderNo {

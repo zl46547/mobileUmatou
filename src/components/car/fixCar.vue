@@ -94,7 +94,7 @@
     .fixCar {
       left: 50%;
       margin-left: -360px;
-      bottom: 120px;
+      bottom: 140px;
       .cartContainer{
         font-size: 20px;
         width: 70px;

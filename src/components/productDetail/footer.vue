@@ -8,9 +8,9 @@
       <i class="iconfont icon-favor" :class="{myLikeProduct:isLikeProduct}"></i><br>
       <span :class="{myLikeProduct:isLikeProduct}" class="icon-text">收藏</span>
     </div>
-    <div class="icon add-cart" style="position: relative;" @click="toCartPage">
+    <div class="icon cart" @click="toCartPage">
       <i class="iconfont icon-cart"></i><br>
-      <div class="badge">{{getCarsNum}}</div>
+      <div class="badge" v-if="getCarsNum>0">{{getCarsNum}}</div>
       <span class="icon-text">购物车</span>
     </div>
     <div class="addCart" @click="addCart">
@@ -107,22 +107,25 @@
       i {
         font-size: 5vw;
       }
-      .icon-text{
-        font-size:1vw;
+      .icon-text {
+        font-size: 1vw;
       }
       .myLikeProduct {
         color: #ff1908;
       }
       .badge {
         position: absolute;
-        right: -3vw;
-        top: -2.4vh;
+        right: -4vw;
+        top: -2.2vh;
         background-color: #ff1908;
         color: #fff;
-        padding: 1.5px 5px;
-        font-size:2vh;
+        padding: 1.5px 1.8vw;
+        font-size: 2vh;
         border-radius: 90px;
       }
+    }
+    .cart {
+      position: relative;
     }
     .addCart {
       height: 100%;
@@ -145,13 +148,14 @@
       .icon {
         cursor: pointer;
         i {
-          font-size: 28px;
+          font-size: 32px;
         }
-        .icon-text{
-          font-size:12px;
+        .icon-text {
+          font-size: 12px;
         }
         .badge {
           right: -22px;
+          padding: 1.5px 8px;
         }
       }
       .addCart {

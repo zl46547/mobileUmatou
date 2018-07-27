@@ -1,11 +1,5 @@
 <template>
   <header>
-    <!--<router-link class="iconfont icon-back" :to="{name :'首页'}"-->
-    <!--v-if="$route.matched[0].path == '/category'"></router-link>-->
-    <!--<router-link class="iconfont icon-back" :to="{name :'用户页'}"-->
-    <!--v-if="$route.matched[0].path == '/allOrders'"></router-link>-->
-    <!--<span class="iconfont icon-back" @click="$router.go(-1)"-->
-    <!--v-if="$route.matched[0].path != '/category' && $route.matched[0].path != '/allOrders'"></span>-->
     <span class="iconfont icon-back" @click="$router.go(-1)" v-if="typeName === -1"></span>
     <router-link class="iconfont icon-back" v-else :to="{name :typeName}"></router-link>
     <slot name="title"></slot>

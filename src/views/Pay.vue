@@ -1,8 +1,8 @@
 <template>
   <div class="content">
     <div>
-      <v-header>
-        <h1 slot="title">支付订单</h1>
+      <v-header :typeName="'用户页'">
+        <h1 slot="title" >支付订单</h1>
       </v-header>
       <div class="content-body">
         <v-pay-way @remain-time="getRemainTime"></v-pay-way>
@@ -104,12 +104,14 @@
 <style lang="less" scoped>
   .content {
     background-color: #f2f2f2;
+    overflow: hidden;
     width: 100%;
     h1 {
       font-size: 5vw;
     }
     .content-body {
-      height: 82vh;
+      height: 84vh;
+      margin-top: 8vh;
       &::-webkit-scrollbar {
         display: none
       }
@@ -130,7 +132,7 @@
       display: flex;
       box-shadow: 0 0 2.2vw 0 hsla(0, 6%, 50%, .23);
       align-items: center;
-      height: 9vh;
+      height: 8vh;
       width: 100vw;
       > div {
         display: flex;

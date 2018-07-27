@@ -1,8 +1,8 @@
 <template>
-  <div class="menu" style="height: 8vh;display: flex;align-items: center;justify-content: space-around">
+  <div class="menu">
     <div v-if="menuItems.length>0" class="menu-item" v-for="(item,i) in menuItems" :key="i"
-         :class="{'isActive':i === menuSelected }" @click="menuClick(i)">
-      <p>{{item.label}}</p>
+         :class="{'isActive':item.label === getSelected }" @click="menuClick(item.label)">
+      <p>{{item.name}}</p>
     </div>
   </div>
 </template>
@@ -13,12 +13,24 @@
     props: {
       menuItems: {
         default: []
-      }
+      },
+      selected: ''
     },
     data() {
       return {
-        menuSelected: 0
+        menuSelected: ''
       }
+    },
+    computed: {
+      getSelected() {
+        var vm = this
+        vm.menuSelected = vm.selected
+        return vm.menuSelected
+      }
+    },
+    mounted() {
+      var vm = this
+      vm.menuSelected = vm.selected
     },
     methods: {
       /**
@@ -51,13 +63,13 @@
     background-color: #fafafa;
     box-shadow: 0 0.5px 20px rgb(221, 221, 221);
     .menu-item {
-      width:100%;
-      height:100%;
+      width: 100%;
+      height: 100%;
       display: flex;
       font-size: 2vw;
       cursor: pointer;
       border-bottom: 2px solid #fff;
-      P{
+      P {
         margin: auto;
       }
     }

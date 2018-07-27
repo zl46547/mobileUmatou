@@ -38,7 +38,7 @@
 <style lang="less" scoped>
   .content {
     width: 100%;
-    height: 35vh;
+    height: 40vh;
     img {
       height: 100%;
       width: 100%;

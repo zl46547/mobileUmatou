@@ -215,7 +215,7 @@
       overflow-y: scroll;
       -webkit-overflow-scrolling: touch;
       width: 100vw;
-      height: 75vh;
+      height: 76vh;
       margin-top: 8vh;
       > div {
         &:last-of-type{
@@ -336,10 +336,16 @@
     }
 
     .totalCount {
-      background-color: #fefefe;
       width: 100vw;
-      height: 9vh;
+      height: 8vh;
+      background-color: #fff;
+      position: fixed;
+      bottom: 8vh;
+      left: 50%;
+      margin-left: -50%;
+      box-shadow: 0 -0.5px 20px rgb(221, 221, 221);
       > div {
+        height: 100%;
         display: flex;
         justify-content: space-between;
         .checkAll {
@@ -382,7 +388,7 @@
           cursor: pointer;
           background-color: #ff822a;
           color: #fff;
-          height: 9vh;
+          height: 100%;
           display: flex;
           text-align: center;
           padding: 0 4vw;
@@ -452,7 +458,7 @@
                     .delete {
                       margin-top: 10px;
                       p {
-                        padding: 10px 0vw;
+                        padding: 10px 0;
                         width: 100px;
                       }
                     }
@@ -464,7 +470,7 @@
           .carList-bottom {
             height: 70px;
             p {
-              padding: 0px 80px;
+              padding: 0 105px;
               font-size: 24px;
             }
           }
@@ -473,7 +479,7 @@
 
       .totalCount {
         width: 768px;
-        height: 50px;
+        margin-left: -384px;
         > div {
           .checkAll {
             padding-left: 10px;
@@ -499,7 +505,6 @@
             }
           }
           .count-btn {
-            height: 75px;
             padding: 0 50px;
           }
         }

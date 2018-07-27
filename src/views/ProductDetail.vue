@@ -50,14 +50,14 @@
         responseData: '',
         menus: [
           {
-            label: '商品',
-            index: '1'
+            name: '商品',
+            label: '0'
           }, {
-            label: '详情',
-            index: '2'
+            name: '详情',
+            label: '1'
           }, {
-            label: '评价',
-            index: '3'
+            name: '评价',
+            label: '2'
           }
         ]
       }

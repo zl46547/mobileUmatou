@@ -148,12 +148,14 @@
 <style lang="less" scoped>
   .content {
     background-color: #f2f2f2;
+    overflow: hidden;
     width: 100%;
     h1 {
       font-size: 5vw;
     }
     .content-body {
-      height: 82vh;
+      height: 84vh;
+      margin-top: 8vh;
       &::-webkit-scrollbar {
         display: none
       }
@@ -188,25 +190,26 @@
       display: flex;
       box-shadow: 0 0 2.2vw 0 hsla(0, 6%, 50%, .23);
       align-items: center;
-      height: 9vh;
+      height: 8vh;
       background-color: #fff;
+      width:100vw;
       > div:nth-of-type(1) {
-        width: 65vw;
+        width: 65%;
         margin-left: 5vw;
-        font-size: 8vw;
+        font-size: 7vw;
         color: #ff3e5e;
         display: flex;
         align-items: baseline;
         sub {
-          font-size: 6vw;
+          font-size: 5vw;
           padding-right: 5px;
         }
       }
       > div:nth-of-type(2) {
         cursor: pointer;
-        height: 9vh;
+        height: 8vh;
         display: flex;
-        width: 35vw;
+        width: 35%;
         color: #fff;
         background-color: rgb(255, 92, 34);
         .submit-btn {
@@ -244,8 +247,8 @@
         }
       }
       .footer {
+        width:768px;
         > div:nth-of-type(1) {
-          width: 570px;
           margin-left: 30px;
           font-size: 40px;
           sub {
@@ -253,7 +256,6 @@
           }
         }
         > div:nth-of-type(2) {
-          width: 168px;
           .submit-btn {
             font-size: 20px;
           }

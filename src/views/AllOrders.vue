@@ -1,5 +1,5 @@
 <template>
-  <div id="allOrders" style="width: 100%;">
+  <div id="allOrders">
     <div>
       <v-header>
         <h1 slot="title">我的订单</h1>
@@ -30,9 +30,13 @@
 </script>
 
 <style lang="less" scoped>
-  .content {
-    background-color: #f2f2f2;
-    height: 91vh;
+  #allOrders{
+    overflow: hidden;
+    .content {
+      background-color: #f2f2f2;
+      height: 92vh;
+      margin-top: 8vh;
+    }
   }
   @media screen and (min-width: 768px) {
   }

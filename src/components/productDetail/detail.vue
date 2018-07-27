@@ -1,15 +1,10 @@
 <template>
   <div class="detail-content">
-    <!--<ul>-->
-      <!--<li :class="{active:i == isActive}" @click="getActive(item.index)" v-for="(item,i) in tabs" :key="i">-->
-        <!--{{item.name}}-->
-      <!--</li>-->
-    <!--</ul>-->
     <!-- 产品规格 -->
     <div class="standard">
-      <header style="display: flex;align-items: baseline;padding: 2vh 3vw">
-        <p style="font-size: 4.5vw;border-left: 7px solid #90c320;padding:0 5px 0 10px;word-break: break-all;white-space: nowrap;">产品规格</p>
-        <p style="font-size: 1vw;width: 80%;border-bottom: 1px solid #cccccc">Product Standard</p>
+      <header>
+        <p class="title">产品规格</p>
+        <p class="sub-title">Product Standard</p>
       </header>
       <div class="standard-list">
         <div class="product-name">商品名称</div>
@@ -88,24 +83,28 @@
 
 <style lang="less" scoped>
   .detail-content {
-    ul {
-      position: fixed;
-      padding: 1vh 0;
-      display: flex;
-      width: 100%;
-      height: 6vh;
-      li {
-        width: 100%;
-        margin: auto;
-        text-align: center;
-        cursor: pointer;
-        font-size: 2vh;
-      }
-    }
     .standard {
       margin-bottom: 1px;
       padding: 1vh 0;
       background-color: #fff;
+      header {
+        display: flex;
+        align-items: baseline;
+        padding: 2vh 3vw;
+        .title {
+          font-size: 4.2vw;
+          border-left: 2.3vw solid #90c320;
+          padding: 0 5px 0 10px;
+          word-break: break-all;
+          white-space: nowrap;
+        }
+        .sub-title {
+          font-size: 2.5vw;
+          color: #888;
+          width: 80%;
+          border-bottom: 2px solid #c3c3c3;
+        }
+      }
       .standard-list {
         font-size: 3vw;
         display: flex;
@@ -120,6 +119,8 @@
       }
     }
     .introduce {
+      padding-bottom: 2vh;
+      background-color: #fff;
       img {
         width: 100vw;
       }
@@ -132,19 +133,17 @@
 
   @media screen and (min-width: 768px) {
     .detail-content {
-      padding-top: 65px;
-      padding-bottom: 65px;
-      ul {
-        height: 30px;
-        width: 768px;
-        top: 60px;
-        padding: 10px 0;
-        li {
-          font-size: 10px;
-        }
-      }
       .standard {
-        margin-top: 50px;
+        header {
+          padding: 2vh 20px;
+          .title {
+            font-size: 32px;
+            border-left: 16px solid #90c320;
+          }
+          .sub-title {
+            font-size: 18px;
+          }
+        }
         > .standard-list {
           font-size: 16px;
           height: 30px;

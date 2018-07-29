@@ -56,10 +56,14 @@
         <div class="img-icon">
           <i class="iconfont icon-single"></i>
         </div>
-        <p>您还没有相关的订单</p>
-        <p>可以去看看有哪些想买</p>
+        <p >您还没有相关的订单</p>
+        <p >可以去看看有哪些想买</p>
         <div class="goToBuy" @click="goToBuy">随便逛逛</div>
       </div>
+      <v-message>
+        <p slot="title" class="message-title">确认删除订单</p>
+        <p slot="description" class="message-description">删除后订单无法还原,是否继续操作？</p>
+      </v-message>
     </div>
   </div>
 </template>
@@ -67,6 +71,7 @@
 <script type="text/ecmascript-6">
   import OrderButton from '@/components/allOrders/orderButton.vue'
   import MenuSelect from '@/common/_menuSelect.vue'
+  import Message from '@/common/_message.vue'
 
   export default {
     data () {
@@ -124,6 +129,7 @@
     },
     components: {
       'VOrderButton': OrderButton,
+      'VMessage': Message,
       'VMenuSelect': MenuSelect
     },
     computed: {},
@@ -414,6 +420,17 @@
         }
       }
     }
+    .message-title {
+      text-align: center;
+      padding-bottom: 2.5vh;
+      border-bottom: 1px solid #d4d4d4;
+      font-size: 20px;
+    }
+    .message-description{
+      text-align: center;
+      padding: 2vh 1.5vw;
+      font-size: 16px;
+    }
   }
 
   @media screen and (min-width: 640px) {
@@ -493,6 +510,12 @@
             font-size: 24px;
           }
         }
+      }
+      .message-title {
+        padding-bottom: 20px;
+      }
+      .message-description{
+        padding: 15px 10px;
       }
     }
   }

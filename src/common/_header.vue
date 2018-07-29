@@ -31,7 +31,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    z-index: 999;
+    z-index: 99;
     background-color: #fafafa;
     box-shadow: 0 0.5px 20px rgb(221, 221, 221);
     .icon-back{

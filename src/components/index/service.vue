@@ -34,7 +34,7 @@
     }
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
     .service {
       ul {
         margin: 25px 0;

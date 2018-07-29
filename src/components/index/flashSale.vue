@@ -151,7 +151,7 @@ import { Lazyload } from 'mint-ui'
     }
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
     .flashSale {
       .flashSale-header {
         padding: 0 25px;

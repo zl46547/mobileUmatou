@@ -119,12 +119,12 @@
     }
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
     .main {
       background-color: #ebebeb;
-      width: 768px;
+      width: 640px;
       .el-row {
-        width: 768px;
+        width: 640px;
         .detail {
           .product-detail {
             p {

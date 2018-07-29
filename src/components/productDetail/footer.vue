@@ -141,10 +141,10 @@
     }
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
     .footer {
-      width: 768px;
-      margin-left: -384px;
+      width: 640px;
+      margin-left: -320px;
       .icon {
         cursor: pointer;
         i {
@@ -159,7 +159,7 @@
         }
       }
       .addCart {
-        width: 268px;
+        width: 238px;
         background-color: #f05423;
         p {
           margin: auto;

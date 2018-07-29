@@ -52,11 +52,11 @@
           let ball = this.balls[count]
           if (ball.show) {
             let rect = ball.el.getBoundingClientRect() // 获取小球的相对于视口的位移(小球高度)
-            let x = rect.left - 32
-            if (rect.left > 674.671875) {
-              x = 674.671875 - 32
+            let x = rect.x - 32 // rect.x 获取鼠标点击的坐标位置，坐标原点位于屏幕左上角，-32是让小球离我点击的地方偏移32像素
+            if (rect.x > 600.890625) { // 当屏幕分辨率 >640时，此时rect.x = 600.890625，固定变量x的值
+              x = 600.890625 - 32
             }
-            let y = -(window.innerHeight - rect.top - 160) // 负数,因为是从左上角往下的的方向
+            let y = -(window.innerHeight - rect.y - 160) // 负数,因为是从左上角往下的的方向
             el.style.display = '' // 清空display
             el.style.webkitTransform = `translate3d(0,${y}px,0)`
             el.style.transform = `translate3d(0,${y}px,0)`
@@ -111,23 +111,23 @@
       left: 10px;
       bottom: 22px;
       z-index: 200;
-      transition: all .58s cubic-bezier(0.49, -0.69, 0.75, 0.41);
+      /*transition: all .58s cubic-bezier(0.49, -0.69, 0.75, 0.41);*/
+      transition: all .4s cubic-bezier(.49,-0.5,.89,.73);
       .inner {
         width: 4vw;
         height: 4vw;
         border-radius: 50%;
         background: rgb(220, 40, 30);
-        transition: all .6s linear;
+        transition: all .4s linear;
       }
     }
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
     .ball-container {
       .ball {
-        left: 32px;
-        bottom: 22px;
-        transition: all .5s cubic-bezier(0.49, -0.69, 0.75, 0.41);
+        /*transition: all .5s cubic-bezier(0.49, -0.69, 0.75, 0.41);*/
+        transition: all .5s cubic-bezier(.49,-0.5,.89,.73);
         .inner {
           width: 22px;
           height: 22px;

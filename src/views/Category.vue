@@ -59,19 +59,6 @@
         }).catch((error) => {
           console.log(error)
         })
-//        var url = '/Home/AdvertisementPhotoshootRequest'
-//        var requestData = {
-//          'sourcetype': 9,
-//          'json': {
-//            'TypeCode': 1002,
-//            'PlatForm': 1500
-//          }
-//        }
-//        api.ajax(url, requestData, function (val) {
-//          if (!utils.isEmpty(val.query.results)) {
-//            vm.allAdvertise = val.query.results.json.Data
-//          }
-//        })
       }
     }
   }

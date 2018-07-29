@@ -47,7 +47,7 @@
         this.$emit('showimg', val)
       },
       toDetailRate () {
-        this.$emit('to-detail-rate', '3')
+        this.$emit('to-detail-rate', '2')
       }
     }
   }
@@ -73,7 +73,7 @@
     }
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
     .content {
       .rate-top {
         font-size: 22px;

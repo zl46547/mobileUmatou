@@ -111,10 +111,10 @@
     }
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
     .footer {
-      width: 768px;
-      margin-left: -384px;
+      width: 640px;
+      margin-left: -320px;
       .tabbar {
         > div {
           .tabbar-item-name {

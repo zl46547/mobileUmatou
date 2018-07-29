@@ -131,7 +131,7 @@
     color: #63a35c;
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
     .detail-content {
       .standard {
         header {
@@ -156,7 +156,7 @@
       }
       .introduce {
         img {
-          width: 768px;
+          width: 640px;
         }
       }
     }

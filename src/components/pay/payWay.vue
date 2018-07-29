@@ -167,11 +167,11 @@
     }
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
     .payWay {
       .payAmmount {
         padding: 20px 8px;
-        width: 768px;
+        width: 640px;
         .remainTime {
           font-size: 22px;
         }
@@ -189,7 +189,7 @@
         }
       }
       .payWaySel {
-        width: 768px;
+        width: 640px;
         margin-top: 18px;
         > div {
           padding: 22px 24px;
@@ -199,7 +199,7 @@
               padding-right: 18px;
             }
             span {
-              font-size: 34px;
+              font-size: 28px;
             }
           }
           .checkbox {

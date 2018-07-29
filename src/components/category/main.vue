@@ -128,7 +128,7 @@
           display: block;
           img {
             display: block;
-            width: 80%;
+            width: 70%;
             margin: 0 auto;
           }
           p {
@@ -151,11 +151,11 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin: 5vh 5vw 0 5vw;
+        margin: 3vh 5vw 1vh 5vw;
         > p {
           color: #333;
           font-weight: 400;
-          font-size: 5vw;
+          font-size: 4vw;
         }
         > div {
           color: #999;
@@ -173,7 +173,7 @@
             margin: 0 auto;
           }
           p {
-            font-size: 4.2vw;
+            font-size: 2.2vw;
             padding: 2vh 0;
             text-align: center;
           }
@@ -188,15 +188,15 @@
     }
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
     .main {
-      width: 630px;
+      width: 505px;
       > .hotCategory {
         .category-list {
           padding: 10px 0;
           a {
             p {
-              font-size: 24px;
+              font-size: 16px;
               padding: 14px 0;
             }
           }
@@ -204,15 +204,15 @@
       }
       > .subCategory {
         .subTitle {
-          margin: 5vh 25px 0 25px;
+          margin: 3vh 25px 1vh 25px;
           > p {
-            font-size: 25px;
+            font-size: 18px;
           }
         }
         .subContent {
           .item {
             p {
-              font-size: 24px;
+              font-size: 16px;
               padding: 14px 0;
             }
           }

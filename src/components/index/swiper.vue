@@ -20,20 +20,18 @@ export default {
 <style lang="less" scoped>
 .mint-swipe {
   width: 100%;
-  height:50vw;
+  height:30vh;
   a,img {
     display: block;
     width: 100%;
     height:100%;
   }
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 640px) {
   .mint-swipe{
-    height:404px;
     a,img {
       display: block;
-      width: 768px;
-      height:404px;
+      width: 640px;
     }
   }
 }

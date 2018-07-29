@@ -138,7 +138,7 @@
     overflow: hidden;
     .content {
       margin-top: 8vh;
-      height: 85vh;
+      height: 84vh;
       &::-webkit-scrollbar {
         display: none
       }

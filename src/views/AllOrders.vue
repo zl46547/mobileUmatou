@@ -38,6 +38,6 @@
       margin-top: 8vh;
     }
   }
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
   }
 </style>

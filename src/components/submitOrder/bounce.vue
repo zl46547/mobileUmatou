@@ -241,7 +241,7 @@
     }
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
     .bounce {
       padding: 20px 25px;
       p {
@@ -258,7 +258,7 @@
       }
       .modalContent {
         .navbarBody-one {
-          height: 335px;
+          height: 250px;
           .usefulCoupon {
             margin: 15px auto;
             .checkbox {
@@ -270,7 +270,7 @@
           }
         }
         .navbarBody-two {
-          height: 335px;
+          height: 250px;
           > div {
             margin: 15px auto;
           }

@@ -68,11 +68,11 @@
     }
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
     .modal {
-      width: 768px;
+      width: 640px;
       > div {
-        width: 768px;
+        width: 640px;
         .modal-top {
           > div {
             font-size: 22px;

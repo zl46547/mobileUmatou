@@ -42,7 +42,7 @@
     }
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
     .navBar {
       .navBarItem {
         padding: 10px 15px;

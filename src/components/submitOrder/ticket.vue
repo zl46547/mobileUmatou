@@ -169,7 +169,7 @@
     }
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
     .ticket {
       padding: 20px 25px;
       p {
@@ -187,7 +187,7 @@
       .modalContent {
         padding: 0 15px;
         .subTitle {
-          font-size: 24px;
+          font-size: 18px;
           padding: 10px 0;
         }
       }

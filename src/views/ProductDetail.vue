@@ -110,11 +110,11 @@
     }
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
     .main {
-      width: 768px;
+      width: 640px;
       ul.el-menu-demo.el-menu--horizontal.el-menu {
-        width: 768px;
+        width: 640px;
       }
       .el-menu--horizontal > .el-menu-item.is-active {
         font-size: 18px;

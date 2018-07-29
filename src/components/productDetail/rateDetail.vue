@@ -185,7 +185,7 @@
     }
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
     .rate-content {
       .rate-recommond-list-top {
         padding: 10px 5px 0px 20px;
@@ -231,14 +231,14 @@
       }
       /* 显示大图 */
       .bigImg {
-        width: 768px;
+        width: 640px;
         > div {
-          width: 768px;;
-          height: 768px;;
+          width: 640px;;
+          height: 640px;;
           img {
             margin: auto;
-            width: 768px;
-            height: 768px;
+            width: 640px;
+            height: 640px;
           }
         }
       }

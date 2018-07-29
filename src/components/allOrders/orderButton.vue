@@ -30,7 +30,7 @@
     cursor: pointer;
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
     .orderButton > div {
       font-size: 24px;
       margin: 0 7px 8px 7px;

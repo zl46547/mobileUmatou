@@ -8,7 +8,7 @@
             <i class="icon iconfont icon-roundcheck" v-if="item.checked"></i>
           </div>
           <div class="checkbox-right">
-            <div>
+            <div class="image">
               <img :src="'http://picpro-sz.34580.com/sz/ImageUrl/'+item.PictureId+'/200.jpeg'" alt="购物车图片">
             </div>
             <div class="img-right">
@@ -52,7 +52,7 @@
             <i class="icon iconfont icon-roundcheck" v-if="checkAllStatus"></i>
             <span>全选</span>
           </div>
-          <div>
+          <div class="allPrice">
             <span class="count">合计：</span>
             <span class="money">¥{{lastTotalMoney}}</span>
           </div>
@@ -206,7 +206,7 @@
 </script>
 
 <style lang="less" scoped>
-  #car{
+  #car {
     overflow: hidden;
     .carList {
       &::-webkit-scrollbar {
@@ -218,21 +218,19 @@
       height: 76vh;
       margin-top: 8vh;
       > div {
-        &:last-of-type{
+        &:last-of-type {
           margin-bottom: 0;
         }
         margin-bottom: 2vh;
         background-color: #fff;
-        box-shadow: 0 2px 6px #bfbfbf;
+        box-shadow: 0 1px 6px #d7d7d7;
         .checkbox {
-          display: table;
-          justify-content: flex-start;
-          padding: 2vh 0;
+          display: flex;
+          align-items: center;
           width: 100%;
           .checkbox-left {
-            padding: 0 2vw;
-            display: table-cell;
-            vertical-align: middle;
+            width: 10%;
+            text-align: center;
             cursor: pointer;
             .icon-round {
               font-size: 6vw;
@@ -243,51 +241,55 @@
             }
           }
           .checkbox-right {
-            margin: 2vw;
+            width: 90%;
             display: flex;
-            img {
-              width: 25vw;
-              height: 25vw;
-              padding: 2vw;
-              border: 1px solid #ccc;
-              border-radius: 5px;
+            align-items: center;
+            .image {
+              width: 30%;
+              padding: 1vw;
+              /*border: 1px solid #ccc;*/
+              /*border-radius: 5px;*/
+              img {
+                width: 100%;
+              }
             }
             .img-right {
-              padding: 0 5vw;
-              width: 100%;
+              margin: 8% 3%;
+              width: 64%;
               > p {
+                overflow: hidden;
                 text-overflow: ellipsis;
-                padding-bottom: 3vw;
+                white-space: nowrap;
+                padding-bottom: 3vh;
                 color: #333;
                 font-size: 4vw;
               }
               .content {
-                display: table;
-                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
                 .price {
-                  width: 20vw;
-                  display: table-cell;
-                  vertical-align: middle;
-                }
-                .price p:nth-of-type(1) {
-                  color: #999;
-                  font-size: 4vw;
-                }
-                .price p:nth-of-type(2) {
-                  color: #f05423;
-                  font-size: 5vw;
+                  p {
+                    &:nth-of-type(1) {
+                      color: #999;
+                      font-size: 4vw;
+                    }
+                    &:nth-of-type(2) {
+                      color: #f05423;
+                      font-size: 5vw;
+                    }
+                  }
                 }
                 .operate {
-                  width: 100%;
                   .inputNumber {
                     display: flex;
+                    align-items: center;
                     justify-content: flex-end;
-                    background-color: #fff;
                     div {
                       display: flex;
                       font-size: 4vw;
-                      width: 7vw;
-                      height: 7vw;
+                      width: 6vw;
+                      height: 6vw;
                       border: 1px solid #cccccc;
                       p {
                         margin: auto;
@@ -305,10 +307,11 @@
                   }
                   .delete {
                     margin-top: 1vh;
+                    font-size: 1vh;
                     float: right;
                     cursor: pointer;
                     p {
-                      padding: 1vh 0vw;
+                      padding: 1vh 0;
                       text-align: center;
                       color: #fff;
                       width: 20vw;
@@ -349,13 +352,11 @@
         display: flex;
         justify-content: space-between;
         .checkAll {
-          margin: auto 0;
-          display: table;
+          display: flex;
+          align-items: center;
           padding-left: 2vw;
           .checkAll-btn {
             cursor: pointer;
-            display: table-cell;
-            vertical-align: middle;
             .icon-round {
               font-size: 6vw;
             }
@@ -365,16 +366,15 @@
             }
             span {
               font-size: 5vw;
-              padding-left: 2vw;
+              padding-left: 1vw;
             }
           }
-          > div {
-            display: table;
+          .allPrice {
+            display: flex;
+            align-items: baseline;
             .count {
               padding-left: 5vw;
               font-size: 6vw;
-              display: table-cell;
-              vertical-align: middle
             }
             .money {
               font-size: 5vw;
@@ -400,20 +400,18 @@
     }
   }
 
-  @media screen and (min-width: 768px) {
-    #car{
+  @media screen and (min-width: 640px) {
+    #car {
       .el-message-box {
-        width: 480px;
+        width: 450px;
       }
 
       .carList {
-        width: 768px;
+        width: 640px;
         > div {
           margin-bottom: 10px;
           .checkbox {
-            padding: 20px 0;
             .checkbox-left {
-              padding: 0 10px;
               .icon-round {
                 font-size: 30px;
               }
@@ -422,43 +420,40 @@
               }
             }
             .checkbox-right {
-              margin: 10px;
-              img {
-                width: 120px;
-                height: 120px;
-                padding: 10px;
+              .image{
+                padding: 5px;
               }
               .img-right {
-                padding: 0 25px;
                 > p {
-                  padding-bottom: 15px;
-                  font-size: 24px;
+                  font-size: 20px;
                 }
                 .content {
                   .price {
-                    width: 100px;
-                  }
-                  .price p:nth-of-type(1) {
-                    font-size: 20px;
-                  }
-                  .price p:nth-of-type(2) {
-                    font-size: 25px;
+                    p {
+                      &:nth-of-type(1) {
+                        font-size: 20px;
+                      }
+                      &:nth-of-type(2) {
+                        font-size: 24px;
+                      }
+                    }
                   }
                   .operate {
                     .inputNumber {
                       div {
                         font-size: 20px;
-                        width: 35px;
-                        height: 35px;
+                        width: 30px;
+                        height: 30px;
                       }
                       div:nth-of-type(2) {
                         width: 40px;
                       }
                     }
                     .delete {
-                      margin-top: 10px;
+                      margin-top: 1vh;
+                      font-size: 14px;
                       p {
-                        padding: 10px 0;
+                        padding: 1vh 0;
                         width: 100px;
                       }
                     }
@@ -478,11 +473,10 @@
       }
 
       .totalCount {
-        width: 768px;
-        margin-left: -384px;
+        width: 640px;
+        margin-left: -320px;
         > div {
           .checkAll {
-            padding-left: 10px;
             .checkAll-btn {
               .icon-round {
                 font-size: 30px;
@@ -491,16 +485,17 @@
                 font-size: 30px;
               }
               span {
-                font-size: 24px;
+                font-size: 18px;
                 padding-left: 10px;
               }
             }
-            > div {
+            .allPrice {
               .count {
-                font-size: 30px;
+                padding-left: 35px;
+                font-size: 24px;
               }
               .money {
-                font-size: 25px;
+                font-size: 24px;
               }
             }
           }

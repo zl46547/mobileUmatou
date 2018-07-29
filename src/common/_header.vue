@@ -46,17 +46,17 @@
     }
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
     header {
-      margin-left: -384px;
-      width:768px;
+      margin-left: -320px;
+      width:640px;
       font-size: 30px;
       .icon-back{
         padding-left:28px;
         font-size: 24px;
       }
       h1 {
-        font-size:26px;
+        font-size:22px;
       }
     }
   }

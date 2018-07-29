@@ -1,10 +1,10 @@
 <template lang="html">
-  <div class="wrap">
+  <div id="loading">
     <div class="spinner">
-      <div class="double-bounce1"></div>
-      <div class="double-bounce2"></div>
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
     </div>
-    <p>正在拼命加载中.....</p>
   </div>
 </template>
 
@@ -13,59 +13,54 @@ export default {}
 </script>
 
 <style lang="less" scoped>
-  .wrap {
-    width: 100vw;
-    height: 100vh;
+  #loading{
     background-color: rgba(255,255,255,.8);
-    border-radius: 2vw;
     position: fixed;
     left: 0;
+    right: 0;
+    bottom: 0;
     top: 0;
     z-index: 99999;
+    display: flex;
   }
-
-  p {
-    text-align: center;
-    font-size: 24px;
-  }
-
   .spinner {
-    width: 50px;
-    height: 50px;
-    position: relative;
-    margin: 65% auto;
-    margin-bottom: 40px;
+    margin: auto;
+    text-align: center;
   }
 
-  .double-bounce1, .double-bounce2 {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background-color: #facd2d;
-    opacity: 0.6;
-    position: absolute;
-    top: 0;
-    left: 0;
+  .spinner > div {
+    width: 30px;
+    height: 30px;
+    background-color: #67CF22;
 
-    -webkit-animation: bounce 2.0s infinite ease-in-out;
-    animation: bounce 2.0s infinite ease-in-out;
+    border-radius: 100%;
+    display: inline-block;
+    -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+    animation: bouncedelay 1.4s infinite ease-in-out;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
   }
 
-  .double-bounce2 {
-    -webkit-animation-delay: -1.0s;
-    animation-delay: -1.0s;
+  .spinner .bounce1 {
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
   }
 
-  @-webkit-keyframes bounce {
-    0%, 100% { -webkit-transform: scale(0.0) }
-    50% { -webkit-transform: scale(1.0) }
+  .spinner .bounce2 {
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
   }
 
-  @keyframes bounce {
-    0%, 100% {
+  @-webkit-keyframes bouncedelay {
+    0%, 80%, 100% { -webkit-transform: scale(0.0) }
+    40% { -webkit-transform: scale(1.0) }
+  }
+
+  @keyframes bouncedelay {
+    0%, 80%, 100% {
       transform: scale(0.0);
       -webkit-transform: scale(0.0);
-    } 50% {
+    } 40% {
         transform: scale(1.0);
         -webkit-transform: scale(1.0);
       }

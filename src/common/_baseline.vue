@@ -18,7 +18,7 @@
       width:55vw;
     }
   }
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
     div {
       img {
         width:255px;

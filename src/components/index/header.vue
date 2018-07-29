@@ -44,7 +44,7 @@
     }
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
     header {
       font-size: 22px;
       font-family:"Microsoft Himalaya";

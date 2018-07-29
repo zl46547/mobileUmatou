@@ -46,10 +46,10 @@
     }
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
     .backToTop {
       right: 50%;
-      transform: translate(350px, 0);
+      transform: translate(300px, 0);
       bottom: 120px;
       font-size: 20px;
       width: 70px;

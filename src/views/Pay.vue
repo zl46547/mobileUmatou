@@ -153,13 +153,13 @@
     }
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
     .content {
       h1 {
         font-size: 28px;
       }
       .footer {
-        width: 768px;
+        width: 640px;
         > div {
           span:nth-of-type(1) {
             font-size: 22px;

@@ -346,14 +346,14 @@
     }
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
     .content {
       .section-one {
         > img {
-          width: 768px;
+          width: 640px;
         }
         .user-info {
-          width: 768px;
+          width: 640px;
           .img-face {
             img {
               width: 80px;

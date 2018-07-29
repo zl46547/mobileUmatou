@@ -115,6 +115,7 @@
               padding: 1vh 2vw;
               .newestPrice {
                 display: flex;
+                white-space: nowrap;
                 align-items: baseline;
                 color: #ff718e;
                 font-size: 2.8vw;
@@ -154,51 +155,51 @@
     }
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
     #adverise {
       .cover {
         img {
-          width: 768px;
+          width: 640px;
         }
       }
       .banners {
         img {
-          width: 768px;
+          width: 640px;
         }
       }
       .sections {
         .sectionItem {
           > img {
-            width: 768px;
+            width: 640px;
           }
           .contentList {
             .width-50 {
-              width: 344px;
+              width: 280px;
             }
 
             .width-33 {
-              width: 216px;
+              width: 182px;
             }
             .productItem {
-              margin: 15px 20px;
+              margin: 15px;
               .price {
-                padding: 15px 20px;
+                padding: 15px 10px;
                 .newestPrice {
-                  font-size: 22px;
+                  font-size: 18px;
                   span:nth-of-type(2) {
-                    font-size: 28px;
+                    font-size: 24px;
                   }
                 }
                 .defaultPrice {
                   span {
-                    font-size: 24px;
+                    font-size: 20px;
                   }
                 }
               }
               .addCart-btn {
                 height: 70px;
                 p {
-                  font-size: 28px;
+                  font-size: 24px;
                 }
               }
             }
@@ -207,7 +208,7 @@
       }
       .backtop {
         img {
-          width: 768px;
+          width: 640px;
         }
       }
     }

@@ -110,7 +110,7 @@ import { Lazyload } from 'mint-ui'
     }
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
     .defaultHome {
       .title {
         padding-top:10px;
@@ -124,16 +124,16 @@ import { Lazyload } from 'mint-ui'
         font-size: 5px;
       }
       .flex {
-        width: 768px;
+        width: 640px;
       }
       .width-50 {
-        width: 384px;
+        width: 320px;
       }
       .width-100 {
-        width: 768px;
+        width: 640px;
       }
       .width-33 {
-        width: 256px;
+        width: 213.3px;
       }
     }
   }

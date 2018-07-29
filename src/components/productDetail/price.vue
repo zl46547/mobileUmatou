@@ -78,7 +78,7 @@
     float: right;
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
     .content>div{
       padding: 15px 25px;
     }

@@ -90,10 +90,10 @@
     }
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
     .fixCar {
       left: 50%;
-      margin-left: -360px;
+      margin-left: -306px;
       bottom: 140px;
       .cartContainer{
         font-size: 20px;

@@ -101,9 +101,9 @@
     top: 8px;
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
     .sawtooth {
-      width: 580px;
+      width: 530px;
       height: 150px;
       .content{
         padding: 15px 30px;

@@ -170,9 +170,9 @@
   .el-message-box {
     width: 80vw;
   }
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
     #app {
-      width: 768px;
+      width: 640px;
       margin: 0 auto;
       height: 100%;
       background-color: #fff;

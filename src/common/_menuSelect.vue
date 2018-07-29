@@ -79,10 +79,10 @@
     }
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
     .menu {
-      margin-left: -384px;
-      width: 768px;
+      margin-left: -320px;
+      width: 640px;
       .menu-item {
         font-size: 18px;
       }

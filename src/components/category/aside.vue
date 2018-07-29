@@ -76,9 +76,9 @@
     }
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
     .aside {
-      width:138px;
+      width:135px;
       > ul {
         li {
           a {

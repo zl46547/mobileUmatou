@@ -416,12 +416,12 @@
     }
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
     .myOrders {
       /* 修改tab切换默认样式 */
       li.el-menu-item {
         text-align: center;
-        width: 153px;
+        width: 150px;
         padding: 0;
         height: 65px;
       }
@@ -440,7 +440,7 @@
               }
               .orderImg {
                 img {
-                  width: 153px;
+                  width: 150px;
                 }
               }
               p {

@@ -220,10 +220,10 @@
     }
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
     .content {
       background-color: #f2f2f2;
-      width: 768px;
+      width: 640px;
       h1 {
         font-size: 28px;
       }
@@ -247,7 +247,7 @@
         }
       }
       .footer {
-        width:768px;
+        width:640px;
         > div:nth-of-type(1) {
           margin-left: 30px;
           font-size: 40px;

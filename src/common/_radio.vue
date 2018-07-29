@@ -47,6 +47,12 @@
     }
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 640px) {
+    .radio-group {
+      .radio {
+        padding: 8px 22px;
+        margin: 8px;
+      }
+    }
   }
 </style>

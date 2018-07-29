@@ -66,6 +66,11 @@
     <v-footer></v-footer>
     <!-- 购物车 -->
     <v-fix-car ref="ball" v-if="dataList.length>0"></v-fix-car>
+    <!-- 提示框 -->
+    <v-message v-if="showMessage" @is-comfirm="isComfirmDel">
+      <p slot="title" class="message-title">确认删除订单</p>
+      <p slot="description" class="message-description">删除后订单无法还原,是否继续操作？</p>
+    </v-message>
   </div>
 </template>
 
@@ -74,11 +79,13 @@
   import { Toast } from 'mint-ui'
   import cartEmpty from '@/components/car/cartEmpty.vue'
   import fixCar from '@/components/car/fixCar.vue'
+  import Message from '@/common/_message.vue'
 
   export default {
     components: {
       'VFooter': Footer,
       'VFixCar': fixCar,
+      'VMessage': Message,
       'VCartEmpty': cartEmpty
     },
     mounted () {
@@ -88,6 +95,8 @@
     data () {
       return {
         checkAllStatus: false,
+        showMessage: false, // 提示框
+        delIndex: '', // 删除的对象的索引
         checkedcarsList: [], // 选中的购物车
         dataList: []
       }
@@ -106,15 +115,16 @@
         this.$store.commit('CAR_LIST', this.dataList)
         this.$router.push({name: '提交订单'})
       },
-      // 删除购物车列表
-      deleteItem (index) {
-        this.$confirm('确认删除该商品?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
+      /**
+       * 确认删除
+       * @param val 删除的对象
+       */
+      isComfirmDel(val) {
+        var vm = this
+        vm.showMessage = false
+        if (val) {
           // 删除数据源内的数据
-          this.dataList.splice(index, 1)
+          this.dataList.splice(vm.delIndex, 1)
           // 如果全部删除了，就把全选状态改为false
           if (this.dataList.length <= 0) {
             this.checkAllStatus = false
@@ -125,8 +135,13 @@
             type: 'success',
             message: '删除成功!'
           })
-        }).catch(() => {
-        })
+        }
+      },
+      // 删除购物车列表
+      deleteItem (index) {
+        var vm = this
+        vm.showMessage = true
+        vm.delIndex = index
       },
       checkAll () {
         if (this.checkAllStatus) {
@@ -420,7 +435,7 @@
               }
             }
             .checkbox-right {
-              .image{
+              .image {
                 padding: 5px;
               }
               .img-right {

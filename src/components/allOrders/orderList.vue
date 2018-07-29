@@ -56,14 +56,14 @@
         <div class="img-icon">
           <i class="iconfont icon-single"></i>
         </div>
-        <p >您还没有相关的订单</p>
-        <p >可以去看看有哪些想买</p>
+        <p>您还没有相关的订单</p>
+        <p>可以去看看有哪些想买</p>
         <div class="goToBuy" @click="goToBuy">随便逛逛</div>
       </div>
-      <v-message>
-        <p slot="title" class="message-title">确认删除订单</p>
-        <p slot="description" class="message-description">删除后订单无法还原,是否继续操作？</p>
-      </v-message>
+        <v-message v-if="showMessage" @is-comfirm="isComfirmDel">
+          <p slot="title" class="message-title">确认删除订单</p>
+          <p slot="description" class="message-description">删除后订单无法还原,是否继续操作？</p>
+        </v-message>
     </div>
   </div>
 </template>
@@ -76,6 +76,8 @@
   export default {
     data () {
       return {
+        showMessage: false,
+        delObj: '', // 要删除的对象
         menus: [
           {
             name: '全部订单',
@@ -191,14 +193,17 @@
       handleSelect (orderStatus) {
         this.selected = orderStatus
         this.initData(orderStatus)
-//        if (orderStatus === 'ALL') {
-//          this.allOrders = this.tempAllOrders
-//        } else {
-//          var allOrders = this.tempAllOrders.where(function (t) {
-//            return t.orderStatus === orderStatus
-//          })
-//          this.allOrders = allOrders
-//        }
+      },
+      /**
+       * 确认删除
+       * @param val 删除的对象
+       */
+      isComfirmDel(val) {
+        var vm = this
+        vm.showMessage = false
+        if (val) {
+          vm.delOrder(vm.delObj)
+        }
       },
       /**
        * 删除订单提示框
@@ -206,15 +211,8 @@
        */
       delOrderAlert (val) {
         var vm = this
-        vm.$confirm('确认删除该订单?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(
-          () => {
-            vm.delOrder(val)
-          }
-        ).catch(() => {})
+        vm.showMessage = true
+        vm.delObj = val
       },
       /**
        * 删除订单
@@ -420,17 +418,6 @@
         }
       }
     }
-    .message-title {
-      text-align: center;
-      padding-bottom: 2.5vh;
-      border-bottom: 1px solid #d4d4d4;
-      font-size: 20px;
-    }
-    .message-description{
-      text-align: center;
-      padding: 2vh 1.5vw;
-      font-size: 16px;
-    }
   }
 
   @media screen and (min-width: 640px) {
@@ -510,12 +497,6 @@
             font-size: 24px;
           }
         }
-      }
-      .message-title {
-        padding-bottom: 20px;
-      }
-      .message-description{
-        padding: 15px 10px;
       }
     }
   }

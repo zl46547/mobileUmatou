@@ -1,8 +1,8 @@
 <template>
-  <div id="alert">
+  <div id="message">
     <div class="mask">
       <div class="content">
-        <div>
+        <div class="title">
           <slot name="title"></slot>
         </div>
         <main>
@@ -10,8 +10,8 @@
             <slot name="description"></slot>
           </div>
           <div class="button">
-            <div class="cancel">取消</div>
-            <div class="comfirm">确定</div>
+            <div class="cancel" @click="onCancel">取消</div>
+            <div class="comfirm" @click="onComfirm">确定</div>
           </div>
         </main>
       </div>
@@ -22,12 +22,20 @@
 
 <script>
   export default {
-    props: ['showAlert']
+    props: ['showAlert'],
+    methods: {
+      onCancel() {
+        this.$emit('is-comfirm', false)
+      },
+      onComfirm() {
+        this.$emit('is-comfirm', true)
+      }
+    }
   }
 </script>
 
 <style lang="less" scoped>
-  #alert {
+  #message {
     .mask {
       z-index: 999;
       position: fixed;
@@ -44,8 +52,19 @@
         background-color: rgb(249, 249, 249);
         padding: 2.5vh 2vw;
         border-radius: 3px;
+        .title {
+          text-align: center;
+          padding-bottom: 2.5vh;
+          border-bottom: 1px solid #d4d4d4;
+          font-size: 20px;
+        }
         main {
           margin: auto;
+          .description {
+            text-align: center;
+            padding: 2vh 1.5vw;
+            font-size: 16px;
+          }
           .button {
             display: flex;
             align-items: center;
@@ -73,14 +92,20 @@
   }
 
   @media screen and (min-width: 640px) {
-    #alert {
+    #message {
       .mask {
-        width:640px;
+        width: 640px;
         margin-left: -320px;
         .content {
           width: 510px;
           padding: 20px 15px;
+          .title {
+            padding-bottom: 20px;
+          }
           main {
+            .description {
+              padding: 15px 10px;
+            }
             .button {
               .cancel, .comfirm {
                 padding: 15px 0;

@@ -71,7 +71,7 @@
             justify-content: center;
             .cancel, .comfirm {
               width: 40%;
-              padding: 2vh 0;
+              padding: 1.5vh 0;
               text-align: center;
               border-radius: 5px;
               cursor: pointer;

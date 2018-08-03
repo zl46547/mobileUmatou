@@ -31,21 +31,27 @@
             <span>¥{{item.finalPrice}}</span>
           </div>
           <div class="footer-btn">
+            <!-- 支付订单按钮 -->
             <div v-if="item.orderStatus == 'OS' && item.orderStatusName === '下单成功'" @click="goToPay(item)">
               <v-order-button :button="payButton"></v-order-button>
             </div>
+            <!-- 重新下单按钮 -->
             <div v-if="item.orderStatus == 'OS' && item.orderStatusName === '订单过期'" @click="goToReOrder(item)">
               <v-order-button :button="reOrderButton"></v-order-button>
             </div>
+            <!-- 确认订单按钮 -->
             <div v-if="item.orderStatus == 'PS'" @click="goToComfirm(item)">
               <v-order-button :button="comfirmButton"></v-order-button>
             </div>
+            <!-- 评论按钮 -->
             <div v-if="item.orderStatus == 'FS'">
               <v-order-button :button="rateButton"></v-order-button>
             </div>
+            <!-- 退货按钮 -->
             <div v-if="item.orderStatus == 'FS'">
               <v-order-button :button="refundButton"></v-order-button>
             </div>
+            <!-- 删除订单按钮 -->
             <div @click="delOrderAlert(item)">
               <v-order-button :button="delButton"></v-order-button>
             </div>
@@ -60,10 +66,14 @@
         <p>可以去看看有哪些想买</p>
         <div class="goToBuy" @click="goToBuy">随便逛逛</div>
       </div>
-        <v-message v-if="showMessage" @is-comfirm="isComfirmDel">
-          <p slot="title" class="message-title">确认删除订单</p>
-          <p slot="description" class="message-description">删除后订单无法还原,是否继续操作？</p>
-        </v-message>
+      <v-message v-if="showDelMessage" @is-comfirm="isComfirmDel">
+        <p slot="title" class="message-title">确认删除订单</p>
+        <p slot="description" class="message-description">删除后订单无法还原,是否继续操作？</p>
+      </v-message>
+      <v-message v-if="showComfirmOrderMessage" @is-comfirm="isComfirmOrder">
+        <p slot="title" class="message-title">确认收货</p>
+        <p slot="description" class="message-description">确认收货后将无法发起退货，是否继续操作？</p>
+      </v-message>
     </div>
   </div>
 </template>
@@ -76,8 +86,9 @@
   export default {
     data () {
       return {
-        showMessage: false,
-        delObj: '', // 要删除的对象
+        showDelMessage: false,
+        showComfirmOrderMessage: false,
+        operaObj: '', // 要操作的对象
         menus: [
           {
             name: '全部订单',
@@ -200,9 +211,9 @@
        */
       isComfirmDel(val) {
         var vm = this
-        vm.showMessage = false
+        vm.showDelMessage = false
         if (val) {
-          vm.delOrder(vm.delObj)
+          vm.delOrder(vm.operaObj)
         }
       },
       /**
@@ -211,8 +222,8 @@
        */
       delOrderAlert (val) {
         var vm = this
-        vm.showMessage = true
-        vm.delObj = val
+        vm.showDelMessage = true
+        vm.operaObj = val
       },
       /**
        * 删除订单
@@ -260,19 +271,12 @@
           }
         })
       },
-      /**
-       * 确认收货
-       * @param val
-       */
-      goToComfirm(val) {
+      isComfirmOrder(val) {
         var vm = this
-        vm.$confirm('确认收货后将无法发起退货，是否继续操作?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
+        vm.showComfirmOrderMessage = false
+        if (val) {
           vm.allOrders.forEach(function (t) {
-            if (t.orderNo === val.orderNo) {
+            if (t.orderNo === vm.operaObj.orderNo) {
               t.orderStatus = 'FS'
               t.orderStatusName = '交易完成'
             }
@@ -283,14 +287,16 @@
           }
           vm.$store.commit('MY_ORDERS', res)
           vm.initData(vm.selected)
-//          vm.$message({
-//            type: 'success',
-//            message: '确认收货成功!',
-//            duration: 2000
-//          })
-//          vm.handleSelect('FS')
-        }).catch(() => {
-        })
+        }
+      },
+      /**
+       * 确认收货
+       * @param val
+       */
+      goToComfirm(val) {
+        var vm = this
+        vm.showComfirmOrderMessage = true
+        vm.operaObj = val
       }
     }
   }

@@ -108,12 +108,12 @@
         functionList: [
           {
             name: '充值',
-            icon: 'icon-chongzhi0101',
+            icon: 'icon-chongzhi',
             color: '#c14089'
           },
           {
             name: '地址管理',
-            icon: 'icon-dizhi-01',
+            icon: 'icon-dizhi',
             color: '#e5cf0d'
           },
           {
@@ -138,7 +138,7 @@
           },
           {
             name: '发票申请',
-            icon: 'icon-iconset0266',
+            icon: 'icon-print',
             color: '#7eb00a'
           },
           {
@@ -153,12 +153,12 @@
           },
           {
             name: '新手礼物',
-            icon: 'icon-weibiaoti-',
+            icon: 'icon-liwu',
             color: '#ffb980'
           },
           {
             name: '关于我们',
-            icon: 'icon-tiyandian',
+            icon: 'icon-friend',
             color: '#2ec7c9'
           }
         ]

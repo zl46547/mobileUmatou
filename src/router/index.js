@@ -13,6 +13,7 @@ const ProductDetail = resolve => require(['@/views/ProductDetail.vue'], resolve)
 const SubmitOrder = resolve => require(['@/views/SubmitOrder.vue'], resolve)
 const Pay = resolve => require(['@/views/Pay.vue'], resolve)
 const AllOrders = resolve => require(['@/views/AllOrders.vue'], resolve)
+const Login = resolve => require(['@/views/Login.vue'], resolve)
 Vue.use(Router)
 
 export default new Router({
@@ -78,6 +79,11 @@ export default new Router({
       path: '/indexAdv/:type',
       name: '广告',
       component: IndexAdv
+    },
+    {
+      path: '/login',
+      name: '登录',
+      component: Login
     }
   ]
 })

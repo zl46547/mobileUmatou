@@ -53,6 +53,9 @@ export default new Router({
     {
       path: '/user',
       name: '用户页',
+      meta: {
+        requireAuth: true // 添加该字段，表示进入这个路由是需要登录的
+      },
       component: User
     },
     {
@@ -63,16 +66,25 @@ export default new Router({
     {
       path: '/submitOrder',
       name: '提交订单',
+      meta: {
+        requireAuth: true
+      },
       component: SubmitOrder
     },
     {
       path: '/pay',
       name: '支付订单',
+      meta: {
+        requireAuth: true
+      },
       component: Pay
     },
     {
       path: '/allOrders',
       name: '我的订单',
+      meta: {
+        requireAuth: true
+      },
       component: AllOrders
     },
     {

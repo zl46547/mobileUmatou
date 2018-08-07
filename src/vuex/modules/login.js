@@ -1,9 +1,13 @@
 import * as types from '../types'
+import Util from '../../util/common'
 
-const state = {token: 0}
+const state = {
+  token: Util.getLocal('TOKEN') || ''
+}
 const mutations = {
-  [types.CHANGE_TOKEN] (state, res) {
+  [types.TOKEN] (state, res) {
     state.token = res
+    Util.setLocal(res, 'TOKEN')
   }
 }
 

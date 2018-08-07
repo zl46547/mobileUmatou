@@ -58,7 +58,8 @@
           method: 'get',
           url: '/shihang/index/command/swiper.json'
         }).then((res) => {
-          if (!utils.isEmpty(res.data)) {
+          var flag = utils.isEmpty(res.data)
+          if (!flag) {
             vm.swiperData = res.data
           }
         }).catch((error) => {

@@ -34,8 +34,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import utils from '../../util/common.js'
-
+  import moment from 'moment'
   export default {
     props: ['flashSale'],
     data () {
@@ -59,8 +58,7 @@
     methods: {
       formateTime () {
         var nowTime = new Date().getTime()
-        var nowTimeStr = utils.dateFormate(new Date(), 'yyyy-MM-dd')
-        var endTime = new Date(nowTimeStr + ' 23:59:59').getTime()
+        var endTime = moment(moment().format('YYYY-MM-DD 23:59:59')).toDate().getTime()
         var remainTime = endTime - nowTime
         setInterval(() => {
           remainTime -= 1000

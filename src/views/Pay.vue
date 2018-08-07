@@ -77,7 +77,7 @@
         var router = this.$router
         setTimeout(function () {
           router.replace({name: '我的订单', params: {type: 'PS'}})
-        }, 2000)
+        }, 1000)
       },
       /**
        * 显示赞赏码对话框

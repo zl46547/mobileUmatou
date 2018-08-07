@@ -2,7 +2,7 @@
 export const SET_LOADING = 'SET_LOADING'
 
 /* 改变token权限 */
-export const CHANGE_TOKEN = 'CHANGE_TOKEN'
+export const TOKEN = 'TOKEN'
 
 /* 分类页的aside index */
 export const CHANGE_TABINDEX = 'CHANGE_TABINDEX'
@@ -21,6 +21,3 @@ export const MY_ORDERS = 'MY_ORDERS'
 
 /* _footer选中的菜单 */
 export const SELECT_MENU = 'SELECT_MENU'
-
-/* 登录的ticket */
-export const LOGIN_TICKET = 'LOGIN_TICKET'

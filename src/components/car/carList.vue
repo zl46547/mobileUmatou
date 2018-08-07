@@ -103,8 +103,25 @@
     },
     methods: {
       goToAccount () {
-        if (this.isCheckedList.length <= 0) {
+        var vm = this
+        if (vm.isCheckedList.length <= 0) {
           Toast('请先挑选商品')
+          return false
+        }
+        var token = vm.$store.state.login.token
+        var flag = true
+        if (!token) {
+          flag = false// 未登录
+        }
+        var currentData = new Date().getTime()
+        var subtractTime = currentData - token
+        if (subtractTime > 2 * 60 * 60 * 1000) {
+          flag = false // 登录超时
+        }
+        if (!flag) {
+          vm.$router.push({
+            path: '/login'
+          })
           return false
         }
         this.$store.commit('SELECT_CAR_LIST', this.isCheckedList)
@@ -113,7 +130,7 @@
           e.checked = false
         })
         this.$store.commit('CAR_LIST', this.dataList)
-        this.$router.push({name: '提交订单'})
+        this.$router.replace({name: '提交订单'})
       },
       /**
        * 确认删除

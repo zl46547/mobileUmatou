@@ -48,8 +48,7 @@
   import PayWay from '@/components/submitOrder/payWay.vue'
   import Ticket from '@/components/submitOrder/ticket.vue'
   import Bounce from '@/components/submitOrder/bounce.vue'
-  import utils from '../util/common.js'
-
+  import moment from 'moment'
   export default {
     components: {
       'VHeader': Header,
@@ -107,11 +106,12 @@
        * 提交订单
        */
       submitOrder () {
+        debugger
         var params = {
           orderList: this.$store.state.car.selectedCarList, // 订单列表
           finalPrice: this.getFinalPrice, // 最终价格
-          submitTime: utils.dateFormate(new Date(), 'yyyy-MM-dd HH:mm:ss'), // 订单提交时间
-          deadTime: utils.timestampToTime(new Date().getTime() + 15 * 60 * 1000, 'yyyy-MM-dd HH:mm:ss'), // 截止日期
+          submitTime: moment().format('YYYY年MM月DD日 HH:mm:ss'), // 订单提交时间
+          deadTime: moment().add(15, 'minute')._d.getTime(), // 截止日期
           bounce: this.bounce.Amount, // 优惠券
           payWay: this.payWay, // 支付方式
           ticket: this.ticket, // 发票
@@ -121,7 +121,7 @@
         this.$store.commit('SUBMIT_ORDER', params)
         // 从购物车中删除已经提交的订单
         this.delCarList(params.orderList)
-        this.$router.push({name: '支付订单'})
+        this.$router.replace({name: '支付订单'})
       },
       /**
        * 删除已下单成功的商品

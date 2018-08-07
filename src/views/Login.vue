@@ -11,10 +11,10 @@
         <img class="logo" src="../assets/images/logo.png"/>
         <form class="form">
           <div class="user">
-            <input type="text" placeholder="请输入用户名" v-model="user.userName">
+            <input type="text" placeholder="请输入用户名" v-model="user.userName">{{user.userName}}
             <img src="../assets/images/生鲜-西红柿.svg"/>
           </div>
-          <input type="password" placeholder="请输入密码" v-model="user.password">
+          <input type="password" placeholder="请输入密码" v-model="user.password">{{user.password}}
           <div class="login-button" @click="login" @mouseenter="mouseenter" @mouseleave="mouseleave">登录<img
             ref="pangxie" src="../assets/images/生鲜-螃蟹.svg"/></div>
         </form>
@@ -25,10 +25,12 @@
 
 <script type="text/ecmascript-6">
   import { Toast } from 'mint-ui'
+  import moment from 'moment'
   export default {
     components: {},
     mounted () {
 //      var vm = this
+      console.log(moment().format('YYYY-MM-DD, h:mm:ss a'))
     },
     data () {
       return {
@@ -44,10 +46,11 @@
        */
       login() {
         var vm = this
-        if (vm.user.userName || vm.user.password) {
+        if (!vm.user.userName || !vm.user.password) {
           Toast('用户名或密码不能为空')
           return false
         }
+        vm.$store.commit('LOGIN_TICKET', new Date().getTime())
       },
       mouseenter() {
         var vm = this

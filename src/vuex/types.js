@@ -21,3 +21,6 @@ export const MY_ORDERS = 'MY_ORDERS'
 
 /* _footer选中的菜单 */
 export const SELECT_MENU = 'SELECT_MENU'
+
+/* 登录的ticket */
+export const LOGIN_TICKET = 'LOGIN_TICKET'

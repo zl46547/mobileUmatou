@@ -8,11 +8,9 @@ export default {
     return JSON.parse(window.localStorage.getItem(key))
   },
   setLocal (res, key = STORAGE_USER_KEY, isSaveOldData = false) {
-    if (isSaveOldData) {
-      if (this.getLocal(key)) {
-        let oldData = this.getLocal(key)
-        return window.localStorage.setItem(JSON.stringify(res.contain(oldData)))
-      }
+    if (isSaveOldData && this.getLocal(key) instanceof Array) {
+      let oldData = this.getLocal(key)
+      return window.localStorage.setItem(JSON.stringify(res.contain(oldData)))
     }
     return window.localStorage.setItem(key, JSON.stringify(res))
   },
@@ -47,6 +45,10 @@ export default {
   },
   encodeURI (str) {
     return encodeURIComponent(encodeURIComponent(str))
+  },
+  isLogin() {
+    // var vm = this
+    // var loginTicket = vm.$store.state.common.loginTicket
   },
   /**
    * 将日期转换成日期字符串

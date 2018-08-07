@@ -7,29 +7,60 @@
       <li><img src="../assets/images/生鲜-葡萄.svg"/></li>
     </ul>
     <div class="wrapper">
-      <div class="container">
-        <img class="logo" src="../assets/images/logo.png"/>
-        <form class="login-form" v-if="isLogin">
-          <div class="user">
-            <input type="text" placeholder="请输入用户名" v-model="user.userName">
+      <transition name="slide-fade" mode="out-in">
+        <div class="container-login" v-if="isLogin" key="login">
+          <img class="logo" src="../assets/images/logo.png"/>
+          <form class="login-form">
             <img src="../assets/images/生鲜-西红柿.svg"/>
-          </div>
-          <input type="password" placeholder="请输入密码" v-model="user.password">
-          <div class="login-button" @click="login" @mouseenter="mouseenter" @mouseleave="mouseleave">登录
-            <img ref="pangxie" src="../assets/images/生鲜-螃蟹.svg"/>
-          </div>
-          <div class="botton">
-            <a href="#">忘记密码？</a>
-            <a href="#" @click="goToRegister">立即注册</a>
-          </div>
-        </form>
-        <form class="register-form" v-else>
-          <input type="text" placeholder="请输入用户名" v-model="user.userName">
-          <input type="password" placeholder="请输入密码" v-model="user.password">
-          <input type="password" placeholder="确认密码" v-model="user.comfirmPwd">
-          <div class="login-button" @click="login" @mouseenter="mouseenter" @mouseleave="mouseleave">注册</div>
-        </form>
-      </div>
+            <div class="form-div" ref="userName">
+              <i class="iconfont icon-user"></i>
+              <input type="text" placeholder="请输入用户名" v-model="user.userName" @focus="getInputFocus('userName')"
+                     @blur="getInputBlus('userName')">
+            </div>
+            <div class="form-div" ref="password">
+              <i class="iconfont icon-lock"></i>
+              <input type="password" placeholder="请输入密码" v-model="user.password" @focus="getInputFocus('password')"
+                     @blur="getInputBlus('password')">
+            </div>
+            <div class="login-button" @click="login" @mouseenter="mouseenter" @mouseleave="mouseleave">登录
+              <img ref="pangxie" src="../assets/images/生鲜-螃蟹.svg"/>
+            </div>
+            <div class="botton">
+              <a href="#">忘记密码？</a>
+              <a href="#" @click="goToRegister">立即注册</a>
+            </div>
+          </form>
+        </div>
+        <!--</transition>-->
+        <!--<transition name="slide-fade" mode="out-in">-->
+        <div class="container-register" v-else key="register">
+          <img class="logo" src="../assets/images/logo.png"/>
+          <form class="register-form">
+            <div class="form-div" ref="userName">
+              <i class="iconfont icon-user"></i>
+              <input type="text" placeholder="请输入用户名" v-model="user.userName" @focus="getInputFocus('userName')"
+                     @blur="getInputBlus('userName')">
+            </div>
+            <div class="form-div" ref="password">
+              <i class="iconfont icon-lock"></i>
+              <input type="password" placeholder="请输入密码" v-model="user.password" @focus="getInputFocus('password')"
+                     @blur="getInputBlus('password')">
+            </div>
+            <div class="form-div" ref="comfirmPwd">
+              <i class="iconfont icon-unlock"></i>
+              <input type="password" placeholder="请确认密码" v-model="user.comfirmPwd"
+                     @focus="getInputFocus('comfirmPwd')"
+                     @blur="getInputBlus('comfirmPwd')">
+            </div>
+            <div class="login-button" @click="register" @mouseenter="mouseenter" @mouseleave="mouseleave">注册
+            </div>
+            <div class="botton">
+              &nbsp;
+              <a href="#" @click="goToLogin">已有账号，立即前往登录</a>
+            </div>
+          </form>
+        </div>
+      </transition>
     </div>
   </div>
 </template>
@@ -55,6 +86,18 @@
         var vm = this
         vm.isLogin = false
       },
+      goToLogin() {
+        var vm = this
+        vm.isLogin = true
+      },
+      getInputFocus(val) {
+        var vm = this
+        vm.$refs[val].style.boxShadow = '0 0 10px #fff'
+      },
+      getInputBlus(val) {
+        var vm = this
+        vm.$refs[val].style.boxShadow = 'none'
+      },
       /**
        * 登录
        */
@@ -67,14 +110,44 @@
         vm.$store.commit('TOKEN', new Date().getTime())
         vm.$router.go(-1)
       },
+      /**
+       * 注册
+       */
+      register() {
+        var vm = this
+        if (!vm.user.userName || !vm.user.password) {
+          Toast('用户名或密码不能为空！')
+          return false
+        }
+        if (vm.user.password !== vm.user.comfirmPwd) {
+          Toast('两次密码不一致！')
+          return false
+        }
+        vm.$notify({
+          title: '注册',
+          message: '注册成功',
+          type: 'success',
+          duration: 1000
+        })
+        setTimeout(function () {
+          vm.user.password = ''
+          vm.isLogin = true
+        }, 1000)
+      },
       mouseenter() {
         var vm = this
+        if (!vm.isLogin) {
+          return
+        }
         vm.$refs.pangxie.style.transform = 'rotate(-1835deg)'
         vm.$refs.pangxie.style.left = '-60%'
-        vm.$refs.pangxie.style.bottom = '75%'
+        vm.$refs.pangxie.style.bottom = '75vh'
       },
       mouseleave() {
         var vm = this
+        if (!vm.isLogin) {
+          return
+        }
         vm.$refs.pangxie.style.transform = 'rotate(1765deg)'
         vm.$refs.pangxie.style.left = '88%'
         vm.$refs.pangxie.style.bottom = '-30%'
@@ -85,6 +158,16 @@
 
 <style lang="less" scoped>
   #login {
+    .slide-fade-enter-active {
+      transition: all .3s ease;
+    }
+    .slide-fade-leave-active {
+      transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    }
+    .slide-fade-enter, .slide-fade-leave-to {
+      transform: translateX(50%);
+      opacity: 0;
+    }
     width: 100%;
     height: 100vh;
     .wrapper {
@@ -104,63 +187,71 @@
         width: 100%;
         height: 100vh;
         content: '';
-        filter: blur(2px);
+        filter: blur(4px);
         z-index: -10;
       }
-      .container {
+      .container-login,.container-register {
         margin: auto;
         text-align: center;
+        width: 85%;
         .logo {
           width: 50%;
           margin-bottom: 20px;
         }
-        .login-form, .register-form {
-          padding: 20px 0;
+        form {
+          padding: 8% 10%;
+          border-radius: 10px;
+          box-shadow: 0 0 40px #fff inset;
           position: relative;
           z-index: 2;
-          input {
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            background-color: rgba(0, 255, 35, 0.04);
-            color: #4d4d4d;
-            width: 70%;
+          > img {
+            position: absolute;
+            width: 30%;
+            left: -10%;
+            top: -20%;
+            transform: rotate(-32deg);
+          }
+          .iconfont {
+            padding: 5px 15px 5px 5px;
+            color: #fff;
+            font-size: 8vw;
+          }
+          .form-div {
+            border: 1.5px solid rgba(255, 255, 255, 0.5);
             border-radius: 3px;
-            padding: 10px 15px;
-            margin: 0 auto 10px auto;
-            display: block;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            font-size: 7vw;
+            margin-bottom: 3vh;
+          }
+          input {
+            color: #4d4d4d;
+            background-color: transparent;
             font-size: 18px;
             font-weight: 300;
+            width: 100%;
             &::-webkit-input-placeholder {
-              color: #f5f5f5;
-            }
-          }
-          .user {
-            position: relative;
-            img {
-              position: absolute;
-              width: 30%;
-              left: -5vw;
-              top: -9vh;
-              transform: rotate(-32deg);
+              color: #ffffff;
             }
           }
           .botton {
             margin: auto;
-            width: 70%;
             padding: 10px;
+            padding-bottom: 0;
             display: flex;
             align-items: center;
             justify-content: space-between;
             a {
               color: #fff;
+              font-size: 3vw;
             }
           }
           .login-button {
             background-color: #4cd964;
             border-radius: 5px;
             padding: 10px 15px;
+            letter-spacing: 12px;
             color: #fff;
-            width: 70%;
             cursor: pointer;
             font-size: 18px;
             position: relative;
@@ -317,19 +408,33 @@
         &::before {
           width: 640px;
         }
-        .container {
+        .container-login,.container-register {
           margin: auto;
           text-align: center;
           .logo {
             margin-bottom: 30px;
           }
           form {
-            .user {
-              img {
-                position: absolute;
-                left: -30px;
-                top: -95px;
+            .iconfont {
+              font-size: 40px;
+            }
+            input {
+              font-size: 24px;
+              &::-webkit-input-placeholder {
+                color: #ffffff;
               }
+            }
+            .botton {
+              a {
+                font-size: 20px;
+              }
+            }
+            .login-button {
+              font-size: 18px;
+              position: relative;
+              left: 50%;
+              transform: translateX(-50%);
+              transition-duration: 0.25s;
             }
           }
         }
@@ -418,18 +523,6 @@
           transform: rotate(480deg);
           left: 0;
           top: 125vh;
-        }
-      }
-      @keyframes pangxie {
-        0% {
-          transform: rotate(0deg);
-          left: -20vw;
-          bottom: 70vh;
-        }
-        100% {
-          transform: rotate(-1835deg);
-          left: 340px;
-          bottom: -30px;
         }
       }
     }

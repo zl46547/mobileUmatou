@@ -72,7 +72,7 @@
           title: '交易完成',
           message: '订单支付成功',
           type: 'success',
-          duration: 2000
+          duration: 1000
         })
         var router = this.$router
         setTimeout(function () {

@@ -171,7 +171,7 @@
     width: 100%;
     height: 100vh;
     .wrapper {
-      background-image: url(../assets/images/login-bgc.jpg);
+      background-image: url(../../static/login-bgc.jpg);
       background-size: cover;
       position: absolute;
       display: flex;

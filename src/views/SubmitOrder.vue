@@ -106,7 +106,6 @@
        * 提交订单
        */
       submitOrder () {
-        debugger
         var params = {
           orderList: this.$store.state.car.selectedCarList, // 订单列表
           finalPrice: this.getFinalPrice, // 最终价格

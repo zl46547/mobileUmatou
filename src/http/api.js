@@ -31,7 +31,7 @@ api.interceptors.request.use(function (response) {
   // 加到时器主要是为了 展示Loading效果 项目中应去除
   setTimeout(function () {
     store.commit('SET_LOADING', false)
-  }, 300)
+  }, 500)
   return response
 }, function (error) {
   // 对响应错误做点什么

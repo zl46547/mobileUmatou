@@ -92,11 +92,14 @@ import { Lazyload } from 'mint-ui'
     .time {
       display: flex;align-items: center;
       .time-num {
-        text-align: center;
-        padding: 0.6vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 7vw;
+        height: 7vw;
         border: 1px solid #aaa;
         color: #666;
-        border-radius: 0.5vw;
+        border-radius: 2px;
         font-size:4vw;
         letter-spacing: 0.3vw;
       }
@@ -158,7 +161,8 @@ import { Lazyload } from 'mint-ui'
         }
         .time {
           .time-num {
-            padding: 4px;
+            width: 40px;
+            height: 40px;
             letter-spacing: 2px;
             font-size:24px;
           }
@@ -195,7 +199,7 @@ import { Lazyload } from 'mint-ui'
         }
         ul::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
           border-radius: 8px;
-          background-color: #7599ff;
+          background-color: rgba(109, 196, 86, 0.91);
         }
         ul::-webkit-scrollbar-track {/*滚动条里面轨道*/
           -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);

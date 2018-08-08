@@ -1,7 +1,7 @@
 /* 全局loading状态 */
 export const SET_LOADING = 'SET_LOADING'
 
-/* 改变token权限 */
+/* 登录TOKEN */
 export const TOKEN = 'TOKEN'
 
 /* 分类页的aside index */
@@ -21,3 +21,6 @@ export const MY_ORDERS = 'MY_ORDERS'
 
 /* _footer选中的菜单 */
 export const SELECT_MENU = 'SELECT_MENU'
+
+/* 用户列表 */
+export const USER_LIST = 'USER_LIST'

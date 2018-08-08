@@ -14,7 +14,7 @@
             <img src="../assets/images/生鲜-西红柿.svg"/>
             <div class="form-div" ref="userName">
               <i class="iconfont icon-user"></i>
-              <input type="text" placeholder="请输入用户名" v-model="user.userName" @focus="getInputFocus('userName')"
+              <input type="text" placeholder="请输入手机号码" v-model="user.userName" @focus="getInputFocus('userName')"
                      @blur="getInputBlus('userName')">
             </div>
             <div class="form-div" ref="password">
@@ -25,20 +25,21 @@
             <div class="login-button" @click="login" @mouseenter="mouseenter" @mouseleave="mouseleave">登录
               <img ref="pangxie" src="../assets/images/生鲜-螃蟹.svg"/>
             </div>
-            <div class="botton">
-              <a href="#">忘记密码？</a>
-              <a href="#" @click="goToRegister">立即注册</a>
+            <div class="bottom">
+              <span>忘记密码？</span>
+              <span @click="goToRegister">立即注册</span>
             </div>
           </form>
+          <div style="font-size: 18px;">
+            {{userList}}<br>{{user}}
+          </div>
         </div>
-        <!--</transition>-->
-        <!--<transition name="slide-fade" mode="out-in">-->
         <div class="container-register" v-else key="register">
           <img class="logo" src="../assets/images/logo.png"/>
           <form class="register-form">
             <div class="form-div" ref="userName">
               <i class="iconfont icon-user"></i>
-              <input type="text" placeholder="请输入用户名" v-model="user.userName" @focus="getInputFocus('userName')"
+              <input type="text" placeholder="请输入手机号码" v-model="user.userName" @focus="getInputFocus('userName')"
                      @blur="getInputBlus('userName')">
             </div>
             <div class="form-div" ref="password">
@@ -54,9 +55,9 @@
             </div>
             <div class="login-button" @click="register" @mouseenter="mouseenter" @mouseleave="mouseleave">注册
             </div>
-            <div class="botton">
+            <div class="bottom">
               &nbsp;
-              <a href="#" @click="goToLogin">已有账号，立即前往登录</a>
+              <span @click="goToLogin">已有账号，立即前往登录</span>
             </div>
           </form>
         </div>
@@ -70,10 +71,13 @@
   export default {
     components: {},
     mounted () {
+      var vm = this
+      vm.userList = vm.$store.state.login.userList
     },
     data () {
       return {
         isLogin: true,
+        userList: [], // 所有用户列表
         user: {
           userName: '',
           password: '',
@@ -82,18 +86,35 @@
       }
     },
     methods: {
+      /**
+       * 切换注册页面
+       */
       goToRegister() {
         var vm = this
+        vm.user = {
+          userName: '',
+          password: '',
+          comfirmPwd: ''
+        }
         vm.isLogin = false
       },
+      /**
+       * 切换登录页面
+       */
       goToLogin() {
         var vm = this
         vm.isLogin = true
       },
+      /**
+       * input获得焦点
+       */
       getInputFocus(val) {
         var vm = this
         vm.$refs[val].style.boxShadow = '0 0 10px #fff'
       },
+      /**
+       * input失去焦点
+       */
       getInputBlus(val) {
         var vm = this
         vm.$refs[val].style.boxShadow = 'none'
@@ -104,11 +125,23 @@
       login() {
         var vm = this
         if (!vm.user.userName || !vm.user.password) {
-          Toast('用户名或密码不能为空')
+          Toast('手机号码或密码不能为空')
           return false
         }
-        vm.$store.commit('TOKEN', new Date().getTime())
-        vm.$router.go(-1)
+        if (!vm.user.userName.match(/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/)) {
+          Toast('请输入正确的手机号码')
+          return false
+        }
+        var exit = vm.userList.contains(vm.user, function (a, b) {
+          return a.userName === b.userName && a.password === b.password
+        })
+        if (exit) {
+          vm.$store.commit('TOKEN', new Date().getTime())
+          vm.$router.go(-1)
+        } else {
+          Toast('手机号码或密码不正确')
+          return false
+        }
       },
       /**
        * 注册
@@ -116,24 +149,41 @@
       register() {
         var vm = this
         if (!vm.user.userName || !vm.user.password) {
-          Toast('用户名或密码不能为空！')
+          Toast('手机号码或密码不能为空！')
+          return false
+        }
+        if (!vm.user.userName.match(/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/)) {
+          Toast('请输入正确的手机号码')
           return false
         }
         if (vm.user.password !== vm.user.comfirmPwd) {
           Toast('两次密码不一致！')
           return false
         }
-        vm.$notify({
-          title: '注册',
-          message: '注册成功',
-          type: 'success',
-          duration: 1000
+        var exit = vm.userList.contains(vm.user, function (a, b) {
+          return a.userName === b.userName
         })
-        setTimeout(function () {
+        if (exit) {
+          Toast('该账户已存在！')
+          return false
+        } else {
+          vm.$notify({
+            title: '注册',
+            message: '注册成功',
+            type: 'success',
+            duration: 1000
+          })
+          var user = JSON.parse(JSON.stringify(vm.user))
+          vm.$store.commit('USER_LIST', user)
           vm.user.password = ''
-          vm.isLogin = true
-        }, 1000)
+          setTimeout(function () {
+            vm.isLogin = true
+          }, 1000)
+        }
       },
+      /**
+       * 鼠标悬浮登录按钮
+       */
       mouseenter() {
         var vm = this
         if (!vm.isLogin) {
@@ -143,6 +193,9 @@
         vm.$refs.pangxie.style.left = '-60%'
         vm.$refs.pangxie.style.bottom = '75vh'
       },
+      /**
+       * 鼠标悬浮离开登录按钮
+       */
       mouseleave() {
         var vm = this
         if (!vm.isLogin) {
@@ -171,7 +224,7 @@
     width: 100%;
     height: 100vh;
     .wrapper {
-      background-image: url(../../static/login-bgc.jpg);
+      background-image: url(../assets/images/login-bgc.jpg);
       background-size: cover;
       position: absolute;
       display: flex;
@@ -190,7 +243,7 @@
         filter: blur(4px);
         z-index: -10;
       }
-      .container-login,.container-register {
+      .container-login, .container-register {
         margin: auto;
         text-align: center;
         width: 85%;
@@ -234,14 +287,15 @@
               color: #ffffff;
             }
           }
-          .botton {
+          .bottom {
             margin: auto;
             padding: 10px;
             padding-bottom: 0;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            a {
+            span {
+              cursor: pointer;
               color: #fff;
               font-size: 3vw;
             }
@@ -408,7 +462,7 @@
         &::before {
           width: 640px;
         }
-        .container-login,.container-register {
+        .container-login, .container-register {
           margin: auto;
           text-align: center;
           .logo {
@@ -424,9 +478,10 @@
                 color: #ffffff;
               }
             }
-            .botton {
-              a {
+            .bottom {
+              span {
                 font-size: 20px;
+                cursor: pointer;
               }
             }
             .login-button {

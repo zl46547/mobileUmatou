@@ -50,8 +50,15 @@
       'VFooter': Footer
     },
     mounted () {
-      this.hour = new Date().getHours()
-      this.getOrderServiceNum()
+      var vm = this
+      // 模拟请求数据
+      vm.$store.commit('SET_LOADING', true)
+      setTimeout(function () {
+        vm.$store.commit('SET_LOADING', false)
+      }, 500)
+      // 获取小时
+      vm.hour = new Date().getHours()
+      vm.getOrderServiceNum()
     },
     data () {
       return {

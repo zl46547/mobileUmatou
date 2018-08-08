@@ -7,11 +7,7 @@ export default {
   getLocal (key = STORAGE_USER_KEY) {
     return JSON.parse(window.localStorage.getItem(key))
   },
-  setLocal (res, key = STORAGE_USER_KEY, isSaveOldData = false) {
-    if (isSaveOldData && this.getLocal(key) instanceof Array) {
-      let oldData = this.getLocal(key)
-      return window.localStorage.setItem(JSON.stringify(res.contain(oldData)))
-    }
+  setLocal (res, key = STORAGE_USER_KEY) {
     return window.localStorage.setItem(key, JSON.stringify(res))
   },
   /**

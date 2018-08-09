@@ -66,7 +66,7 @@
       width: 100%;
       height: 100%;
       display: flex;
-      font-size: 2vw;
+      font-size: 1.2rem;
       cursor: pointer;
       border-bottom: 2px solid #fafafa;
       P {
@@ -84,7 +84,7 @@
       margin-left: -320px;
       width: 640px;
       .menu-item {
-        font-size: 18px;
+        font-size: 1.4rem;
       }
     }
   }

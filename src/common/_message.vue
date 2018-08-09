@@ -56,14 +56,14 @@
           text-align: center;
           padding-bottom: 2.5vh;
           border-bottom: 1px solid #d4d4d4;
-          font-size: 20px;
+          font-size: 1.5rem;
         }
         main {
           margin: auto;
           .description {
             text-align: center;
-            padding: 2vh 1.5vw;
-            font-size: 16px;
+            padding: 3vh 1.5vw;
+            font-size: 1.2rem;
           }
           .button {
             display: flex;
@@ -75,6 +75,7 @@
               text-align: center;
               border-radius: 5px;
               cursor: pointer;
+              font-size: 1.2rem;
             }
             .cancel {
               margin-right: 5vw;
@@ -101,14 +102,17 @@
           padding: 20px 15px;
           .title {
             padding-bottom: 20px;
+            font-size:1.7rem;
           }
           main {
             .description {
-              padding: 15px 10px;
+              padding: 30px 10px;
+              font-size:1.4rem;
             }
             .button {
               .cancel, .comfirm {
                 padding: 15px 0;
+                font-size:1.4rem;
               }
               .cancel {
                 margin-right: 35px;

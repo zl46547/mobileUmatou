@@ -37,10 +37,10 @@
     .icon-back{
       cursor: pointer;
       padding-left:4vw;
-      font-size: 4vw;
+      font-size: 2rem;
     }
     h1 {
-      font-size:4.5vw;
+      font-size:1.5rem;
       letter-spacing: .2vw;
       font-weight: 600;
     }
@@ -50,13 +50,12 @@
     header {
       margin-left: -320px;
       width:640px;
-      font-size: 30px;
       .icon-back{
         padding-left:28px;
-        font-size: 24px;
+        font-size: 2.2rem;
       }
       h1 {
-        font-size:22px;
+        font-size:1.7rem;
       }
     }
   }

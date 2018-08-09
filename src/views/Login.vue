@@ -30,9 +30,6 @@
               <span @click="goToRegister">立即注册</span>
             </div>
           </form>
-          <div style="font-size: 18px;">
-            {{userList}}<br>{{user}}
-          </div>
         </div>
         <div class="container-register" v-else key="register">
           <img class="logo" src="../assets/images/logo.png"/>
@@ -167,11 +164,9 @@
           Toast('该账户已存在！')
           return false
         } else {
-          vm.$notify({
-            title: '注册',
-            message: '注册成功',
-            type: 'success',
-            duration: 1000
+          vm.$message({
+            message: '恭喜你，注册成功！',
+            type: 'success'
           })
           var user = JSON.parse(JSON.stringify(vm.user))
           vm.$store.commit('USER_LIST', user)

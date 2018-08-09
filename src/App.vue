@@ -27,7 +27,8 @@
   html, body, #app {
     width: 100%;
     height: 100%;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    font-size:12px;
   }
 
   body,
@@ -151,18 +152,21 @@
     top: 40% !important;
     left: 50%;
     transform: translate(-50%,-50%);
-    width: 60vw;
+    width: 50%;
     .el-notification__icon {
-      font-size: 7vw;
+      font-size: 2.5rem;
     }
     .el-notification__group {
-      margin-left: 5vw;
+      width:100%;
+      margin-left: 0;
       .el-notification__title {
-        font-size: 5vw;
+        text-align: center;
+        font-size: 2rem;
       }
       .el-notification__content {
-        font-size: 4vw;
-        margin: 3vw 0 0;
+        font-size: 1.3rem;
+        text-align: center;
+        margin: 0.7rem 0 0;
       }
     }
   }
@@ -183,20 +187,7 @@
       height: 100%;
     }
     .el-notification.right {
-      width: 460px;
-      .el-notification__icon {
-        font-size: 32px;
-      }
-      .el-notification__group {
-        margin-left: 24px;
-        .el-notification__title {
-          font-size: 26px;
-        }
-        .el-notification__content {
-          font-size: 20px;
-          margin: 16px 0 0;
-        }
-      }
+      width: 40%;
     }
     /* 修改messagebox默认样式 */
     .el-message-box {

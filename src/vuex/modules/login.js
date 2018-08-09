@@ -13,7 +13,6 @@ const mutations = {
   },
   /* 用户列表 */
   [types.USER_LIST] (state, res) {
-    debugger
     state.userList.push(res)
     Util.setLocal(state.userList, 'USER_LIST')
   }

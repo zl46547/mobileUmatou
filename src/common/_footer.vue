@@ -91,10 +91,13 @@
       align-items: center;
       justify-content: space-around;
       width: 100%;
-      > div {
+      .tabbar-item {
         text-align: center;
+        .iconfont{
+          font-size: 1.5rem;
+        }
         .tabbar-item-name {
-          font-size: 1vw;
+          font-size: 1rem;
         }
       }
     }
@@ -116,9 +119,12 @@
       width: 640px;
       margin-left: -320px;
       .tabbar {
-        > div {
+        .tabbar-item {
+          .iconfont{
+            font-size: 1.8rem;
+          }
           .tabbar-item-name {
-            font-size: 12px;
+            font-size: 1.2rem;
           }
         }
       }

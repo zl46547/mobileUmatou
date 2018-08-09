@@ -100,8 +100,8 @@
     overflow: hidden;
     background-color: #ececec;
     .detail,.rate,.product {
-      margin-top: 8vh;
-      height: 84vh;
+      margin-top: 60px;
+      height: calc(100vh - 120px);
       &::-webkit-scrollbar {
         display: none
       }
@@ -117,10 +117,10 @@
         width: 640px;
       }
       .el-menu--horizontal > .el-menu-item.is-active {
-        font-size: 18px;
+        font-size: 1.2rem;
       }
       li.el-menu-item[data-v-31ad9208] {
-        font-size: 18px;
+        font-size: 1.2rem;
       }
       .el-carousel__container {
         position: relative;

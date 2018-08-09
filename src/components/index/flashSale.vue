@@ -99,17 +99,17 @@ import { Lazyload } from 'mint-ui'
         height: 7vw;
         border: 1px solid #aaa;
         color: #666;
-        border-radius: 2px;
-        font-size:4vw;
-        letter-spacing: 0.3vw;
+        border-radius: 3px;
+        font-size:1.2rem;
+        letter-spacing: 2px;
       }
       .time-col {
         color: #666;
         font-family:"Microsoft Himalaya";
         padding: 1vw;
         text-align: center;
-        /*font-weight: 700;*/
-        font-size:4.2vw;
+        font-size:1.3rem;
+        letter-spacing: 2px;
       }
     }
   }
@@ -134,17 +134,19 @@ import { Lazyload } from 'mint-ui'
             width: 30vw;
             overflow: hidden;
             text-overflow: ellipsis;
-            white-space: nowrap
+            white-space: nowrap;
+            font-size: 1.2rem;
           }
           .price {
             text-align: center;
             .flashSale-list-price {
               color: #b4282d;
+              font-size: 1.3rem;
             }
             .flashSale-list-unit {
               padding-top: 2vh;
               color: rgb(150, 150, 150);
-              font-size: 1vw;
+              font-size: 1rem;
             }
           }
         }
@@ -164,11 +166,11 @@ import { Lazyload } from 'mint-ui'
             width: 40px;
             height: 40px;
             letter-spacing: 2px;
-            font-size:24px;
+            font-size:1.4rem;
           }
           .time-col {
             padding: 4px;
-            font-size:28px;
+            font-size:1.5rem;
           }
         }
       }
@@ -185,10 +187,14 @@ import { Lazyload } from 'mint-ui'
               }
               p {
                 width: 150px;
+                font-size: 1.4rem;
+              }
+              .flashSale-list-price {
+                font-size: 1.5rem;
               }
               .flashSale-list-unit {
                 padding-top: 10px;
-                font-size: 10px;
+                font-size: 1.2rem;
               }
             }
           }

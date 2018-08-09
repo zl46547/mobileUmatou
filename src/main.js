@@ -9,9 +9,12 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import $ from 'jquery'
 import linq from 'linqjs'
+import iview from 'iview'
+import 'iview/dist/styles/iview.css'
 
 Vue.use(ElementUI)
 Vue.use(Mint)
+Vue.use(iview)
 Vue.prototype.$api = api
 Vue.config.productionTip = false
 

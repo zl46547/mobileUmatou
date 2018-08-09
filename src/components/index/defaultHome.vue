@@ -88,11 +88,11 @@ import { Lazyload } from 'mint-ui'
       padding-top:2vh;
     }
     .title p:nth-of-type(1) {
-      font-size: 4vw;
+      font-size: 1.3rem;
       margin-bottom: 1vh;
     }
     .title p:nth-of-type(2) {
-      font-size: 1vw;
+      font-size: 1rem;
       color: #999;
     }
     .flex {
@@ -117,11 +117,11 @@ import { Lazyload } from 'mint-ui'
         margin: 10px 0
       }
       .title p:nth-of-type(1) {
-        font-size: 20px;
+        font-size: 1.5rem;
         margin-bottom: 5px;
       }
       .title p:nth-of-type(2) {
-        font-size: 5px;
+        font-size: 1.2rem;
       }
       .flex {
         width: 640px;

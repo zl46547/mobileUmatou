@@ -6,8 +6,10 @@
           <img :src="'http://picpro-sz.34580.com/sz/ImageUrl/' +k.PictureId+ '/500.jpeg'" alt="">
         </router-link>
         <div class="product-detail">
-          <p class="productName">{{k.ProductName}}</p>
-          <p class="pvStandard">{{k.PvStandard}}</p>
+          <router-link :to="'/productDetail/'+k.ProductId">
+            <p class="productName">{{k.ProductName}}</p>
+            <p class="pvStandard">{{k.PvStandard}}</p>
+          </router-link>
           <div class="price">
             <p class="periodMoney">¥{{k.PeriodMoney}}</p>
             <div @click="addCart(k)">
@@ -54,7 +56,7 @@
   .main {
     background-color: #ebebeb;
     width: 100%;
-    height:84vh;
+    height: 84vh;
     &::-webkit-scrollbar {
       display: none
     }
@@ -78,37 +80,39 @@
             text-align: left;
             text-overflow: ellipsis;
             white-space: nowrap;
-            padding: 5px 8px;
-            width: 60%;
+            width: 100%;
             overflow: hidden;
-            margin-left: 2vw;
+            margin-left: 3vw;
           }
           .productName {
-            font-size: 3vw;
+            padding: 1vh 0;
+            font-size: 1.3rem;
           }
           .pvStandard {
             color: #999899;
-            font-size: 2vw;
+            font-size: 1.2rem;
           }
           .price {
             display: flex;
             justify-content: space-between;
             align-items: center;
             .periodMoney {
-              font-size: 3vw;
+              font-size: 1.3rem;
               color: #f05423;
+              width: 50%;
             }
             > div {
-              width: 5vw;
-              height: 5vw;
+              width: 25px;
+              height: 25px;
               border: 1px solid #ccc;
               border-radius: 50%;
               display: flex;
-              margin: 1vw;
+              margin: 2vw;
               cursor: pointer;
               align-items: center;
+              justify-content: center;
               i {
-                font-size: 2vw;
+                font-size: 1.2rem;
                 margin: auto;
                 color: #e55b2f;
               }
@@ -131,21 +135,21 @@
               margin-left: 15px;
             }
             .productName {
-              font-size: 18px;
+              font-size: 1.8rem;
             }
             .pvStandard {
-              font-size: 16px;
+              font-size: 1.7rem;
             }
             .price {
               .periodMoney {
-                font-size: 24px;
+                font-size: 1.8rem;
               }
               > div {
                 width: 35px;
-                height:35px;
+                height: 35px;
                 margin: 10px;
                 i {
-                  font-size: 24px;
+                  font-size: 1.7rem;
                 }
               }
             }

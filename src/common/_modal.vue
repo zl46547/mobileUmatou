@@ -49,11 +49,11 @@
         > div {
           margin: auto 0;
           padding: 0 20px;
-          font-size: 5vw;
+          font-size: 1.5rem;
           font-weight: bold;
         }
         .close {
-          font-size: 4vw;
+          font-size: 1.4rem;
           cursor: pointer
         }
       }
@@ -75,10 +75,10 @@
         width: 640px;
         .modal-top {
           > div {
-            font-size: 22px;
+            font-size: 1.9rem;
           }
           .close {
-            font-size: 30px;
+            font-size: 1.6rem;
           }
         }
       }

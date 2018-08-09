@@ -61,13 +61,13 @@
       margin-bottom: 1px;
       height: 7vh;
       background-color: #fff;
-      padding: 5px 20px;
-      font-size: 4vw;
+      padding: 5px 4vw;
+      font-size: 1.4rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       i {
-        font-size: 5vw;
+        font-size: 1.5rem;
         font-weight: 500;
       }
     }
@@ -76,9 +76,10 @@
   @media screen and (min-width: 640px) {
     .content {
       .rate-top {
-        font-size: 22px;
+        padding: 5px 25px;
+        font-size: 1.6rem;
         i {
-          font-size: 20px;
+          font-size: 1.7rem;
         }
       }
     }

@@ -92,29 +92,34 @@
         align-items: baseline;
         padding: 2vh 3vw;
         .title {
-          font-size: 4.2vw;
+          font-size: 1.5rem;
           border-left: 2.3vw solid #90c320;
           padding: 0 5px 0 10px;
           word-break: break-all;
           white-space: nowrap;
         }
         .sub-title {
-          font-size: 2.5vw;
+          font-size: 1.2rem;
           color: #888;
           width: 80%;
-          border-bottom: 2px solid #c3c3c3;
+          border-bottom: 1.3px solid #c3c3c3;
         }
       }
       .standard-list {
-        font-size: 3vw;
+        font-size: 1.3rem;
         display: flex;
         padding-bottom: 2vh;
         align-items: center;
-        height: 4vh;
         .product-name {
-          width: 20vw;
+          width: 20%;
+          display: flex;
+          justify-content: flex-end;
           color: rgba(0, 0, 0, 0.43);
-          margin-left: 8vw;
+          margin: 0 8vw 0 4vw;
+          white-space: nowrap;
+        }
+        div:nth-of-type(2){
+          width: 80%;
         }
       }
     }
@@ -137,20 +142,17 @@
         header {
           padding: 2vh 20px;
           .title {
-            font-size: 32px;
+            font-size: 1.7rem;
             border-left: 16px solid #90c320;
           }
           .sub-title {
-            font-size: 18px;
+            font-size: 1.4rem;
           }
         }
         > .standard-list {
-          font-size: 16px;
-          height: 30px;
-          line-height: 30px;
+          font-size: 1.5rem;
           .product-name {
-            width: 100px;
-            margin-left: 40px;
+            margin: 0 40px 0 20px;
           }
         }
       }

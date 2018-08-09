@@ -55,11 +55,11 @@
           display: block;
           padding: 4vw 0;
           position: relative;
-          font-size: 3vw;
+          font-size: 1.2rem;
         }
         .active {
           position: relative;
-          font-size: 4vw;
+          font-size: 1.3rem;
           color: #55c955;
           background-color: #fff;
           &::before {
@@ -84,10 +84,10 @@
           a {
             padding: 16px 0;
             position: relative;
-            font-size: 16px;
+            font-size: 1.4rem;
           }
           .active {
-            font-size: 16px;
+            font-size: 1.6rem;
           }
         }
       }

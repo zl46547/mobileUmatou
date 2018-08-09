@@ -18,8 +18,7 @@
           <div class="rate-recommond-list-content">
             <!-- 评论标签 -->
             <div class="div-badge">
-              <div class="activities-badge" v-for="(tag,i) in item.Tags" :key="i" v-if="item.Tags.length>0">{{tag}}
-              </div>
+              <div class="activities-badge" v-for="(tag,i) in item.Tags" :key="i" v-if="item.Tags.length>0">{{tag}}</div>
             </div>
             <!-- 评论内容 -->
             <div class="reflex-context">{{item.ReflexContext}}</div>
@@ -100,6 +99,7 @@
   .rate-content {
     .rate-recommond-list-top {
       display: flex;
+      align-items: center;
       background-color: #fff;
       padding: 2vh 2vw 0 4vw;
       img {
@@ -110,7 +110,7 @@
         margin-right: 20px;
       }
       p {
-        padding-top: 3.5vw;
+        font-size:1.2rem;
       }
     }
     .rate-recommond-list-content {
@@ -120,14 +120,16 @@
       }
       .reflex-context {
         margin-left: 2vw;
+        font-size:1.2rem;
       }
       .create-time {
         display: flex;
         justify-content: space-between;
         height: 5vw;
         line-height: 5vw;
+        font-size:1.2rem;
         .icon-mark {
-          font-size: 20px;
+          font-size: 1.5rem;
         }
         span {
           padding-left: 4px;
@@ -137,6 +139,7 @@
         display: flex;
         margin-top: 3vh;
         .activities-badge {
+          font-size:1.1rem;
           border: 1px solid #49aa34;
           color: #49aa34;
           border-radius: 4px;
@@ -194,7 +197,7 @@
           height: 75px;
         }
         p {
-          padding-top: 20px;
+          font-size:1.4rem;
         }
       }
       .rate-recommond-list-content {
@@ -203,12 +206,14 @@
         }
         .reflex-context {
           margin-left: 10px;
+          font-size:1.4rem;
         }
         .create-time {
           height: 25px;
           line-height: 25px;
+          font-size:1.4rem;
           .icon-mark {
-            font-size: 30px;
+            font-size: 1.7rem;
           }
           span {
             padding-left: 4px;
@@ -216,7 +221,7 @@
         }
         .div-badge {
           .activities-badge {
-            font-size: 10px;
+            font-size:1.3rem;
             padding: 5px 8px;
             margin-left: 10px;
           }

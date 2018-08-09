@@ -25,13 +25,13 @@
     height:8vh;
     display: flex;
     align-items: center;
-    font-size: 3vw;
+    font-size: 1.1rem;
     padding-left:4vw;
     z-index: 999;
     box-shadow: 0 0.5px 20px rgb(221, 221, 221);
     .icon-back{
       transform: rotate(-90deg);
-      font-size:3vw;
+      font-size:1.2rem;
       margin-right:2vw;
     }
     .search{
@@ -46,11 +46,11 @@
 
   @media screen and (min-width: 640px) {
     header {
-      font-size: 22px;
+      font-size: 1.7rem;
       font-family:"Microsoft Himalaya";
       padding-left:28px;
       .icon-back{
-        font-size:22px;
+        font-size:1.4rem;
         margin-right:14px;
       }
     }

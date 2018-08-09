@@ -79,7 +79,10 @@
         Util.setLocal(list, 'LIKE_PRODUCT')
       },
       toService () {
-        alert('功能未开发')
+        this.$message({
+          message: '该功能暂未开发！',
+          type: 'warning'
+        })
       },
       toCartPage () {
         this.$router.push({name: '购物车页'})
@@ -91,7 +94,7 @@
 <style lang="less" scoped>
   .footer {
     width: 100%;
-    height: 8vh;
+    height: 60px;
     background-color: #fff;
     position: fixed;
     bottom: 0;
@@ -105,22 +108,26 @@
       text-align: center;
       cursor: pointer;
       i {
-        font-size: 5vw;
+        font-size: 1.4rem;
       }
       .icon-text {
-        font-size: 1vw;
+        font-size: 1rem;
       }
       .myLikeProduct {
         color: #ff1908;
       }
       .badge {
         position: absolute;
-        right: -4vw;
-        top: -2.2vh;
+        right: -13%;
+        top: -6%;
         background-color: #ff1908;
         color: #fff;
-        padding: 1.5px 1.8vw;
-        font-size: 2vh;
+        width:16px;
+        height:16px;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        font-size: 1rem;
         border-radius: 90px;
       }
     }
@@ -147,16 +154,15 @@
       margin-left: -320px;
       .icon {
         cursor: pointer;
-        i {
-          font-size: 32px;
-        }
-        .icon-text {
-          font-size: 12px;
-        }
-        .badge {
-          right: -22px;
-          padding: 1.5px 8px;
-        }
+        /*i {*/
+          /*font-size: 1.6rem;*/
+        /*}*/
+        /*.icon-text {*/
+          /*font-size: 1.2rem;*/
+        /*}*/
+        /*.badge {*/
+          /*font-size:1.4rem;*/
+        /*}*/
       }
       .addCart {
         width: 238px;

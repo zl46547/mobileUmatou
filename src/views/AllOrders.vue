@@ -1,10 +1,5 @@
 <template>
   <div id="allOrders">
-    <div>
-      <v-header>
-        <h1 slot="title">我的订单</h1>
-      </v-header>
-    </div>
     <div class="content">
       <v-order-list></v-order-list>
     </div>
@@ -34,8 +29,13 @@
     overflow: hidden;
     .content {
       background-color: #f2f2f2;
-      height: 92vh;
-      margin-top: 8vh;
+      margin-top: 60px;
+    }
+    header {
+      box-shadow: none;
+    }
+    .menu{
+      box-shadow: -1px 0.5px 20px #dddddd;
     }
   }
   @media screen and (min-width: 640px) {

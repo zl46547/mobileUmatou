@@ -18,7 +18,7 @@
       <div v-for="k in categoryList.Data.SubCategories" :key="k.Id">
         <div class="subTitle">
           <p>{{k.MetaKeywords}}</p>
-          <div @click="allProduct"><span>全部商品</span><i class="icon iconfont icon-right"></i></div>
+          <div @click="allProduct"><span>全部商品</span><i class="iconfont icon-right"></i></div>
         </div>
         <div class="subContent">
           <div class="item" v-for="item in k.SmallCategories" :key="item.Id">
@@ -132,7 +132,7 @@
             margin: 0 auto;
           }
           p {
-            font-size: 4.2vw;
+            font-size: 1.2rem;
             padding: 2vh 0;
             text-align: center;
           }
@@ -155,11 +155,17 @@
         > p {
           color: #333;
           font-weight: 400;
-          font-size: 4vw;
+          font-size: 1.4rem;
         }
         > div {
           color: #999;
-          cursor: pointer
+          cursor: pointer;
+          span{
+            font-size:1.1rem;
+          }
+          .iconfont{
+            font-size:1.3rem;
+          }
         }
       }
       .subContent {
@@ -173,7 +179,7 @@
             margin: 0 auto;
           }
           p {
-            font-size: 2.2vw;
+            font-size: 1.2rem;
             padding: 2vh 0;
             text-align: center;
           }
@@ -196,7 +202,7 @@
           padding: 10px 0;
           a {
             p {
-              font-size: 16px;
+              font-size: 1.4rem;
               padding: 14px 0;
             }
           }
@@ -206,13 +212,21 @@
         .subTitle {
           margin: 3vh 25px 1vh 25px;
           > p {
-            font-size: 18px;
+            font-size: 1.6rem;
+          }
+          >div{
+            span{
+              font-size:1.3rem;
+            }
+            .iconfont{
+              font-size:1.5rem;
+            }
           }
         }
         .subContent {
           .item {
             p {
-              font-size: 16px;
+              font-size: 1.4rem;
               padding: 14px 0;
             }
           }

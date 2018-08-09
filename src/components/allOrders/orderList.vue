@@ -305,9 +305,9 @@
 <style lang="less" scoped>
   .myOrders {
     .orderList {
-      height: 92vh;
+      height: calc(100vh - 60px);
       &::-webkit-scrollbar {
-        display: none
+        display: none;
       }
       overflow-y: scroll;
       -webkit-overflow-scrolling: touch;
@@ -318,7 +318,7 @@
         margin-bottom: 2vh;
         box-shadow: 0 3px 17px #cccccc;
         .orderNo {
-          font-size: 4.2vw;
+          font-size: 1.2rem;
           background-color: #fff;
           margin-bottom: 1px;
           padding: 2vh 2vw;
@@ -356,17 +356,17 @@
             }
             p {
               margin-left: 2vw;
-              font-size: 4.2vw;
+              font-size: 1.4rem;
             }
           }
           > div:nth-of-type(2) {
             .iconfont {
-              font-size: 4.2vw
+              font-size: 1.4rem
             }
           }
         }
         .footer {
-          font-size: 4.2vw;
+          font-size: 1.4rem;
           padding: 1vh 2vw;
           background-color: #fff;
           display: flex;
@@ -375,11 +375,12 @@
           .price {
             span:nth-of-type(1) {
               color: #9a9a9a;
-              font-size: 4.2vw;
+              font-size: 1.4rem;
+              margin-right: 5px;
             }
             span:nth-of-type(2) {
               color: #ff156a;
-              font-size: 4.2vw;
+              font-size: 1.8rem;
             }
           }
           .footer-btn {
@@ -395,28 +396,29 @@
           border-radius: 50%;
           background-color: #d6d6d6;
           margin: 0 auto;
-          margin-top: 11vh;
+          margin-top: 16vh;
           .iconfont {
             color: #fff;
             margin: auto;
-            font-size: 21vw;
+            font-size: 3rem;
           }
         }
         p:nth-of-type(1) {
-          font-size: 4.2vw;
-          padding: 1vh;
+          font-size: 1.4rem;
+          padding: 1.5vh;
           text-align: center;
         }
         p:nth-of-type(2) {
-          font-size: 4vw;
+          font-size: 1.5rem;
           color: #c0c0c0;
-          padding-bottom: 0.8vh;
+          padding-bottom: 1.2vh;
           text-align: center;
         }
         .goToBuy {
-          width: 20vw;
+          width: 25%;
+          font-size:1.2rem;
           text-align: center;
-          margin: auto;
+          margin: 1vh auto;
           padding: 1vh 2vw;
           border: 1px solid #a0a0a0;
           border-radius: 2px;
@@ -428,18 +430,11 @@
 
   @media screen and (min-width: 640px) {
     .myOrders {
-      /* 修改tab切换默认样式 */
-      li.el-menu-item {
-        text-align: center;
-        width: 150px;
-        padding: 0;
-        height: 65px;
-      }
       .orderList {
         .myorder-item {
           margin-bottom: 15px;
           .orderNo {
-            font-size: 22px;
+            font-size: 1.4rem;
             padding: 18px 20px;
           }
           .content {
@@ -455,24 +450,24 @@
               }
               p {
                 margin-left: 15px;
-                font-size: 30px;
+                font-size: 1.6rem;
               }
             }
             > div:nth-of-type(2) {
               .iconfont {
-                font-size: 30px;
+                font-size: 1.6rem;
               }
             }
           }
           .footer {
-            font-size: 26px;
+            font-size: 1.6rem;
             padding: 18px 20px;
             .price {
               span:nth-of-type(1) {
-                font-size: 26px;
+                font-size: 1.6rem;
               }
               span:nth-of-type(2) {
-                font-size: 26px;
+                font-size: 2rem;
               }
             }
             .footer-btn {
@@ -482,25 +477,24 @@
         }
         .empty {
           .img-icon {
-            width: 200px;
-            height: 200px;
-            margin-top: 60px;
+            width: 150px;
+            height: 150px;
             .iconfont {
-              font-size: 130px;
+              font-size: 4rem;
             }
           }
           p:nth-of-type(1) {
-            font-size: 32px;
+            font-size: 1.6rem;
             padding: 20px;
           }
           p:nth-of-type(2) {
-            font-size: 24px;
+            font-size: 1.7rem;
             padding-bottom: 10px;
           }
           .goToBuy {
             width: 140px;
             padding: 8px 16px;
-            font-size: 24px;
+            font-size: 1.4rem;
           }
         }
       }

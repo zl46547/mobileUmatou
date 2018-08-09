@@ -22,10 +22,10 @@
       display: flex;
       align-items: center;
       justify-content: space-around;
-      margin: 3vh 0;
-      font-size: 4.5vw;
+      margin: 2vh 0;
+      font-size: 1.5rem;
       .iconfont{
-        font-size:5.5vw;
+        font-size:1.8rem;
         color: #ec7b11;
       }
       span {
@@ -38,9 +38,9 @@
     .service {
       ul {
         margin: 25px 0;
-        font-size: 26px;
+        font-size: 1.9rem;
         .iconfont{
-          font-size:30px;
+          font-size:2.2rem;
         }
         span {
           margin-left: 8px;

@@ -164,7 +164,7 @@
     background-color: #fff;
     position: relative;
     p {
-      font-size: 4vw;
+      font-size: 1.4rem;
       margin-bottom: 2vh;
     }
     > div {
@@ -172,11 +172,11 @@
       justify-content: space-between;
       .bounceSelected {
         font-weight: bold;
-        font-size: 5vw;
+        font-size: 1.5rem;
       }
       .iconfont {
         cursor: pointer;
-        font-size: 5vw;
+        font-size: 1.5rem;
       }
     }
     .modalContent {
@@ -197,7 +197,7 @@
             padding-right: 2vw;
             font-weight: bold;
             .iconfont {
-              font-size: 6vw;
+              font-size: 1.6rem;
             }
             .icon-roundcheck {
               color: #ff2b1c;
@@ -245,15 +245,15 @@
     .bounce {
       padding: 20px 25px;
       p {
-        font-size: 24px;
+        font-size: 1.6rem;
         margin-bottom: 15px;
       }
       > div {
         .bounceSelected {
-          font-size: 24px;
+          font-size: 1.7rem;
         }
         .iconfont {
-          font-size: 24px;
+          font-size: 1.7rem;
         }
       }
       .modalContent {
@@ -264,7 +264,7 @@
             .checkbox {
               padding-right: 10px;
               .iconfont {
-                font-size: 30px;
+                font-size: 1.8rem;
               }
             }
           }

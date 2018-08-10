@@ -107,7 +107,7 @@
     overflow: hidden;
     width: 100%;
     h1 {
-      font-size: 5vw;
+      font-size: 1.5rem;
     }
     .content-body {
       height: 84vh;
@@ -140,14 +140,14 @@
         color: #fff;
         align-items: baseline;
         span:nth-of-type(1) {
-          font-size: 5vw;
+          font-size: 1.5rem;
         }
         span:nth-of-type(2) {
-          font-size: 8vw;
+          font-size: 1.8rem;
           padding: 0 2vw;
         }
         span:nth-of-type(3) {
-          font-size: 8vw;
+          font-size: 1.8rem;
         }
       }
     }
@@ -156,20 +156,20 @@
   @media screen and (min-width: 640px) {
     .content {
       h1 {
-        font-size: 28px;
+        font-size: 1.7rem;
       }
       .footer {
         width: 640px;
         > div {
           span:nth-of-type(1) {
-            font-size: 22px;
+            font-size: 1.7rem;
           }
           span:nth-of-type(2) {
-            font-size: 28px;
+            font-size: 1.9rem;
             padding: 0 12px;
           }
           span:nth-of-type(3) {
-            font-size: 32px;
+            font-size: 2rem;
           }
         }
       }

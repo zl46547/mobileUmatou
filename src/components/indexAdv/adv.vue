@@ -118,14 +118,14 @@
                 white-space: nowrap;
                 align-items: baseline;
                 color: #ff718e;
-                font-size: 2.8vw;
+                font-size: 1.1rem;
                 span:nth-of-type(2) {
-                  font-size: 3.8vw;
+                  font-size: 1.6rem;
                 }
               }
               .defaultPrice {
                 span {
-                  font-size: 2.8vw;
+                  font-size: 1rem;
                   color: #aaa;
                   text-decoration: line-through;
                 }
@@ -138,7 +138,7 @@
               cursor: pointer;
               border-radius: 0 0 10px 10px;
               p {
-                font-size: 4.2vw;
+                font-size: 1.2rem;
                 color: #fff;
                 margin: auto;
               }

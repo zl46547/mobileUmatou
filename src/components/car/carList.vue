@@ -265,10 +265,10 @@
             text-align: center;
             cursor: pointer;
             .icon-round {
-              font-size: 6vw;
+              font-size: 1.8rem;
             }
             .icon-roundcheck {
-              font-size: 6vw;
+              font-size: 1.8rem;
               color: #00d300;
             }
           }
@@ -294,7 +294,7 @@
                 white-space: nowrap;
                 padding-bottom: 3vh;
                 color: #333;
-                font-size: 4vw;
+                font-size: 1.4rem;
               }
               .content {
                 display: flex;
@@ -304,11 +304,11 @@
                   p {
                     &:nth-of-type(1) {
                       color: #999;
-                      font-size: 4vw;
+                      font-size: 1.4rem;
                     }
                     &:nth-of-type(2) {
                       color: #f05423;
-                      font-size: 5vw;
+                      font-size: 1.5rem;
                     }
                   }
                 }
@@ -319,9 +319,9 @@
                     justify-content: flex-end;
                     div {
                       display: flex;
-                      font-size: 4vw;
-                      width: 6vw;
-                      height: 6vw;
+                      font-size: 1.4rem;
+                      width: 8vw;
+                      height: 8vw;
                       border: 1px solid #cccccc;
                       p {
                         margin: auto;
@@ -339,7 +339,7 @@
                   }
                   .delete {
                     margin-top: 1vh;
-                    font-size: 1vh;
+                    font-size: 1.1rem;
                     float: right;
                     cursor: pointer;
                     p {
@@ -363,7 +363,7 @@
           display: flex;
           align-items: center;
           p {
-            font-size: 4vw;
+            font-size: 1.4rem;
             padding: 0 12vw
           }
         }
@@ -390,14 +390,14 @@
           .checkAll-btn {
             cursor: pointer;
             .icon-round {
-              font-size: 6vw;
+              font-size: 1.8rem
             }
             .icon-roundcheck {
-              font-size: 6vw;
+              font-size: 1.8rem;
               color: #00d300;
             }
             span {
-              font-size: 5vw;
+              font-size: 1.5rem;
               padding-left: 1vw;
             }
           }
@@ -406,10 +406,10 @@
             align-items: baseline;
             .count {
               padding-left: 5vw;
-              font-size: 6vw;
+              font-size: 1.6rem;
             }
             .money {
-              font-size: 5vw;
+              font-size: 1.5rem;
               color: #ff2b1c;
               display: table-cell;
               vertical-align: bottom
@@ -424,6 +424,7 @@
           display: flex;
           text-align: center;
           padding: 0 4vw;
+          font-size:1rem;
           > div {
             margin: auto
           }
@@ -445,10 +446,10 @@
           .checkbox {
             .checkbox-left {
               .icon-round {
-                font-size: 30px;
+                font-size: 2rem;
               }
               .icon-roundcheck {
-                font-size: 30px;
+                font-size: 2rem;
               }
             }
             .checkbox-right {
@@ -457,23 +458,23 @@
               }
               .img-right {
                 > p {
-                  font-size: 20px;
+                  font-size: 1.6rem;
                 }
                 .content {
                   .price {
                     p {
                       &:nth-of-type(1) {
-                        font-size: 20px;
+                        font-size: 1.6rem;
                       }
                       &:nth-of-type(2) {
-                        font-size: 24px;
+                        font-size: 1.7rem;
                       }
                     }
                   }
                   .operate {
                     .inputNumber {
                       div {
-                        font-size: 20px;
+                        font-size: 1.6rem;
                         width: 30px;
                         height: 30px;
                       }
@@ -483,7 +484,7 @@
                     }
                     .delete {
                       margin-top: 1vh;
-                      font-size: 14px;
+                      font-size: 1.3rem;
                       p {
                         padding: 1vh 0;
                         width: 100px;
@@ -498,7 +499,7 @@
             height: 70px;
             p {
               padding: 0 105px;
-              font-size: 24px;
+              font-size: 1.6rem;
             }
           }
         }
@@ -511,28 +512,29 @@
           .checkAll {
             .checkAll-btn {
               .icon-round {
-                font-size: 30px;
+                font-size: 2rem;
               }
               .icon-roundcheck {
-                font-size: 30px;
+                font-size: 2rem;
               }
               span {
-                font-size: 18px;
+                font-size: 1.7rem;
                 padding-left: 10px;
               }
             }
             .allPrice {
               .count {
                 padding-left: 35px;
-                font-size: 24px;
+                font-size: 1.8rem;
               }
               .money {
-                font-size: 24px;
+                font-size: 1.7rem;
               }
             }
           }
           .count-btn {
             padding: 0 50px;
+            font-size:1.2rem;
           }
         }
       }

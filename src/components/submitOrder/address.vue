@@ -2,16 +2,20 @@
   <div class="addAddress">
     <div class="addressContent">
       <i class="iconfont icon-location"></i>
-      <div class="address-info">
-        <el-row style="padding: 1vh 0">
-          <el-col :span="7"><p class="receiveMan-title">收货人：</p></el-col>
-          <el-col :span="9"><p class="receiveMan-name">{{addressInfo.name}}</p></el-col>
-          <el-col :span="8"><p class="receiveMan-tel" style="">{{addressInfo.tel}}</p></el-col>
-        </el-row>
-        <el-row style="padding: 1vh 0">
-          <el-col :span="7"><p class="receiveAddr-title">收货地址：</p></el-col>
-          <el-col :span="15"><p class="receiveAddr-detail">{{addressInfo.address}}</p></el-col>
-        </el-row>
+      <div>
+        <div class="address-info">
+          <p class="receiveMan-title">收货人：</p>
+          <div>
+            <p class="receiveMan-name">{{addressInfo.name}}</p>
+            <p class="receiveMan-tel">{{addressInfo.tel}}</p>
+          </div>
+        </div>
+        <div class="address-info">
+          <p class="receiveMan-title">收货地址：</p>
+          <div>
+            <p class="receiveMan-tel">{{addressInfo.address}}</p>
+          </div>
+        </div>
       </div>
       <i class="iconfont icon-right"></i>
     </div>
@@ -43,37 +47,42 @@
     background-color: #fff;
     margin-top: 2px;
     .addressContent {
-      display: table;
+      display: flex;
+      align-items: center;
       width: 100%;
+      padding: 1vh 0;
       cursor: pointer;
-      .iconfont {
-        text-align: center;
-        display: table-cell;
-        vertical-align: middle;
-        width: 10%;
-      }
       .icon-location {
-        font-size: 7vw;
+        font-size: 1.7rem;
+        margin: 10px;
       }
       .icon-right {
-        font-size: 4vw;
+        font-size: 1.7rem;
+        margin: 10px;
       }
-      .address-info {
-        display: table-cell;
-        padding: 2vh;
-        padding-bottom: 0;
-        width: 80%;
-        .receiveMan-title {
-          text-align: right;
+      >div{
+        width: 100%;
+        .iconfont {
+          text-align: center;
+          display: table-cell;
+          vertical-align: middle;
+          width: 10%;
         }
-        .receiveMan-title, .receiveMan-name, .receiveMan-tel {
-          font-size: 4.5vw;
-        }
-        .receiveAddr-title {
-          text-align: right;
-        }
-        .receiveAddr-title, .receiveAddr-detail {
-          font-size: 4vw;
+        .address-info {
+          display: flex;
+          width: 100%;
+          padding: 1vh 0;
+          font-size: 1.5rem;
+          .receiveMan-title {
+            width: 100px;
+            text-align: right;
+            white-space: nowrap;
+          }
+          > div {
+            width: 70%;
+            display: flex;
+            justify-content: space-between;
+          }
         }
       }
     }
@@ -85,24 +94,15 @@
   @media screen and (min-width: 640px) {
     .addAddress {
       .addressContent {
-        width: 100%;
-        .iconfont {
-          width: 10%;
-        }
         .icon-location {
-          font-size: 40px;
+          font-size: 2.5rem;
         }
         .icon-right {
-          font-size: 25px;
+          font-size: 2.5rem;
         }
-        .address-info {
-          padding: 20px 0;
-          width: 80%;
-          .receiveMan-title, .receiveMan-name, .receiveMan-tel {
-            font-size: 25px;
-          }
-          .receiveAddr-title, .receiveAddr-detail {
-            font-size: 20px;
+        >div{
+          .address-info {
+            font-size: 1.8rem;
           }
         }
       }

@@ -150,7 +150,7 @@
     overflow: hidden;
     width: 100%;
     h1 {
-      font-size: 5vw;
+      font-size: 1.5rem;
     }
     .content-body {
       height: 84vh;
@@ -171,13 +171,13 @@
           display: flex;
           justify-content: space-between;
           align-items: center;
-          font-size: 4vw;
+          font-size: 1.4rem;
           margin: 1vh 0;
           .subtitle {
-            font-size: 4vw;
+            font-size: 1.4rem;
           }
           .subValue {
-            font-size: 4.5vw;
+            font-size: 1.5rem;
             font-weight: bold;
           }
         }
@@ -195,12 +195,12 @@
       > div:nth-of-type(1) {
         width: 65%;
         margin-left: 5vw;
-        font-size: 7vw;
+        font-size: 1.7rem;
         color: #ff3e5e;
         display: flex;
         align-items: baseline;
         sub {
-          font-size: 5vw;
+          font-size: 1.5rem;
           padding-right: 5px;
         }
       }
@@ -213,7 +213,7 @@
         background-color: rgb(255, 92, 34);
         .submit-btn {
           margin: auto;
-          font-size: 4vw;
+          font-size: 1.4rem;
         }
       }
     }

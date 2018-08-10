@@ -61,7 +61,7 @@
     left: 50%;
     margin-left: -48%;
     bottom: 20vh;
-    font-size: 2vw;
+    font-size: 1.2rem;
     .cartContainer{
       width: 14vw;
       height: 14vw;
@@ -70,7 +70,7 @@
       display: flex;
       .iconfont {
         margin: auto;
-        font-size: 6.2vw;
+        font-size: 1.8rem;
         color: #fff;
       }
       .num {
@@ -96,17 +96,17 @@
       margin-left: -306px;
       bottom: 140px;
       .cartContainer{
-        font-size: 20px;
-        width: 70px;
-        height: 70px;
+        font-size: 1.4rem;
+        width: 60px;
+        height: 60px;
         .iconfont {
-          font-size: 46px;
+          font-size: 2.5rem;
         }
         .num {
-          right: -7px;
-          top: -8px;
-          width: 30px;
-          height: 30px;
+          right: -13%;
+          top: -9%;
+          width: 25px;
+          height: 25px;
         }
       }
     }

@@ -1,9 +1,15 @@
 import * as types from '../types'
 import Util from '../../util/common'
 
+const defaultUser = [
+  {
+    userName: '18115169031',
+    password: '123456'
+  }
+]
 const state = {
   token: Util.getLocal('TOKEN') || '',
-  userList: Util.getLocal('USER_LIST') || []
+  userList: Util.getLocal('USER_LIST') || defaultUser
 }
 const mutations = {
   /* 登录TOKEN */

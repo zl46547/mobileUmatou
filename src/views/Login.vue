@@ -262,20 +262,20 @@
           .iconfont {
             padding: 5px 15px 5px 5px;
             color: #fff;
-            font-size: 8vw;
+            font-size: 1.8rem;
           }
           .form-div {
             border: 1.5px solid rgba(255, 255, 255, 0.5);
             border-radius: 3px;
             display: flex;
             align-items: center;
-            font-size: 7vw;
+            font-size: 1.7rem;
             margin-bottom: 3vh;
           }
           input {
             color: #4d4d4d;
             background-color: transparent;
-            font-size: 18px;
+            font-size: 1.2rem;
             font-weight: 300;
             width: 100%;
             &::-webkit-input-placeholder {
@@ -292,7 +292,7 @@
             span {
               cursor: pointer;
               color: #fff;
-              font-size: 3vw;
+              font-size: 1.3rem;
             }
           }
           .login-button {
@@ -302,7 +302,7 @@
             letter-spacing: 12px;
             color: #fff;
             cursor: pointer;
-            font-size: 18px;
+            font-size: 1.2rem;
             position: relative;
             left: 50%;
             transform: translateX(-50%);
@@ -465,22 +465,22 @@
           }
           form {
             .iconfont {
-              font-size: 40px;
+              font-size: 2rem;
             }
             input {
-              font-size: 24px;
+              font-size: 1.9rem;
               &::-webkit-input-placeholder {
                 color: #ffffff;
               }
             }
             .bottom {
               span {
-                font-size: 20px;
+                font-size: 1.4rem;
                 cursor: pointer;
               }
             }
             .login-button {
-              font-size: 18px;
+              font-size: 1.4rem;
               position: relative;
               left: 50%;
               transform: translateX(-50%);

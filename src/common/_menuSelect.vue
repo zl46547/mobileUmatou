@@ -61,7 +61,8 @@
     justify-content: space-around;
     z-index: 999;
     background-color: #fafafa;
-    box-shadow: 0 0.5px 20px rgb(221, 221, 221);
+    box-shadow: 0 3px 20px rgb(235, 235, 235);
+    border-top: 1px solid rgba(210, 208, 208, 0.25);
     .menu-item {
       width: 100%;
       height: 100%;

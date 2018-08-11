@@ -5,13 +5,13 @@
         <img src="../../assets/images/timeoutBuy.png" alt="a">
       </div>
       <div class="time">
-        <span class="time-col">剩</span>
-        <span class="time-num">{{getTime.hour}}</span>
-        <span class="time-col">:</span>
-        <span class="time-num">{{getTime.min}}</span>
-        <span class="time-col">:</span>
-        <span class="time-num">{{getTime.seconds}}</span>
-        <span class="time-col">结束</span>
+        <p class="time-col">剩</p>
+        <p class="time-num">{{getTime.hour}}</p>
+        <p class="time-col">:</p>
+        <p class="time-num">{{getTime.min}}</p>
+        <p class="time-col">:</p>
+        <p class="time-num">{{getTime.seconds}}</p>
+        <p class="time-col">结束</p>
       </div>
     </div>
     <div class="flashSale-list">
@@ -90,7 +90,8 @@ import { Lazyload } from 'mint-ui'
       width: 28vw;
     }
     .time {
-      display: flex;align-items: center;
+      display: flex;
+      align-items: center;
       .time-num {
         display: flex;
         align-items: center;
@@ -100,15 +101,14 @@ import { Lazyload } from 'mint-ui'
         border: 1px solid #aaa;
         color: #666;
         border-radius: 3px;
-        font-size:1.2rem;
+        font-size: 1.2rem;
         letter-spacing: 2px;
       }
       .time-col {
         color: #666;
-        font-family:"Microsoft Himalaya";
-        padding: 1vw;
+        padding: 0 1vw;
         text-align: center;
-        font-size:1.3rem;
+        font-size: 1.3rem;
         letter-spacing: 2px;
       }
     }
@@ -166,11 +166,11 @@ import { Lazyload } from 'mint-ui'
             width: 40px;
             height: 40px;
             letter-spacing: 2px;
-            font-size:1.4rem;
+            font-size: 1.4rem;
           }
           .time-col {
-            padding: 4px;
-            font-size:1.5rem;
+            padding: 0 4px;
+            font-size: 2rem;
           }
         }
       }
@@ -199,16 +199,17 @@ import { Lazyload } from 'mint-ui'
             }
           }
         }
-        ul::-webkit-scrollbar {/*滚动条整体样式*/
-          width: 1px;     /*高宽分别对应横竖滚动条的尺寸*/
+        ul::-webkit-scrollbar { /*滚动条整体样式*/
+          width: 1px; /*高宽分别对应横竖滚动条的尺寸*/
           height: 8px;
         }
-        ul::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+        ul::-webkit-scrollbar-thumb { /*滚动条里面小方块*/
           border-radius: 8px;
-          background-color: rgba(109, 196, 86, 0.91);
+          background-color: #fff;
+          box-shadow: 0 0 15px #1fc200 inset;
         }
-        ul::-webkit-scrollbar-track {/*滚动条里面轨道*/
-          -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+        ul::-webkit-scrollbar-track { /*滚动条里面轨道*/
+          -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
           border-radius: 10px;
           background: #EDEDED;
         }

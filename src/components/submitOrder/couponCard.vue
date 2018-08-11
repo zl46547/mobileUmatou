@@ -1,15 +1,25 @@
 <template>
-  <div class="sawtooth" style="display: flex;align-items: center;" :style="{'background-color':coupon.backgroundColor}">
-    <div class="content">
-      <div class="par">
-        <p class="sign">￥</p>
-        <p class="amount">{{coupon.Amount}}</p>
-        <p>优惠券</p>
+  <div class="coupon-item">
+    <div class="style-two" :style="{'background-color':coupon.backgroundColor[0]}">
+      <div class="dot-contain-top">
+        <div class="dot" v-for="(item,i) in 25" :key="i" :style="{'background-color':coupon.backgroundColor[0]}"></div>
       </div>
-      <p class="description">{{coupon.Description}}</p>
-    </div>
-    <div class="copy">
-      副券<p>{{coupon.BeginTime}}<br>{{coupon.EndTime}}</p>
+      <div class="dot-contain-bottom">
+        <div class="dot" v-for="(item,i) in 25" :key="i" :style="{'background-color':coupon.backgroundColor[0]}"></div>
+      </div>
+      <div class="info-box">
+        <p class="ticket-title">优鲜码头优惠</p>
+        <div class="coupon-money">
+          <div class="lay account" :style="{'color':coupon.backgroundColor[1]}">￥<span>{{coupon.Amount}}</span></div>
+          <div class="lay">
+            <p class="demand">{{coupon.Description}}</p>
+          </div>
+        </div>
+        <p class="data">{{coupon.BeginTime}}~{{coupon.EndTime}}</p>
+      </div>
+      <a href="javascript:;" class="get-btn">
+        <span>立即 <br>使用</span>
+      </a>
     </div>
   </div>
 </template>
@@ -28,129 +38,205 @@
 </script>
 
 <style lang="less" scoped>
-
-  .sawtooth {
-    position: relative;
-    width: 80vw;
-    height: 23vw;
-    /* 相对定位，方便让before和after伪元素绝对定位偏移 */
-    /* 把超出p的部分隐藏起来 */
-    overflow: hidden;
-    .content{
-      padding: 3vh 5vw;
-      width: 40vw;
-      border-right: 2px dashed rgba(255, 255, 255, .3);
-      .par {
-        display: table;
-        p {
-          font-size: 4.5vw;
-          color: rgba(255, 255, 255, .8);
-          vertical-align: bottom;
-          display: table-cell;
-        }
-        .amount {
-          font-size: 9.5vw;
-          color: #fff;
-          padding-right: 1vw;
-          line-height: 0.8;
-        }
-        .sign {
-          font-size: 6vw;
+  .coupon-item {
+    .style-two{
+      width: 100%;
+      height: 25vw;
+      position: relative;
+      margin: 5% 0;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      .dot-contain-top,.dot-contain-bottom{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width:100%;
+        position: absolute;
+        .dot{
+          width:3vw;
+          height:3vw;
+          border-radius: 50%;
         }
       }
-      .description {
+      .dot-contain-top{
+        top: -1.5vw;
+      }
+      .dot-contain-bottom{
+        bottom: -1.5vw;
+      }
+      .info-box{
+        flex: 1;
+        padding: 2% 1% 2% 10%;
+        &:after,&:before{
+          content: "";
+          width: 6vw;
+          height: 6vw;
+          position: absolute;
+          background-color: #fff;
+          border-radius: 50%;
+          left: -3vw;
+        }
+        &:before{
+          top: 15%;
+        }
+        &:after{
+          bottom: 15%;
+        }
+        .data{
+          font-size: 1.1rem;
+          white-space: nowrap;
+          word-break: break-all;
+        }
+      }
+      .ticket-title {
+        font-size: 1.1rem;
         color: #fff;
-        font-size: 3.5vw;
-        margin-top: 1vh;
+      }
+      .coupon-money {
+        width: 100%;
+        display: flex;
+        font-size: 2rem;
+        align-items: center;
+        .account {
+          span{
+            font-size: 3.8rem;
+          }
+        }
+        .lay{
+          font-size:1.1rem;
+          line-height: 1;
+          .demand{
+            margin-left: 10px;
+          }
+        }
+      }
+      .get-btn{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40%;
+        height: 100%;
+        text-align: center;
+        color: #fff;
+        font-size: 1.5rem;
+        position: relative;
+        &:after,&:before {
+          content: "";
+          width: 6vw;
+          height: 6vw;
+          position: absolute;
+          background-color: #fff;
+          border-radius: 50%;
+          right: -3vw;
+        }
+        &:before {
+          top: 15%;
+        }
+        &:after{
+          bottom: 15%;
+        }
+        span{
+          width: 4rem;
+          font-size: 1.8rem;
+          word-break: keep-all;
+        }
       }
     }
-    .copy {
-      text-align: center;
-      padding: 3vw 2vw;
-      width: 30vw;
-      vertical-align: text-bottom;
-      font-family: "Microsoft Himalaya";
-      font-size: 7vw;
-      color: rgb(255, 255, 255);
-      p {
-        font-size: 5vw;
+  }
+
+  @media screen and (min-width: 500px) {
+    .coupon-item {
+      .style-two{
+        .info-box{
+          .data{
+            font-size: 1.5rem;
+          }
+        }
+        .ticket-title {
+          font-size: 1.5rem;
+          color: #fff;
+        }
+        .coupon-money {
+          font-size: 2.4rem;
+          .account {
+            span{
+              font-size: 4.3rem;
+            }
+          }
+          .lay{
+            font-size:1.5rem;
+          }
+        }
+        .get-btn{
+          font-size: 1.9rem;
+          span{
+            font-size: 2.2rem;
+          }
+        }
       }
     }
   }
-
-  .sawtooth:before, .sawtooth:after {
-    content: ' ';
-    width: 0;
-    height: 24vw;
-    position: absolute;
-  }
-
-  .sawtooth:before {
-    /* 圆点型的border */
-    border-right: 11px dotted white;
-    /* 偏移一个半径，让圆点的一半覆盖p */
-    left: -3px;
-    top: 8px;
-  }
-
-  .sawtooth:after {
-    /* 圆点型的border */
-    border-left: 11px dotted white;
-    /* 偏移一个半径，让圆点的一半覆盖p */
-    right: -3px;
-    top: 8px;
-  }
-
   @media screen and (min-width: 640px) {
-    .sawtooth {
-      width: 530px;
-      height: 150px;
-      .content{
-        padding: 15px 30px;
-        width: 300px;
-        .par {
-          p {
-            font-size: 25px;
-          }
-          .amount {
-            font-size: 60px;
-            padding-right: 5px;
-            line-height: 0.8;
-          }
-          .sign {
-            font-size: 30px;
+    .coupon-item {
+      .style-two{
+        width: 100%;
+        height: 150px;
+        .dot-contain-top,.dot-contain-bottom{
+          .dot{
+            width:26px;
+            height:26px;
           }
         }
-        .description {
-          font-size: 20px;
-          margin-top: 8px;
+        .dot-contain-top{
+          top: -13px;
+        }
+        .dot-contain-bottom{
+          bottom: -13px;
+        }
+        .info-box{
+          &:after,&:before{
+            content: "";
+            width: 40px;
+            height: 40px;
+            left: -20px;
+          }
+          .data{
+            font-size: 1.8rem;
+            white-space: nowrap;
+            word-break: break-all;
+          }
+        }
+        .ticket-title {
+          font-size: 1.8rem;
+        }
+        .coupon-money {
+          font-size: 2.7rem;
+          .account {
+            span{
+              font-size: 5.2rem;
+            }
+          }
+          .lay{
+            font-size:1.8rem;
+          }
+        }
+        .get-btn{
+          font-size: 2.2rem;
+          &:after,&:before {
+            content: "";
+            width: 40px;
+            height: 40px;
+            right: -20px;
+          }
+          span{
+            font-size: 2.5rem;
+          }
         }
       }
-      .copy {
-        padding: 15px 10px;
-        width: 180px;
-        font-size: 38px;
-        p {
-          font-size: 28px;
-        }
-      }
-    }
-    .sawtooth:before, .sawtooth:after {
-      height: 130px;
-    }
-
-    .sawtooth:before {
-      border-right: 16px dotted white;
-      left: -6px;
-      top: 11px;
-    }
-
-    .sawtooth:after {
-      /* 圆点型的border */
-      border-left: 16px dotted white;
-      /* 偏移一个半径，让圆点的一半覆盖p */
-      right: -6px;
-      top: 11px;
     }
   }
 </style>

@@ -49,7 +49,7 @@
         background-color: #fff;
         display: table;
         /*align-items: flex-start;*/
-        padding: 5vw;
+        padding: 1vh 5vw;
         .img-left{
           display: table-cell;
           vertical-align: middle;
@@ -70,22 +70,22 @@
             text-overflow: ellipsis;
             padding-bottom: 3vw;
             color: #333;
-            font-size: 5vw;
+            font-size: 1.5rem;
           }
           .content {
             display: flex;
             justify-content: space-between;
             .price p:nth-of-type(1) {
               color: #999;
-              font-size: 4vw;
+              font-size: 1.4rem;
             }
             .price p:nth-of-type(2) {
               color: #f05423;
-              font-size: 5vw;
+              font-size: 1.5rem;
             }
             .buyNum {
               color: #999;
-              font-size: 5vw;
+              font-size: 1.5rem;
             }
           }
         }
@@ -98,7 +98,7 @@
         align-items: center;
         margin-top: 2px;
         p {
-          font-size: 5vw;
+          font-size: 1.5rem;
           padding: 0 12vw;
         }
       }
@@ -110,7 +110,7 @@
       .order-content {
         margin-bottom: 20px;
         .orderitem {
-          padding: 15px;
+          padding: 10px 15px;
           .img-left{
             img {
               width: 150px;
@@ -123,17 +123,17 @@
             width: 100%;
             p {
               padding-bottom: 20px;
-              font-size: 25px;
+              font-size: 1.7rem;
             }
             .content {
               .price p:nth-of-type(1) {
-                font-size: 20px;
+                font-size: 1.6rem;
               }
               .price p:nth-of-type(2) {
-                font-size: 25px;
+                font-size: 1.7rem;
               }
               .buyNum {
-                font-size: 25px;
+                font-size: 1.7rem;
               }
             }
           }
@@ -141,7 +141,7 @@
         .carList-bottom {
           height: 70px;
           p {
-            font-size: 25px;
+            font-size: 1.7rem;
             padding: 0 70px;
           }
         }

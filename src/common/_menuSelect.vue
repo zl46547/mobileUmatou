@@ -39,6 +39,11 @@
        */
       menuClick(val) {
         var vm = this
+        // 模拟请求数据
+        vm.$store.commit('SET_LOADING', true)
+        setTimeout(function () {
+          vm.$store.commit('SET_LOADING', false)
+        }, 500)
         vm.menuSelected = val
         vm.$emit('menu-selected', vm.menuSelected)
       }

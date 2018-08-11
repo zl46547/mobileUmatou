@@ -31,7 +31,7 @@
       </div>
       <div class="footer">
         <div>
-          <sub>¥</sub>{{getFinalPrice}}
+          <span>¥</span>{{getFinalPrice}}
         </div>
         <div @click="submitOrder">
           <div class="submit-btn">提交订单</div>
@@ -110,7 +110,7 @@
           orderList: this.$store.state.car.selectedCarList, // 订单列表
           finalPrice: this.getFinalPrice, // 最终价格
           submitTime: moment().format('YYYY年MM月DD日 HH:mm:ss'), // 订单提交时间
-          deadTime: moment().add(15, 'minute')._d.getTime(), // 截止日期
+          deadTime: moment().add(1, 'minute')._d.getTime(), // 截止日期
           bounce: this.bounce.Amount, // 优惠券
           payWay: this.payWay, // 支付方式
           ticket: this.ticket, // 发票
@@ -199,7 +199,7 @@
         color: #ff3e5e;
         display: flex;
         align-items: baseline;
-        sub {
+        span {
           font-size: 1.5rem;
           padding-right: 5px;
         }

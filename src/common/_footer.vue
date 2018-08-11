@@ -93,7 +93,7 @@
       width: 100%;
       .tabbar-item {
         text-align: center;
-        .iconfont{
+        .iconfont {
           font-size: 1.5rem;
         }
         .tabbar-item-name {
@@ -120,7 +120,7 @@
       margin-left: -320px;
       .tabbar {
         .tabbar-item {
-          .iconfont{
+          .iconfont {
             font-size: 1.8rem;
           }
           .tabbar-item-name {

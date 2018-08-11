@@ -109,7 +109,7 @@
       margin: auto;
       width: 100vw;
       .remainTime {
-        font-size: 5vw;
+        font-size: 1.5rem;
         color: #bebebe;
         margin: auto;
         text-align: center
@@ -120,14 +120,14 @@
         justify-content: center;
         padding: 1vh;
         p:nth-of-type(1) {
-          font-size: 6vw;
+          font-size: 1.6rem;
         }
         p:nth-of-type(2) {
-          font-size: 9vw;
+          font-size: 1.9rem;
         }
       }
       .orderNo {
-        font-size: 1vw;
+        font-size: 1.1rem;
         color: #c8c8c8;
         text-align: center;
       }
@@ -144,11 +144,11 @@
         justify-content: space-between;
         .payWayName {
           i {
-            font-size: 8vw;
+            font-size: 1.8rem;
             padding-right: 3vw;
           }
           span {
-            font-size: 6vw;
+            font-size: 1.6rem;
           }
         }
         .checkbox {
@@ -157,7 +157,7 @@
           padding-right: 2vw;
           font-weight: bold;
           .iconfont {
-            font-size: 7vw;
+            font-size: 1.7rem;
           }
           .icon-roundcheck {
             color: #ff2b1c;
@@ -173,19 +173,19 @@
         padding: 20px 8px;
         width: 640px;
         .remainTime {
-          font-size: 22px;
+          font-size: 1.7rem;
         }
         .ammount {
           padding: 8px;
           p:nth-of-type(1) {
-            font-size: 32px;
+            font-size: 1.8rem;
           }
           p:nth-of-type(2) {
-            font-size: 45px;
+            font-size: 2.1rem;
           }
         }
         .orderNo {
-          font-size: 12px;
+          font-size: 1.3rem;
         }
       }
       .payWaySel {
@@ -195,17 +195,17 @@
           padding: 22px 24px;
           .payWayName {
             i {
-              font-size: 40px;
+              font-size: 2rem;
               padding-right: 18px;
             }
             span {
-              font-size: 28px;
+              font-size: 1.8rem;
             }
           }
           .checkbox {
             padding-right: 15px;
             .iconfont {
-              font-size: 35px;
+              font-size: 1.9rem;
             }
           }
         }

@@ -74,6 +74,10 @@
         <p slot="title" class="message-title">确认收货</p>
         <p slot="description" class="message-description">确认收货后将无法发起退货，是否继续操作？</p>
       </v-message>
+      <v-message v-if="showReOrderMessage" @is-comfirm="isComfirmReOrder">
+        <p slot="title" class="message-title">重新下单</p>
+        <p slot="description" class="message-description">已添加{{operaObj.orderList.length}}个商品到购物车，是否立即前往购物车查看？</p>
+      </v-message>
     </div>
   </div>
 </template>
@@ -88,6 +92,7 @@
       return {
         showDelMessage: false,
         showComfirmOrderMessage: false,
+        showReOrderMessage: false,
         operaObj: '', // 要操作的对象
         menus: [
           {
@@ -202,8 +207,9 @@
        * @param orderStatus  订单状态
        */
       handleSelect (orderStatus) {
-        this.selected = orderStatus
-        this.initData(orderStatus)
+        var vm = this
+        vm.selected = orderStatus
+        vm.initData(orderStatus)
       },
       /**
        * 确认删除
@@ -254,22 +260,26 @@
        * @param val
        */
       goToReOrder (reOrders) {
+        var vm = this
         // 将商品添加到购物车
-        var carlist = this.$store.state.car.carList
+        var carlist = vm.$store.state.car.carList
         // 设置默认选中
         reOrders.orderList.forEach(function (e) {
           e.checked = true
         })
         var newCarlist = reOrders.orderList.union(carlist)
-        this.$store.commit('CAR_LIST', newCarlist)
+        vm.$store.commit('CAR_LIST', newCarlist)
         // 从我的订单中删除
-        this.delOrder(reOrders)
-        this.$alert(`已添加${reOrders.orderList.length}个商品到购物车，是否立即前往购物车查看？`, '提示', {
-          confirmButtonText: '确定',
-          callback: action => {
-            this.$router.push({name: '购物车页'})
-          }
-        })
+        vm.delOrder(reOrders)
+        vm.operaObj = reOrders
+        vm.showReOrderMessage = true
+      },
+      isComfirmReOrder(val) {
+        var vm = this
+        vm.showReOrderMessage = false
+        if (val) {
+          this.$router.push({name: '购物车页'})
+        }
       },
       isComfirmOrder(val) {
         var vm = this
@@ -330,7 +340,7 @@
         }
         .content {
           background-color: #fff;
-          padding: 1vh 2vw;
+          padding: 1vh 2vw 0 2vw;
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -416,7 +426,7 @@
         }
         .goToBuy {
           width: 25%;
-          font-size:1.2rem;
+          font-size: 1.2rem;
           text-align: center;
           margin: 1vh auto;
           padding: 1vh 2vw;
@@ -438,7 +448,7 @@
             padding: 18px 20px;
           }
           .content {
-            padding: 8px 15px;
+            padding: 8px 15px 0 15px;
             > div:nth-of-type(1) {
               .imgWidth {
                 width: 460px;
@@ -461,7 +471,7 @@
           }
           .footer {
             font-size: 1.6rem;
-            padding: 18px 20px;
+            padding: 5px 20px;
             .price {
               span:nth-of-type(1) {
                 font-size: 1.6rem;

@@ -75,7 +75,7 @@
     background-color: #fff;
     position: relative;
     p {
-      font-size: 4vw;
+      font-size: 1.4rem;
       margin-bottom: 2vh;
     }
     > div {
@@ -83,11 +83,11 @@
       justify-content: space-between;
       .payWaySelected {
         font-weight: bold;
-        font-size: 5vw;
+        font-size: 1.5rem;
       }
       .iconfont {
         cursor: pointer;
-        font-size: 5vw;
+        font-size: 1.5rem;
       }
     }
     .modalContent {
@@ -116,15 +116,15 @@
     .payWay {
       padding: 20px 25px;
       p {
-        font-size: 20px;
+        font-size: 1.6rem;
         margin-bottom: 25px;
       }
       > div {
         .payWaySelected {
-          font-size: 24px;
+          font-size: 1.7rem;
         }
         .iconfont {
-          font-size: 24px;
+          font-size: 1.7rem;
         }
       }
       .modalContent {

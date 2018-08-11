@@ -268,7 +268,7 @@
         }
         p {
           margin: 1vh 0;
-          font-size: 4.5vw;
+          font-size: 1.4rem;
         }
         .vip {
           display: flex;
@@ -280,7 +280,7 @@
             margin-right: 5px;
           }
           span {
-            font-size: 3.3vw;
+            font-size: 1.3rem;
           }
         }
       }
@@ -295,22 +295,25 @@
         text-align: center;
         cursor: pointer;
         .iconfont {
-          font-size: 7vw;
+          font-size: 1.7rem;
         }
         p {
           margin-top: 1vh;
-          font-size: 2vw;
+          font-size: 1.2rem;
         }
         .bage {
-          font-size: 12px;
-          height: 2vh;
           position: absolute;
-          top: -9px;
-          left: 8vw;
-          padding: 3px 6px;
-          background-color: #ec2828;
-          border-radius: 90px;
+          right: -13%;
+          top: -6%;
+          background-color: #ff1908;
           color: #fff;
+          width: 16px;
+          height: 16px;
+          justify-content: center;
+          display: flex;
+          align-items: center;
+          font-size: 1rem;
+          border-radius: 90px;
         }
       }
     }
@@ -320,7 +323,7 @@
       display: flex;
       align-items: center;
       justify-content: space-around;
-      font-size: 4.2vw;
+      font-size: 1.4rem;
       background-color: #fff;
       .myAccount {
         cursor: pointer;
@@ -341,12 +344,12 @@
         text-align: center;
         padding: 1.1vh 0;
         .iconfont {
-          font-size: 7vw;
+          font-size: 1.7rem;
           margin-bottom: 10px;
         }
         p {
           text-align: center;
-          font-size: 3.8vw;
+          font-size: 1.4rem;
           margin-top: 5px;
         }
       }
@@ -369,7 +372,7 @@
           }
           p {
             margin: 8px 0;
-            font-size: 25px;
+            font-size: 1.6rem;
           }
           .vip {
             img {
@@ -377,7 +380,7 @@
               height: 28px;
             }
             span {
-              font-size: 20px;
+              font-size: 1.5rem;
             }
           }
         }
@@ -386,11 +389,11 @@
         padding: 20px 0 10px 0;
         .orderService {
           .iconfont {
-            font-size: 35px;
+            font-size: 1.9rem;
           }
           p {
             margin-top: 8px;
-            font-size: 12px;
+            font-size: 1.6rem;
           }
           .bage {
             height: 15px;
@@ -411,10 +414,10 @@
           width: 25%;
           padding: 10px 0;
           .iconfont {
-            font-size: 35px;
+            font-size: 1.9rem;
           }
           p {
-            font-size: 18px;
+            font-size: 1.6rem;
           }
         }
       }

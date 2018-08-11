@@ -32,14 +32,14 @@
     .icon-back{
       transform: rotate(-90deg);
       font-size:1.2rem;
-      margin-right:2vw;
+      padding: 0 7px;
     }
     .search{
       cursor: text;
       border-radius:90px;background-color: #eee;width: 80%;text-align: center;
       height:6vh;
       img{
-        height:4vh; padding: 1vh 0;
+        height:100%; padding: 1vh 0;
       }
     }
   }
@@ -51,7 +51,8 @@
       padding-left:28px;
       .icon-back{
         font-size:1.4rem;
-        margin-right:14px;
+        margin-bottom: 10px;
+        padding: 0 7px;
       }
     }
   }

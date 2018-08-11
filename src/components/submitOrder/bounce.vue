@@ -128,10 +128,10 @@
           if (couponList.length > 0) {
             couponList.forEach(function (e) {
               if (totalAmmount > e.LimitMinMoney) {
-                e.backgroundColor = '#D24161'
+                e.backgroundColor = ['#ED008C', '#FFF100']
                 usefulCoupon.push(e)
               } else {
-                e.backgroundColor = '#c1c1c1'
+                e.backgroundColor = ['#c1c1c1', '#FFFFFF']
                 unUsefulCoupon.push(e)
               }
             })
@@ -202,39 +202,43 @@
       }
     }
     .modalContent {
+      .menu {
+        height: 50px;
+        box-shadow: 0 10px 17px rgba(159, 159, 159, 0.1);
+        background-color: #fff;
+      }
       .navbarBody-one {
-        margin-top: 60px;
-        height: calc(62vh - 60px - 60px); // 60px为navbar切换的高度，60px为确认按钮的高度+margin
+        margin-top: 50px;
+        height: calc(62vh - 50px - 60px); // 50px为navbar切换的高度，第二个60px为确认按钮的高度+margin
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
         &::-webkit-scrollbar {
           display: none
         }
         .usefulCoupon {
-          display: table;
-          margin: 1.9vh auto;
-          transform: translate(-3%);
+          display: flex;
+          align-items: center;
+          padding: 0 8vw 0 4vw;
           .checkbox {
-            display: table-cell;
-            vertical-align: middle;
+            display: flex;
+            align-items: center;
             padding-right: 2vw;
             font-weight: bold;
             .iconfont {
-              font-size: 1.6rem;
+              font-size: 2rem;
             }
             .icon-roundcheck {
               color: #ff2b1c;
             }
           }
           .couponCard {
-            display: table-cell;
-            vertical-align: middle;
+            width: 100%;
           }
         }
       }
       .comfirm {
         cursor: pointer;
-        width: 60vw;
+        width: 40%;
         height: 40px;
         background-color: #ff2b1c;
         display: flex;
@@ -246,66 +250,28 @@
         }
       }
       .navbarBody-two {
-        margin-top: 60px;
-        height: calc(62vh - 60px - 10px); // 60px为navbar切换的高度，10px为距底部的距离
+        margin-top: 50px;
+        height: calc(62vh - 50px - 10px); // 60px为navbar切换的高度，10px为距底部的距离
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
         &::-webkit-scrollbar {
           display: none
         }
         > div {
+          width: 90%;
           display: table;
-          margin: 1.9vh auto;
+          margin: auto;
         }
       }
     }
   }
 
   @media screen and (min-width: 640px) {
-    /*.bounce {*/
-      /*padding: 20px 25px;*/
-      /*p {*/
-        /*font-size: 1.6rem;*/
-        /*margin-bottom: 15px;*/
-      /*}*/
-      /*> div {*/
-        /*.bounceSelected {*/
-          /*font-size: 1.7rem;*/
-        /*}*/
-        /*.iconfont {*/
-          /*font-size: 1.7rem;*/
-        /*}*/
-      /*}*/
-      /*.modalContent {*/
-        /*.navbarBody-one {*/
-          /*height: 250px;*/
-          /*.usefulCoupon {*/
-            /*margin: 15px auto;*/
-            /*.checkbox {*/
-              /*padding-right: 10px;*/
-              /*.iconfont {*/
-                /*font-size: 1.8rem;*/
-              /*}*/
-            /*}*/
-          /*}*/
-        /*}*/
-        /*.navbarBody-two {*/
-          /*height: 250px;*/
-          /*> div {*/
-            /*margin: 15px auto;*/
-          /*}*/
-        /*}*/
-      /*}*/
-      /*.comfirm {*/
-        /*bottom: 20px;*/
-        /*width: 300px;*/
-        /*height: 50px;*/
-      /*}*/
-    /*}*/
     .bounce {
-      padding: 20px 25px;;
+      padding: 20px 25px;
       p {
         font-size: 1.6rem;
+        margin-bottom: 15px;
       }
       > div {
         .bounceSelected {
@@ -318,16 +284,14 @@
       .modalContent {
         .navbarBody-one {
           .usefulCoupon {
+            padding: 20px 50px 0 20px;
             .checkbox {
               padding-right: 10px;
               .iconfont {
-                font-size: 1.8rem;
+                font-size: 2.2rem;
               }
             }
           }
-        }
-        .comfirm {
-          width: 200px;
         }
       }
     }

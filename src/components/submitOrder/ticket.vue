@@ -127,7 +127,7 @@
     background-color: #fff;
     position: relative;
     p {
-      font-size: 4vw;
+      font-size: 1.4rem;
       margin-bottom: 2vh;
     }
     > div {
@@ -135,17 +135,17 @@
       justify-content: space-between;
       .ticketSelected {
         font-weight: bold;
-        font-size: 5vw;
+        font-size: 1.5rem;
       }
       .iconfont {
         cursor: pointer;
-        font-size: 5vw;
+        font-size: 1.5rem;
       }
     }
     .modalContent {
       padding: 0 3vw;
       .subTitle {
-        font-size: 4vw;
+        font-size: 1.4rem;
         font-weight: bold;
         padding: 1vh 0;
       }
@@ -173,21 +173,21 @@
     .ticket {
       padding: 20px 25px;
       p {
-        font-size: 24px;
+        font-size: 1.6rem;
         margin-bottom: 15px;
       }
       > div {
         .ticketSelected {
-          font-size: 24px;
+          font-size: 1.7rem;
         }
         .iconfont {
-          font-size: 24px;
+          font-size: 1.7rem;
         }
       }
       .modalContent {
         padding: 0 15px;
         .subTitle {
-          font-size: 18px;
+          font-size: 1.6rem;
           padding: 10px 0;
         }
       }

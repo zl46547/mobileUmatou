@@ -349,7 +349,7 @@
         }
         p {
           text-align: center;
-          font-size: 1.4rem;
+          font-size: 1.1rem;
           margin-top: 5px;
         }
       }
@@ -414,10 +414,10 @@
           width: 25%;
           padding: 10px 0;
           .iconfont {
-            font-size: 1.9rem;
+            font-size: 2rem;
           }
           p {
-            font-size: 1.6rem;
+            font-size: 1.3rem;
           }
         }
       }

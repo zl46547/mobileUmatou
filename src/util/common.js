@@ -4,9 +4,18 @@
  */
 const STORAGE_USER_KEY = 'STORAGE_USER_KEY'
 export default {
+  /**
+   * 获取浏览器缓存
+   * @param key
+   */
   getLocal (key = STORAGE_USER_KEY) {
     return JSON.parse(window.localStorage.getItem(key))
   },
+  /**
+   * 设置浏览器缓存
+   * @param res
+   * @param key
+   */
   setLocal (res, key = STORAGE_USER_KEY) {
     return window.localStorage.setItem(key, JSON.stringify(res))
   },

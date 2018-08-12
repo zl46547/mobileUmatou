@@ -1,10 +1,10 @@
 import axios from 'axios'
 import store from '@/vuex/store.js'
 import router from '../router'
+import loading from '../util/showLoading'
 
 const api = axios.create()
 api.defaults.baseURL = 'http://zl46547.coding.me/markdown'
-// api.defaults.baseURL = 'https://zl46547.github.io/javaUmatou/WebContent'
 api.defaults.timeout = 5000
 api.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 api.defaults.headers.post['X-Requested-With'] = 'XMLHttpRequest'
@@ -12,7 +12,7 @@ api.defaults.headers.post['X-Requested-With'] = 'XMLHttpRequest'
 // 请求拦截
 api.interceptors.request.use(function (config) {
   // 在发送请求之前做些什么
-  store.commit('SET_LOADING', true)
+  loading.showLoading()
   // 如果有token,添加到请求报文 后台会根据该报文返回status
   // if (store.state.login.token) {
   //   config.headers.Authorization = `token ${store.state.login.token}`
@@ -26,12 +26,9 @@ api.interceptors.request.use(function (config) {
 })
 
 // 添加响应拦截器
-api.interceptors.request.use(function (response) {
+api.interceptors.response.use(function (response) {
   // 对响应数据做点什么
-  // 加到时器主要是为了 展示Loading效果 项目中应去除
-  setTimeout(function () {
-    store.commit('SET_LOADING', false)
-  }, 500)
+  loading.hideLoading()
   return response
 }, function (error) {
   // 对响应错误做点什么

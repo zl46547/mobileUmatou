@@ -7,7 +7,7 @@
       <div class="category-list" v-for="k in categoryList.Data.HotCategoryList" :key="k.Id">
         <router-link :to="'/categoryDetail/'+k.Id">
           <div>
-            <img :src="'http://picpro-sz.34580.com/sz/ImageUrl/' +k.PictureId+ '/160.jpeg'" alt="">
+            <img v-lazy="'http://picpro-sz.34580.com/sz/ImageUrl/' +k.PictureId+ '/160.jpeg'" alt="">
           </div>
           <p>{{k.Name}}</p>
         </router-link>
@@ -24,7 +24,7 @@
           <div class="item" v-for="item in k.SmallCategories" :key="item.Id">
             <router-link :to="'/categoryDetail/'+item.Id">
               <div>
-                <img :src="'http://picpro-sz.34580.com/sz/ImageUrl/' +item.PictureId+ '/160.jpeg'" alt="">
+                <img v-lazy="'http://picpro-sz.34580.com/sz/ImageUrl/' +item.PictureId+ '/160.jpeg'" alt="">
               </div>
               <p>{{item.Name}}</p>
             </router-link>

@@ -3,21 +3,24 @@ import App from './App'
 import router from './router'
 import store from '@/vuex/store.js' // vuex
 import api from '@/http/api.js' // http请求
-import Mint from 'mint-ui' // 移动端UI
-import 'mint-ui/lib/style.css'
 import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
 import $ from 'jquery'
 import linq from 'linqjs'
-import iview from 'iview'
-import 'iview/dist/styles/iview.css'
+import lazyLoad from 'vue-lazyload'
+import 'mint-ui/lib/style.css'
+import 'element-ui/lib/theme-chalk/index.css'
+// import Mint from 'mint-ui' // 移动端UI
 
 Vue.use(ElementUI)
-Vue.use(Mint)
-Vue.use(iview)
+Vue.use(lazyLoad, {
+  preLoad: 1.3,
+  attempt: 1,
+  loading: require('./assets/images/loading.gif'),
+  error: require('./assets/images/loadError.png')
+})
+// Vue.use(Mint)
 Vue.prototype.$api = api
 Vue.config.productionTip = false
-
 // 用钩子函数beforeEach()对路由进行判断
 router.beforeEach((to, from, next) => {
   var token = store.state.login.token

@@ -27,10 +27,10 @@
   html, body, #app {
     width: 100%;
     height: 100%;
+    background-color: #fff;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     font-size:12px;
   }
-
   body,
   dd,
   dl,
@@ -117,7 +117,8 @@
   body {
     font-family: PingFangSC-Light, helvetica, 'Heiti SC';
     color: #666;
-    background: #fff;
+    background-color: #e1e1e1;
+    -webkit-tap-highlight-color: #f2f2f2;
   }
 
   a {
@@ -180,11 +181,6 @@
       margin: 0 auto;
       height: 100%;
       background-color: #fff;
-    }
-    html,body{
-      background-color: #e1e1e1;
-      -webkit-tap-highlight-color: #f2f2f2;
-      height: 100%;
     }
     .el-notification.right {
       width: 40%;

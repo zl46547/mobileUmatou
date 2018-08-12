@@ -2,18 +2,22 @@
     <div v-if='adverise'>
       <mt-swipe :auto="4000" :interval="4000">
         <mt-swipe-item v-for="k in adverise" :key="k.Id">
-          <router-link :to="{ name: '详情页'}">
+          <!--<router-link :to="{ name: '详情页'}">-->
             <img :src="k.PicUrl">
-          </router-link>
+          <!--</router-link>-->
         </mt-swipe-item>
       </mt-swipe>
     </div>
 </template>
 
 <script type="text/ecmascript-6">
-
+  import { Swipe, SwipeItem } from 'mint-ui'
 export default {
-  props: ['adverise']
+  props: ['adverise'],
+  components: {
+    'mt-swipe': Swipe,
+    'mt-swipe-item': SwipeItem
+  }
 }
 </script>
 

@@ -28,7 +28,6 @@
   import Service from '../components/productDetail/service.vue'
   import Rate from '../components/productDetail/rate.vue'
   import Footer from '../components/productDetail/footer.vue'
-
   import RateDetail from '../components/productDetail/rateDetail.vue'
   import Detail from '../components/productDetail/detail.vue'
   export default {

@@ -9,10 +9,13 @@
 </template>
 
 <script type="text/ecmascript-6">
-
+  import { Swipe, SwipeItem } from 'mint-ui'
   export default {
     props: ['response'],
-    components: {},
+    components: {
+      'mt-swipe': Swipe,
+      'mt-swipe-item': SwipeItem
+    },
     data () {
       return {
         bannersList: []
@@ -48,6 +51,7 @@
   @media screen and (min-width: 640px) {
     .content {
       width: 640px;
+      height: 50vh;
     }
   }
 </style>

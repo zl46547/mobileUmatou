@@ -68,16 +68,14 @@
           }
         }
         this.myOrders[index].orderStatus = 'PS'
-        this.$notify({
-          title: '交易完成',
-          message: '订单支付成功',
-          type: 'success',
-          duration: 1000
+        this.$message({
+          message: '订单支付成功！',
+          type: 'success'
         })
         var router = this.$router
         setTimeout(function () {
           router.replace({name: '我的订单', params: {type: 'PS'}})
-        }, 1000)
+        }, 1500)
       },
       /**
        * 显示赞赏码对话框

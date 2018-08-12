@@ -66,18 +66,18 @@
         <p>可以去看看有哪些想买</p>
         <div class="goToBuy" @click="goToBuy">随便逛逛</div>
       </div>
-      <v-message v-if="showDelMessage" @is-comfirm="isComfirmDel">
-        <p slot="title" class="message-title">确认删除订单</p>
-        <p slot="description" class="message-description">删除后订单无法还原,是否继续操作？</p>
-      </v-message>
-      <v-message v-if="showComfirmOrderMessage" @is-comfirm="isComfirmOrder">
-        <p slot="title" class="message-title">确认收货</p>
-        <p slot="description" class="message-description">确认收货后将无法发起退货，是否继续操作？</p>
-      </v-message>
-      <v-message v-if="showReOrderMessage" @is-comfirm="isComfirmReOrder">
-        <p slot="title" class="message-title">重新下单</p>
-        <p slot="description" class="message-description">已添加{{operaObj.orderList.length}}个商品到购物车，是否立即前往购物车查看？</p>
-      </v-message>
+        <v-message v-if="showDelMessage" @is-comfirm="isComfirmDel">
+          <p slot="title" class="message-title">确认删除订单</p>
+          <p slot="description" class="message-description">删除后订单无法还原,是否继续操作？</p>
+        </v-message>
+        <v-message v-if="showComfirmOrderMessage" @is-comfirm="isComfirmOrder">
+          <p slot="title" class="message-title">确认收货</p>
+          <p slot="description" class="message-description">确认收货后将无法发起退货，是否继续操作？</p>
+        </v-message>
+        <v-message v-if="showReOrderMessage" @is-comfirm="isComfirmReOrder">
+          <p slot="title" class="message-title">重新下单</p>
+          <p slot="description" class="message-description">已添加{{operaObj.orderList.length}}个商品到购物车，是否立即前往购物车查看？</p>
+        </v-message>
     </div>
   </div>
 </template>
@@ -86,6 +86,7 @@
   import OrderButton from '@/components/allOrders/orderButton.vue'
   import MenuSelect from '@/common/_menuSelect.vue'
   import Message from '@/common/_message.vue'
+  import Transition from '@/common/_transition.vue'
 
   export default {
     data () {
@@ -148,6 +149,7 @@
     components: {
       'VOrderButton': OrderButton,
       'VMessage': Message,
+      'VTransition': Transition,
       'VMenuSelect': MenuSelect
     },
     computed: {},

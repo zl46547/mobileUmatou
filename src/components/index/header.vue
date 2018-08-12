@@ -38,8 +38,11 @@
       cursor: text;
       border-radius:90px;background-color: #eee;width: 80%;text-align: center;
       height:6vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       img{
-        height:100%; padding: 1vh 0;
+        height:90%;
       }
     }
   }

@@ -1,21 +1,21 @@
 <template>
   <div v-if='adverise' id="adverise">
     <div id="top" class="cover">
-      <img :src="adverise.coverImg" alt="">
+      <img v-lazy="adverise.coverImg" alt="">
     </div>
     <div class="banners" v-if="adverise.banners.length>0">
       <router-link :to="{ name: '商品详情',params:{'id':item.productId}}" v-for="(item,i) in adverise.banners" :key="i">
-        <img :src="item.images" alt="">
+        <img v-lazy="item.images" alt="">
       </router-link>
     </div>
     <div class="sections" v-if="adverise.sections.length>0">
       <div class="sectionItem" v-for="(section,i) in adverise.sections" :key="i">
-        <img :src="section.images" alt="" v-if="section.images">
+        <img v-lazy="section.images" alt="" v-if="section.images">
         <div class="contentList">
           <div v-for="obj in section.dataList" :key="obj.ProductId">
             <div class="productItem" :class="{'width-50':section.type == 2,'width-33':section.type == 3}">
               <router-link :to="{ name: '商品详情',params:{'id':obj.ProductId}}">
-                <img :src="obj.PictureUrl" alt="">
+                <img v-lazy="obj.PictureUrl" alt="">
               </router-link>
               <div class="price">
                 <div class="newestPrice">
@@ -36,7 +36,7 @@
       </div>
     </div>
     <div class="backtop">
-      <a @click="goToTop()"><img :src="adverise.backtop" alt="回到顶部" style=""></a>
+      <a @click="goToTop()"><img v-lazy="adverise.backtop" alt="回到顶部" style=""></a>
     </div>
   </div>
 </template>

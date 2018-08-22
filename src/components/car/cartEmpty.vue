@@ -26,8 +26,8 @@
 
 <style lang="less" scoped>
   .cartEmpty {
-    height: 84vh;
-    margin-top: 8vh;
+    height: calc(100vh - 120px);
+    margin-top: 60px;
     display: flex;
     >div{
       margin: auto;

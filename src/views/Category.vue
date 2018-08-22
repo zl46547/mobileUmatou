@@ -70,8 +70,8 @@
     height: 100%;
     overflow-y: hidden;
     .view {
-      margin-top: 8vh;
-      height:84vh;
+      margin-top: 60px;
+      height:calc(100vh - 120px);
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;

@@ -22,7 +22,7 @@
     left: 0;
     top:0;
     width:100%;
-    height:8vh;
+    height:60px;
     display: flex;
     align-items: center;
     font-size: 1.1rem;
@@ -36,8 +36,8 @@
     }
     .search{
       cursor: text;
-      border-radius:90px;background-color: #eee;width: 80%;text-align: center;
-      height:6vh;
+      border-radius:90px;background-color: #eee;width: 78%;text-align: center;
+      height:40px;
       display: flex;
       align-items: center;
       justify-content: center;

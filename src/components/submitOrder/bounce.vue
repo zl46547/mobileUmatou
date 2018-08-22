@@ -9,7 +9,7 @@
       <span slot="title">优惠券</span>
       <div slot="content">
         <div class="modalContent">
-          <v-menu-select style="margin-top: 8vh" @menu-selected="clickedNavBar" :menuItems="navBarList"
+          <v-menu-select style="margin-top: 60px" @menu-selected="clickedNavBar" :menuItems="navBarList"
                          :selected="activeNavBar" class="menuSelect"></v-menu-select>
           <!--<v-nav-bar @clicked-nav-bar="clickedNavBar" :nav_bar_list="navBarList"></v-nav-bar>-->
           <!-- 可使用的优惠券 -->

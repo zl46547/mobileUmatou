@@ -77,7 +77,7 @@
 
   .footer {
     width: 100%;
-    height: 8vh;
+    height: 60px;
     background-color: #fff;
     position: fixed;
     bottom: 0;

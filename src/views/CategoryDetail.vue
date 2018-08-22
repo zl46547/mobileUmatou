@@ -29,7 +29,7 @@
   #category-detail{
     overflow: hidden;
     .category-main{
-      margin-top: 8vh;
+      margin-top: 60px;
     }
   }
 </style>

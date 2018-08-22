@@ -27,7 +27,7 @@
     top:0;
     margin-left: -50%;
     width:100%;
-    height:8vh;
+    height:60px;
     display: flex;
     align-items: center;
     justify-content: space-between;

@@ -138,8 +138,8 @@
     position: relative;
     overflow: hidden;
     .content {
-      margin-top: 8vh;
-      height: 84vh;
+      margin-top: 60px;
+      height: calc(100vh - 120px);
       &::-webkit-scrollbar {
         display: none
       }

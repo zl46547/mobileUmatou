@@ -247,8 +247,8 @@
       overflow-y: scroll;
       -webkit-overflow-scrolling: touch;
       width: 100vw;
-      height: 76vh;
-      margin-top: 8vh;
+      height: calc(100vh - 180px);;
+      margin-top: 60px;
       > div {
         &:last-of-type {
           margin-bottom: 0;
@@ -372,10 +372,10 @@
 
     .totalCount {
       width: 100vw;
-      height: 8vh;
+      height: 60px;
       background-color: #fff;
       position: fixed;
-      bottom: 8vh;
+      bottom: 60px;
       left: 50%;
       margin-left: -50%;
       box-shadow: 0 -0.5px 20px rgb(221, 221, 221);

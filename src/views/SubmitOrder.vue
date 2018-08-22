@@ -153,8 +153,8 @@
       font-size: 1.5rem;
     }
     .content-body {
-      height: 84vh;
-      margin-top: 8vh;
+      height: calc(100vh - 120px);
+      margin-top: 60px;
       &::-webkit-scrollbar {
         display: none
       }

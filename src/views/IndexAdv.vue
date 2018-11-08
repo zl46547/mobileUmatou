@@ -12,7 +12,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Header from '@/common/_header.vue'
+  import Header from '@/common/header/index.vue'
   import Adverise from '@/components/indexAdv/adv.vue'
   import utils from '@/util/common.js'
 

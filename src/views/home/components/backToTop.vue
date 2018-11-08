@@ -25,7 +25,7 @@
 
 <style lang="less" scoped>
   /* 加载字体样式 */
-  @import "../assets/font/iconfont.css";
+  @import "../../../assets/font/iconfont.css";
 
   .backToTop {
     cursor: pointer;

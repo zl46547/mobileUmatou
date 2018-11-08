@@ -75,7 +75,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Footer from '@/common/_footer.vue'
+  import Footer from '@/common/footer/index.vue'
   import { Toast } from 'mint-ui'
   import cartEmpty from '@/components/car/cartEmpty.vue'
   import fixCar from '@/components/car/fixCar.vue'

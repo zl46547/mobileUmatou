@@ -41,8 +41,8 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Header from '@/common/_header.vue'
-  import Footer from '@/common/_footer.vue'
+  import Header from '@/common/header/index.vue'
+  import Footer from '@/common/footer/index.vue'
 
   export default {
     components: {

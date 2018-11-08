@@ -43,7 +43,7 @@
     },
     methods: {
       gotoRouter () {
-        this.$router.push(this.selected)
+        this.$router.replace(this.selected)
       },
       selectMenu(val) {
         this.selected = val
@@ -72,12 +72,12 @@
 </script>
 
 <style lang="less" scoped>
-  @import "../assets/font/iconfont.css";
-  @import "../assets/fz.less";
+  @import "../../assets/font/iconfont.css";
+  @import "../../assets/fz.less";
 
   .footer {
     width: 100%;
-    height: 60px;
+    height: 55px;
     background-color: #fff;
     position: fixed;
     bottom: 0;

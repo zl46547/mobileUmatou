@@ -24,8 +24,13 @@
   /* 加载字体样式 */
   @import "./assets/font/iconfont.css";
   /* 初始化页面样式 */
-  html, body, #app {
+  #app{
+    max-width:640px;
+  }
+  html, body{
     width: 100%;
+  }
+  html, body, #app {
     height: 100%;
     background-color: #fff;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -148,46 +153,5 @@
     display: block;
     visibility: hidden;
     clear: both;
-  }
-  .el-notification.right {
-    top: 40% !important;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    width: 50%;
-    .el-notification__icon {
-      font-size: 2.5rem;
-    }
-    .el-notification__group {
-      width:100%;
-      margin-left: 0;
-      .el-notification__title {
-        text-align: center;
-        font-size: 2rem;
-      }
-      .el-notification__content {
-        font-size: 1.3rem;
-        text-align: center;
-        margin: 0.7rem 0 0;
-      }
-    }
-  }
-  /* 修改messagebox默认样式 */
-  .el-message-box {
-    width: 80vw;
-  }
-  @media screen and (min-width: 640px) {
-    #app {
-      width: 640px;
-      margin: 0 auto;
-      height: 100%;
-      background-color: #fff;
-    }
-    .el-notification.right {
-      width: 40%;
-    }
-    /* 修改messagebox默认样式 */
-    .el-message-box {
-      width: 480px;
-    }
   }
 </style>

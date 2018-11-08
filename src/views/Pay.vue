@@ -26,7 +26,7 @@
 <script type="text/ecmascript-6">
   import PayWay from '@/components/pay/payWay.vue'
   import Support from '@/components/pay/support.vue'
-  import Header from '@/common/_header.vue'
+  import Header from '@/common/header/index.vue'
 
   export default {
     components: {

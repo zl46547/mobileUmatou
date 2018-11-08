@@ -9,8 +9,6 @@ import linq from 'linqjs'
 import lazyLoad from 'vue-lazyload'
 import 'mint-ui/lib/style.css'
 import 'element-ui/lib/theme-chalk/index.css'
-// import Mint from 'mint-ui' // 移动端UI
-
 Vue.use(ElementUI)
 Vue.use(lazyLoad, {
   preLoad: 1.3,
@@ -18,38 +16,8 @@ Vue.use(lazyLoad, {
   loading: require('./assets/images/loading.gif'),
   error: require('./assets/images/loadError.png')
 })
-// Vue.use(Mint)
 Vue.prototype.$api = api
 Vue.config.productionTip = false
-// 用钩子函数beforeEach()对路由进行判断
-router.beforeEach((to, from, next) => {
-  var token = store.state.login.token
-  var flag = true
-  if (!token) {
-    flag = false// 未登录
-  }
-  var currentData = new Date().getTime()
-  var subtractTime = currentData - token
-  if (subtractTime > 2 * 60 * 60 * 1000) {
-    flag = false // 登录超时
-  }
-  if (flag) {
-    store.commit('TOKEN', new Date().getTime()) // 在token未失效的情况下，每次切换路由时都刷新一下token，保持登录状态
-  }
-  if (to.meta.requireAuth) { // 需要权限,进一步进行判断
-    if (flag) { // 通过vuex state获取当前的token是否存在
-      next()
-    } else { // 如果没有权限,重定向到登录页,进行登录
-      next({
-        path: '/login',
-        query: {redirect: to.fullPath} // 将跳转的路由path作为参数，登录成功后跳转到该路由
-      })
-    }
-  } else { // 不需要权限 直接跳转
-    next()
-  }
-})
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

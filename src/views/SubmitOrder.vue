@@ -42,7 +42,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Header from '@/common/_header.vue'
+  import Header from '@/common/header/index.vue'
   import Address from '@/components/submitOrder/address.vue'
   import OrderList from '@/components/submitOrder/orderList.vue'
   import PayWay from '@/components/submitOrder/payWay.vue'

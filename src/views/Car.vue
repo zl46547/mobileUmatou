@@ -10,7 +10,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Header from '@/common/_header.vue'
+  import Header from '@/common/header/index.vue'
   import CarList from '@/components/car/carList.vue'
 
   export default {

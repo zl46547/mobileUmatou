@@ -52,8 +52,8 @@
       transform: translate(300px, 0);
       bottom: 120px;
       font-size: 20px;
-      width: 70px;
-      height: 70px;
+      width: 60px;
+      height: 60px;
       .iconfont {
         font-size: 46px;
       }

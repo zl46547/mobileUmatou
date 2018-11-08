@@ -71,11 +71,13 @@
 <style lang="less" scoped>
   #menuList {
     width: 100%;
+    max-width: 640px;
     background-color: #fff;
     margin-bottom: 16px;
+    text-align: center;
     .swiper {
       height: 180px;
-      width: 100vw;
+      width: 100%;
       .swiper-item {
         display: flex;
         flex-wrap: wrap;
@@ -85,6 +87,7 @@
       width: 20%;
       text-align: center;
       padding: 3% 0;
+      cursor: pointer;
       img {
         width: 42px;
         height: 42px;
@@ -93,13 +96,45 @@
     }
     .menuName {
       width: 100%;
+      margin-top: 10px;
       font-size: 0.3rem;
     }
     > img {
-      width: 100%;
+      width: 90%;
       background-color: #fff;
       margin-bottom: 8px;
     }
   }
-
+  @media screen and (min-width: 400px) {
+    #menuList {
+      .swiper {
+        height: 200px;
+      }
+      .menuList-item {
+        img {
+          width: 50px;
+          height: 50px;
+        }
+      }
+      .menuName {
+        font-size: 1.2rem;
+      }
+    }
+  }
+  @media screen and (min-width: 500px) {
+    #menuList {
+      .swiper {
+        height: 240px;
+      }
+      .menuList-item {
+        img {
+          width: 60px;
+          height: 60px;
+        }
+      }
+      .menuName {
+        font-size: 1.2rem;
+      }
+    }
+  }
 </style>

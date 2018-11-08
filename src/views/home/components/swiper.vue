@@ -62,11 +62,21 @@
 <style lang="less" scoped>
   #adverise {
     width: 100%;
+    max-width: 640px;
     height:180px;
     img {
       width: 100%;
       height: 100%;
     }
   }
-
+  @media screen and (min-width: 400px) {
+    #adverise {
+      height:230px;
+    }
+  }
+  @media screen and (min-width: 500px) {
+    #adverise {
+      height:280px;
+    }
+  }
 </style>

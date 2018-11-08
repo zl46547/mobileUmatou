@@ -263,4 +263,46 @@
       }
     }
   }
+  @media screen and (min-width: 400px) {
+    #defaultHome {
+      .defaultHome-item {
+        .title div:nth-of-type(1) {
+          font-size: 1.5rem;
+        }
+        .title div:nth-of-type(2) {
+          font-size: 1.25rem;
+        }
+        .find-more {
+          .product-name {
+            font-size: 1.5rem;
+            padding: 15px 5px;
+          }
+        }
+        .scroll-div {
+          &::-webkit-scrollbar{
+            display: none;
+          }
+          .scroll-div-item {
+            margin: 15px 20px;
+            img {
+              width: 120px;
+            }
+            .product-name {
+              width: 120px;
+              font-size: 1.3rem;
+            }
+            .price {
+              width: 120px;
+              .flashSale-list-price {
+                font-size: 1.8rem;
+              }
+              .flashSale-list-unit {
+                font-size: 1.22rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 </style>

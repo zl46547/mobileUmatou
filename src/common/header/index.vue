@@ -26,18 +26,22 @@
 <style lang="less" scoped>
   header {
     position: fixed;
-    left: 0;
+    left: 50%;
     top: 0;
+    transform: translateX(-50%);
     background-color: #fff;
-    width: 100%;
+    max-width:640px;
+    width:100%;
     height: 55px;
     display: flex;
     flex: 1;
     align-items: center;
     font-size: 0.3rem;
-    padding-left: 4%;
     z-index: 999;
     box-shadow: 0 0.5px 20px rgba(219, 219, 219, 0.48);
+    .address{
+      margin-left: 4%;
+    }
     .icon-arrow {
       padding-left: 7px;
     }
@@ -73,6 +77,18 @@
 
     .icon-arrow:before {
       content: "\e61a";
+    }
+  }
+
+  @media screen and (min-width: 400px) {
+    header {
+      height: 60px;
+      .search {
+        img {
+          height: 70%;
+          width: 40%;
+        }
+      }
     }
   }
 </style>

@@ -76,4 +76,17 @@
       }
     }
   }
+  @media screen and (min-width: 400px) {
+    #home {
+      .content {
+        margin-top: 60px;
+        height: calc(100vh - 115px);
+        .baseLine {
+          img{
+            margin: 20px auto;
+          }
+        }
+      }
+    }
+  }
 </style>

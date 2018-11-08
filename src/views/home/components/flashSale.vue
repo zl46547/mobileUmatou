@@ -114,10 +114,9 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 3vw;
+      padding: 0 3%;
       img {
         width: 98px;
-        height: 48px;
       }
       .time {
         display: flex;
@@ -126,8 +125,8 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 7vw;
-          height: 7vw;
+          width: 24px;
+          height: 24px;
           border: 1px solid #aaa;
           color: #666;
           border-radius: 3px;
@@ -170,14 +169,59 @@
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+            margin-top: 5px;
             .flashSale-list-price {
               color: #b4282d;
               font-size: 0.28rem;
             }
             .flashSale-list-unit {
-              padding-top: 2vh;
               color: rgb(150, 150, 150);
               font-size: 0.22rem;
+            }
+          }
+        }
+      }
+    }
+  }
+  @media screen and (min-width: 400px) {
+    #flashSale {
+      .flashSale-header {
+        img {
+          width: 125px;
+        }
+        .time {
+          .time-num {
+            width: 30px;
+            height: 30px;
+            font-size: 1.2rem;
+          }
+          .time-col {
+            font-size: 1.3rem;
+          }
+        }
+      }
+      .flashSale-list {
+        .scroll-div {
+          &::-webkit-scrollbar{
+            display: none;
+          }
+          .scroll-div-item {
+            margin: 15px 16px;
+            img {
+              width: 120px;
+            }
+            .product-name {
+              width: 120px;
+              font-size: 1.3rem;
+            }
+            .price {
+              width: 120px;
+              .flashSale-list-price {
+                font-size: 1.28rem;
+              }
+              .flashSale-list-unit {
+                font-size: 1.22rem;
+              }
             }
           }
         }

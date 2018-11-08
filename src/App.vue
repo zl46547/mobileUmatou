@@ -26,6 +26,7 @@
   /* 初始化页面样式 */
   #app{
     max-width:640px;
+    margin: auto;
   }
   html, body{
     width: 100%;

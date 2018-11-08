@@ -145,9 +145,9 @@
        * @param JumpValue
        */
       goToIndexAdv(JumpValue) {
-        var vm = this
-        var queryId = JumpValue.replace('https://wechatx.34580.com/topics/', '')
-        vm.$router.push({path: '/indexAdv', query: {queryId}})
+//        var vm = this
+//        var queryId = JumpValue.replace('https://wechatx.34580.com/topics/', '')
+//        vm.$router.push({path: '/indexAdv', query: {queryId}})
       },
       /**
        * 跳转商品详情页面

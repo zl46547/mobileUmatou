@@ -4,10 +4,11 @@ import store from '@/vuex/store.js'
 // 按需加载,当渲染其他页面时才加载其组件,并缓存,减少首屏加载时间
 const Index = resolve => require(['@/views/home/index.vue'], resolve)
 const IndexAdv = resolve => require(['@/views/IndexAdv.vue'], resolve)
+const Category = resolve => require(['@/views/category/index.vue'], resolve)
+const CategoryMain = resolve => require(['@/views/category/components/main.vue'], resolve)
+
 const Detail = resolve => require(['@/views/Detail.vue'], resolve)
 const CategoryDetail = resolve => require(['@/views/CategoryDetail.vue'], resolve)
-const CategoryMain = resolve => require(['@/components/category/main.vue'], resolve)
-const Category = resolve => require(['@/views/Category.vue'], resolve)
 const Car = resolve => require(['@/views/Car.vue'], resolve)
 const User = resolve => require(['@/views/User.vue'], resolve)
 const ProductDetail = resolve => require(['@/views/ProductDetail.vue'], resolve)
@@ -35,7 +36,7 @@ const router = new Router({
       component: Category,
      children: [
        {
-         path: '/category/:tab',
+         path: '/category/:id',
          name: '分类页',
          component: CategoryMain
        }

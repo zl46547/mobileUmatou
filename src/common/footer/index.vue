@@ -13,7 +13,6 @@
 <script type="text/ecmascript-6">
 
   export default {
-    components: {},
     data () {
       return {
         selected: '/',
@@ -26,7 +25,7 @@
           {
             name: '分类',
             icon: 'icon-cascades',
-            url: '/category/all'
+            url: '/category/0'
           },
           {
             name: '购物车',
@@ -58,7 +57,7 @@
           this.selected = '/'
           break
         case '分类页':
-          this.selected = '/category/all'
+          this.selected = '/category/0'
           break
         case '购物车页':
           this.selected = '/car'
@@ -93,6 +92,7 @@
       width: 100%;
       .tabbar-item {
         text-align: center;
+        cursor: pointer;
         .iconfont {
           font-size: 1.5rem;
         }

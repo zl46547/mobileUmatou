@@ -196,12 +196,15 @@
       }
       .width-50 {
         width: 50%;
+        cursor: pointer;
       }
       .width-100 {
         width: 100%;
+        cursor: pointer;
       }
       .width-33 {
         width: 33.3%;
+        cursor: pointer;
       }
       a {
         color: #666;
@@ -232,6 +235,7 @@
         .scroll-div-item {
           display: inline-block;
           margin: 5px 10px;
+          cursor: pointer;
           img {
             width: 100px;
           }

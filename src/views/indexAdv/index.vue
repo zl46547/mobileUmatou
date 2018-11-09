@@ -21,7 +21,7 @@
               <span>/{{k.entity.unit}}</span>
             </div>
             <div class="defaultPrice">
-              <span>¥&nbsp;{{k.entity.marketPrice}}</span>
+              <span>¥&nbsp;{{k.entity.shiHangPrice}}</span>
             </div>
           </div>
           <div class="addCart-btn" :style="{'background-color':item.cartBgColor}" @click="addTocart(k)">
@@ -63,9 +63,9 @@
       },
       backToTop () {
         let timer = setInterval(() => {
-          var top = document.getElementsByClassName('content')[0].scrollTop
+          var top = document.getElementById('adverise').scrollTop
           let speed = Math.ceil(top / 5)
-          document.getElementsByClassName('content')[0].scrollTop = top - speed
+          document.getElementById('adverise').scrollTop = top - speed
           if (top === 0) {
             clearInterval(timer)
           }
@@ -133,6 +133,11 @@
 
 <style lang="less" scoped>
   #adverise {
+    height:100vh;
+    overflow-y: auto;
+    &::-webkit-scrollbar{
+      display: none;
+    }
     .typeA {
       img {
         width: 100%;
@@ -144,6 +149,7 @@
       justify-content: space-around;
       img {
         width: 100%;
+        cursor: pointer;
       }
     }
     .typeC {
@@ -157,11 +163,13 @@
         margin-bottom: 10px;
         img {
           width: 100%;
+          cursor: pointer;
         }
       }
     }
     .title {
-      font-size: 14px;
+      font-size: 1.2rem;
+      padding: 3% 3% 0 3%;
       text-overflow: ellipsis;
       width: 100%;
       overflow: hidden;
@@ -171,19 +179,19 @@
       display: flex;
       align-items: baseline;
       justify-content: space-between;
-      padding: 0 2vw 1vh 2vw;
+      padding: 3% 4%;
       .newestPrice {
         display: flex;
         white-space: nowrap;
         align-items: baseline;
         color: #ff718e;
         font-size: 0.25rem;
-        text:nth-of-type(2) {
+        span:nth-of-type(2) {
           font-size: 0.3rem;
         }
       }
       .defaultPrice {
-        text {
+        span {
           font-size: 0.25rem;
           color: #aaa;
           text-decoration: line-through;
@@ -192,7 +200,7 @@
     }
     .addCart-btn {
       display: flex;
-      height: 6vh;
+      height: 38px;
       width: 100%;
       cursor: pointer;
       border-radius: 0 0 10px 10px;
@@ -200,6 +208,41 @@
         font-size: 0.35rem;
         color: #fff;
         margin: auto;
+      }
+    }
+  }
+  @media screen and (min-width: 400px) {
+    #adverise {
+      .title {
+        font-size: 1.3rem;
+        padding: 6% 6% 0 6%;
+      }
+      .price {
+        padding: 6% 8%;
+        .newestPrice {
+          font-size: 1.25rem;
+          span:nth-of-type(2) {
+            font-size: 1.3rem;
+          }
+        }
+        .defaultPrice {
+          span {
+            font-size: 1.25rem;
+          }
+        }
+      }
+      .addCart-btn {
+        height: 45px;
+        .addCart-btn-text {
+          font-size: 1.3rem;
+        }
+      }
+    }
+  }
+  @media screen and (min-width: 500px) {
+    #adverise {
+      .addCart-btn {
+        height: 55px;
       }
     }
   }

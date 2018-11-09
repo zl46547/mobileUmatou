@@ -76,10 +76,7 @@
        */
       goToCategoryDetail(id) {
         var vm = this
-        var CategoryIds = JSON.stringify([`${id}`])
-        vm.navigateTo({
-          url: `/pages/categoryDetail/main?categoryIds=${CategoryIds}`
-        })
+        vm.$router.push({name: '详细分类', query: {categoryIds: id}})
       },
       /**
        * 获取热门分类数据

@@ -34,31 +34,14 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import addCartUtil from '../../utils/addCart'
+  import addCartUtil from '../../util/addCart'
   import { Toast } from 'mint-ui'
   export default {
     mounted() {
       var vm = this
-      var advData = ''
       vm.$store.commit('SET_LOADING', true)
       let {queryId} = vm.$route.query
-      vm.getAdvData(queryId).then(function (adv) {
-        advData = adv
-        return vm.getBarCodeList(adv)
-      }).catch(function (error) {
-        alert(error)
-      })
-        .then(function (barCodeList) {
-          return vm.getPictureData(barCodeList)
-        }).catch(function (error) {
-        alert(error)
-      })
-        .then(function (picData) {
-          vm.formatProductEntity(advData, picData)
-          vm.$store.commit('SET_LOADING', false)
-        }).catch(function (error) {
-        alert(error)
-      })
+      vm.getAdvData(queryId)
     },
     beforeDestroy() {
       var vm = this
@@ -105,86 +88,15 @@
        */
       getAdvData(queryId) {
         var vm = this
-        return new Promise(function (resolve, reject) {
-          vm.$api({
-            method: 'get',
-            url: '/shihang/index/adv/' + queryId + '.json'
-          }).then((res) => {
-            if (res.data.data.topic_info) {
-              var advData = res.data.data.topic_info
-              resolve(advData)
-            } else {
-              reject(new Error('获取广告数据失败！'))
-            }
-          }).catch((error) => {
-            console.log(error)
-          })
-        })
-      },
-      getBarCodeList(advData) {
-        // 取出类型为C的对象
-        var typeC = advData.where(function (e) {
-          return e.type === 'c'
-        })
-        var allList = []
-        // 取出对象中所有的list
-        typeC.forEach(function (e) {
-          allList = allList.union(e.list)
-        })
-        var barCodeList = allList.select(function (e) {
-          return e.barCode
-        })
-        return barCodeList
-      },
-      /**
-       * 根据barCodeList获取所有图片
-       * @param barCodeList
-       */
-      getPictureData(barCodeList) {
-        var vm = this
-        return new Promise(function (resolve, reject) {
-          vm.request({
-            url: 'https://wechatx.34580.com/topicInfo/product',
-            data: {
-              cityFlag: 'sz',
-              barCodes: barCodeList
-            },
-            success: function (res) {
-              var pictureData = res.data.data
-              resolve(pictureData)
-            },
-            error: function (error) {
-              reject(error)
-            }
-          })
-        })
-      },
-      /**
-       * 封装商品详情
-       */
-      formatProductEntity(advData, pictureData) {
-        var vm = this
-        advData.forEach(function (item) {
-          if (item.type === 'c') {
-            item.list.forEach(function (e) {
-              e['entity'] = vm.getProductEntity(e.barCode, pictureData)
-            })
+        vm.$api({
+          method: 'get',
+          url: `/shihang/index/adv/${queryId}.json/`
+        }).then((res) => {
+          if (res.data) {
+            vm.advData = res.data
+            vm.$store.commit('SET_LOADING', false)
           }
         })
-        vm.advData = advData
-      },
-      /**
-       * 获取产品实例
-       */
-      getProductEntity(barCode, pictureData) {
-        if (pictureData.length > 0) {
-          var picture = pictureData.where(function (e) {
-            return e.barCode === barCode
-          })
-          var productEntity = JSON.parse(JSON.stringify(picture[0]))
-          productEntity['imgUrl'] = `http://picpro-sz.34580.com/sz/ImageUrl/${productEntity.pictureId}/400.jpg`
-        }
-        return productEntity
       },
       /**
        * 加入购物车

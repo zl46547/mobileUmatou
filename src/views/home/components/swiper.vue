@@ -2,9 +2,7 @@
   <div v-if='adveriseList' id="adverise">
     <mt-swipe :auto="4000" :interval="4000">
       <mt-swipe-item v-for="k in adveriseList" :key="k.Id">
-        <router-link :to="{ path: '/indexAdv',query:{'queryId':k.JumpValue}}">
-          <img :src="k.PicUrl">
-        </router-link>
+          <img :src="k.PicUrl" @click="goToIndexAdv(k.JumpValue)">
       </mt-swipe-item>
     </mt-swipe>
   </div>

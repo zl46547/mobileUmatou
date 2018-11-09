@@ -1,45 +1,45 @@
 <template>
-  <div class="main">
-    <!--<div class="randerAdvertise" v-if="randerAdvertise.length > 0">-->
-    <!--<v-swiper :adverise="randerAdvertise"></v-swiper>-->
-    <!--</div>-->
-    <!--<div class="hotCategory" v-if="pathId == '0'">-->
-    <!--<div class="category-list" v-for="k in category" :key="k.Id" @click="goToCategoryDetail(k.Id)">-->
-    <!--<img :src="'http://picpro-sz.34580.com/sz/ImageUrl/'+k.PictureId+'/160.jpeg'" mode="widthFix"/>-->
-    <!--<div class="title">{{k.Name}}</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--<div class="subCategory" v-if="pathId != '0'"-->
-    <!--:class="{'hasAdv':randerAdvertise.length > 0,'notHasAdv':randerAdvertise.length <= 0}">-->
-    <!--<div v-for="(k,index) in category" :key="index">-->
-    <!--<div class="subTitle">-->
-    <!--<div class="metaKeywords">{{k.MetaKeywords}}</div>-->
-    <!--<div class="allProduct" @click="allProduct">-->
-    <!--<span>全部商品</span>-->
-    <!--<span class="icon iconfont icon-arrow" style="font-size: 1rem;"></span>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--<div class="subContent">-->
-    <!--<div class="item" v-for="(item) in k.SmallCategories" :key="item.Id" @click="goToCategoryDetail(item.Id)">-->
-    <!--<img :src="'http://picpro-sz.34580.com/sz/ImageUrl/' +item.PictureId+ '/160.jpeg'"-->
-    <!--mode="widthFix"/>-->
-    <!--<div class="subContent-title">{{item.Name}}</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
+  <div id="categoryMain">
+    <div class="randerAdvertise" v-if="randerAdvertise.length > 0">
+      <v-swiper :adverise="randerAdvertise"></v-swiper>
+    </div>
+    <div class="hotCategory" v-if="pathId == '0'">
+      <div class="category-list" v-for="k in category" :key="k.Id" @click="goToCategoryDetail(k.Id)">
+        <img :src="'http://picpro-sz.34580.com/sz/ImageUrl/'+k.PictureId+'/160.jpeg'" mode="widthFix"/>
+        <div class="title">{{k.Name}}</div>
+      </div>
+    </div>
+    <div class="subCategory" v-if="pathId != '0'"
+         :class="{'hasAdv':randerAdvertise.length > 0,'notHasAdv':randerAdvertise.length <= 0}">
+      <div v-for="(k,index) in category" :key="index">
+        <div class="subTitle">
+          <div class="metaKeywords">{{k.MetaKeywords}}</div>
+          <div class="allProduct" @click="allProduct">
+            <span>全部商品</span>
+            <span class="icon iconfont icon-arrow"></span>
+          </div>
+        </div>
+        <div class="subContent">
+          <div class="item" v-for="(item) in k.SmallCategories" :key="item.Id" @click="goToCategoryDetail(item.Id)">
+            <img :src="'http://picpro-sz.34580.com/sz/ImageUrl/' +item.PictureId+ '/160.jpeg'"
+                 mode="widthFix"/>
+            <div class="subContent-title">{{item.Name}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  //  import utils from '@/util/common.js'
+  import { Toast } from 'mint-ui'
   import Swiper from './swiper.vue'
 
   export default {
     data () {
       return {
         category: '',
-        pathId: '0',
+        pathId: '',
         randerAdvertise: [], // 需渲染的广告轮播
         allAdvertise: [] // 需渲染的广告轮播
       }
@@ -50,13 +50,19 @@
     mounted () {
       var vm = this
       vm.pathId = vm.$route.params.id
-//      vm.getAllAdvertisement()
+      vm.getAllAdvertisement().then((res) => {
+        if (vm.pathId === '0') {
+          vm.getHotCategory()
+        } else {
+          vm.getSubCategory(vm.pathId)
+        }
+      })
     },
     watch: {
       '$route': function (url) {
         var vm = this
         let {id} = url.params
-        if (id === 0) {
+        if (id.toString() === '0') {
           vm.getHotCategory()
         } else {
           vm.getSubCategory(id)
@@ -87,7 +93,6 @@
         }).then((res) => {
           vm.category = res.data.Data.HotCategoryList
           vm.getRanderAdvertise(0)
-          vm.hideLoading()
         }).catch((error) => {
           console.log(error)
         })
@@ -105,7 +110,6 @@
         }).then((res) => {
           vm.category = res.data.Data.SubCategories
           vm.getRanderAdvertise(id)
-          vm.hideLoading()
         }).catch((error) => {
           console.log(error)
         })
@@ -115,15 +119,16 @@
        */
       getAllAdvertisement () {
         var vm = this
-        vm.request({
-          url: 'https://api1.34580.com/sz/Home/AdvertisementPhotoshootRequest',
-          data: {
-            sourcetype: 9,
-            json: {'TypeCode': 1002, 'PlatForm': 1500}
-          },
-          success: function (res) {
+        return new Promise((resolve, reject) => {
+          vm.$api({
+            method: 'get',
+            url: '/shihang/category/smallCategory/advise.json'
+          }).then((res) => {
             vm.allAdvertise = res.data.Data
-          }
+            resolve('SUCCESS')
+          }).catch((error) => {
+            console.log(error)
+          })
         })
       },
       /**
@@ -140,26 +145,24 @@
        * 全部商品
        */
       allProduct () {
-        var vm = this
-        vm.showToast({
-          title: '该功能暂未开发',
-          img: '../../assets/imgs/error.png'
+        Toast({
+          message: '该功能暂未开发'
         })
       }
     }
   }
 </script>
 <style lang="less" scoped>
-  .main {
-    width: 78vw;
+  #categoryMain {
+    width: 78%;
     .hotCategory {
       &::-webkit-scrollbar {
         display: none
       }
-      overflow-y: scroll;
+      overflow-y: auto;
       -webkit-overflow-scrolling: touch;
       width: 100%;
-      height: calc(100vh - 120px - 55px);
+      height: calc(100vh - 120px - 110px);
       display: flex;
       justify-content: flex-start;
       flex-wrap: wrap;
@@ -167,6 +170,7 @@
         width: 33%;
         text-align: center;
         padding: 1vh 0;
+        cursor: pointer;
         img {
           display: block;
           width: 70%;
@@ -186,12 +190,11 @@
       overflow-y: scroll;
       -webkit-overflow-scrolling: touch;
       width: 100%;
-      height: 60vh;
       .subTitle {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin: 3vh 5vw 1vh 5vw;
+        margin: 10px 15px;
         .metaKeywords {
           color: #333;
           font-weight: 400;
@@ -202,8 +205,11 @@
           cursor: pointer;
           display: flex;
           align-items: center;
-          text {
+          span {
             font-size: 0.3rem;
+          }
+          .icon-arrow {
+            font-size: 0.4rem;
           }
         }
       }
@@ -213,6 +219,7 @@
         .item {
           width: 33%;
           text-align: center;
+          cursor: pointer;
           img {
             width: 80%;
           }
@@ -225,10 +232,10 @@
       }
     }
     .hasAdv {
-      height: calc(100vh - 120px - 55px);
+      height: calc(100vh - 120px - 110px);
     }
     .notHasAdv {
-      height: calc(100vh - 55px);
+      height: calc(100vh - 110px);
     }
   }
 
@@ -249,5 +256,61 @@
 
   .icon-arrow:before {
     content: "\e627";
+  }
+
+  @media screen and (min-width: 400px) {
+    #categoryMain {
+      .hotCategory {
+        height: calc(100vh - 160px - 115px);
+        .category-list {
+          .title {
+            font-size: 1.3rem;
+          }
+        }
+      }
+      .subCategory {
+        .subTitle {
+          margin: 15px 25px;
+          .metaKeywords {
+            font-size: 1.35rem;
+          }
+          .allProduct {
+            span {
+              font-size: 1.3rem;
+            }
+            .icon-arrow {
+              font-size: 1.4rem;
+            }
+          }
+        }
+        .subContent {
+          .item {
+            .subContent-title {
+              font-size: 1.3rem;
+            }
+          }
+        }
+      }
+      .hasAdv {
+        height: calc(100vh - 160px - 115px);
+      }
+      .notHasAdv {
+        height: calc(100vh - 115px);
+      }
+    }
+  }
+
+  @media screen and (min-width: 500px) {
+    #categoryMain {
+      .hotCategory {
+        height: calc(100vh - 200px - 115px);
+      }
+      .hasAdv {
+        height: calc(100vh - 200px - 115px);
+      }
+      .notHasAdv {
+        height: calc(100vh - 115px);
+      }
+    }
   }
 </style>

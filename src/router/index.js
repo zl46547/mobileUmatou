@@ -32,7 +32,7 @@ const router = new Router({
     },
     {
       path: '/category',
-      redirect: '/category/all',
+      redirect: '/category/0',
       component: Category,
      children: [
        {

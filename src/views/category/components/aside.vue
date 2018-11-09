@@ -1,5 +1,5 @@
 <template>
-  <div class="big-category" v-if="bigCategory">
+  <div id="big-category" v-if="bigCategory">
     <div class="big-category-item" v-for="(k) in bigCategory" @click="changeTabIndex(k)"
          :key="k.Id" :class="{active:k.Name == activeItem.Name}">
       <div>{{k.Name}}</div>
@@ -50,15 +50,16 @@
 </script>
 
 <style lang="less" scoped>
-  .big-category {
-    width: 22vw;
-    height: calc(100vh - 55px);
+  #big-category {
+    width: 22%;
+    height: calc(100vh - 110px);
     overflow-y: auto;
     background-color: rgb(247, 247, 247);
     &::-webkit-scrollbar {
       display: none;
     }
     .big-category-item {
+      cursor: pointer;
       text-align: center;
       font-size: 0.3rem;
       padding: 10px 0;
@@ -69,6 +70,23 @@
       color: #55c955;
       background-color: #fff;
       border-left: 2px solid #55c955;
+    }
+  }
+  @media screen and (min-width: 400px) {
+    #big-category {
+      height: calc(100vh - 115px);
+      .big-category-item {
+        font-size: 1.3rem;
+        padding: 15px 0;
+      }
+      .active {
+        font-size: 1.35rem;
+      }
+    }
+  }
+  @media screen and (min-width: 500px) {
+    #big-category {
+      height: calc(100vh - 115px);
     }
   }
 </style>

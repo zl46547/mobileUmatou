@@ -132,9 +132,6 @@
           height: 60px;
         }
       }
-      .menuName {
-        font-size: 1.2rem;
-      }
     }
   }
 </style>

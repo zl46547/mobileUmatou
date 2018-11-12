@@ -2,15 +2,16 @@
   <div id="adverise" v-if="advData">
     <div v-for="(item) in advData" :key="item.uid">
       <div v-if="item.type === 'a'" class="typeA">
-        <img :src="item.picUrl" alt="" mode="widthFix"/>
+        <img v-lazy="item.picUrl" alt="typeA图片" />
       </div>
       <div v-if="item.type === 'b'" class="typeB">
-        <img :src="k.picUrl" alt="typeB图片" mode="widthFix" v-for="(k) in item.list" :key="k.index"
-             @click="goTop(item.list[0])"/>
+        <div v-for="(k) in item.list" :key="k.index">
+          <img v-lazy="k.picUrl" alt="typeB图片"  @click="goTop(item.list[0])"/>
+        </div>
       </div>
       <div v-if="item.type === 'c'" class="typeC">
         <div class="typeC-content" v-for="(k) in item.list" :key="k.index">
-          <img :src="k.entity.imgUrl" alt="typeC图片" mode="widthFix" @click="goToDetail(k.entity.productId)"/>
+          <img v-lazy="k.entity.imgUrl" alt="typeC图片" @click="goToDetail(k.entity.productId)"/>
           <div class="title" @click="goToDetail(k.entity.productId)">
             {{k.entity.name}}
           </div>
@@ -58,7 +59,7 @@
       goToDetail(productId) {
         var vm = this
         if (productId) {
-          vm.$router.push({path: '/detail', query: {productId}})
+          vm.$router.push({name: '商品详情', params: {productId}})
         }
       },
       backToTop () {
@@ -135,6 +136,7 @@
   #adverise {
     height:100vh;
     overflow-y: auto;
+    overflow-x: hidden;
     &::-webkit-scrollbar{
       display: none;
     }
@@ -144,12 +146,17 @@
       }
     }
     .typeB {
+      width:100%;
       display: flex;
       align-items: center;
-      justify-content: space-around;
-      img {
-        width: 100%;
-        cursor: pointer;
+      flex-wrap: nowrap;
+      >div{
+        width:100%;
+        img {
+          width: 100%;
+          cursor: pointer;
+          display: block;
+        }
       }
     }
     .typeC {

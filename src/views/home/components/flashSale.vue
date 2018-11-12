@@ -17,7 +17,7 @@
     <div class="flashSale-list">
       <div class="scroll-div" scroll-x="true">
         <div class="scroll-div-item" v-for="k in flashSaleData.FlashSaleProducts" :key="k.id" @click="goToDetail(k)">
-          <img :src="'http://picpro-sz.34580.com/sz/ImageUrl/'+k.PictureId+'/200.jpeg'"/>
+          <img v-lazy="'http://picpro-sz.34580.com/sz/ImageUrl/'+k.PictureId+'/200.jpeg'"/>
           <div class="product-name">{{k.ProductName}}</div>
           <div class="price">
             <span class="flashSale-list-price">￥{{k.PeriodMoney}}</span>
@@ -101,7 +101,7 @@
        */
       goToDetail(val) {
         var vm = this
-        vm.$router.push({path: '/detail', query: {productId: val.ProductId}})
+        vm.$router.push({name: '商品详情', params: {productId: val.ProductId}})
       }
     }
   }

@@ -19,16 +19,13 @@
         </div>
       </div>
     </div>
-    <v-toast v-if="showToast" @close-message="closeToast">
-      <span slot="tip">加入购物车成功！</span>
-    </v-toast>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import addCartUtil from '@/util/addCart.js'
   import Header from '../../common/header/index.vue'
-
+  import { Toast } from 'mint-ui'
   export default {
     mounted() {
       var vm = this
@@ -38,8 +35,7 @@
     data () {
       return {
         categoryIds: [],
-        categoryDetailData: [],
-        showToast: false
+        categoryDetailData: []
       }
     },
     components: {
@@ -52,7 +48,7 @@
        */
       goToDetail(productId) {
         var vm = this
-        vm.$router.push({path: '/detail', query: {productId}})
+        vm.$router.push({name: '商品详情', params: {productId}})
       },
       /**
        * 获取分类详细数据
@@ -75,7 +71,6 @@
       addCart(val) {
         var vm = this
         vm.getProductDetailData(val)
-        vm.showToast = true
       },
       /**
        * 获取商品详细信息
@@ -86,6 +81,9 @@
           url: '/shihang/productDetail/content/' + val.ProductId + '.json'
         }).then((res) => {
           addCartUtil.addCart(res.data.Data.ProductInfo)
+          Toast({
+            message: '加入购物车成功！'
+          })
         }).catch((error) => {
           console.log(error)
         })
@@ -179,6 +177,7 @@
       content: "\e735";
     }
   }
+
   @media screen and (min-width: 400px) {
     #categoryDetail {
       .category-detail-content {
@@ -211,6 +210,7 @@
       }
     }
   }
+
   @media screen and (min-width: 500px) {
   }
 

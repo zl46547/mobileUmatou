@@ -16,7 +16,7 @@ export default {
    * @param res
    * @param key
    */
-  setLocal (res, key = STORAGE_USER_KEY) {
+  setLocal (key = STORAGE_USER_KEY, res) {
     return window.localStorage.setItem(key, JSON.stringify(res))
   },
   /**

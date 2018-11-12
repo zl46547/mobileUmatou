@@ -1,5 +1,5 @@
 <template>
-  <div class="detail-content">
+  <div id="detail">
     <!-- 产品规格 -->
     <div class="standard">
       <header>
@@ -8,35 +8,35 @@
       </header>
       <div class="standard-list">
         <div class="product-name">商品名称</div>
-        <div>{{responseData.ProductInfo.ProductName}}</div>
+        <div>{{detail.ProductName}}</div>
       </div>
       <div class="standard-list">
         <div class="product-name">编号</div>
-        <div>{{responseData.ProductInfo.Number}}</div>
+        <div>{{detail.Number}}</div>
       </div>
       <div class="standard-list">
         <div class="product-name">规格</div>
-        <div>{{responseData.ProductInfo.PvStandard}}</div>
+        <div>{{detail.PvStandard}}</div>
       </div>
       <div class="standard-list">
         <div class="product-name">产地</div>
-        <div>{{responseData.ProductInfo.Place}}</div>
+        <div>{{detail.Place}}</div>
       </div>
       <div class="standard-list">
         <div class="product-name">储存方式</div>
-        <div>{{responseData.ProductInfo.Number}}</div>
+        <div>{{detail.Number}}</div>
       </div>
       <div class="standard-list">
         <div class="product-name">开票内容</div>
-        <div>{{responseData.ProductInfo.FinanceCName}}</div>
+        <div>{{detail.FinanceCName}}</div>
       </div>
       <div class="standard-list">
         <div class="product-name">截单时间</div>
-        <div>{{responseData.ProductInfo.LastTimeInfo}}</div>
+        <div>{{detail.LastTimeInfo}}</div>
       </div>
     </div>
-    <div class="introduce">
-      <img :src="getImageUrl" alt="">
+    <div class="introduce" v-if="detail.detailImages.length>0">
+      <img :src="item" alt="" v-for="(item,index) in detail.detailImages" :key="index"/>
     </div>
   </div>
 </template>
@@ -44,7 +44,7 @@
 <script type="text/ecmascript-6">
 
   export default {
-    props: ['responseData'],
+    props: ['detail'],
     data () {
       return {
         nowIndex: 0,
@@ -63,14 +63,6 @@
     computed: {
       isActive () {
         return this.nowIndex
-      },
-      getImageUrl () {
-        if (this.responseData) {
-          var start = this.responseData.ProductInfo.FullDescription.indexOf('http')
-          var end = this.responseData.ProductInfo.FullDescription.indexOf('jpg') + 3
-          var imageUrl = this.responseData.ProductInfo.FullDescription.substring(start, end)
-          return imageUrl
-        }
       }
     },
     methods: {
@@ -82,7 +74,7 @@
 </script>
 
 <style lang="less" scoped>
-  .detail-content {
+  #detail {
     .standard {
       margin-bottom: 1px;
       padding: 1vh 0;
@@ -90,36 +82,38 @@
       header {
         display: flex;
         align-items: baseline;
-        padding: 2vh 3vw;
+        padding: 12px 18px;
         .title {
           font-size: 1.5rem;
-          border-left: 2.3vw solid #90c320;
+          border-left: 10px solid #90c320;
           padding: 0 5px 0 10px;
           word-break: break-all;
           white-space: nowrap;
         }
         .sub-title {
-          font-size: 1.2rem;
+          font-size: 1.3rem;
           color: #888;
           width: 80%;
           border-bottom: 1.3px solid #c3c3c3;
         }
       }
+
       .standard-list {
         font-size: 1.3rem;
         display: flex;
         padding-bottom: 2vh;
         align-items: center;
         .product-name {
-          width: 20%;
+          width: 108px;
           display: flex;
           justify-content: flex-end;
           color: rgba(0, 0, 0, 0.43);
-          margin: 0 8vw 0 4vw;
+          margin: 0 20px 0 15px;
           white-space: nowrap;
         }
         div:nth-of-type(2){
-          width: 80%;
+          width: 100%;
+          padding-right: 10px;
         }
       }
     }
@@ -127,38 +121,24 @@
       padding-bottom: 2vh;
       background-color: #fff;
       img {
-        width: 100vw;
+        width: 100%;
       }
     }
   }
-
-  .active {
-    color: #63a35c;
-  }
-
-  @media screen and (min-width: 640px) {
-    .detail-content {
+  @media screen and (min-width: 400px) {
+    #detail {
       .standard {
         header {
-          padding: 2vh 20px;
+          padding: 18px 24px;
           .title {
-            font-size: 1.7rem;
-            border-left: 16px solid #90c320;
+            font-size: 1.8rem;
           }
           .sub-title {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
           }
         }
-        > .standard-list {
-          font-size: 1.5rem;
-          .product-name {
-            margin: 0 40px 0 20px;
-          }
-        }
-      }
-      .introduce {
-        img {
-          width: 640px;
+        .standard-list {
+          font-size: 1.4rem;
         }
       }
     }

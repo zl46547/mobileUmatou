@@ -7,11 +7,10 @@ const IndexAdv = resolve => require(['@/views/indexAdv/index.vue'], resolve)
 const Category = resolve => require(['@/views/category/index.vue'], resolve)
 const CategoryMain = resolve => require(['@/views/category/components/main.vue'], resolve)
 const CategoryDetail = resolve => require(['@/views/categoryDetail/index.vue'], resolve)
+const ProductDetail = resolve => require(['@/views/productDetail/index.vue'], resolve)
 
-const Detail = resolve => require(['@/views/Detail.vue'], resolve)
 const Car = resolve => require(['@/views/Car.vue'], resolve)
 const User = resolve => require(['@/views/User.vue'], resolve)
-const ProductDetail = resolve => require(['@/views/ProductDetail.vue'], resolve)
 const SubmitOrder = resolve => require(['@/views/SubmitOrder.vue'], resolve)
 const Pay = resolve => require(['@/views/Pay.vue'], resolve)
 const AllOrders = resolve => require(['@/views/AllOrders.vue'], resolve)
@@ -24,11 +23,6 @@ const router = new Router({
       path: '/',
       name: '首页',
       component: Index
-    },
-    {
-      path: '/detail',
-      name: '详情页',
-      component: Detail
     },
     {
       path: '/category',
@@ -64,7 +58,7 @@ const router = new Router({
       component: User
     },
     {
-      path: '/productDetail/:id',
+      path: '/productDetail/:productId',
       name: '商品详情',
       component: ProductDetail
     },

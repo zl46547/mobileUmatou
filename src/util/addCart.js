@@ -1,12 +1,11 @@
 import store from '@/vuex/store.js' // vuex
-import { Message } from 'element-ui'
+
 export default {
   /**
    * 加入购物车
-   * @param value 产品对象信息
+   * @param productInfo 产品对象信息
    */
-  addCart (value) {
-    var productInfo = value
+  addCart (productInfo) {
     var list = store.state.car.carList
     var index = -1
     for (var i = 0; i < list.length; i++) {
@@ -17,24 +16,16 @@ export default {
     // 说明存在
     if (index >= 0) {
       list[index].buyNum += 1
-      list[index].totalMoney = Math.round(list[index].buyNum * list[index].DefaultMoney * 10) / 10
+      list[index].totalMoney = (list[index].buyNum * list[index].PeriodMoney).toFixed(2)
     } else {
-      var cartItem = {}
-      cartItem['ProductId'] = productInfo.ProductId
-      cartItem['ProductName'] = productInfo.ProductName
-      cartItem['PvStandard'] = productInfo.PvStandard
-      cartItem['PictureId'] = productInfo.PictureId
-      cartItem['DefaultMoney'] = productInfo.DefaultMoney
-      cartItem['buyNum'] = 1
-      cartItem['totalMoney'] = productInfo.DefaultMoney
-      cartItem['checked'] = true
+      var cartItem = {
+        ...productInfo,
+        buyNum: 1,
+        checked: true,
+        totalMoney: productInfo.PeriodMoney
+      }
       list.unshift(cartItem)
     }
     store.commit('CAR_LIST', list)
-    Message({
-      message: '成功加入购物车！',
-      type: 'success',
-      duration: 800
-    })
   }
 }

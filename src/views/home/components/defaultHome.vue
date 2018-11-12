@@ -9,51 +9,51 @@
       <!-- 左上下 -->
       <div class="flex" v-if="item.FloorType == 1">
         <div>
-          <img :src="item.PicAdvItems[0].BackGroundImg" alt="" class="width-50"/>
+          <img v-lazy="item.PicAdvItems[0].BackGroundImg" alt="" class="width-50"/>
         </div>
         <div>
-          <img :src="item.PicAdvItems[1].BackGroundImg" alt="" class="width-50;"/>
-          <img :src="item.PicAdvItems[2].BackGroundImg" alt="" class="width-50;"/>
+          <img v-lazy="item.PicAdvItems[1].BackGroundImg" alt="" class="width-50;"/>
+          <img v-lazy="item.PicAdvItems[2].BackGroundImg" alt="" class="width-50;"/>
         </div>
       </div>
       <!-- 上下右 -->
       <div class="flex" v-if="item.FloorType == 2">
         <div>
-          <img :src="item.PicAdvItems[0].BackGroundImg" alt="" class="width-50"/>
-          <img :src="item.PicAdvItems[1].BackGroundImg" alt="" class="width-50"/>
+          <img v-lazy="item.PicAdvItems[0].BackGroundImg" alt="" class="width-50"/>
+          <img v-lazy="item.PicAdvItems[1].BackGroundImg" alt="" class="width-50"/>
         </div>
         <div>
-          <img :src="item.PicAdvItems[2].BackGroundImg" alt="" class="width-50"/>
+          <img v-lazy="item.PicAdvItems[2].BackGroundImg" alt="" class="width-50"/>
         </div>
       </div>
       <!-- 一列 -->
       <div v-if="item.FloorType == 7">
-        <img :src="item.PicAdvItems[0].BackGroundImg" alt="" class="width-100"
+        <img v-lazy="item.PicAdvItems[0].BackGroundImg" alt="" class="width-100"
              @click="goToJump(item.FloorType,item.PicAdvItems[0])"/>
       </div>
       <!-- 两列 -->
       <div class="flex" v-if="item.FloorType == 6">
         <div class="width-50">
-          <img :src="item.PicAdvItems[0].BackGroundImg" alt=""
+          <img v-lazy="item.PicAdvItems[0].BackGroundImg" alt=""
                @click="goToJump(item.FloorType,item.PicAdvItems[0])"/>
         </div>
         <div class="width-50">
-          <img :src="item.PicAdvItems[1].BackGroundImg" alt=""
+          <img v-lazy="item.PicAdvItems[1].BackGroundImg" alt=""
                @click="goToJump(item.FloorType,item.PicAdvItems[1])"/>
         </div>
       </div>
       <!-- 三列 -->
       <div class="flex" v-if="item.FloorType == 4">
         <div class="width-33">
-          <img :src="item.PicAdvItems[0].BackGroundImg"
+          <img v-lazy="item.PicAdvItems[0].BackGroundImg"
                @click="goToJump(item.FloorType,item.PicAdvItems[0])"/>
         </div>
         <div class="width-33">
-          <img :src="item.PicAdvItems[1].BackGroundImg"
+          <img v-lazy="item.PicAdvItems[1].BackGroundImg"
                @click="goToJump(item.FloorType,item.PicAdvItems[1])"/>
         </div>
         <div class="width-33">
-          <img :src="item.PicAdvItems[2].BackGroundImg"
+          <img v-lazy="item.PicAdvItems[2].BackGroundImg"
                @click="goToJump(item.FloorType,item.PicAdvItems[2])"/>
         </div>
       </div>
@@ -62,7 +62,7 @@
         <div class="scroll-div">
           <div class="scroll-div-item" v-for="(scrollItem,scrollItemIndex) in item.ProductItems" :key="scrollItemIndex"
                @click="goToJump(item.FloorType,scrollItem)">
-            <img :src="'http://picpro-sz.34580.com/sz/ImageUrl/'+scrollItem.PictureId+'/160.jpeg'"/>
+            <img v-lazy="'http://picpro-sz.34580.com/sz/ImageUrl/'+scrollItem.PictureId+'/160.jpeg'"/>
             <div class="product-name">{{scrollItem.ProductName}}</div>
             <div class="price">
               <span class="flashSale-list-price">￥{{scrollItem.PeriodMoney}}</span>
@@ -74,7 +74,7 @@
       <!-- 发现更多 -->
       <div class="flex flex-wrap find-more" v-if="item.FloorType == 15">
         <div v-for="(k,kId) in item.CategoryProductItems[0].ProductItems" class="width-50" :key="kId">
-          <img :src="'http://picpro-sz.34580.com/sz/ImageUrl/'+k.PictureId+'/500.jpeg'" class="width-50"
+          <img v-lazy="'http://picpro-sz.34580.com/sz/ImageUrl/'+k.PictureId+'/500.jpeg'" class="width-50"
                @click="goToJump(item.FloorType,k)"/>
           <div class="product-name">{{k.ProductName}}</div>
         </div>
@@ -155,7 +155,7 @@
        */
       goToDetail(productId) {
         var vm = this
-        vm.$router.push({path: '/detail', query: {productId}})
+        vm.$router.push({name: '商品详情', params: {productId}})
       },
       /**
        * 跳转分类详细页面

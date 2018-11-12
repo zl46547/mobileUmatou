@@ -9,7 +9,7 @@ const state = {
 const mutations = {
   [types.CAR_LIST] (state, res) {
     state.carList = res
-    Util.setLocal(res, 'CAR_LIST')
+    Util.setLocal('CAR_LIST', res)
   },
   [types.SELECT_CAR_LIST] (state, res) {
     state.selectedCarList = res

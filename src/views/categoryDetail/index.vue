@@ -26,6 +26,7 @@
   import addCartUtil from '@/util/addCart.js'
   import Header from '../../common/header/index.vue'
   import { Toast } from 'mint-ui'
+  import axios from 'axios'
   export default {
     mounted() {
       var vm = this
@@ -76,11 +77,11 @@
        * 获取商品详细信息
        */
       getProductDetailData(val) {
-        this.$api({
+        axios({
           method: 'get',
-          url: '/shihang/productDetail/content/' + val.ProductId + '.json'
+          url: 'http://zl46547.coding.me/markdown/shihang/productDetail/content/' + val.ProductId + '.json'
         }).then((res) => {
-          addCartUtil.addCart(res.data.Data.ProductInfo)
+          addCartUtil.addCart(res.data.data.Data.ProductInfo)
           Toast({
             message: '加入购物车成功！'
           })
@@ -96,6 +97,7 @@
   #categoryDetail {
     background-color: #ebebeb;
     width: 100%;
+    overflow: hidden;
     .category-detail-content {
       margin-top: 55px;
       height: calc(100vh - 55px);

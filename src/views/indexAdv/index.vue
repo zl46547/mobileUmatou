@@ -1,6 +1,8 @@
 <template>
   <div id="adverise" v-if="advData">
-    <v-header></v-header>
+    <v-header>
+      <span slot="title">优惠活动</span>
+    </v-header>
     <div class="content">
       <div v-for="(item) in advData" :key="item.uid">
         <div v-if="item.type === 'a'" class="typeA">
@@ -39,8 +41,9 @@
 
 <script type="text/ecmascript-6">
   import addCartUtil from '../../util/addCart'
-  import Header from '../../common/header/index.vue'
+  import Header from '../../common/navigator.vue'
   import { Toast } from 'mint-ui'
+  import axios from 'axios'
   export default {
     mounted() {
       var vm = this
@@ -71,9 +74,9 @@
       },
       backToTop () {
         let timer = setInterval(() => {
-          var top = document.getElementById('adverise').scrollTop
+          var top = document.getElementsByClassName('content')[0].scrollTop
           let speed = Math.ceil(top / 5)
-          document.getElementById('adverise').scrollTop = top - speed
+          document.getElementsByClassName('content')[0].scrollTop = top - speed
           if (top === 0) {
             clearInterval(timer)
           }
@@ -82,7 +85,7 @@
       /**
        * 回到顶部
        */
-      goTop: function (item) {
+      goTop (item) {
         var vm = this
         if (item.linkType === '5') {
           vm.backToTop()
@@ -120,10 +123,9 @@
        * 获取商品详细信息
        */
       getProductDetailData(productId) {
-        var vm = this
-        vm.$api({
+        axios({
           method: 'get',
-          url: '/shihang/productDetail/content/' + productId + '.json'
+          url: 'http://zl46547.coding.me/markdown/shihang/productDetail/content/' + productId + '.json'
         }).then((res) => {
           addCartUtil.addCart(res.data.data.Data.ProductInfo)
           Toast({
@@ -139,7 +141,7 @@
 
 <style lang="less" scoped>
   #adverise {
-    height: 100vh;
+    overflow: hidden;
     .content{
       margin-top: 45px;
       height:calc(100vh - 45px);
@@ -163,7 +165,6 @@
         width: 100%;
         img {
           width: 100%;
-          cursor: pointer;
           display: block;
         }
       }
@@ -230,6 +231,10 @@
 
   @media screen and (min-width: 400px) {
     #adverise {
+      .content{
+        margin-top: 50px;
+        height:calc(100vh - 50px);
+      }
       .title {
         font-size: 1.3rem;
         padding: 6% 6% 0 6%;

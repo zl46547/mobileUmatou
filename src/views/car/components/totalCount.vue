@@ -3,8 +3,8 @@
     <div>
       <div class="checkAll">
         <div class="checkAll-btn" @click="checkAll">
-          <i class="iconfont icon-uncheck" v-if="!checkAllStatus"></i>
-          <i class="iconfont icon-checked" v-if="checkAllStatus"></i>
+          <i class="iconfont icon-uncheck" v-if="!checkAllStatustemp"></i>
+          <i class="iconfont icon-checked" v-if="checkAllStatustemp"></i>
           <span>全选</span>
         </div>
         <div class="allPrice">
@@ -40,13 +40,19 @@
         default: []
       }
     },
+    data() {
+      return {
+        newCheckAllStatus: ''
+      }
+    },
     computed: {
       carListComp() {
         var vm = this
         return vm.carList
       },
-      checkAllStatusComp() {
+      checkAllStatustemp() {
         var vm = this
+        vm.newCheckAllStatus = vm.checkAllStatus
         return vm.checkAllStatus
       }
     },
@@ -54,18 +60,18 @@
       // 全选
       checkAll () {
         var vm = this
-        if (vm.checkAllStatus) {
+        if (vm.newCheckAllStatus) {
           vm.carList.forEach(function (e) {
             e.checked = false
           })
-          vm.checkAllStatus = false
+          vm.newCheckAllStatus = false
         } else {
           vm.carList.forEach(function (e) {
             e.checked = true
           })
-          vm.checkAllStatus = true
+          vm.newCheckAllStatus = true
         }
-        vm.$emit('check-all', {carList: vm.carListComp, checkAllStatus: vm.checkAllStatusComp})
+        vm.$emit('check-all', {carList: vm.carListComp, checkAllStatus: vm.newCheckAllStatus})
       },
       /**
        * 去结算
@@ -98,7 +104,7 @@
     position: fixed;
     bottom: 55px;
     left: 50%;
-    max-width:640px;
+    max-width: 640px;
     transform: translateX(-50%);
     box-shadow: 0 -0.5px 20px rgb(221, 221, 221);
     > div {
@@ -152,8 +158,8 @@
         height: 100%;
         display: flex;
         text-align: center;
-        padding: 0 4%;
-        font-size: 1.3rem;
+        width: 25%;
+        font-size: 1.1rem;
         > div {
           margin: auto
         }
@@ -182,6 +188,7 @@
   .icon-checked:before {
     content: "\e626";
   }
+
   @media screen and (min-width: 400px) {
     #totalCount {
       height: 55px;
@@ -209,7 +216,7 @@
         }
         .count-btn {
           white-space: nowrap;
-          font-size: 1.5rem;
+          font-size: 1.3rem;
         }
       }
     }

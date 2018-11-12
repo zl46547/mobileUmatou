@@ -75,6 +75,9 @@
     background-color: #fff;
     margin-bottom: 16px;
     text-align: center;
+    >img{
+      cursor: pointer;
+    }
     .swiper {
       height: 180px;
       width: 100%;
@@ -87,11 +90,11 @@
       width: 20%;
       text-align: center;
       padding: 3% 0;
-      cursor: pointer;
       img {
         width: 42px;
         height: 42px;
         margin: auto;
+        cursor: pointer;
       }
     }
     .menuName {

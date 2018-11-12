@@ -1,7 +1,7 @@
 <template>
   <div id="home">
     <v-header></v-header>
-    <div class="content" @mousewheel="getScorlTop()">
+    <div class="content" @wheel="getScorlTop()">
       <v-swiper></v-swiper>
       <v-menu-list></v-menu-list>
       <v-flashSale></v-flashSale>
@@ -39,8 +39,6 @@
         showBackToTop: false
       }
     },
-    mounted () {
-    },
     methods: {
       getScorlTop () {
         var top = document.getElementsByClassName('content')[0].scrollTop
@@ -63,26 +61,27 @@
       margin-top: 55px;
       height: calc(100vh - 110px);
       &::-webkit-scrollbar {
-        display: none
+      display: none
       }
       overflow-y: scroll;
       -webkit-overflow-scrolling: touch;
       .baseLine {
         text-align: center;
-        img{
+        img {
           width: 50%;
           margin: 10px auto;
         }
       }
     }
   }
+
   @media screen and (min-width: 400px) {
     #home {
       .content {
         margin-top: 60px;
         height: calc(100vh - 115px);
         .baseLine {
-          img{
+          img {
             margin: 20px auto;
           }
         }

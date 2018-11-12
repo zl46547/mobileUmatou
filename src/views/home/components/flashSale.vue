@@ -152,6 +152,7 @@
         .scroll-div-item {
           display: inline-block;
           margin: 5px 6px;
+          cursor: pointer;
           img {
             width: 100px;
           }

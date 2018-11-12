@@ -27,10 +27,10 @@
 
 <style lang="less" scoped>
   #cartEmpty {
-    height: calc(100vh - 55px);
+    height: calc(100vh - 100px);
     display: flex;
     > div {
-      margin: 30% auto;
+      margin: auto;
       image {
         width: 100%;
       }

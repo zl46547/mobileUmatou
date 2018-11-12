@@ -85,7 +85,7 @@
 <script type="text/ecmascript-6">
   import OrderButton from '@/components/allOrders/orderButton.vue'
   import MenuSelect from '@/common/_menuSelect.vue'
-  import Message from '@/common/_message.vue'
+  import Message from '@/common/message.vue'
   import Transition from '@/common/_transition.vue'
 
   export default {

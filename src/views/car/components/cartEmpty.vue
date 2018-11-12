@@ -1,8 +1,8 @@
 <template>
-  <div class="cartEmpty">
+  <div id="cartEmpty">
     <div>
-      <img src="../../assets/images/emptyCart.png"/>
-      <p>您的购物车空空如也</p>
+      <img src="../../../assets/images/emptyCart.png" mode="widthFix"/>
+      <div class="state">您的购物车空空如也</div>
       <div>
         <div class="goToShop" @click="goHome">
           <p>去逛逛</p>
@@ -18,27 +18,28 @@
     computed: {},
     methods: {
       goHome () {
-        this.$router.push({name: '首页'})
+        var vm = this
+        vm.$router.push({name: '首页'})
       }
     }
   }
 </script>
 
 <style lang="less" scoped>
-  .cartEmpty {
-    height: calc(100vh - 120px);
-    margin-top: 60px;
+  #cartEmpty {
+    height: calc(100vh - 55px);
     display: flex;
-    >div{
-      margin: auto;
-      img {
+    > div {
+      margin: 30% auto;
+      image {
         width: 100%;
       }
-      > p {
+      .state {
         color: #ccc;
         width: 100%;
         text-align: center;
-        font-size: 5vw;
+        font-family: "Microsoft PhagsPa";
+        font-size: 1.45rem;
       }
       > div {
         width: 100%;
@@ -46,35 +47,16 @@
         justify-content: center;
         margin-top: 2vh;
         .goToShop {
+          font-size: 1.3rem;
           cursor: pointer;
           display: flex;
-          width: 25vw;
+          width: 25%;
           height: 6vh;
           border-radius: 5px;
           color: #fff;
           background-color: #49aa34;
           p {
             margin: auto
-          }
-        }
-      }
-    }
-  }
-
-  @media screen and (min-width: 640px) {
-    .cartEmpty {
-      width: 100%;
-      >div{
-        > p {
-          width: 100%;
-          font-size: 26px;
-          padding-bottom: 20px;
-        }
-        > div {
-          width: 100%;
-          margin-top: 10px;
-          .goToShop {
-            width: 150px;
           }
         }
       }

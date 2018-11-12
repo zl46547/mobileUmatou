@@ -1,32 +1,35 @@
 <template>
   <div id="adverise" v-if="advData">
-    <div v-for="(item) in advData" :key="item.uid">
-      <div v-if="item.type === 'a'" class="typeA">
-        <img v-lazy="item.picUrl" alt="typeA图片" />
-      </div>
-      <div v-if="item.type === 'b'" class="typeB">
-        <div v-for="(k) in item.list" :key="k.index">
-          <img v-lazy="k.picUrl" alt="typeB图片"  @click="goTop(item.list[0])"/>
+    <v-header></v-header>
+    <div class="content">
+      <div v-for="(item) in advData" :key="item.uid">
+        <div v-if="item.type === 'a'" class="typeA">
+          <img v-lazy="item.picUrl" alt="typeA图片"/>
         </div>
-      </div>
-      <div v-if="item.type === 'c'" class="typeC">
-        <div class="typeC-content" v-for="(k) in item.list" :key="k.index">
-          <img v-lazy="k.entity.imgUrl" alt="typeC图片" @click="goToDetail(k.entity.productId)"/>
-          <div class="title" @click="goToDetail(k.entity.productId)">
-            {{k.entity.name}}
+        <div v-if="item.type === 'b'" class="typeB">
+          <div v-for="(k) in item.list" :key="k.index">
+            <img v-lazy="k.picUrl" alt="typeB图片" @click="goTop(item.list[0])"/>
           </div>
-          <div class="price" @click="goToDetail(k.entity.productId)">
-            <div class="newestPrice">
-              <span>¥</span>
-              <span>{{k.entity.periodPrice}}</span>
-              <span>/{{k.entity.unit}}</span>
+        </div>
+        <div v-if="item.type === 'c'" class="typeC">
+          <div class="typeC-content" v-for="(k) in item.list" :key="k.index">
+            <img v-lazy="k.entity.imgUrl" alt="typeC图片" @click="goToDetail(k.entity.productId)"/>
+            <div class="title" @click="goToDetail(k.entity.productId)">
+              {{k.entity.name}}
             </div>
-            <div class="defaultPrice">
-              <span>¥&nbsp;{{k.entity.shiHangPrice}}</span>
+            <div class="price" @click="goToDetail(k.entity.productId)">
+              <div class="newestPrice">
+                <span>¥</span>
+                <span>{{k.entity.periodPrice}}</span>
+                <span>/{{k.entity.unit}}</span>
+              </div>
+              <div class="defaultPrice">
+                <span>¥&nbsp;{{k.entity.shiHangPrice}}</span>
+              </div>
             </div>
-          </div>
-          <div class="addCart-btn" :style="{'background-color':item.cartBgColor}" @click="addTocart(k)">
-            <div class="addCart-btn-text">加入购物车</div>
+            <div class="addCart-btn" :style="{'background-color':item.cartBgColor}" @click="addTocart(k)">
+              <div class="addCart-btn-text">加入购物车</div>
+            </div>
           </div>
         </div>
       </div>
@@ -36,6 +39,7 @@
 
 <script type="text/ecmascript-6">
   import addCartUtil from '../../util/addCart'
+  import Header from '../../common/header/index.vue'
   import { Toast } from 'mint-ui'
   export default {
     mounted() {
@@ -43,6 +47,9 @@
       vm.$store.commit('SET_LOADING', true)
       let {queryId} = vm.$route.query
       vm.getAdvData(queryId)
+    },
+    components: {
+      'VHeader': Header
     },
     beforeDestroy() {
       var vm = this
@@ -114,18 +121,16 @@
        */
       getProductDetailData(productId) {
         var vm = this
-        vm.request({
-          url: 'https://api1.34580.com/sz/Products/ProductDetailRequest',
-          data: {
-            sourcetype: 9,
-            id: productId
-          },
-          success: function (res) {
-            addCartUtil.addCart(res.data.Data.ProductInfo)
-            Toast({
-              message: '加入购物车成功'
-            })
-          }
+        vm.$api({
+          method: 'get',
+          url: '/shihang/productDetail/content/' + productId + '.json'
+        }).then((res) => {
+          addCartUtil.addCart(res.data.data.Data.ProductInfo)
+          Toast({
+            message: '加入购物车成功'
+          })
+        }).catch((error) => {
+          console.log(error)
         })
       }
     }
@@ -134,11 +139,15 @@
 
 <style lang="less" scoped>
   #adverise {
-    height:100vh;
-    overflow-y: auto;
-    overflow-x: hidden;
-    &::-webkit-scrollbar{
-      display: none;
+    height: 100vh;
+    .content{
+      margin-top: 45px;
+      height:calc(100vh - 45px);
+      overflow-y: auto;
+      overflow-x: hidden;
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
     .typeA {
       img {
@@ -146,12 +155,12 @@
       }
     }
     .typeB {
-      width:100%;
+      width: 100%;
       display: flex;
       align-items: center;
       flex-wrap: nowrap;
-      >div{
-        width:100%;
+      > div {
+        width: 100%;
         img {
           width: 100%;
           cursor: pointer;
@@ -218,6 +227,7 @@
       }
     }
   }
+
   @media screen and (min-width: 400px) {
     #adverise {
       .title {
@@ -246,6 +256,7 @@
       }
     }
   }
+
   @media screen and (min-width: 500px) {
     #adverise {
       .addCart-btn {

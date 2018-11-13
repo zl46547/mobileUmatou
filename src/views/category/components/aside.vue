@@ -61,12 +61,12 @@
     .big-category-item {
       cursor: pointer;
       text-align: center;
-      font-size: 0.3rem;
+      font-size: 1.3rem;
       padding: 10px 0;
       border-left: 2px solid rgb(247, 247, 247);
     }
     .active {
-      font-size: 0.35rem;
+      font-size: 1.35rem;
       color: #55c955;
       background-color: #fff;
       border-left: 2px solid #55c955;
@@ -76,11 +76,11 @@
     #big-category {
       height: calc(100vh - 115px);
       .big-category-item {
-        font-size: 1.3rem;
+        font-size: 1.35rem;
         padding: 15px 0;
       }
       .active {
-        font-size: 1.35rem;
+        font-size: 1.4rem;
       }
     }
   }

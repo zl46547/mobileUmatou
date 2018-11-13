@@ -66,7 +66,6 @@
       width: 100%;
       height: 100%;
       display: flex;
-      font-size: 1.3rem;
       cursor: pointer;
       border-bottom: 2px solid #fafafa;
       span {

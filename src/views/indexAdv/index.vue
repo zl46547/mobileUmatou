@@ -202,14 +202,14 @@
         white-space: nowrap;
         align-items: baseline;
         color: #ff718e;
-        font-size: 0.25rem;
+        font-size: 1.25rem;
         span:nth-of-type(2) {
-          font-size: 0.3rem;
+          font-size: 1.3rem;
         }
       }
       .defaultPrice {
         span {
-          font-size: 0.25rem;
+          font-size: 1.25rem;
           color: #aaa;
           text-decoration: line-through;
         }
@@ -222,7 +222,7 @@
       cursor: pointer;
       border-radius: 0 0 10px 10px;
       .addCart-btn-text {
-        font-size: 0.35rem;
+        font-size: 1.35rem;
         color: #fff;
         margin: auto;
       }
@@ -242,21 +242,21 @@
       .price {
         padding: 6% 8%;
         .newestPrice {
-          font-size: 1.25rem;
+          font-size: 1.3rem;
           span:nth-of-type(2) {
-            font-size: 1.3rem;
+            font-size: 1.35rem;
           }
         }
         .defaultPrice {
           span {
-            font-size: 1.25rem;
+            font-size: 1.3rem;
           }
         }
       }
       .addCart-btn {
         height: 45px;
         .addCart-btn-text {
-          font-size: 1.3rem;
+          font-size: 1.35rem;
         }
       }
     }

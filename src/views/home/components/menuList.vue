@@ -100,7 +100,7 @@
     .menuName {
       width: 100%;
       margin-top: 10px;
-      font-size: 0.3rem;
+      font-size: 1.2rem;
     }
     > img {
       width: 90%;
@@ -120,7 +120,7 @@
         }
       }
       .menuName {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
       }
     }
   }

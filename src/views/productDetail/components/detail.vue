@@ -36,7 +36,7 @@
       </div>
     </div>
     <div class="introduce" v-if="detail.detailImages.length>0">
-      <img :src="item" alt="" v-for="(item,index) in detail.detailImages" :key="index"/>
+      <img v-lazy="item" alt="" v-for="(item,index) in detail.detailImages" :key="index"/>
     </div>
   </div>
 </template>

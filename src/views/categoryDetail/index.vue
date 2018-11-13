@@ -3,16 +3,13 @@
     <v-header></v-header>
     <div class="category-detail-content">
       <div v-for="k in categoryDetailData" :key="k.ProductName" class="detail-item" @click="goToDetail(k.ProductId)">
-        <img :src="'http://picpro-sz.34580.com/sz/ImageUrl/' +k.PictureId+ '/500.jpeg'" alt="分类详情"
-             mode="widthFix"/>
+        <img :src="'http://picpro-sz.34580.com/sz/ImageUrl/' +k.PictureId+ '/500.jpeg'" alt="分类详情"/>
         <div class="product-detail">
-          <div class="productName productDes">{{k.ProductName}}</div>
-          <div class="price productDes">
-            <div class="priceDeatil">
-              <div class="pvStandard productDes">{{k.PvStandard}}</div>
-              <div class="periodMoney">¥{{k.PeriodMoney}}</div>
-            </div>
-            <div @click.stop="addCart(k)" class="addCart">
+          <p class="productName productDes">{{k.ProductName}}</p>
+          <p class="priceDeatil">{{k.PvStandard}}</p>
+          <div class="addCart">
+            <p class="periodMoney"><span>￥</span><span>{{k.PeriodMoney}}</span></p>
+            <div @click.stop="addCart(k)" class="addCart-icon">
               <span class="iconfont icon-gouwuche"></span>
             </div>
           </div>
@@ -127,24 +124,33 @@
         overflow: hidden;
       }
       .productName {
-        font-size: 0.3rem;
+        font-size: 1.3rem;
       }
-      .price {
+      .priceDeatil {
+        width:100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: #999899;
+        font-size: 1.25rem;
+      }
+      .addCart{
         display: flex;
+        align-items: center;
         justify-content: space-between;
-        .priceDeatil {
+        padding-bottom: 5px;
+        .periodMoney {
           display: flex;
-          align-items: center;
-          .pvStandard {
-            color: #999899;
-            font-size: 0.25rem;
+          align-items: baseline;
+          color: #f05423;
+          span:nth-of-type(1){
+            font-size: 1rem;
           }
-          .periodMoney {
-            font-size: 0.35rem;
-            color: #f05423;
+          span:nth-of-type(2){
+            font-size: 1.7rem;
+            font-family: monospace;
           }
         }
-        .addCart {
+        .addCart-icon {
           width: 25px;
           height: 25px;
           border: 1px solid #ccc;
@@ -155,7 +161,7 @@
           align-items: center;
           justify-content: center;
           .icon-gouwuche {
-            font-size: 0.3rem;
+            font-size: 1.3rem;
             margin: auto;
             color: #e55b2f;
           }
@@ -170,7 +176,6 @@
     }
     .iconfont {
       font-family: "iconfont";
-      font-size: 16px;
       font-style: normal;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
@@ -188,32 +193,24 @@
       }
       .product-detail {
         .productName {
-          font-size: 1.3rem;
+          font-size: 1.35rem;
         }
         .price {
           .priceDeatil {
             .pvStandard {
-              color: #999899;
-              font-size: 1.25rem;
+              font-size: 1.3rem;
             }
             .periodMoney {
-              font-size: 1.35rem;
+              font-size: 1.4rem;
             }
           }
           .addCart {
-            width: 25px;
-            height: 25px;
-            margin: 2%;
             .icon-gouwuche {
-              font-size: 1.3rem;
+              font-size: 1.35rem;
             }
           }
         }
       }
     }
   }
-
-  @media screen and (min-width: 500px) {
-  }
-
 </style>

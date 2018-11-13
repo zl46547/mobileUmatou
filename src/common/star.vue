@@ -56,7 +56,7 @@
     }
     .iconfont {
       font-family: "iconfont";
-      font-size: 0.3rem;
+      font-size: 1.3rem;
       font-style: normal;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;

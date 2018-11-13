@@ -174,7 +174,7 @@
           margin: 0 auto;
         }
         .title {
-          font-size: 0.3rem;
+          font-size: 1.3rem;
           padding: 2vh 0;
           text-align: center;
         }
@@ -195,7 +195,7 @@
         .metaKeywords {
           color: #333;
           font-weight: 400;
-          font-size: 0.35rem;
+          font-size: 1.35rem;
         }
         .allProduct {
           color: #999;
@@ -203,10 +203,10 @@
           display: flex;
           align-items: center;
           span {
-            font-size: 0.3rem;
+            font-size: 1.3rem;
           }
           .icon-arrow {
-            font-size: 0.4rem;
+            font-size: 1.4rem;
           }
         }
       }
@@ -221,7 +221,7 @@
             width: 80%;
           }
           .subContent-title {
-            font-size: 0.3rem;
+            font-size: 1.3rem;
             padding: 2vh 0;
             text-align: center;
           }
@@ -245,7 +245,6 @@
 
   .iconfont {
     font-family: "iconfont" !important;
-    font-size: 16px;
     font-style: normal;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -261,7 +260,7 @@
         height: calc(100vh - 160px - 115px);
         .category-list {
           .title {
-            font-size: 1.3rem;
+            font-size: 1.35rem;
           }
         }
       }
@@ -269,14 +268,14 @@
         .subTitle {
           margin: 15px 25px;
           .metaKeywords {
-            font-size: 1.35rem;
+            font-size: 1.4rem;
           }
           .allProduct {
             span {
-              font-size: 1.3rem;
+              font-size: 1.35rem;
             }
             .icon-arrow {
-              font-size: 1.4rem;
+              font-size: 1.45rem;
             }
           }
         }

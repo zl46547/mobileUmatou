@@ -9,9 +9,9 @@ const CategoryMain = resolve => require(['@/views/category/components/main.vue']
 const CategoryDetail = resolve => require(['@/views/categoryDetail/index.vue'], resolve)
 const ProductDetail = resolve => require(['@/views/productDetail/index.vue'], resolve)
 const Car = resolve => require(['@/views/car/index.vue'], resolve)
+const SubmitOrder = resolve => require(['@/views/submitOrder/index.vue'], resolve)
 
 const User = resolve => require(['@/views/User.vue'], resolve)
-const SubmitOrder = resolve => require(['@/views/SubmitOrder.vue'], resolve)
 const Pay = resolve => require(['@/views/Pay.vue'], resolve)
 const AllOrders = resolve => require(['@/views/AllOrders.vue'], resolve)
 const Login = resolve => require(['@/views/Login.vue'], resolve)
@@ -65,9 +65,9 @@ const router = new Router({
     {
       path: '/submitOrder',
       name: '提交订单',
-      meta: {
-        requireAuth: true
-      },
+      // meta: {
+      //   requireAuth: true
+      // },
       component: SubmitOrder
     },
     {

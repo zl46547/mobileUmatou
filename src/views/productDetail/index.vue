@@ -12,10 +12,10 @@
       <v-detail :detail="productInfo"></v-detail>
     </div>
     <!-- 评价页 -->
-    <v-loadmore v-if="selected == 2" class="rate" :bottom-method="getRateData" :bottom-all-loaded="allLoaded"
-                ref="loadmore">
+    <div v-if="selected == 2" class="rate" v-infinite-scroll="getRateData" infinite-scroll-disabled="loading"
+         infinite-scroll-distance="10">
       <v-rate-detail :rateData="rateData"></v-rate-detail>
-    </v-loadmore>
+    </div>
     <!-- 脚部区域 -->
     <v-footer :productInfo="productInfo"></v-footer>
   </div>
@@ -29,7 +29,6 @@
   import Footer from './components/footer.vue'
   import RateDetail from './components/rateDetail.vue'
   import Detail from './components/detail.vue'
-  import { Loadmore } from 'mint-ui'
   import moment from 'moment'
   export default {
     components: {
@@ -39,8 +38,7 @@
       'VService': Service,
       'VFooter': Footer,
       'VDetail': Detail,
-      'VRateDetail': RateDetail,
-      'VLoadmore': Loadmore
+      'VRateDetail': RateDetail
     },
     mounted() {
       var vm = this
@@ -101,6 +99,9 @@
       getRateData() {
         var vm = this
         vm.pageIndex = vm.pageIndex + 1
+        if (vm.allLoaded) {
+          return false
+        }
         this.$api({
           method: 'get',
           url: '/shihang/productDetail/rate/' + vm.productId + '.json'
@@ -114,7 +115,6 @@
           if (!res.data.data.Data.HasNextPage) {
             vm.allLoaded = true
           }
-          vm.$refs.loadmore.onBottomLoaded()
         }).catch((error) => {
           console.log(error)
         })

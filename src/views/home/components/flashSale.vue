@@ -130,14 +130,14 @@
           border: 1px solid #aaa;
           color: #666;
           border-radius: 3px;
-          font-size: 0.25rem;
+          font-size: 1.25rem;
           letter-spacing: 2px;
         }
         .time-col {
           color: #666;
           padding: 0 1vw;
           text-align: center;
-          font-size: 0.3rem;
+          font-size: 1.3rem;
           letter-spacing: 2px;
         }
       }
@@ -162,7 +162,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            font-size: 0.3rem;
+            font-size: 1.3rem;
           }
           .price {
             text-align: center;
@@ -173,11 +173,11 @@
             margin-top: 5px;
             .flashSale-list-price {
               color: #b4282d;
-              font-size: 0.28rem;
+              font-size: 1.28rem;
             }
             .flashSale-list-unit {
               color: rgb(150, 150, 150);
-              font-size: 0.22rem;
+              font-size: 1.22rem;
             }
           }
         }

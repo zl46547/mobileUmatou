@@ -7,8 +7,10 @@ import ElementUI from 'element-ui'
 import $ from 'jquery'
 import linq from 'linqjs'
 import lazyLoad from 'vue-lazyload'
+import { InfiniteScroll } from 'mint-ui' // minit-ui无线滚动
 import 'mint-ui/lib/style.css'
 import 'element-ui/lib/theme-chalk/index.css'
+Vue.use(InfiniteScroll)
 Vue.use(ElementUI)
 Vue.use(lazyLoad, {
   preLoad: 1.3,

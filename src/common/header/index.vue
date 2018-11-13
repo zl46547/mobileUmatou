@@ -36,14 +36,16 @@
     display: flex;
     flex: 1;
     align-items: center;
-    font-size: 0.3rem;
     z-index: 999;
     box-shadow: 0 0.5px 20px rgba(219, 219, 219, 0.48);
     .address{
       margin-left: 4%;
+      font-size: 1.3rem;
+      white-space: nowrap;
     }
     .icon-arrow {
       padding-left: 7px;
+      font-size: 1.5rem;
     }
     .search {
       margin-left: 3%;
@@ -69,7 +71,6 @@
     }
     .iconfont {
       font-family: "iconfont" !important;
-      font-size: 16px;
       font-style: normal;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;

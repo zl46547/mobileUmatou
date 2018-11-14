@@ -10,9 +10,9 @@ const CategoryDetail = resolve => require(['@/views/categoryDetail/index.vue'], 
 const ProductDetail = resolve => require(['@/views/productDetail/index.vue'], resolve)
 const Car = resolve => require(['@/views/car/index.vue'], resolve)
 const SubmitOrder = resolve => require(['@/views/submitOrder/index.vue'], resolve)
+const Pay = resolve => require(['@/views/pay/index.vue'], resolve)
 
 const User = resolve => require(['@/views/User.vue'], resolve)
-const Pay = resolve => require(['@/views/Pay.vue'], resolve)
 const AllOrders = resolve => require(['@/views/AllOrders.vue'], resolve)
 const Login = resolve => require(['@/views/Login.vue'], resolve)
 Vue.use(Router)
@@ -73,9 +73,9 @@ const router = new Router({
     {
       path: '/pay',
       name: '支付订单',
-      meta: {
-        requireAuth: true
-      },
+      // meta: {
+      //   requireAuth: true
+      // },
       component: Pay
     },
     {

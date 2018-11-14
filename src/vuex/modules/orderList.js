@@ -22,7 +22,7 @@ const mutations = {
     }
     state.myOrders = myOrders
     state.submitOrder = res
-    Util.setLocal(myOrders, 'MY_ORDERS')
+    Util.setLocal('MY_ORDERS', myOrders)
   },
   [types.MY_ORDERS] (state, res) {
     if (res.isUpdate) {
@@ -34,7 +34,7 @@ const mutations = {
     } else {
       state.myOrders = res.allOrders
     }
-    Util.setLocal(state.myOrders, 'MY_ORDERS')
+    Util.setLocal('MY_ORDERS', state.myOrders)
   }
 }
 

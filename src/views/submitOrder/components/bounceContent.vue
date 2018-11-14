@@ -3,10 +3,10 @@
     <v-menu-select @menu-selected="clickedNavBar" :menuItems="navBarList" :selected="activeNavBar"></v-menu-select>
     <div v-if="activeNavBar == 1" class="navbarBody-one">
       <div class="usefulCoupon" v-for="(item,i) in usefulCoupon" :key="i" @click="checkCoupon(item)"
-            v-if="usefulCoupon">
+           v-if="usefulCoupon">
         <div class="checkbox">
-          <i class="iconfont icon-uncheck" v-if="item.Id !== checkedItem.Id"></i>
-          <i class="iconfont icon-checked" v-if="item.Id === checkedItem.Id"></i>
+          <i class="iconfont icon-uncheck" v-if="item.Id !== newCheckedItem.Id"></i>
+          <i class="iconfont icon-checked" v-if="item.Id === newCheckedItem.Id"></i>
         </div>
         <div class="couponCard">
           <v-coupon-card :coupon="item"></v-coupon-card>
@@ -43,8 +43,17 @@
         default: []
       }
     },
+    computed: {
+      getNewCheckedItem() {
+        var vm = this
+        vm.newCheckedItem = vm.checkedItem
+        debugger
+        return vm.checkedItem
+      }
+    },
     data () {
       return {
+        newCheckedItem: '',
         activeNavBar: 1,
         navBarList: [
           {
@@ -62,20 +71,19 @@
       'VMenuSelect': MenuSelect,
       'VCouponCard': CouponCard
     },
-    computed: {},
     methods: {
       /**
        * 勾选优惠券
        * @param val
        */
       checkCoupon (val) {
-        this.checkedItem = val
+        this.newCheckedItem = val
       },
       /**
        * 确认按钮事件
        */
       comfirm () {
-        this.$emit('comfirm-selected-item', this.checkedItem)
+        this.$emit('comfirm-selected-item', this.newCheckedItem)
       },
       /**
        * navbar切换事件
@@ -92,9 +100,9 @@
 <style lang="less" scoped>
 
   #bounceContent {
-    height:calc(70vh - 50px);
+    height: calc(70vh - 50px);
     .navbarBody-one {
-      height:calc(100% - 55px);
+      height: calc(100% - 55px);
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
       &::-webkit-scrollbar {
@@ -102,13 +110,13 @@
       }
       .usefulCoupon {
         display: table;
-        width:90%;
+        width: 90%;
         margin: 1.9vh auto;
         transform: translate(-2%);
         .checkbox {
           display: table-cell;
           vertical-align: middle;
-          padding-right: 2%;
+          cursor: pointer;
           .icon-uncheck {
             font-size: 1.5rem;
             color: #b1b1b1;
@@ -125,7 +133,7 @@
       }
     }
     .comfirm {
-      font-size:1.3rem;
+      font-size: 1.3rem;
       cursor: pointer;
       width: 50%;
       height: 35px;
@@ -147,7 +155,7 @@
       }
       > div {
         display: table;
-        width:80%;
+        width: 80%;
         margin: 1.9vh auto;
       }
     }
@@ -177,10 +185,11 @@
       content: "\e626";
     }
   }
+
   @media screen and (min-width: 400px) {
     #bounceContent {
       .navbarBody-one {
-        height:calc(100% - 85px);
+        height: calc(100% - 85px);
         .usefulCoupon {
           .checkbox {
             .icon-uncheck {
@@ -193,7 +202,7 @@
         }
       }
       .comfirm {
-        font-size:1.5rem;
+        font-size: 1.5rem;
         height: 45px;
         margin: 20px auto;
       }

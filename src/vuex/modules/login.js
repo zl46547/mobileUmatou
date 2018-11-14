@@ -15,12 +15,12 @@ const mutations = {
   /* 登录TOKEN */
   [types.TOKEN] (state, res) {
     state.token = res
-    Util.setLocal(res, 'TOKEN')
+    Util.setLocal('TOKEN', res)
   },
   /* 用户列表 */
   [types.USER_LIST] (state, res) {
     state.userList.push(res)
-    Util.setLocal(state.userList, 'USER_LIST')
+    Util.setLocal('USER_LIST', state.userList)
   }
 }
 

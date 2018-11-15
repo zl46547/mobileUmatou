@@ -11,8 +11,8 @@ const ProductDetail = resolve => require(['@/views/productDetail/index.vue'], re
 const Car = resolve => require(['@/views/car/index.vue'], resolve)
 const SubmitOrder = resolve => require(['@/views/submitOrder/index.vue'], resolve)
 const Pay = resolve => require(['@/views/pay/index.vue'], resolve)
+const User = resolve => require(['@/views/user/index.vue'], resolve)
 
-const User = resolve => require(['@/views/User.vue'], resolve)
 const AllOrders = resolve => require(['@/views/AllOrders.vue'], resolve)
 const Login = resolve => require(['@/views/Login.vue'], resolve)
 Vue.use(Router)
@@ -52,9 +52,9 @@ const router = new Router({
     {
       path: '/user',
       name: '用户页',
-      meta: {
-        requireAuth: true // 添加该字段，表示进入这个路由是需要登录的
-      },
+      // meta: {
+      //   requireAuth: true // 添加该字段，表示进入这个路由是需要登录的
+      // },
       component: User
     },
     {

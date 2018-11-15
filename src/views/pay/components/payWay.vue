@@ -213,12 +213,10 @@
   @media screen and (min-width: 400px) {
     #payWay {
       .payAmmount {
-        /*padding: 20px 10px;*/
         .remainTime {
           font-size: 1.6rem;
         }
         .ammount {
-          /*padding: 1vh;*/
           p:nth-of-type(1) {
             font-size: 1.7rem;
           }
@@ -231,21 +229,16 @@
         }
       }
       .payWaySel {
-        /*margin-top: 3vh;*/
         > div {
-          /*margin-bottom: 2px;*/
-          /*padding: 20px 15px;*/
           .payWayName {
             .iconfont {
               font-size: 1.7rem;
-              /*padding-right: 20px;*/
             }
             span {
               font-size: 1.5rem;
             }
           }
           .checkbox {
-            /*padding-right: 10px;*/
             .icon-uncheck {
               font-size: 1.7rem;
             }

@@ -21,8 +21,6 @@
 </script>
 
 <style lang="less">
-  /* 加载字体样式 */
-  @import "./assets/font/iconfont.css";
   /* 初始化页面样式 */
   #app{
     max-width:640px;

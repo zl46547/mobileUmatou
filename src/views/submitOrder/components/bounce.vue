@@ -7,12 +7,12 @@
     </div>
     <v-modal v-if="openModal" @close-modal="closeMoadl">
       <div slot="content">
-          <v-bounce-content
-            :usefulCoupon="usefulCoupon"
-            :unUsefulCoupon="unUsefulCoupon"
-            :checkedItem="checkedItem"
-            @comfirm-selected-item="comfirmSelectedItem"
-          ></v-bounce-content>
+        <v-bounce-content
+          :usefulCoupon="usefulCoupon"
+          :unUsefulCoupon="unUsefulCoupon"
+          :checkedItem="checkedItem"
+          @comfirm-selected-item="comfirmSelectedItem"
+        ></v-bounce-content>
       </div>
     </v-modal>
   </div>
@@ -37,7 +37,7 @@
     },
     computed: {},
     mounted () {
-      var vm = this
+      let vm = this
       vm.getCouponData()
     },
     methods: {
@@ -57,7 +57,7 @@
        * 确认选择的优惠券
        */
       comfirmSelectedItem(val) {
-        var vm = this
+        let vm = this
         vm.checkedItem = val
         vm.openModal = false
         vm.$emit('comfirm-selected-item', val)
@@ -66,94 +66,41 @@
        * 获取优惠券列表
        */
       getCouponData () {
-        var vm = this
-        var totalAmmount = this.getTotalAmmount()
-        var couponList = [
-          {
-            'Id': 24476898,
-            'Name': '50元优惠券',
-            'Code': '24476898',
-            'Amount': 50,
-            'BeginTime': '2018-05-24',
-            'EndTime': '2019-05-28',
-            'UsedTime': null,
-            'Status': 1,
-            'Description': '订单满200元减50元',
-            'LimitMinMoney': 200
-          },
-          {
-            'Id': 24476798,
-            'Name': '520元优惠券',
-            'Code': '24476798',
-            'Amount': 520,
-            'BeginTime': '2018-05-24',
-            'EndTime': '2019-05-28',
-            'UsedTime': null,
-            'Status': 1,
-            'Description': '订单满1314元减520元',
-            'LimitMinMoney': 1314
-          },
-          {
-            'Id': 24476810,
-            'Name': '5元优惠券',
-            'Code': '24476810',
-            'Amount': 5,
-            'BeginTime': '2018-04-1',
-            'EndTime': '2019-04-6',
-            'UsedTime': null,
-            'Status': 0,
-            'Description': '订单满9.9元减5元',
-            'LimitMinMoney': 9.9
-          },
-          {
-            'Id': 24476845,
-            'Name': '20元优惠券',
-            'Code': '24476845',
-            'Amount': 20,
-            'BeginTime': '2018-04-10',
-            'EndTime': '2019-04-12',
-            'UsedTime': null,
-            'Status': 0,
-            'Description': '订单满69元减20元',
-            'LimitMinMoney': 69
-          },
-          {
-            'Id': 24476856,
-            'Name': '100元优惠券',
-            'Code': '24476856',
-            'Amount': 5,
-            'BeginTime': '2018-04-18',
-            'EndTime': '2019-04-20',
-            'UsedTime': null,
-            'Status': 0,
-            'Description': '订单满500元减100元',
-            'LimitMinMoney': 500
+        let vm = this
+        let totalAmmount = this.getTotalAmmount()
+        let couponList = []
+        vm.$api({
+          method: 'get',
+          url: '/shihang/user/couponList.json'
+        }).then((res) => {
+          couponList = res.data.Data.CouponList
+          let usefulCoupon = []
+          let unUsefulCoupon = []
+          if (couponList.length > 0) {
+            couponList.forEach((e) => {
+              if (totalAmmount > e.LimitMinMoney) {
+                e.backgroundColor = '#D24161'
+                usefulCoupon.push(e)
+              } else {
+                e.backgroundColor = '#c1c1c1'
+                unUsefulCoupon.push(e)
+              }
+            })
+            vm.usefulCoupon = usefulCoupon
+            vm.unUsefulCoupon = unUsefulCoupon
+            this.initCheckCoupon()
           }
-        ]
-        var usefulCoupon = []
-        var unUsefulCoupon = []
-        if (couponList.length > 0) {
-          couponList.forEach(function (e) {
-            if (totalAmmount > e.LimitMinMoney) {
-              e.backgroundColor = '#D24161'
-              usefulCoupon.push(e)
-            } else {
-              e.backgroundColor = '#c1c1c1'
-              unUsefulCoupon.push(e)
-            }
-          })
-          vm.usefulCoupon = usefulCoupon
-          vm.unUsefulCoupon = unUsefulCoupon
-          this.initCheckCoupon()
-        }
+        }).catch((error) => {
+          console.error(error)
+        })
       },
       /**
        * 获取订单总金额
        * @returns {number}
        */
       getTotalAmmount () {
-        var submitOrderList = store.state.car.selectedCarList
-        var money = 0
+        let submitOrderList = store.state.car.selectedCarList
+        let money = 0
         if (submitOrderList.length > 0) {
           submitOrderList.forEach(function (e) {
             money = money + parseFloat(e.totalMoney)
@@ -165,10 +112,10 @@
        * 设置默认勾选的优惠券
        */
       initCheckCoupon () {
-        var vm = this
+        let vm = this
         if (vm.usefulCoupon.length > 0) {
           // 获取最大的优惠券
-          var maxAmount = vm.usefulCoupon.max(function (t) {
+          let maxAmount = vm.usefulCoupon.max(function (t) {
             return t.Amount
           })
           vm.checkedItem = vm.usefulCoupon.where(function (t) {
@@ -232,6 +179,7 @@
       content: "\e626";
     }
   }
+
   @media screen and (min-width: 400px) {
     #bounce {
       p {

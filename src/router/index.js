@@ -14,8 +14,7 @@ const Pay = resolve => require(['@/views/pay/index.vue'], resolve)
 const User = resolve => require(['@/views/user/index.vue'], resolve)
 const AllOrders = resolve => require(['@/views/allOrders/index.vue'], resolve)
 const Rate = resolve => require(['@/views/rate/index.vue'], resolve)
-
-const Login = resolve => require(['@/views/Login.vue'], resolve)
+const Login = resolve => require(['@/views/login/index.vue'], resolve)
 Vue.use(Router)
 
 const router = new Router({
@@ -29,13 +28,13 @@ const router = new Router({
       path: '/category',
       redirect: '/category/0',
       component: Category,
-     children: [
-       {
-         path: '/category/:id',
-         name: '分类页',
-         component: CategoryMain
-       }
-     ]
+      children: [
+        {
+          path: '/category/:id',
+          name: '分类页',
+          component: CategoryMain
+        }
+      ]
     },
     {
       path: '/categoryDetail',
@@ -45,17 +44,17 @@ const router = new Router({
     {
       path: '/car',
       name: '购物车页',
-      // meta: {
-      //   requireAuth: true // 添加该字段，表示进入这个路由是需要登录的
-      // },
+      meta: {
+        requireAuth: true // 添加该字段，表示进入这个路由是需要登录的
+      },
       component: Car
     },
     {
       path: '/user',
       name: '用户页',
-      // meta: {
-      //   requireAuth: true // 添加该字段，表示进入这个路由是需要登录的
-      // },
+      meta: {
+        requireAuth: true
+      },
       component: User
     },
     {
@@ -66,25 +65,25 @@ const router = new Router({
     {
       path: '/submitOrder',
       name: '提交订单',
-      // meta: {
-      //   requireAuth: true
-      // },
+      meta: {
+        requireAuth: true
+      },
       component: SubmitOrder
     },
     {
       path: '/pay',
       name: '支付订单',
-      // meta: {
-      //   requireAuth: true
-      // },
+      meta: {
+        requireAuth: true
+      },
       component: Pay
     },
     {
       path: '/allOrders',
       name: '我的订单',
-      // meta: {
-      //   requireAuth: true
-      // },
+      meta: {
+        requireAuth: true
+      },
       component: AllOrders
     },
     {

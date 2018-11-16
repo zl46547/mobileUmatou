@@ -47,7 +47,6 @@
       getNewCheckedItem() {
         var vm = this
         vm.newCheckedItem = vm.checkedItem
-        debugger
         return vm.checkedItem
       }
     },

@@ -44,6 +44,4 @@
       box-shadow: -1px 0.5px 20px #dddddd;
     }
   }
-  @media screen and (min-width: 640px) {
-  }
 </style>

@@ -12,8 +12,9 @@ const Car = resolve => require(['@/views/car/index.vue'], resolve)
 const SubmitOrder = resolve => require(['@/views/submitOrder/index.vue'], resolve)
 const Pay = resolve => require(['@/views/pay/index.vue'], resolve)
 const User = resolve => require(['@/views/user/index.vue'], resolve)
+const AllOrders = resolve => require(['@/views/allOrders/index.vue'], resolve)
+const Rate = resolve => require(['@/views/rate/index.vue'], resolve)
 
-const AllOrders = resolve => require(['@/views/AllOrders.vue'], resolve)
 const Login = resolve => require(['@/views/Login.vue'], resolve)
 Vue.use(Router)
 
@@ -81,15 +82,20 @@ const router = new Router({
     {
       path: '/allOrders',
       name: '我的订单',
-      meta: {
-        requireAuth: true
-      },
+      // meta: {
+      //   requireAuth: true
+      // },
       component: AllOrders
     },
     {
       path: '/indexAdv',
       name: '广告',
       component: IndexAdv
+    },
+    {
+      path: '/rate',
+      name: '评价页',
+      component: Rate
     },
     {
       path: '/login',

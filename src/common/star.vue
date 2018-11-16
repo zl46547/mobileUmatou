@@ -1,7 +1,7 @@
 <template>
-  <div id="star" v-if="satisfyValue>-1">
+  <div id="star" v-if="getSatisfyValue>-1">
     <i class="iconfont icon-star" v-for="(satisfyItem,index) in 5"
-       :class="{'satisfy':index<satisfyValue,'class-hover':needHover}"
+       :class="{'satisfy':index<newSatisfyValue,'class-hover':needHover}"
        @click="handleClick(index)"
        :key="index"></i>
   </div>
@@ -23,12 +23,24 @@
         default: false
       }
     },
+    data() {
+      return {
+        newSatisfyValue: ''
+      }
+    },
+    computed: {
+      getSatisfyValue() {
+        var vm = this
+        vm.newSatisfyValue = vm.satisfyValue
+        return vm.satisfyValue
+      }
+    },
     methods: {
       handleClick(index) {
         if (!this.needHandleClick) {
           return false
         }
-        this.satisfyValue = index + 1
+        this.newSatisfyValue = index + 1
       }
     }
   }
@@ -55,6 +67,7 @@
       font-style: normal;
     }
     .iconfont {
+      cursor: pointer;
       font-family: "iconfont";
       font-size: 1.3rem;
       font-style: normal;
@@ -68,6 +81,13 @@
 
     .icon-rate:before {
       content: "\e642";
+    }
+  }
+  @media screen and (min-width: 400px) {
+    #star {
+      .iconfont {
+        font-size: 1.5rem;
+      }
     }
   }
 </style>

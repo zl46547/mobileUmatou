@@ -179,16 +179,16 @@
     }
     /* 显示大图 */
     .bigImg {
-      z-index: 99;
+      z-index: 99999;
       overflow: hidden;
       width: 100%;
       position: fixed;
       top: 0;
-      bottom: 50px;
+      bottom: 0;
       left: 50%;
       max-width:640px;
       transform: translateX(-50%);
-      background-color: rgba(3, 3, 3, 0.5);
+      background-color: rgba(3, 3, 3, 0.8);
       > div {
         display: flex;
         width: 100%;

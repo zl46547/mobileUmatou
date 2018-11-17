@@ -58,24 +58,16 @@
       :carList="carList"
       @check-all="checkAll"
     ></v-total-count>
-
-    <!-- 提示框 -->
-    <v-message v-if="showMessage" @is-comfirm="isComfirmDel">
-      <p slot="title">确认删除订单</p>
-      <p slot="description">删除后订单无法还原,是否继续操作？</p>
-    </v-message>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import cartEmpty from './cartEmpty.vue'
   import TotalCount from './totalCount.vue'
-  import Message from '@/common/message.vue'
   import { Toast } from 'mint-ui'
 
   export default {
     components: {
-      'VMessage': Message,
       'VCartEmpty': cartEmpty,
       'VTotalCount': TotalCount
     },
@@ -119,39 +111,41 @@
       },
       /**
        * 确认删除
-       * @param val 删除的对象
+       * @param index 删除的下标
        */
-      isComfirmDel(val) {
+      isComfirmDel(index) {
         var vm = this
-        vm.showMessage = false
-        if (val) {
-          // 删除数据源内的数据
-          vm.carList.splice(vm.delIndex, 1)
-          // 如果全部删除了，就把全选状态改为false
-          if (vm.carList.length <= 0) {
-            vm.checkAllStatus = false
-          }
-          // 提交vuex，修改localStorage购物车列表数据
-          vm.$store.commit('CAR_LIST', vm.carList)
-          // 刷新数据
-          vm.getGroupCarList()
-          Toast({
-            message: '删除成功'
-          })
-          vm.whetherIsCheckAll()
+        // 删除数据源内的数据
+        vm.carList.splice(index, 1)
+        // 如果全部删除了，就把全选状态改为false
+        if (vm.carList.length <= 0) {
+          vm.checkAllStatus = false
         }
+        // 提交vuex，修改localStorage购物车列表数据
+        vm.$store.commit('CAR_LIST', vm.carList)
+        // 刷新数据
+        vm.getGroupCarList()
+        Toast({
+          message: '删除成功'
+        })
+        vm.whetherIsCheckAll()
       },
       // 删除购物车列表
       deleteItem (productId) {
         var vm = this
-        vm.showMessage = true
-        var index = -1
-        for (var i = 0; i < vm.carList.length; i++) {
-          if (vm.carList[i].ProductId === productId) {
-            index = i
+        vm.$message({
+          description: '删除后订单无法还原,是否继续操作？',
+          onComfirm() {
+            var index = -1
+            for (var i = 0; i < vm.carList.length; i++) {
+              if (vm.carList[i].ProductId === productId) {
+                index = i
+              }
+            }
+            vm.isComfirmDel(index)
           }
-        }
-        vm.delIndex = index
+        })
+//        vm.showMessage = true
       },
       // 全选
       checkAll(val) {
@@ -364,7 +358,7 @@
                     border: 1px solid #cccccc;
                     div {
                       font-size: 1.2rem;
-                      width:25px;
+                      width: 25px;
                       border-right: 1px solid #cccccc;
                       &:last-of-type {
                         border: none;
@@ -379,7 +373,7 @@
                       border-radius: 4px 0 0 4px
                     }
                     div:nth-of-type(2) {
-                      width:35px;
+                      width: 35px;
                       p {
                         font-size: 1.2rem;
                       }
@@ -397,7 +391,7 @@
                       padding: 5px 0;
                       text-align: center;
                       color: #fff;
-                      width:80px;
+                      width: 80px;
                       background-color: red;
                       border-radius: 4px;
                     }
@@ -442,6 +436,7 @@
       content: "\e626";
     }
   }
+
   @media screen and (min-width: 400px) {
     #cars {
       margin-top: 50px;

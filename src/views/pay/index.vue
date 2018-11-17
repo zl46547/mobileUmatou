@@ -68,7 +68,7 @@
           message: '订单支付成功'
         })
         setTimeout(() => {
-          vm.$router.push({name: '我的订单', query: {type: 'ALL'}})
+          vm.$router.replace({name: '我的订单', query: {type: 'ALL'}})
         }, 1500)
       }
     }

@@ -178,7 +178,8 @@
       overflow: hidden;
       z-index: 2;
       .container-login, .container-register {
-        margin: 25% auto;
+        margin: auto;
+        margin-top: 25%;
         text-align: center;
         width: 85%;
         .logo {

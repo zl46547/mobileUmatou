@@ -22,7 +22,6 @@
 <script type="text/ecmascript-6">
   import addCartUtil from '@/util/addCart.js'
   import Util from '@/util/common.js'
-  import store from '@/vuex/store.js'
   import { Toast } from 'mint-ui'
   export default {
     props: ['productInfo'],
@@ -48,7 +47,12 @@
     },
     computed: {
       getCarsNum () {
-        return store.state.car.carList.length
+        var vm = this
+        var num = 0
+        vm.$store.state.car.carList.forEach((e) => {
+          num += e.buyNum
+        })
+        return num
       }
     },
     methods: {
@@ -111,7 +115,7 @@
     position: fixed;
     bottom: 0;
     left: 50%;
-    max-width:640px;
+    max-width: 640px;
     transform: translateX(-50%);
     display: flex;
     align-items: center;
@@ -131,14 +135,14 @@
         color: #ff1908;
       }
       .badge {
-        font-size: 1.2rem;
+        font-size: 1rem;
         position: absolute;
         right: 20%;
         top: -10%;
         background-color: #ff1908;
         color: #fff;
-        width: 16px;
-        height: 16px;
+        width: 18px;
+        height: 18px;
         justify-content: center;
         display: flex;
         align-items: center;
@@ -167,7 +171,7 @@
       font-style: normal;
     }
     .iconfont {
-      font-family: "iconfont" ;
+      font-family: "iconfont";
       font-style: normal;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;

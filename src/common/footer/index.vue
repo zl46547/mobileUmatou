@@ -127,7 +127,7 @@
   }
 
   @media screen and (min-width: 640px) {
-    .footer {
+    #footer {
       width: 640px;
       margin-left: -320px;
       .tabbar {

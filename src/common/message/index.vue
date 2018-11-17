@@ -1,12 +1,12 @@
 <template>
-  <div class="mask">
+  <div class="mask" v-if="visible">
     <div class="content">
       <div class="title">
-        <slot name="title"></slot>
+        {{title}}
       </div>
       <main>
         <div class="description">
-          <slot name="description"></slot>
+          {{description}}
         </div>
         <div class="button">
           <div class="cancel" @click="onCancel">取消</div>
@@ -20,7 +20,7 @@
 
 <script>
   export default {
-    props: ['showAlert'],
+    props: ['title', 'description', 'visible'],
     methods: {
       onCancel() {
         this.$emit('is-comfirm', false)

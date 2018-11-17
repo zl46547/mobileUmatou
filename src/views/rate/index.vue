@@ -1,5 +1,8 @@
 <template>
   <div id="rate">
+    <v-header>
+      <span slot="title">评价商品</span>
+    </v-header>
     <div class="topTate">
       <div v-for="(item,index) in rateList" :key="index" :class="{'active':isActive.label == item.label}"
            @click="changeRate(item)">
@@ -32,10 +35,11 @@
 <script type="text/ecmascript-6">
   import Star from '@/common/star.vue'
   import { Toast, Field } from 'mint-ui'
-
+  import Header from '@/common/navigator.vue'
   export default {
     components: {
       'VStar': Star,
+      'VHeader': Header,
       'VField': Field
     },
     data () {
@@ -90,7 +94,7 @@
     height: 100vh;
     width: 100%;
     .topTate {
-      border-top: 1px solid #eee;
+      margin-top: 45px;
       border-bottom: 1px solid #eee;
       background-color: #fff;
       padding: 10px 14px;
@@ -99,9 +103,11 @@
       justify-content: space-between;
       .iconfont {
         font-size: 1.5rem;
+        cursor: pointer;
       }
       .label {
         font-size: 1.3rem;
+        cursor: pointer;
       }
       .active {
         color: #ff2b1c;
@@ -165,6 +171,9 @@
 
     .icon-starmarkhighligh:before {
       content: "\e90d";
+    }
+    .mint-cell-wrapper {
+      background-image: initial!important;
     }
   }
   @media screen and (min-width: 400px) {

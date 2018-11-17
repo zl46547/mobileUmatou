@@ -122,7 +122,7 @@
         vm.$store.commit(actionTypes.SUBMIT_ORDER, params)
         // 从购物车中删除已经提交的订单
         vm.delCarList(params.orderList)
-        vm.$router.push({name: '支付订单'})
+        vm.$router.replace({name: '支付订单'})
       },
       /**
        * 删除已下单成功的商品

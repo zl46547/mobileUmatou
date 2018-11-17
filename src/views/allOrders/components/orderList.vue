@@ -64,7 +64,6 @@
 <script type="text/ecmascript-6">
   import OrderButton from './orderButton.vue'
   import Empty from './empty.vue'
-  import {MessageBox} from 'mint-ui'
   export default {
     data () {
       return {
@@ -157,8 +156,11 @@
        */
       delOrderAlert (val) {
         let vm = this
-        MessageBox.confirm('确认删除该订单？').then(action => {
-          vm.delOrder(val)
+        vm.$message({
+          description: '确认删除该订单？',
+          onComfirm() {
+            vm.delOrder(val)
+          }
         })
       },
       /**
@@ -194,16 +196,19 @@
         var vm = this
         // 将商品添加到购物车
         var carlist = vm.$store.state.car.carList
-        MessageBox.confirm(`确认添加${reOrders.orderList.length}个商品到购物车？`).then(action => {
-          // 设置默认选中
-          reOrders.orderList.forEach(e => {
-            e.checked = true
-          })
-          var newCarlist = reOrders.orderList.union(carlist)
-          vm.$store.commit('CAR_LIST', newCarlist)
-          // 从我的订单中删除
-          vm.delOrder(reOrders)
-          vm.$router.push({path: '/car'})
+        vm.$message({
+          description: `确认添加${reOrders.orderList.length}个商品到购物车？`,
+          onComfirm() {
+            // 设置默认选中
+            reOrders.orderList.forEach(e => {
+              e.checked = true
+            })
+            var newCarlist = reOrders.orderList.union(carlist)
+            vm.$store.commit('CAR_LIST', newCarlist)
+            // 从我的订单中删除
+            vm.delOrder(reOrders)
+            vm.$router.push({path: '/car'})
+          }
         })
       },
       /**
@@ -212,15 +217,18 @@
        */
       goToComfirm(val) {
         var vm = this
-        MessageBox.confirm(`是否确认收货？`).then(action => {
-          vm.allOrders.forEach((t) => {
-            if (t.orderNo === val.orderNo) {
-              t.orderStatus = 'FS'
-              t.orderStatusName = '交易完成'
-            }
-          })
-          vm.$store.commit('MY_ORDERS', {isUpdate: true, allOrders: val})
-          vm.initData(vm.selected)
+        vm.$message({
+          description: '是否确认收货？',
+          onComfirm() {
+            vm.allOrders.forEach((t) => {
+              if (t.orderNo === val.orderNo) {
+                t.orderStatus = 'FS'
+                t.orderStatusName = '交易完成'
+              }
+            })
+            vm.$store.commit('MY_ORDERS', {isUpdate: true, allOrders: val})
+            vm.initData(vm.selected)
+          }
         })
       },
       /**

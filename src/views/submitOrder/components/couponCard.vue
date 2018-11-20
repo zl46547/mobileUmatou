@@ -119,7 +119,7 @@
             font-size: 1.45rem;
             color: rgb(255, 255, 255);
             p {
-              font-size: 1.5rem;
+              font-size: 1.2rem;
             }
           }
         }
@@ -189,7 +189,7 @@
             .content-right {
               font-size: 1.65rem;
               p {
-                font-size: 1.7rem;
+                font-size: 1.4rem;
               }
             }
           }

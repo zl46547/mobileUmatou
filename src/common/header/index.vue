@@ -49,10 +49,11 @@
     }
     .search {
       margin-left: 3%;
+      margin-right: 3%;
       cursor: text;
       border-radius: 90px;
       background-color: #eee;
-      width: 73%;
+      width: 100%;
       text-align: center;
       height: 70%;
       display: flex;

@@ -5,8 +5,8 @@
       <div class="usefulCoupon" v-for="(item,i) in usefulCoupon" :key="i" @click="checkCoupon(item)"
            v-if="usefulCoupon">
         <div class="checkbox">
-          <i class="iconfont icon-uncheck" v-if="item.Id !== newCheckedItem.Id"></i>
-          <i class="iconfont icon-checked" v-if="item.Id === newCheckedItem.Id"></i>
+          <i class="iconfont icon-uncheck" v-if="item.Id !== getNewCheckedItem.Id"></i>
+          <i class="iconfont icon-checked" v-if="item.Id === getNewCheckedItem.Id"></i>
         </div>
         <div class="couponCard">
           <v-coupon-card :coupon="item"></v-coupon-card>

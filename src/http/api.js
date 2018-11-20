@@ -5,7 +5,7 @@ import loading from '../util/showLoading'
 
 const api = axios.create()
 api.defaults.baseURL = 'http://zl46547.coding.me/markdown'
-api.defaults.timeout = 5000
+api.defaults.timeout = 10000
 api.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 api.defaults.headers.post['X-Requested-With'] = 'XMLHttpRequest'
 
@@ -13,10 +13,6 @@ api.defaults.headers.post['X-Requested-With'] = 'XMLHttpRequest'
 api.interceptors.request.use(function (config) {
   // 在发送请求之前做些什么
   loading.showLoading()
-  // 如果有token,添加到请求报文 后台会根据该报文返回status
-  // if (store.state.login.token) {
-  //   config.headers.Authorization = `token ${store.state.login.token}`
-  // }
   return config
 }, function (error) {
   // 对请求错误做些什么

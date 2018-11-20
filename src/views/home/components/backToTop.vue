@@ -28,8 +28,7 @@
   .backToTop {
     cursor: pointer;
     position: fixed;
-    right: 50%;
-    transform: translate(5%, 0);
+    right: 5%;
     bottom: 15vh;
     width: 10vw;
     height: 10vw;

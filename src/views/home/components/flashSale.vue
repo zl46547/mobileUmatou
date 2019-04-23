@@ -66,7 +66,7 @@
         var vm = this
         vm.$api({
           method: 'get',
-          url: '/shihang/index/command/flashSale.json'
+          url: '/home/flashSale.json'
         }).then((res) => {
           vm.flashSaleData = res.data.Data
         }).catch((error) => {

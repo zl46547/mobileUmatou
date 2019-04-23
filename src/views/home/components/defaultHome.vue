@@ -100,7 +100,7 @@
         var vm = this
         vm.$api({
           method: 'get',
-          url: '/shihang/index/command/defaultHome.json'
+          url: '/home/defaultHome.json'
         }).then((res) => {
           vm.defaultHomeData = res.data.Data.FloorInfo.ConfigHomeFloors
         })

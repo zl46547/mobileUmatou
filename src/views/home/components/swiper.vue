@@ -31,7 +31,7 @@
         var vm = this
         vm.$api({
           method: 'get',
-          url: '/shihang/index/command/swiper.json'
+          url: '/home/swiper.json'
         }).then((res) => {
           vm.adveriseList = res.data.Data
         }).catch((error) => {

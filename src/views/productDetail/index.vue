@@ -76,7 +76,7 @@
         var vm = this
         this.$api({
           method: 'get',
-          url: '/shihang/productDetail/content/' + vm.productId + '.json'
+          url: '/productDetail/' + vm.productId + '.json'
         }).then((res) => {
           vm.productInfo = res.data.data.Data.ProductInfo
           vm.productInfo['detailImages'] = vm.getDetailImages(vm.productInfo.FullDescription)
@@ -104,7 +104,7 @@
         }
         this.$api({
           method: 'get',
-          url: '/shihang/productDetail/rate/' + vm.productId + '.json'
+          url: '/rate/' + vm.productId + '.json'
         }).then((res) => {
           var sourceData = res.data.data.Data.SourceData
           /* 接口中CreateTime带有'T',去除'T' */

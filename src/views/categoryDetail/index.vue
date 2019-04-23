@@ -55,7 +55,7 @@
         var vm = this
         this.$api({
           method: 'get',
-          url: '/shihang/category/categoryDetail/' + vm.categoryIds + '.json'
+          url: '/categoryDetail/' + vm.categoryIds + '.json'
         }).then((res) => {
           vm.categoryDetailData = res.data.Data.SourceData
         }).catch((error) => {

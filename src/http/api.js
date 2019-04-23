@@ -4,7 +4,7 @@ import router from '../router'
 import loading from '../util/showLoading'
 
 const api = axios.create()
-api.defaults.baseURL = 'http://zl46547.coding.me/markdown'
+api.defaults.baseURL = 'http://www.umatou.club'
 api.defaults.timeout = 10000
 api.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 api.defaults.headers.post['X-Requested-With'] = 'XMLHttpRequest'

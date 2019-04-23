@@ -45,7 +45,7 @@
         var vm = this
         vm.$api({
           method: 'get',
-          url: '/shihang/index/command/shortcutIconRequest.json'
+          url: '/home/shortcutIconRequest.json'
         }).then((res) => {
             vm.menuList = res.data.Data.ShortcutIcons
             vm.topCenterInfos = res.data.Data.TopCenterInfos

@@ -86,7 +86,7 @@
         vm.pathId = 0
         vm.$api({
           method: 'get',
-          url: '/shihang/category/smallCategory/0.json'
+          url: '/categories/0.json'
         }).then((res) => {
           vm.category = res.data.Data.HotCategoryList
           vm.getRanderAdvertise(0)
@@ -103,7 +103,7 @@
         vm.pathId = id
         vm.$api({
           method: 'get',
-          url: '/shihang/category/smallCategory/' + id + '.json'
+          url: '/categories/' + id + '.json'
         }).then((res) => {
           vm.category = res.data.Data.SubCategories
           vm.getRanderAdvertise(id)
@@ -119,7 +119,7 @@
         return new Promise((resolve, reject) => {
           vm.$api({
             method: 'get',
-            url: '/shihang/category/smallCategory/advise.json'
+            url: '/categories/advise.json'
           }).then((res) => {
             vm.allAdvertise = res.data.Data
             resolve('SUCCESS')

@@ -31,7 +31,7 @@
         var vm = this
         vm.$api({
           method: 'get',
-          url: '/shihang/category/bigCategory.json'
+          url: '/categories/bigCategory.json'
         }).then((res) => {
           vm.bigCategory = res.data.Data
           vm.bigCategory.unshift({

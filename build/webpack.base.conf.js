@@ -6,7 +6,7 @@ const vueLoaderConfig = require('./vue-loader.conf')
 const webpack = require("webpack")
 
 // 拼接出绝对路径
-function resolve (dir) {
+function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
 

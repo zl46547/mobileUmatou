@@ -66,7 +66,7 @@
         var vm = this
         vm.$api({
           method: 'get',
-          url: '/home/flashSale.json'
+          url: '/home/flashSale'
         }).then((res) => {
           vm.flashSaleData = res.data.Data
         }).catch((error) => {

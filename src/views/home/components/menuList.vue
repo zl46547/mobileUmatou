@@ -2,32 +2,32 @@
   <div id="menuList">
     <img :src="topCenterInfos[0].ImageUrl" v-if="topCenterInfos"
            @click="goToIndexAdv(topCenterInfos[0].LinkUrls[0])"/>
-    <swiper class="swiper" v-if='menuList' :auto="0">
-        <swiper-item class="swiper-item">
+    <Swipe class="swiper" v-if='menuList' :autoplay="0" :show-indicators="false">
+        <SwipeItem class="swiper-item">
           <div class="menuList-item" v-for="(item,index) in menuList" :key="item.Name" v-if="index<10" @click="handleSwipoer">
             <img :src="item.URL" mode="aspectFit"/>
             <p class="menuName">{{item.Name}}</p>
           </div>
-        </swiper-item>
-        <swiper-item class="swiper-item">
+        </SwipeItem>
+        <SwipeItem class="swiper-item">
           <div class="menuList-item" v-for="(item,index) in menuList" :key="item.Name" v-if="index>=10" @click="handleSwipoer">
             <img :src="item.URL" mode="aspectFit"/>
             <p class="menuName">{{item.Name}}</p>
           </div>
-        </swiper-item>
-    </swiper>
+        </SwipeItem>
+    </Swipe>
   </div>
 </template>
 <script type="text/ecmascript-6">
-  import { Swipe, SwipeItem, Toast } from 'mint-ui'
+  import { Swipe, SwipeItem, Toast } from 'vant'
   export default {
     mounted() {
       var vm = this
       vm.getMenuListData()
     },
     components: {
-      'swiper': Swipe,
-      'swiper-item': SwipeItem
+      Swipe,
+      SwipeItem
     },
     data() {
       return {
@@ -45,7 +45,7 @@
         var vm = this
         vm.$api({
           method: 'get',
-          url: '/home/shortcutIconRequest.json'
+          url: '/home/shortcutIcon'
         }).then((res) => {
             vm.menuList = res.data.Data.ShortcutIcons
             vm.topCenterInfos = res.data.Data.TopCenterInfos

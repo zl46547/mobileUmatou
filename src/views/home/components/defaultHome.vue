@@ -1,11 +1,6 @@
 <template>
   <div id="defaultHome">
     <div class="defaultHome-item" v-for="(item,itemId) in defaultHomeData" :key="itemId" v-if="defaultHomeData">
-      <!-- 小标题 -->
-      <div class="title" v-if="item.ChildTitle">
-        <div>{{item.FatherTitle}}</div>
-        <div>{{item.ChildTitle}}</div>
-      </div>
       <!-- 左上下 -->
       <div class="flex" v-if="item.FloorType == 1">
         <div>
@@ -71,6 +66,14 @@
           </div>
         </div>
       </div>
+      <!-- 轮播 -->
+      <div v-if="item.FloorType ===13">
+        <Swipe :autoplay="3000" indicator-color="white">
+          <SwipeItem v-for="image in item.AdvInfo.AdvItems" :key="image.Id">
+            <img :src="image.PicUrl" :alt="image.ContentName"/>
+          </SwipeItem>
+        </Swipe>
+      </div>
       <!-- 发现更多 -->
       <div class="flex flex-wrap find-more" v-if="item.FloorType == 15">
         <div v-for="(k,kId) in item.CategoryProductItems[0].ProductItems" class="width-50" :key="kId">
@@ -84,12 +87,17 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import { Toast } from 'mint-ui'
+  import { Toast, Swipe, SwipeItem } from 'vant'
+
   export default {
     data() {
       return {
         defaultHomeData: ''
       }
+    },
+    components: {
+      Swipe,
+      SwipeItem
     },
     mounted() {
       var vm = this
@@ -100,7 +108,7 @@
         var vm = this
         vm.$api({
           method: 'get',
-          url: '/home/defaultHome.json'
+          url: '/home/defaultHome'
         }).then((res) => {
           vm.defaultHomeData = res.data.Data.FloorInfo.ConfigHomeFloors
         })
@@ -172,19 +180,6 @@
   #defaultHome {
     .defaultHome-item {
       background-color: #fff;
-      .title {
-        text-align: center;
-        margin: 2vh 0;
-        padding-top: 2vh;
-      }
-      .title div:nth-of-type(1) {
-        font-size: 1.3rem;
-        margin-bottom: 1vh;
-      }
-      .title div:nth-of-type(2) {
-        font-size: 1.25rem;
-        color: #999;
-      }
       .flex {
         display: flex
       }

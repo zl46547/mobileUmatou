@@ -1,29 +1,36 @@
 <template>
   <div v-if='adveriseList' id="adverise">
-    <mt-swipe :auto="4000" :interval="4000">
-      <mt-swipe-item v-for="k in adveriseList" :key="k.Id">
+    <Swipe :autoplay="4000" @change="onChange">
+      <SwipeItem v-for="k in adveriseList" :key="k.Id">
           <img :src="k.PicUrl" @click="goToIndexAdv(k.JumpValue)">
-      </mt-swipe-item>
-    </mt-swipe>
+      </SwipeItem>
+      <div class="custom-indicator" slot="indicator">
+        {{ current + 1 }}/4
+      </div>
+    </Swipe>
   </div>
 </template>
 <script type="text/ecmascript-6">
-  import { Swipe, SwipeItem, Toast } from 'mint-ui'
+  import { Swipe, SwipeItem, Toast } from 'vant'
   export default {
     mounted() {
       var vm = this
       vm.getSwiperData()
     },
     components: {
-      'mt-swipe': Swipe,
-      'mt-swipe-item': SwipeItem
+      Swipe,
+      SwipeItem
     },
     data() {
       return {
-        adveriseList: ''
+        adveriseList: '',
+        current: 0
       }
     },
     methods: {
+      onChange(index) {
+        this.current = index
+      },
       /**
        * 获取轮播图数据
        */
@@ -31,7 +38,7 @@
         var vm = this
         vm.$api({
           method: 'get',
-          url: '/home/swiper.json'
+          url: '/home/advertisementPhotoshoot'
         }).then((res) => {
           vm.adveriseList = res.data.Data
         }).catch((error) => {
@@ -62,10 +69,20 @@
     width: 100%;
     max-width: 640px;
     height:180px;
+    position: relative;
     img {
       width: 100%;
       height: 100%;
       cursor: pointer;
+    }
+    .custom-indicator {
+      position: absolute;
+      right: 5px;
+      bottom: 5px;
+      padding: 2px 5px;
+      color: #fff;
+      font-size: 12px;
+      background: rgba(0, 0, 0, 0.1);
     }
   }
   @media screen and (min-width: 400px) {

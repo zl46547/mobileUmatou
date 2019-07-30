@@ -1,20 +1,38 @@
 <template>
     <div id="adverise" v-if='adverise'>
-      <mt-swipe :auto="4000" :interval="4000">
-        <mt-swipe-item v-for="k in adverise" :key="k.Id">
+      <Swipe :autoplay="4000" @change="onChange">
+        <SwipeItem v-for="k in adverise" :key="k.Id">
           <img :src="k.PicUrl">
-        </mt-swipe-item>
-      </mt-swipe>
+        </SwipeItem>
+        <div class="custom-indicator" slot="indicator">
+          {{ current + 1 }}/{{adverise.length}}
+        </div>
+      </Swipe>
     </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import { Swipe, SwipeItem } from 'mint-ui'
+  import { Swipe, SwipeItem } from 'vant'
 export default {
   props: ['adverise'],
+  watch: {
+    adverise() {
+      this.current = 0
+    }
+  },
+  data() {
+    return {
+      current: 0
+    }
+  },
   components: {
-    'mt-swipe': Swipe,
-    'mt-swipe-item': SwipeItem
+    Swipe,
+    SwipeItem
+  },
+  methods: {
+    onChange(index) {
+      this.current = index
+    }
   }
 }
 </script>
@@ -24,9 +42,19 @@ export default {
     width: 100%;
     max-width: 640px;
     height:120px;
+    position: relative;
     img {
       width: 100%;
       height: 100%;
+    }
+    .custom-indicator {
+      position: absolute;
+      right: 5px;
+      bottom: 5px;
+      padding: 2px 5px;
+      color: #fff;
+      font-size: 12px;
+      background: rgba(0, 0, 0, 0.1);
     }
   }
   @media screen and (min-width: 400px) {

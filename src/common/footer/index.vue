@@ -25,7 +25,7 @@
           {
             name: '分类',
             icon: 'icon-category',
-            url: '/category/0'
+            url: '/category'
           },
           {
             name: '购物车',
@@ -57,7 +57,7 @@
           this.selected = '/'
           break
         case '分类页':
-          this.selected = '/category/0'
+          this.selected = '/category'
           break
         case '购物车页':
           this.selected = '/car'

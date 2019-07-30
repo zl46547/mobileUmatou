@@ -31,14 +31,9 @@
         var vm = this
         vm.$api({
           method: 'get',
-          url: '/categories/bigCategory.json'
+          url: '/products/bigCategory'
         }).then((res) => {
           vm.bigCategory = res.data.Data
-          vm.bigCategory.unshift({
-            'Id': 0,
-            'Name': '推荐分类',
-            'PictureId': 999999
-          })
           vm.activeItem = vm.bigCategory[0]
           vm.changeTabIndex(vm.activeItem)
         }).catch((error) => {

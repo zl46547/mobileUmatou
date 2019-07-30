@@ -5,7 +5,7 @@
           <img :src="k.PicUrl" @click="goToIndexAdv(k.JumpValue)">
       </SwipeItem>
       <div class="custom-indicator" slot="indicator">
-        {{ current + 1 }}/4
+        {{ current + 1 }}/{{adveriseList.length}}
       </div>
     </Swipe>
   </div>
@@ -38,7 +38,8 @@
         var vm = this
         vm.$api({
           method: 'get',
-          url: '/home/advertisementPhotoshoot'
+          url: '/home/advertisementPhotoshoot',
+          params: {typeCode: 1011}
         }).then((res) => {
           vm.adveriseList = res.data.Data
         }).catch((error) => {

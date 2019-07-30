@@ -62,7 +62,7 @@
       '$route': function (url) {
         var vm = this
         let {id} = url.params
-        if (id.toString() === '0') {
+        if (!id) {
           vm.getHotCategory()
         } else {
           vm.getSubCategory(id)
@@ -86,7 +86,7 @@
         vm.pathId = 0
         vm.$api({
           method: 'get',
-          url: '/categories/0.json'
+          url: '/products/hotCategory'
         }).then((res) => {
           vm.category = res.data.Data.HotCategoryList
           vm.getRanderAdvertise(0)
@@ -100,10 +100,10 @@
        */
       getSubCategory (id) {
         var vm = this
-        vm.pathId = id
         vm.$api({
           method: 'get',
-          url: '/categories/' + id + '.json'
+          url: '/products/subCategory',
+          params: {id}
         }).then((res) => {
           vm.category = res.data.Data.SubCategories
           vm.getRanderAdvertise(id)
@@ -119,7 +119,8 @@
         return new Promise((resolve, reject) => {
           vm.$api({
             method: 'get',
-            url: '/categories/advise.json'
+            url: '/home/advertisementPhotoshoot',
+            params: {typeCode: 1002}
           }).then((res) => {
             vm.allAdvertise = res.data.Data
             resolve('SUCCESS')

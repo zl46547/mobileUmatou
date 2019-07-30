@@ -42,14 +42,15 @@
 <script type="text/ecmascript-6">
   import addCartUtil from '../../util/addCart'
   import Header from '../../common/navigator.vue'
-  import { Toast } from 'mint-ui'
+  import {Toast} from 'mint-ui'
   import axios from 'axios'
+
   export default {
     mounted() {
       var vm = this
       vm.$store.commit('SET_LOADING', true)
       let {queryId} = vm.$route.query
-      vm.getAdvData(queryId)
+      vm.getAdvisementData(queryId)
     },
     components: {
       'VHeader': Header
@@ -66,6 +67,91 @@
       }
     },
     methods: {
+      async getAdvisementData(topicId) {
+        let vm = this
+        let advData = await vm.getAdvData(topicId)
+        let barCodeList = vm.getBarCodeList(advData)
+        let picData = await vm.getPictureData(barCodeList)
+        vm.formatProductEntity(advData, picData)
+      },
+      getAdvData(topicId) {
+        return new Promise((resolve, reject) => {
+          this.$api({
+            method: 'get',
+            url: `/topicInfo/getTopicIds`,
+            params: {topicId}
+          }).then((res) => {
+            if (res.data.data.topic_info) {
+              let advData = res.data.data.topic_info
+              resolve(advData)
+            }
+          })
+        })
+      },
+      getBarCodeList(advData) {
+        // 取出类型为C的对象
+        let typeC = advData.filter(item => item.type === 'c')
+        let allList = []
+        // 取出对象中所有的list
+        typeC.forEach(function (e) {
+          allList = allList.union(e.list)
+        })
+        return allList.select(function (e) {
+          return e.barCode
+        })
+      },
+      /**
+       * 根据barCodeList获取所有图片
+       * @param barCodeList
+       */
+      getPictureData(barCodeList) {
+        return new Promise((resolve, reject) => {
+          let barCodes = JSON.stringify(barCodeList)
+          this.$api({
+            method: 'get',
+            url: `/topicInfo/getProduct`,
+            params: {barCodes}
+          }).then((result) => {
+            let pictureData = result.data.data
+            resolve(pictureData)
+          })
+        })
+      },
+      /**
+       * 封装商品详情
+       */
+      formatProductEntity(advData, pictureData) {
+        let vm = this
+        advData.forEach(function (item) {
+          if (item.type === 'c') {
+            item.list.forEach(function (e) {
+              let entity = vm.getProductEntity(e.barCode, pictureData)
+              if (entity) {
+                e['entity'] = entity
+              }
+            })
+          }
+        })
+        vm.advData = advData
+        vm.$store.commit('SET_LOADING', false)
+      },
+      /**
+       * 获取产品实例
+       */
+      getProductEntity(barCode, pictureData) {
+        let productEntity = ''
+        if (pictureData.length > 0) {
+          let picture = pictureData.where(function (e) {
+            return e.barCode === barCode
+          })
+          if (picture.length <= 0) {
+            return null
+          }
+          productEntity = JSON.parse(JSON.stringify(picture[0]))
+          productEntity['imgUrl'] = `http://picpro-sz.34580.com/sz/ImageUrl/${productEntity.pictureId}/400.jpg`
+        }
+        return productEntity
+      },
       goToDetail(productId) {
         var vm = this
         if (productId) {
@@ -97,18 +183,22 @@
       /**
        * 获取广告数据
        */
-      getAdvData(queryId) {
-        var vm = this
-        vm.$api({
-          method: 'get',
-          url: `/shihang/index/adv/${queryId}.json/`
-        }).then((res) => {
-          if (res.data) {
-            vm.advData = res.data
-            vm.$store.commit('SET_LOADING', false)
-          }
-        })
-      },
+      // getAdvData(topicId) {
+      //   var vm = this
+      //   vm.$api({
+      //     method: 'get',
+      //     url: `/topicInfo/getTopicIds`,
+      //     params: {topicId}
+      //   }).then((res) => {
+      //     if (res.data) {
+      //       let {topic_info} = res.data.data
+      //     }
+          // if (res.data) {
+          //   vm.advData = res.data
+          //   vm.$store.commit('SET_LOADING', false)
+          // }
+      //   })
+      // },
       /**
        * 加入购物车
        * @param product

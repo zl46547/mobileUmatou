@@ -26,13 +26,13 @@
   import axios from 'axios'
   export default {
     mounted() {
-      var vm = this
-      vm.categoryIds = vm.$route.query.categoryIds
-      vm.getCategoryDetail()
+      let {categoryIds} = this.$route.query
+      if (categoryIds) {
+        this.getCategoryDetail({categoryIds})
+      }
     },
     data () {
       return {
-        categoryIds: [],
         categoryDetailData: []
       }
     },
@@ -51,13 +51,15 @@
       /**
        * 获取分类详细数据
        */
-      getCategoryDetail() {
-        var vm = this
+      getCategoryDetail(params) {
         this.$api({
           method: 'get',
-          url: '/categoryDetail/' + vm.categoryIds + '.json'
-        }).then((res) => {
-          vm.categoryDetailData = res.data.Data.SourceData
+          url: '/products/categoryDetail',
+          params
+        }).then(({data}) => {
+          if (data) {
+            this.categoryDetailData = data.Data.SourceData
+          }
         }).catch((error) => {
           console.log(error)
         })

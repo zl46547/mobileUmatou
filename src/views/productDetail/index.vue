@@ -41,18 +41,16 @@
       'VRateDetail': RateDetail
     },
     mounted() {
-      var vm = this
-      vm.productId = vm.$route.params.productId
-      vm.selected = '0'
-      vm.getProductDetailData()
-      vm.getRateData()
+      let { productId } = this.$route.params
+      this.selected = '0'
+      this.getProductDetailData(productId)
+      // this.getRateData()
     },
     data () {
       return {
         pageIndex: 0,
         allLoaded: false,
         rateData: [],
-        productId: '',
         productInfo: '', // 商品详情
         productInfoServices: '', // 商品服务
         productActivities: '', // 商品活动
@@ -72,11 +70,12 @@
       }
     },
     methods: {
-      getProductDetailData() {
+      getProductDetailData(ssuId) {
         var vm = this
         this.$api({
           method: 'get',
-          url: '/productDetail/' + vm.productId + '.json'
+          url: '/productDetail/detail',
+          params: {ssuId}
         }).then((res) => {
           vm.productInfo = res.data.data.Data.ProductInfo
           vm.productInfo['detailImages'] = vm.getDetailImages(vm.productInfo.FullDescription)

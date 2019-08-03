@@ -1,15 +1,15 @@
 <template>
   <div id="categoryMain">
     <div class="randerAdvertise" v-if="randerAdvertise.length > 0">
-      <v-swiper :adverise="randerAdvertise"></v-swiper>
+      <Swiper :adverise="randerAdvertise"></Swiper>
     </div>
-    <div class="hotCategory" v-if="pathId == '0'">
+    <div class="hotCategory" v-if="!pathId">
       <div class="category-list" v-for="k in category" :key="k.Id" @click="goToCategoryDetail(k.Id)">
         <img :src="'http://picpro-sz.34580.com/sz/ImageUrl/'+k.PictureId+'/160.jpeg'" mode="widthFix"/>
         <div class="title">{{k.Name}}</div>
       </div>
     </div>
-    <div class="subCategory" v-if="pathId != '0'"
+    <div class="subCategory" v-if="pathId"
          :class="{'hasAdv':randerAdvertise.length > 0,'notHasAdv':randerAdvertise.length <= 0}">
       <div v-for="(k,index) in category" :key="index">
         <div class="subTitle">
@@ -34,6 +34,11 @@
 <script type="text/ecmascript-6">
   import {Toast} from 'vant'
   import Swiper from './swiper.vue'
+  import {
+    getHotCategory,
+    getSubCategory,
+    getSwipper
+  } from '../service'
 
   export default {
     data() {
@@ -45,31 +50,26 @@
       }
     },
     components: {
-      'VSwiper': Swiper
+      Swiper
     },
-    async mounted() {
-      this.pathId = this.$route.params.id
-      this.getAllAdvertisement().then(res => {
-        this.allAdvertise = res.Data
-        this.getCategoryDetailById(this.pathId)
-      })
+    mounted() {
+      this.getAllAdvertisement()
     },
     watch: {
-      '$route': function (url) {
-        let {id} = url.params
-        this.pathId = id
-        this.getCategoryDetailById(id)
+      '$route': function () {
+        this.getCategoryDetailById()
       }
     },
     methods: {
       /**
        * 根据id获取分类数据
        */
-      getCategoryDetailById(id) {
-        if (String(id) === '0') {
-          this.getHotCategory()
+      getCategoryDetailById() {
+        let id = Number(this.$route.params.id)
+        if (!id) {
+          this.initHotCategory()
         } else {
-          this.getSubCategory(id)
+          this.initSubCategory(id)
         }
       },
       /**
@@ -82,15 +82,11 @@
       /**
        * 获取热门分类数据
        */
-      getHotCategory() {
-        var vm = this
-        vm.pathId = 0
-        vm.$api({
-          method: 'get',
-          url: '/products/hotCategory'
-        }).then((res) => {
-          vm.category = res.data.Data.HotCategoryList
-          vm.getRanderAdvertise(0)
+      initHotCategory() {
+        this.pathId = 0
+        getHotCategory().then((res) => {
+          this.category = res.HotCategoryList
+          this.getRanderAdvertise(0)
         }).catch((error) => {
           console.log(error)
         })
@@ -99,15 +95,11 @@
        * 获取小分类数据
        * @param id
        */
-      getSubCategory(id) {
-        var vm = this
-        vm.$api({
-          method: 'get',
-          url: '/products/subCategory',
-          params: {id}
-        }).then((res) => {
-          vm.category = res.data.Data.SubCategories
-          vm.getRanderAdvertise(id)
+      initSubCategory(id) {
+        this.pathId = id
+        getSubCategory({id}).then((res) => {
+          this.category = res.SubCategories
+          this.getRanderAdvertise(id)
         }).catch((error) => {
           console.log(error)
         })
@@ -115,29 +107,16 @@
       /**
        * 获取所有广告数据
        */
-      getAllAdvertisement() {
-        var vm = this
-        return new Promise((resolve, reject) => {
-          vm.$api({
-            method: 'get',
-            url: '/home/advertisementPhotoshoot',
-            params: {typeCode: 1002}
-          }).then(({ data }) => {
-            if (data) {
-              resolve(data)
-            }
-          }).catch((error) => {
-            console.log(error)
-          })
-        })
+      async getAllAdvertisement() {
+        this.allAdvertise = await getSwipper({typeCode: 1002})
+        this.getCategoryDetailById()
       },
       /**
        * 根据id获取对应的广告列表
        * @param id
        */
       getRanderAdvertise(id) {
-        var vm = this
-        vm.randerAdvertise = vm.allAdvertise.where(function (e) {
+        this.randerAdvertise = this.allAdvertise.where(function (e) {
           return e.CategotyId === id
         })
       },

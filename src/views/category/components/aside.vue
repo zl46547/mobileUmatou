@@ -1,14 +1,14 @@
 <template>
   <div id="big-category" v-if="bigCategory">
     <div class="big-category-item" v-for="(k) in bigCategory" @click="changeTabIndex(k)"
-         :key="k.Id" :class="{active:k.Name == activeItem.Name}">
+         :key="k.Id" :class="{active:k.Name === activeItem.Name}">
       <div>{{k.Name}}</div>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-
+import {getBigCategory} from '../service'
   export default {
     computed: {},
     data() {
@@ -18,24 +18,28 @@
       }
     },
     mounted() {
-      var vm = this
-      vm.getAsideData()
+      let id = this.$route.params.id
+      if (!id) {
+        return false
+      }
+      this.getAsideData(Number(id))
     },
     methods: {
+      /**
+       * 切换分类
+       */
       changeTabIndex(val) {
-        var vm = this
-        vm.activeItem = val
-        vm.$router.replace({name: '分类页', params: {id: val.Id}})
+        this.activeItem = val
+        this.$router.replace({name: '分类页', params: {id: val.Id}})
       },
-      getAsideData() {
-        var vm = this
-        vm.$api({
-          method: 'get',
-          url: '/products/bigCategory'
-        }).then((res) => {
-          vm.bigCategory = res.data.Data
-          vm.activeItem = vm.bigCategory[0]
-          vm.changeTabIndex(vm.activeItem)
+      /**
+       * 获取左侧大分类数据
+       */
+      getAsideData(id) {
+        getBigCategory().then((res) => {
+          this.bigCategory = res
+          this.activeItem = this.bigCategory.find(item => (item.Id === id))
+          // this.changeTabIndex(this.activeItem)
         }).catch((error) => {
           console.log(error)
         })

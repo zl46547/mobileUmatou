@@ -20,10 +20,10 @@
 </template>
 <script type="text/ecmascript-6">
   import { Swipe, SwipeItem, Toast } from 'vant'
+  import {getShortcutIcon} from '../service'
   export default {
     mounted() {
-      var vm = this
-      vm.getMenuListData()
+      this.getMenuListData()
     },
     components: {
       Swipe,
@@ -42,13 +42,9 @@
         })
       },
       getMenuListData() {
-        var vm = this
-        vm.$api({
-          method: 'get',
-          url: '/home/shortcutIcon'
-        }).then((res) => {
-            vm.menuList = res.data.Data.ShortcutIcons
-            vm.topCenterInfos = res.data.Data.TopCenterInfos
+        getShortcutIcon().then((res) => {
+          this.menuList = res.ShortcutIcons
+          this.topCenterInfos = res.TopCenterInfos
         }).catch((error) => {
           console.log(error)
         })

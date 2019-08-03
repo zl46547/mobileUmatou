@@ -31,6 +31,7 @@
 
 <script type="text/ecmascript-6">
   import moment from 'moment'
+  import {getFlashSale} from '../service'
   export default {
     data () {
       return {
@@ -50,25 +51,19 @@
       }
     },
     mounted () {
-      var vm = this
-      vm.formateTime()
-      vm.getFlashSaleData()
+      this.formateTime()
+      this.getFlashSaleData()
     },
     beforeDestroy() {
-      var vm = this
-      clearInterval(vm.setIntervalFunction)
+      clearInterval(this.setIntervalFunction)
     },
     methods: {
       /**
-       * 获取显示抢购数据
+       * 获取限时抢购数据
        */
       getFlashSaleData() {
-        var vm = this
-        vm.$api({
-          method: 'get',
-          url: '/home/flashSale'
-        }).then((res) => {
-          vm.flashSaleData = res.data.Data
+        getFlashSale().then((res) => {
+          this.flashSaleData = res
         }).catch((error) => {
           console.log(error)
         })
@@ -77,11 +72,10 @@
        * 时间格式化
        */
       formateTime () {
-        var vm = this
         var nowTime = new Date().getTime()
         var endTime = moment(moment().format('YYYY-MM-DD 23:59:59')).toDate().getTime()
         var remainTime = endTime - nowTime
-        vm.setIntervalFunction = setInterval(() => {
+        this.setIntervalFunction = setInterval(() => {
           remainTime -= 1000
           if (remainTime < 0) {
             remainTime = 0
@@ -100,8 +94,7 @@
        * @param val
        */
       goToDetail(val) {
-        var vm = this
-        vm.$router.push({name: '商品详情', params: {productId: val.ProductId}})
+        this.$router.push({name: '商品详情', params: {productId: val.ProductId}})
       }
     }
   }

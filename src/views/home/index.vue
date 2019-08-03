@@ -1,17 +1,17 @@
 <template>
   <div id="home">
-    <v-header></v-header>
+    <Header></Header>
     <div class="content" @wheel="getScorlTop()">
-      <v-swiper></v-swiper>
-      <v-menu-list></v-menu-list>
-      <v-flashSale></v-flashSale>
-      <v-default-home></v-default-home>
+      <Swiper></Swiper>
+      <MenuList></MenuList>
+      <FlashSale></FlashSale>
+      <DefaultHome></DefaultHome>
       <div class="baseLine">
         <img src="../../assets/images/baseline.png"/>
       </div>
     </div>
-    <v-back-to-top v-show="showBackToTop" @hide="getScorlTop"></v-back-to-top>
-    <v-footer></v-footer>
+    <BackToTop v-show="showBackToTop" @hide="getScorlTop"></BackToTop>
+    <Footer></Footer>
   </div>
 </template>
 
@@ -26,13 +26,13 @@
 
   export default {
     components: {
-      'VHeader': Header,
-      'VSwiper': Swiper,
-      'VMenuList': MenuList,
-      'VFlashSale': FlashSale,
-      'VDefaultHome': DefaultHome,
-      'VFooter': Footer,
-      'VBackToTop': BackToTop
+      Header,
+      Swiper,
+      MenuList,
+      FlashSale,
+      DefaultHome,
+      Footer,
+      BackToTop
     },
     data () {
       return {

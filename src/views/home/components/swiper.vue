@@ -12,6 +12,7 @@
 </template>
 <script type="text/ecmascript-6">
   import { Swipe, SwipeItem, Toast } from 'vant'
+  import {getSwipper} from '../service'
   export default {
     mounted() {
       var vm = this
@@ -28,6 +29,10 @@
       }
     },
     methods: {
+      /**
+       * 轮播图切换
+       * @param index
+       */
       onChange(index) {
         this.current = index
       },
@@ -35,13 +40,8 @@
        * 获取轮播图数据
        */
       getSwiperData() {
-        var vm = this
-        vm.$api({
-          method: 'get',
-          url: '/home/advertisementPhotoshoot',
-          params: {typeCode: 1011}
-        }).then((res) => {
-          vm.adveriseList = res.data.Data
+        getSwipper({typeCode: 1011}).then((res) => {
+          this.adveriseList = res
         }).catch((error) => {
           console.log(error)
         })

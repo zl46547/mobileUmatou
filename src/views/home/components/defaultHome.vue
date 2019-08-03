@@ -88,7 +88,7 @@
 
 <script type="text/ecmascript-6">
   import { Toast, Swipe, SwipeItem } from 'vant'
-
+  import {getDefaultHome} from '../service'
   export default {
     data() {
       return {
@@ -100,17 +100,17 @@
       SwipeItem
     },
     mounted() {
-      var vm = this
-      vm.getDefaultHome()
+      this.initDefaultHome()
     },
     methods: {
-      getDefaultHome() {
-        var vm = this
-        vm.$api({
-          method: 'get',
-          url: '/home/defaultHome'
-        }).then((res) => {
-          vm.defaultHomeData = res.data.Data.FloorInfo.ConfigHomeFloors
+      /**
+       * 初始化首页列表
+       */
+      initDefaultHome() {
+        getDefaultHome().then((res) => {
+          this.defaultHomeData = res.FloorInfo.ConfigHomeFloors
+        }).catch(error => {
+          console.log(error)
         })
       },
       /**
@@ -119,15 +119,14 @@
        * @param picAdvItems
        */
       goToJump(floorType, picAdvItems) {
-        var vm = this
         if (floorType === 12 || floorType === 15) {
-          vm.goToDetail(picAdvItems.ProductId)
+          this.goToDetail(picAdvItems.ProductId)
           return false
         }
         switch (picAdvItems.JumpType) {
           case 1:
             if (picAdvItems.JumpValue.indexOf('topics') > -1) {
-              vm.goToIndexAdv(picAdvItems.JumpValue)
+              this.goToIndexAdv(picAdvItems.JumpValue)
             } else {
               Toast({
                 message: '该功能暂未开发'
@@ -140,11 +139,11 @@
             })
             break
           case 4:
-            vm.goToDetail(picAdvItems.JumpValue)
+            this.goToDetail(picAdvItems.JumpValue)
             break
           case 5:
             var categoryIds = [picAdvItems.JumpValue]
-            vm.goToCategoryDetail(JSON.stringify(categoryIds))
+            this.goToCategoryDetail(JSON.stringify(categoryIds))
             break
         }
       },
@@ -153,25 +152,22 @@
        * @param JumpValue
        */
       goToIndexAdv(JumpValue) {
-        var vm = this
         var queryId = JumpValue.replace('https://wechatx.34580.com/topics/', '')
-        vm.$router.push({path: '/indexAdv', query: {queryId}})
+        this.$router.push({path: '/indexAdv', query: {queryId}})
       },
       /**
        * 跳转商品详情页面
        * @param productId
        */
       goToDetail(productId) {
-        var vm = this
-        vm.$router.push({name: '商品详情', params: {productId}})
+        this.$router.push({name: '商品详情', params: {productId}})
       },
       /**
        * 跳转分类详细页面
-       * @param productId
+       * @param categoryIds
        */
       goToCategoryDetail(categoryIds) {
-        var vm = this
-        vm.$router.push({path: '/categoryDetail', params: {categoryIds}})
+        this.$router.push({path: '/categoryDetail', params: {categoryIds}})
       }
     }
   }

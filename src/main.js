@@ -3,14 +3,12 @@ import App from './App'
 import router from './router'
 import store from '@/vuex/store.js' // vuex
 import api from '@/http/api.js' // http请求
-import $ from 'jquery'
 import linq from 'linqjs'
 import lazyLoad from 'vue-lazyload'
-import { InfiniteScroll } from 'mint-ui' // minit-ui无线滚动
 import 'mint-ui/lib/style.css'
+import './assets/font/index.css'
 import Message from './common/message/index.js'
-// Vue.use(Toast)
-Vue.use(InfiniteScroll)
+
 Vue.use(Message)
 Vue.use(lazyLoad, {
   preLoad: 1.3,
@@ -25,7 +23,6 @@ new Vue({
   el: '#app',
   router,
   store,
-  $,
   linq,
   components: {App},
   template: '<App/>'

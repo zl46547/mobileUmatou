@@ -1,6 +1,6 @@
 <template>
   <div id="categoryDetail" v-if="categoryDetailData">
-    <v-header></v-header>
+    <Header></Header>
     <div class="category-detail-content">
       <div v-for="k in categoryDetailData" :key="k.ProductName" class="detail-item" @click="goToDetail(k.ProductId)">
         <img :src="'http://picpro-sz.34580.com/sz/ImageUrl/' +k.PictureId+ '/500.jpeg'" alt="分类详情"/>
@@ -20,10 +20,10 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import addCartUtil from '@/util/addCart.js'
+  // import addCartUtil from '@/util/addCart.js'
   import Header from '../../common/header/index.vue'
-  import { Toast } from 'mint-ui'
-  import axios from 'axios'
+  import { Toast } from 'vant'
+  import {getCategoryDetail} from './service'
   export default {
     mounted() {
       let {categoryIds} = this.$route.query
@@ -37,7 +37,7 @@
       }
     },
     components: {
-      'VHeader': Header
+      Header
     },
     methods: {
       /**
@@ -52,13 +52,9 @@
        * 获取分类详细数据
        */
       getCategoryDetail(params) {
-        this.$api({
-          method: 'get',
-          url: '/products/categoryDetail',
-          params
-        }).then(({data}) => {
-          if (data) {
-            this.categoryDetailData = data.Data.SourceData
+        getCategoryDetail(params).then((res) => {
+          if (res) {
+            this.categoryDetailData = res.SourceData
           }
         }).catch((error) => {
           console.log(error)
@@ -69,23 +65,9 @@
        * @param val
        */
       addCart(val) {
-        var vm = this
-        vm.getProductDetailData(val)
-      },
-      /**
-       * 获取商品详细信息
-       */
-      getProductDetailData(val) {
-        axios({
-          method: 'get',
-          url: 'http://zl46547.coding.me/markdown/shihang/productDetail/content/' + val.ProductId + '.json'
-        }).then((res) => {
-          addCartUtil.addCart(res.data.data.Data.ProductInfo)
-          Toast({
-            message: '加入购物车成功！'
-          })
-        }).catch((error) => {
-          console.log(error)
+        // addCartUtil.addCart(res.data.data.Data.ProductInfo)
+        Toast({
+          message: '加入购物车成功！'
         })
       }
     }

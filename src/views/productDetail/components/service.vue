@@ -1,17 +1,17 @@
 <template>
   <div id="service">
     <div class="activities" v-for="(activityItem,activityIndex) in activity" :key="activityIndex">
-      <div class="activities-badge">{{activityItem.TypeName}}</div>
-      <div class="descrption">{{activityItem.Descrption}}</div>
+      <div class="activities-badge">{{activityItem.typeName}}</div>
+      <div class="descrption">{{activityItem.description}}</div>
     </div>
     <div class="product-service">
-      <div class="service-tip" v-if="lastTime.LastTimeInfo">
+      <div class="service-tip" v-if="lastTime.lastTimeInfo">
         <span class="iconfont icon-clock"></span>
-        <span >{{lastTime.LastTimeInfo}}</span>
+        <span >{{lastTime.lastTimeInfo}}</span>
       </div>
       <div class="service-refund">
         <div class="service-item" v-for="(serviceItem,serviceIndex) in service" :key="serviceIndex">
-          <span class="iconfont icon-checked"></span><span>{{serviceItem.Name}}</span>
+          <span class="iconfont icon-checked"></span><span>{{serviceItem.name}}</span>
         </div>
       </div>
     </div>
@@ -35,14 +35,14 @@
       align-items: center;
       padding: 0 20px 10px 20px;
       .activities-badge {
-        width: 40px;
+        width: 34px;
         border: 1px solid red;
         color: #ff1908;
         border-radius: 3px;
         text-align: center;
-        padding: 3px;
+        padding: 1px;
         margin-right: 10px;
-        font-size: 1.3rem;
+        font-size: 1rem;
       }
       .descrption {
         font-size: 1.32rem;

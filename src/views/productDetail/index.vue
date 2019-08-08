@@ -1,11 +1,14 @@
 <template>
   <div id="productDetail">
-    <v-menu-select :menuItems="menus" @menu-selected="menuSelected" :selected="selected"></v-menu-select>
+    <MenuSelect :menuItems="menus" @menu-selected="menuSelected" :selected="selected"></MenuSelect>
     <!-- 商品页 -->
     <div v-if="selected == 0" class="product">
-      <v-banners :banners="productInfo.Banners"></v-banners>
-      <v-price :price="productInfo"></v-price>
-      <v-service :service="productInfoServices" :activity="productActivities" :lastTime="productInfo"></v-service>
+      <Banners :banners="productInfo.banners"/>
+      <Price :price="productInfo"></Price>
+      <Service :service="productInfoServices"
+               :activity="productActivities"
+               :lastTime="productInfo"
+      />
     </div>
     <!-- 详情页 -->
     <div v-if="selected == 1" class="detail">
@@ -29,13 +32,14 @@
   import Footer from './components/footer.vue'
   import RateDetail from './components/rateDetail.vue'
   import Detail from './components/detail.vue'
+  import {getProductDetail} from './service'
   import moment from 'moment'
   export default {
     components: {
-      'VMenuSelect': MenuSelect,
-      'VBanners': Banners,
-      'VPrice': Price,
-      'VService': Service,
+      MenuSelect,
+      Banners,
+      Price,
+      Service,
       'VFooter': Footer,
       'VDetail': Detail,
       'VRateDetail': RateDetail
@@ -71,16 +75,11 @@
     },
     methods: {
       getProductDetailData(ssuId) {
-        var vm = this
-        this.$api({
-          method: 'get',
-          url: '/productDetail/detail',
-          params: {ssuId}
-        }).then((res) => {
-          vm.productInfo = res.data.data.Data.ProductInfo
-          vm.productInfo['detailImages'] = vm.getDetailImages(vm.productInfo.FullDescription)
-          vm.productInfoServices = res.data.data.Data.ProductInfoServices
-          vm.productActivities = res.data.data.Data.ProductActivities
+        getProductDetail({ssuId}).then((res) => {
+          this.productInfo = res.productInfo
+          this.productInfo['detailImages'] = this.getDetailImages(res.productInfo.fullDescription)
+          this.productInfoServices = res.productInfoServiceList
+          this.productActivities = res.productActivityList
         }).catch((error) => {
           console.log(error)
         })

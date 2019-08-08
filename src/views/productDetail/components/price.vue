@@ -1,18 +1,18 @@
 <template>
   <div id="price">
     <div class="content">
-      <div class="productName">{{price.ProductName}}</div>
+      <div class="productName">{{price.productName}}</div>
       <div class="price">
         <span>¥</span>
-        <span>{{price.PeriodMoney}}</span>
-        <span>/{{price.Unit}}</span>
+        <span>{{price.periodMoney}}</span>
+        <span>/{{price.unit}}</span>
       </div>
       <div class="marketPrice">
         <div>
           <div>市场价：</div>
-          <div>{{price.DefaultMoney}}元/{{price.Unit}}</div>
+          <div>{{price.defaultMoney}}元/{{price.unit}}</div>
         </div>
-        <div>已售{{price.SoldNumber}}</div>
+        <div>已售{{price.soldNumber}}</div>
       </div>
     </div>
   </div>
@@ -21,12 +21,7 @@
 <script type="text/ecmascript-6">
 
   export default {
-    props: ['price'],
-    data() {
-      return {
-      }
-    },
-    methods: {}
+    props: ['price']
   }
 </script>
 

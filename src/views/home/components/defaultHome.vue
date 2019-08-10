@@ -126,7 +126,7 @@
         switch (picAdvItems.JumpType) {
           case 1:
             if (picAdvItems.JumpValue.indexOf('topics') > -1) {
-              this.goToIndexAdv(picAdvItems.JumpValue)
+              this.goToTopicActivity(picAdvItems.JumpValue)
             } else {
               Toast({
                 message: '该功能暂未开发'
@@ -151,9 +151,9 @@
        * 跳转至广告详情页
        * @param JumpValue
        */
-      goToIndexAdv(JumpValue) {
+      goToTopicActivity(JumpValue) {
         var queryId = JumpValue.replace('https://wechatx.34580.com/topics/', '')
-        this.$router.push({path: '/indexAdv', query: {queryId}})
+        this.$router.push({path: '/topicActivity', query: {queryId}})
       },
       /**
        * 跳转商品详情页面

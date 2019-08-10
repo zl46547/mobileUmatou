@@ -1,8 +1,12 @@
 <template>
   <div id="productDetail">
-    <MenuSelect :menuItems="menus" @menu-selected="menuSelected" :selected="selected"></MenuSelect>
+    <MenuSelect
+      :menuItems="menus"
+      @menu-selected="menuSelected"
+      :selected="selected"
+    />
     <!-- 商品页 -->
-    <div v-if="selected == 0" class="product">
+    <div v-if="selected === '0'" class="product">
       <Banners :banners="productInfo.banners"/>
       <Price :price="productInfo"></Price>
       <Service :service="productInfoServices"
@@ -11,16 +15,15 @@
       />
     </div>
     <!-- 详情页 -->
-    <div v-if="selected == 1" class="detail">
-      <v-detail :detail="productInfo"></v-detail>
+    <div v-if="selected === '1'" class="detail">
+      <Detail :detail="productInfo"/>
     </div>
     <!-- 评价页 -->
-    <div v-if="selected == 2" class="rate" v-infinite-scroll="getRateData" infinite-scroll-disabled="loading"
-         infinite-scroll-distance="10">
-      <v-rate-detail :rateData="rateData"></v-rate-detail>
+    <div v-if="selected === '2'" class="rate">
+      <RateDetail/>
     </div>
     <!-- 脚部区域 -->
-    <v-footer :productInfo="productInfo"></v-footer>
+    <Footer :productInfo="productInfo"/>
   </div>
 </template>
 
@@ -33,89 +36,56 @@
   import RateDetail from './components/rateDetail.vue'
   import Detail from './components/detail.vue'
   import {getProductDetail} from './service'
-  import moment from 'moment'
+
   export default {
     components: {
       MenuSelect,
       Banners,
       Price,
       Service,
-      'VFooter': Footer,
-      'VDetail': Detail,
-      'VRateDetail': RateDetail
+      Footer,
+      Detail,
+      RateDetail
     },
     mounted() {
-      let { productId } = this.$route.params
+      let {productId} = this.$route.params
       this.selected = '0'
       this.getProductDetailData(productId)
-      // this.getRateData()
     },
-    data () {
+    data() {
       return {
-        pageIndex: 0,
-        allLoaded: false,
-        rateData: [],
         productInfo: '', // 商品详情
         productInfoServices: '', // 商品服务
         productActivities: '', // 商品活动
         menus: [ // 菜单切换
-          {
-            name: '商品',
-            label: '0'
-          }, {
-            name: '详情',
-            label: '1'
-          }, {
-            name: '评价',
-            label: '2'
-          }
+          { name: '商品', label: '0' },
+          { name: '详情', label: '1' },
+          { name: '评价', label: '2' }
         ],
         selected: '0' // 选中的navbar
       }
     },
     methods: {
+      /**
+       * 获取商品详情
+       * @param ssuId
+       */
       getProductDetailData(ssuId) {
         getProductDetail({ssuId}).then((res) => {
           this.productInfo = res.productInfo
-          this.productInfo['detailImages'] = this.getDetailImages(res.productInfo.fullDescription)
+          this.productInfo.fullDescription = res.productInfo.fullDescription.match(/http.*?jpg/g)
           this.productInfoServices = res.productInfoServiceList
           this.productActivities = res.productActivityList
         }).catch((error) => {
           console.log(error)
         })
       },
-      getDetailImages(images) {
-        return images.match(/http.*?jpg/g)
-      },
-      menuSelected (val) {
-        var vm = this
-        vm.selected = val
-      },
       /**
-       * 获取评论数据
+       * 菜单选择
+       * @param val
        */
-      getRateData() {
-        var vm = this
-        vm.pageIndex = vm.pageIndex + 1
-        if (vm.allLoaded) {
-          return false
-        }
-        this.$api({
-          method: 'get',
-          url: '/rate/' + vm.productId + '.json'
-        }).then((res) => {
-          var sourceData = res.data.data.Data.SourceData
-          /* 接口中CreateTime带有'T',去除'T' */
-          sourceData.forEach(function (e) {
-            e.CreateTime = moment(e.CreateTime).format('YYYY年MM月DD日 HH:mm:ss')
-          })
-          vm.rateData = vm.rateData.union(sourceData)
-          if (!res.data.data.Data.HasNextPage) {
-            vm.allLoaded = true
-          }
-        }).catch((error) => {
-          console.log(error)
-        })
+      menuSelected(val) {
+        this.selected = val
       }
     }
   }
@@ -124,14 +94,17 @@
 <style lang="less" scoped>
   #productDetail {
     overflow: hidden;
+
     .detail, .rate, .product {
       margin-top: 50px;
       height: calc(100vh - 100px);
       overflow-y: auto;
       overflow-x: hidden;
+
       &::-webkit-scrollbar {
         display: none
       }
+
       -webkit-overflow-scrolling: touch;
     }
   }

@@ -1,6 +1,6 @@
 <template>
   <div id="banners" v-if="banners">
-    <Swipe indicator-color="white">
+    <Swipe indicator-color="white" :autoplay="3000">
       <SwipeItem v-for="(item,index) in banners" :key="index">
         <img :src="'http://picpro-sz.34580.com/sz/ImageUrl/'+item+'/800.jpeg'" class="slide-image"/>
       </SwipeItem>

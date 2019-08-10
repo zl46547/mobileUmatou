@@ -6,7 +6,9 @@ import api from '@/http/api.js' // http请求
 import linq from 'linqjs'
 import lazyLoad from 'vue-lazyload'
 import 'mint-ui/lib/style.css'
+// 字体样式
 import './assets/font/index.css'
+// 全局消息组件
 import Message from './common/message/index.js'
 
 Vue.use(Message)

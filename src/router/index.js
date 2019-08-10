@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import store from '@/vuex/store.js'
 // 按需加载,当渲染其他页面时才加载其组件,并缓存,减少首屏加载时间
 const Index = resolve => require(['@/views/home/index.vue'], resolve)
-const IndexAdv = resolve => require(['@/views/indexAdv/index.vue'], resolve)
+const IndexAdv = resolve => require(['@/views/topicActivity/index.vue'], resolve)
 const Category = resolve => require(['@/views/category/index.vue'], resolve)
 const CategoryMain = resolve => require(['@/views/category/components/main.vue'], resolve)
 const CategoryDetail = resolve => require(['@/views/categoryDetail/index.vue'], resolve)
@@ -87,7 +87,7 @@ const router = new Router({
       component: AllOrders
     },
     {
-      path: '/indexAdv',
+      path: '/topicActivity',
       name: '广告',
       component: IndexAdv
     },

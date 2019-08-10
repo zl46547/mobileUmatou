@@ -54,7 +54,7 @@
         var vm = this
         if (JumpValue.indexOf('topics') > -1) {
           var queryId = JumpValue.replace('https://wechatx.34580.com/topics/', '')
-          vm.$router.push({path: '/indexAdv', query: {queryId}})
+          vm.$router.push({path: '/topicActivity', query: {queryId}})
         } else {
           Toast({
             message: '不支持该跳转'

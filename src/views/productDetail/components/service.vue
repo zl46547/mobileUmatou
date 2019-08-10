@@ -65,11 +65,15 @@
         padding-bottom: 10px;
         display: flex;
         align-items: center;
+        flex-wrap: wrap;
         .iconfont{
           color: #79cf80;
           padding: 10px 10px;
           font-size: 1.4rem;
         }
+      }
+      .service-item{
+        white-space: nowrap;
       }
     }
     @font-face {

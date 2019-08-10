@@ -1,7 +1,7 @@
 <template>
   <div id="menuList">
     <img :src="topCenterInfos[0].ImageUrl" v-if="topCenterInfos"
-           @click="goToIndexAdv(topCenterInfos[0].LinkUrls[0])"/>
+           @click="goToTopicActivity(topCenterInfos[0].LinkUrls[0])"/>
     <Swipe class="swiper" v-if='menuList' :autoplay="0" :show-indicators="false">
         <SwipeItem class="swiper-item">
           <div class="menuList-item" v-for="(item,index) in menuList" :key="item.Name" v-if="index<10" @click="handleSwipoer">
@@ -53,11 +53,11 @@
        * 跳转至广告详情页
        * @param JumpValue
        */
-      goToIndexAdv(JumpValue) {
+      goToTopicActivity(JumpValue) {
         var vm = this
         if (JumpValue.indexOf('topics') > -1) {
           var queryId = JumpValue.replace('https://wechatx.34580.com/topics/', '')
-          vm.$router.push({path: '/indexAdv', query: {queryId}})
+          vm.$router.push({path: '/topicActivity', query: {queryId}})
         }
       }
     }

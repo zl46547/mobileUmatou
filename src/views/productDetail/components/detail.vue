@@ -8,35 +8,35 @@
       </header>
       <div class="standard-list">
         <div class="product-name">商品名称</div>
-        <div>{{detail.ProductName}}</div>
+        <div>{{detail.productName}}</div>
       </div>
       <div class="standard-list">
         <div class="product-name">编号</div>
-        <div>{{detail.Number}}</div>
+        <div>{{detail.number}}</div>
       </div>
       <div class="standard-list">
         <div class="product-name">规格</div>
-        <div>{{detail.PvStandard}}</div>
+        <div>{{detail.pvStandard}}</div>
       </div>
       <div class="standard-list">
         <div class="product-name">产地</div>
-        <div>{{detail.Place}}</div>
+        <div>{{detail.place}}</div>
       </div>
       <div class="standard-list">
         <div class="product-name">储存方式</div>
-        <div>{{detail.Number}}</div>
+        <div>{{detail.number}}</div>
       </div>
       <div class="standard-list">
         <div class="product-name">开票内容</div>
-        <div>{{detail.FinanceCName}}</div>
+        <div>{{detail.financeCName}}</div>
       </div>
       <div class="standard-list">
         <div class="product-name">截单时间</div>
-        <div>{{detail.LastTimeInfo}}</div>
+        <div>{{detail.lastTimeInfo?detail.lastTimeInfo:'未截单'}}</div>
       </div>
     </div>
-    <div class="introduce" v-if="detail.detailImages.length>0">
-      <img v-lazy="item" alt="" v-for="(item,index) in detail.detailImages" :key="index"/>
+    <div class="introduce" v-if="detail.fullDescription && detail.fullDescription.length>0">
+      <img v-lazy="item" alt="" v-for="(item,index) in detail.fullDescription" :key="index"/>
     </div>
   </div>
 </template>

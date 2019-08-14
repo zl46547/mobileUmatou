@@ -39,32 +39,32 @@ class BaseAxiosHelper {
   handleError (error) {
     store.commit('SET_LOADING', false)
     if (!error.response) {
-      Toast.success(error.message)
+      Toast.success(error.Message)
       return Promise.reject(error)
     }
-    const { status, data: { message, code } } = error.response
+    const { status, data: { Message, code } } = error.response
     switch (status) {
       case 500:
-        if (message) {
-          Toast(message)
+        if (Message) {
+          Toast(Message)
         } else {
           Toast.fail('网络错误,请稍后再试...')
         }
         break
       case 400:
-        if (message) {
-          Toast(message)
+        if (Message) {
+          Toast(Message)
         }
         break
       case 404:
-        Toast.fail(`${message || 'Not Found'}`)
+        Toast.fail(`${Message || 'Not Found'}`)
         break
       case 401:
         Toast.fail('身份过期，请重新登录')
         this.returnToLoginIn(code)
         break
       default:
-        Toast.fail(`${message || '未知错误'}`)
+        Toast.fail(`${Message || '未知错误'}`)
         break
     }
     return Promise.reject(error)

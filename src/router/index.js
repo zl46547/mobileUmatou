@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from '@/vuex/store.js'
+import {USER} from '../vuex/types'
 // 按需加载,当渲染其他页面时才加载其组件,并缓存,减少首屏加载时间
 const Index = resolve => require(['@/views/home/index.vue'], resolve)
 const IndexAdv = resolve => require(['@/views/topicActivity/index.vue'], resolve)
@@ -105,18 +106,21 @@ const router = new Router({
 })
 // 用钩子函数beforeEach()对路由进行判断
 router.beforeEach((to, from, next) => {
-  var token = store.state.login.token
-  var flag = true
-  if (!token) {
+  let user = store.state.login.user
+  let flag = true
+  debugger
+  if (!user) {
     flag = false// 未登录
+  } else {
+    let currentData = new Date().getTime()
+    let subtractTime = currentData - user.token
+    if (subtractTime > 2 * 60 * 60 * 1000) {
+      flag = false // 登录超时
+    }
   }
-  var currentData = new Date().getTime()
-  var subtractTime = currentData - token
-  if (subtractTime > 2 * 60 * 60 * 1000) {
-    flag = false // 登录超时
-  }
-  if (flag) {
-    store.commit('TOKEN', new Date().getTime()) // 在token未失效的情况下，每次切换路由时都刷新一下token，保持登录状态
+
+  if (user) {
+    store.commit(USER, {...user, token: new Date().getTime()}) // 在token未失效的情况下，每次切换路由时都刷新一下token，保持登录状态
   }
   if (to.meta.requireAuth) { // 需要权限,进一步进行判断
     if (flag) { // 通过vuex state获取当前的token是否存在

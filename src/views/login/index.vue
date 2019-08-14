@@ -6,8 +6,8 @@
           <img class="logo" src="../../assets/images/logo_login.png"/>
           <form class="login-form">
             <div class="form-div">
-              <i class="iconfont icon-username"></i>
-              <input type="text" placeholder="请输入手机号码" v-model="user.userName">
+              <i class="iconfont icon-mobile"></i>
+              <input type="text" placeholder="请输入手机号码" v-model="user.mobile">
             </div>
             <div class="form-div">
               <i class="iconfont icon-password"></i>
@@ -24,8 +24,8 @@
           <img class="logo" src="../../assets/images/logo_login.png"/>
           <form class="register-form">
             <div class="form-div">
-              <i class="iconfont icon-username"></i>
-              <input type="text" placeholder="请输入手机号码" v-model="user.userName">
+              <i class="iconfont icon-mobile"></i>
+              <input type="text" placeholder="请输入手机号码" v-model="user.mobile">
             </div>
             <div class="form-div">
               <i class="iconfont icon-password"></i>
@@ -47,108 +47,83 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import { Toast } from 'mint-ui'
+  import { Toast } from 'vant'
+  import {submitRegster, submitSignIn} from './service'
+  import * as types from '../../vuex/types'
   export default {
     components: {},
     mounted () {
-      var vm = this
-      vm.userList = vm.$store.state.login.userList
     },
     data () {
       return {
         isLogin: true,
-        userList: [], // 所有用户列表
         user: {
-          userName: '18115169031',
-          password: '123456',
+          mobile: '18115169031',
+          password: '16899199',
           comfirmPwd: ''
         }
       }
     },
     methods: {
       forgetPassword() {
-        var vm = this
-        vm.user.userName = '18115169031'
-        vm.user.password = '123456'
+        this.user.mobile = '18115169031'
+        this.user.password = '16899199'
       },
       /**
        * 切换注册页面
        */
       goToRegister() {
-        var vm = this
-        vm.user = {
-          userName: '',
+        this.user = {
+          mobile: '',
           password: '',
           comfirmPwd: ''
         }
-        vm.isLogin = false
+        this.isLogin = false
       },
       /**
        * 切换登录页面
        */
       goToLogin() {
-        var vm = this
-        vm.isLogin = true
+        this.isLogin = true
       },
       /**
        * 登录
        */
       login() {
-        var vm = this
-        if (!vm.user.userName || !vm.user.password) {
+        if (!this.user.mobile || !this.user.password) {
           Toast('手机号码或密码不能为空')
           return false
         }
-        if (!vm.user.userName.match(/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/)) {
+        if (!this.user.mobile.match(/^(1[3456789])\d{9}$/)) {
           Toast('请输入正确的手机号码')
           return false
         }
-        var exit = vm.userList.contains(vm.user, function (a, b) {
-          return a.userName === b.userName && a.password === b.password
+        submitSignIn(this.user).then(res => {
+          this.$store.commit(types.USER, {...res, token: new Date().getTime()})
+          this.$router.go(-1)
         })
-        if (exit) {
-          vm.$store.commit('TOKEN', new Date().getTime())
-          vm.$router.go(-1)
-        } else {
-          Toast('手机号码或密码不正确')
-          return false
-        }
       },
       /**
        * 注册
        */
       register() {
-        var vm = this
-        if (!vm.user.userName || !vm.user.password) {
+        if (!this.user.mobile || !this.user.password) {
           Toast('手机号码或密码不能为空！')
           return false
         }
-        if (!vm.user.userName.match(/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/)) {
+        if (!this.user.mobile.match(/^(1[3456789])\d{9}$/)) {
           Toast('请输入正确的手机号码')
           return false
         }
-        if (vm.user.password !== vm.user.comfirmPwd) {
+        if (this.user.password !== this.user.comfirmPwd) {
           Toast('两次密码不一致！')
           return false
         }
-        var exit = vm.userList.contains(vm.user, function (a, b) {
-          return a.userName === b.userName
+        submitRegster(this.user).then(res => {
+          Toast('注册成功！')
+          this.$store.commit(types.USER, {...res, token: new Date().getTime()})
+          this.$router.go(-1)
         })
-        if (exit) {
-          Toast('该账户已存在！')
-          return false
-        } else {
-          vm.$message({
-            message: '恭喜你，注册成功！',
-            type: 'success'
-          })
-          var user = JSON.parse(JSON.stringify(vm.user))
-          vm.$store.commit('USER_LIST', user)
-          vm.user.password = ''
-          setTimeout(function () {
-            vm.isLogin = true
-          }, 1000)
-        }
       }
     }
   }
@@ -254,7 +229,7 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
-    .icon-username:before { content: "\e759"; }
+    .icon-mobile:before { content: "\e759"; }
 
     .icon-comfirm-password:before { content: "\e645"; }
 

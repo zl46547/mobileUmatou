@@ -23,7 +23,9 @@
       <RateDetail/>
     </div>
     <!-- 脚部区域 -->
-    <Footer :productInfo="productInfo"/>
+    <Footer v-if="productInfo.productId"
+            :productId="productInfo.productId"
+    />
   </div>
 </template>
 
@@ -54,7 +56,7 @@
     },
     data() {
       return {
-        productInfo: '', // 商品详情
+        productInfo: {}, // 商品详情
         productInfoServices: '', // 商品服务
         productActivities: '', // 商品活动
         menus: [ // 菜单切换
@@ -71,11 +73,11 @@
        * @param ssuId
        */
       getProductDetailData(ssuId) {
-        getProductDetail({ssuId}).then((res) => {
-          this.productInfo = res.productInfo
-          this.productInfo.fullDescription = res.productInfo.fullDescription.match(/http.*?jpg/g)
-          this.productInfoServices = res.productInfoServiceList
-          this.productActivities = res.productActivityList
+        getProductDetail({ssuId}).then(({productInfo, productInfoServiceList, productActivityList}) => {
+          this.productInfo = productInfo
+          this.productInfo.fullDescription = productInfo.fullDescription.match(/http.*?jpg/g)
+          this.productInfoServices = productInfoServiceList
+          this.productActivities = productActivityList
         }).catch((error) => {
           console.log(error)
         })

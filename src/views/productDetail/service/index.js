@@ -1,7 +1,8 @@
 import {
   getProductDetailRequest,
   getRateListRequest,
-  getRateStatisticsRequest
+  getRateStatisticsRequest,
+  submitAddGoods
 } from '../api'
 
 /**
@@ -31,6 +32,17 @@ export const getRateList = async params => {
  */
 export const getRateStatistics = async params => {
   let {data} = await getRateStatisticsRequest(params)
+  if (data.Data) {
+    return data.Data
+  }
+  return null
+}
+
+/**
+ * 加入购物车
+ */
+export const handleAddGoods = async params => {
+  let {data} = await submitAddGoods(params)
   if (data.Data) {
     return data.Data
   }

@@ -108,7 +108,6 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   let user = store.state.login.user
   let flag = true
-  debugger
   if (!user) {
     flag = false// 未登录
   } else {

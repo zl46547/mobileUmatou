@@ -21,6 +21,7 @@ export const getRateListRequest = params => {
     params
   })
 }
+
 /**
  * 获取评论基础数据
  */
@@ -29,5 +30,16 @@ export const getRateStatisticsRequest = params => {
     method: 'get',
     url: '/productComment/statistics',
     params
+  })
+}
+
+/**
+ * 加入购物侧
+ */
+export const submitAddGoods = data => {
+  return axios({
+    method: 'post',
+    url: '/shoppingCart/addGoods',
+    data
   })
 }

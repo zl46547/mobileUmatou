@@ -2,7 +2,8 @@ import {
   getProductDetailRequest,
   getRateListRequest,
   getRateStatisticsRequest,
-  submitAddGoods
+  submitAddGoods,
+  getCartCount
 } from '../api'
 
 /**
@@ -47,4 +48,15 @@ export const handleAddGoods = async params => {
     return data.Data
   }
   return null
+}
+
+/**
+ * 获取购物车数量
+ */
+export const fetchCartCount = async params => {
+  let {data} = await getCartCount(params)
+  if (data.Data) {
+    return data.Data.count
+  }
+  return 0
 }

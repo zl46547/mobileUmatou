@@ -21,7 +21,7 @@
 
 <script type="text/ecmascript-6">
   import Util from '@/util/common.js'
-  import {handleAddGoods} from '../service'
+  import {handleAddGoods, fetchCartCount} from '../service'
   import {Toast} from 'vant'
 
   export default {
@@ -36,6 +36,11 @@
         count: 0,
         isLikeProduct: false
       }
+    },
+    async mounted() {
+      // 初始化购物车数量
+      let {user: {customerGuid}} = this.$store.state.login
+      this.count = await fetchCartCount({customerGuid})
     },
     methods: {
       /**

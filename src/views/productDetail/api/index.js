@@ -34,12 +34,23 @@ export const getRateStatisticsRequest = params => {
 }
 
 /**
- * 加入购物侧
+ * 加入购物车
  */
 export const submitAddGoods = data => {
   return axios({
     method: 'post',
     url: '/shoppingCart/addGoods',
     data
+  })
+}
+
+/**
+ * 查询购物车数量
+ */
+export const getCartCount = params => {
+  return axios({
+    method: 'get',
+    url: '/shoppingCart/getCartCount',
+    params
   })
 }

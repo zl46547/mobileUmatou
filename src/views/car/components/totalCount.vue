@@ -3,8 +3,8 @@
     <div>
       <div class="checkAll">
         <div class="checkAll-btn" @click="checkAll">
-          <i class="iconfont icon-uncheck" v-if="!checkAllStatustemp"></i>
-          <i class="iconfont icon-checked" v-if="checkAllStatustemp"></i>
+          <i class="iconfont icon-uncheck" v-if="!checkAllStatus"></i>
+          <i class="iconfont icon-checked" v-if="checkAllStatus"></i>
           <span>全选</span>
         </div>
         <div class="allPrice">
@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="count-btn" @click="goToAccount">
-        <div><span>去结算</span><span>（{{isCheckedList.length}}）</span></div>
+        <div><span>去结算</span><span>（{{checkCount}}）</span></div>
       </div>
     </div>
   </div>
@@ -31,10 +31,6 @@
         required: true,
         default: 0
       },
-      isCheckedList: {
-        required: true,
-        default: []
-      },
       carList: {
         required: true,
         default: []
@@ -42,36 +38,22 @@
     },
     data() {
       return {
-        newCheckAllStatus: ''
       }
     },
     computed: {
-      carListComp() {
-        var vm = this
-        return vm.carList
-      },
-      checkAllStatustemp() {
-        var vm = this
-        vm.newCheckAllStatus = vm.checkAllStatus
-        return vm.checkAllStatus
+      checkCount() {
+        return this.carList.filter(item => item.checked).length
       }
+      // checkAllStatustemp() {
+      //   var vm = this
+      //   vm.newCheckAllStatus = vm.checkAllStatus
+      //   return vm.checkAllStatus
+      // }
     },
     methods: {
       // 全选
       checkAll () {
-        var vm = this
-        if (vm.newCheckAllStatus) {
-          vm.carList.forEach(function (e) {
-            e.checked = false
-          })
-          vm.newCheckAllStatus = false
-        } else {
-          vm.carList.forEach(function (e) {
-            e.checked = true
-          })
-          vm.newCheckAllStatus = true
-        }
-        vm.$emit('check-all', {carList: vm.carListComp, checkAllStatus: vm.newCheckAllStatus})
+        this.$emit('check-all')
       },
       /**
        * 去结算

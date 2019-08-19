@@ -1,6 +1,7 @@
 import {
  getCartListRequest,
-  deleteGoodsRequest
+  deleteGoodsRequest,
+  setGoodsQuantityRequest
 } from '../api'
 
 /**
@@ -21,6 +22,18 @@ export const getCartList = async params => {
  */
 export const deleteGoods = async params => {
   let {data} = await deleteGoodsRequest(params)
+  if (data.Data) {
+    return data.Data
+  }
+  return null
+}
+
+/**
+ * 加减购物车数量
+ * @param params
+ */
+export const setGoodsQuantity = async params => {
+  let {data} = await setGoodsQuantityRequest(params)
   if (data.Data) {
     return data.Data
   }

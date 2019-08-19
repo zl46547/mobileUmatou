@@ -20,13 +20,13 @@
               </div>
               <div class="operate">
                 <div class="inputNumber">
-                  <div @click="changeNum(-1,item.productId)">
+                  <div @click="changeNum(-1,item)">
                     <p>-</p>
                   </div>
                   <div>
                     <p>{{item.quantity}}</p>
                   </div>
-                  <div @click="changeNum(1,item.productId)">
+                  <div @click="changeNum(1,item)">
                     <p>+</p>
                   </div>
                 </div>
@@ -43,7 +43,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {deleteGoods} from '../service'
+  import {deleteGoods, setGoodsQuantity} from '../service'
   import {Toast} from 'vant'
 
   export default {
@@ -68,8 +68,11 @@
       handleCheckboxClick(index, productId) {
         let checkedStatus = !this.groupItem.groupItemList[index].checked
         this.$emit('handle-checkbox-click', {productId, checkedStatus})
-        // this.whetherIsCheckAll()
       },
+      /**
+       * 删除购物车
+       * @param productId
+       */
       deleteItem(productId) {
         let {user: {customerGuid}} = this.$store.state.login
         if (!customerGuid) {
@@ -84,21 +87,30 @@
                 this.$emit('del-refresh', productId)
               }
             })
-            // let index = -1
-            // for (let i = 0; i < this.carList.length; i++) {
-            //   if (this.carList[i].ProductId === productId) {
-            //     index = i
-            //   }
-            // }
-            // this.isComfirmDel(index)
           }
         })
       },
-      changeNum() {
-
+      /**
+       * 改变购买数量
+       * @param value 购物车数量+1或者是-1
+       * @param item
+       */
+      changeNum(value, item) {
+        let {user: {customerGuid}} = this.$store.state.login
+        if (!customerGuid) {
+          return false
+        }
+        let quantity = item.quantity + value
+        if (quantity < 1) {
+          quantity = 1
+        }
+        setGoodsQuantity({quantity, productId: item.productId, customerGuid}).then(res => {
+          if (res) {
+            this.$emit('change-number', {quantity, productId: item.productId})
+          }
+        })
       }
-    },
-    computed: {}
+    }
   }
 </script>
 

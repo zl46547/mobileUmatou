@@ -44,11 +44,6 @@
       checkCount() {
         return this.carList.filter(item => item.checked).length
       }
-      // checkAllStatustemp() {
-      //   var vm = this
-      //   vm.newCheckAllStatus = vm.checkAllStatus
-      //   return vm.checkAllStatus
-      // }
     },
     methods: {
       // 全选
@@ -59,20 +54,15 @@
        * 去结算
        */
       goToAccount () {
-        var vm = this
-        if (vm.isCheckedList.length <= 0) {
+        let hasChecked = this.carList.filter(item => item.checked)
+        if (hasChecked.length <= 0) {
           Toast({
             message: '请选择需要结算的商品'
           })
           return false
         }
-        vm.$store.commit('SELECT_CAR_LIST', this.isCheckedList)
-        // 结算后商品不再默认选中
-        this.carList.forEach(function (e) {
-          e.checked = false
-        })
-        vm.$store.commit('CAR_LIST', this.carList)
-        vm.$router.replace({name: '提交订单'})
+        this.$store.commit('CAR_LIST', hasChecked)
+        this.$router.replace({name: '提交订单'})
       }
     }
   }

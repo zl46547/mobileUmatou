@@ -66,40 +66,40 @@
        * 获取优惠券列表
        */
       getCouponData () {
-        let vm = this
-        let totalAmmount = this.getTotalAmmount()
-        let couponList = []
-        vm.$api({
-          method: 'get',
-          url: '/shihang/user/couponList.json'
-        }).then((res) => {
-          couponList = res.data.Data.CouponList
-          let usefulCoupon = []
-          let unUsefulCoupon = []
-          if (couponList.length > 0) {
-            couponList.forEach((e) => {
-              if (totalAmmount > e.LimitMinMoney) {
-                e.backgroundColor = '#D24161'
-                usefulCoupon.push(e)
-              } else {
-                e.backgroundColor = '#c1c1c1'
-                unUsefulCoupon.push(e)
-              }
-            })
-            vm.usefulCoupon = usefulCoupon
-            vm.unUsefulCoupon = unUsefulCoupon
-            this.initCheckCoupon()
-          }
-        }).catch((error) => {
-          console.error(error)
-        })
+        // let vm = this
+        // let totalAmmount = this.getTotalAmmount()
+        // let couponList = []
+        // vm.$api({
+        //   method: 'get',
+        //   url: '/shihang/user/couponList.json'
+        // }).then((res) => {
+        //   couponList = res.data.Data.CouponList
+          // let usefulCoupon = []
+          // let unUsefulCoupon = []
+          // if (couponList.length > 0) {
+          //   couponList.forEach((e) => {
+          //     if (totalAmmount > e.LimitMinMoney) {
+          //       e.backgroundColor = '#D24161'
+          //       usefulCoupon.push(e)
+          //     } else {
+          //       e.backgroundColor = '#c1c1c1'
+          //       unUsefulCoupon.push(e)
+          //     }
+          //   })
+          //   vm.usefulCoupon = usefulCoupon
+          //   vm.unUsefulCoupon = unUsefulCoupon
+          //   this.initCheckCoupon()
+          // }
+        // }).catch((error) => {
+        //   console.error(error)
+        // })
       },
       /**
        * 获取订单总金额
        * @returns {number}
        */
       getTotalAmmount () {
-        let submitOrderList = store.state.car.selectedCarList
+        let submitOrderList = store.state.car.carList
         let money = 0
         if (submitOrderList.length > 0) {
           submitOrderList.forEach(function (e) {

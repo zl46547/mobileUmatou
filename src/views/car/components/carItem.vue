@@ -53,12 +53,6 @@
         type: Object
       }
     },
-    mounted() {
-    },
-    data() {
-      return {
-      }
-    },
     methods: {
       /**
        * 点击复选框

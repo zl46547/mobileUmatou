@@ -15,11 +15,9 @@
 <script type="text/ecmascript-6">
 
   export default {
-    computed: {},
     methods: {
       goHome () {
-        var vm = this
-        vm.$router.push({name: '首页'})
+        this.$router.push({name: '首页'})
       }
     }
   }
@@ -38,7 +36,6 @@
         color: #ccc;
         width: 100%;
         text-align: center;
-        font-family: "Microsoft PhagsPa";
         font-size: 1.45rem;
       }
       > div {

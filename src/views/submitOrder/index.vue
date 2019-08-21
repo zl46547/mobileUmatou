@@ -5,11 +5,11 @@
         <span slot="title">提交订单</span>
       </v-header>
       <div class="content-body">
-        <v-address></v-address>
-        <v-order-list></v-order-list>
+        <Address/>
+        <OrderList/>
         <v-pay-way @pay-way-selected="payWaySelected"></v-pay-way>
-        <v-ticket @selected-ticket="selectedTicket"></v-ticket>
-        <v-bounce @comfirm-selected-item="selectedBounce"></v-bounce>
+        <!--<v-ticket @selected-ticket="selectedTicket"></v-ticket>-->
+        <!--<v-bounce @comfirm-selected-item="selectedBounce"></v-bounce>-->
         <div class="pannelMargin ammountCount">
           <div>
             <p class="subtitle">商品金额</p>
@@ -48,8 +48,8 @@
   import * as actionTypes from '../../vuex/types'
   export default {
     components: {
-      'VOrderList': OrderList,
-      'VAddress': Address,
+      OrderList,
+      Address,
       'VPayWay': PayWay,
       'VTicket': Ticket,
       'VHeader': Header,
@@ -94,11 +94,13 @@
        * 获取订单总金额
        */
       getTotalPrice () {
-        var vm = this
-        var checkedcarsList = vm.$store.state.car.selectedCarList
-        var money = 0
-        checkedcarsList.forEach(function (e) {
-          money += parseFloat(e.totalMoney)
+        let carList = this.$store.state.car.carList
+        if (carList.length <= 0) {
+          this.$router.replace('/car')
+        }
+        let money = 0
+        carList.forEach(item => {
+          money += item.productInfo.periodMoney * item.quantity
         })
         this.totalPrice = money.toFixed(2)
       },

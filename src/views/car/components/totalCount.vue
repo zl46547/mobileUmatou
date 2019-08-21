@@ -3,8 +3,8 @@
     <div>
       <div class="checkAll">
         <div class="checkAll-btn" @click="checkAll">
-          <i class="iconfont icon-uncheck" v-if="!checkAllStatus"></i>
-          <i class="iconfont icon-checked" v-if="checkAllStatus"></i>
+          <i class="iconfont icon-checkbox-blank" v-if="!checkAllStatus"></i>
+          <i class="iconfont icon-checkbox-marked" v-if="checkAllStatus"></i>
           <span>全选</span>
         </div>
         <div class="allPrice">
@@ -20,7 +20,9 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import { Toast } from 'mint-ui'
+  import { Toast } from 'vant'
+  import {CAR_LIST} from '../../../vuex/types'
+
   export default {
     props: {
       checkAllStatus: {
@@ -61,7 +63,7 @@
           })
           return false
         }
-        this.$store.commit('CAR_LIST', hasChecked)
+        this.$store.commit(CAR_LIST, hasChecked)
         this.$router.replace({name: '提交订单'})
       }
     }
@@ -92,11 +94,11 @@
           display: flex;
           align-items: center;
           white-space: nowrap;
-          .icon-uncheck {
+          .icon-checkbox-blank {
             font-size: 1.5rem;
             color: #b1b1b1;
           }
-          .icon-checked {
+          .icon-checkbox-marked {
             font-size: 1.5rem;
             color: #00d300;
           }
@@ -144,21 +146,6 @@
     src: url(data:font/truetype;charset=utf-8;base64,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) format('truetype');
     font-weight: normal;
     font-style: normal;
-  }
-
-  .iconfont {
-    font-family: "iconfont";
-    font-style: normal;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  .icon-uncheck:before {
-    content: "\e70f";
-  }
-
-  .icon-checked:before {
-    content: "\e626";
   }
 
   @media screen and (min-width: 400px) {

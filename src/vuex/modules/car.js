@@ -2,17 +2,13 @@ import Util from '../../util/common'
 import * as types from '../types'
 
 const state = {
-  carList: Util.getLocal('CAR_LIST') || [], // 编辑状态
-  selectedCarList: [] // 选中的购物车列表
+  carList: Util.getLocal('CAR_LIST') || [] // 编辑状态
 }
 
 const mutations = {
   [types.CAR_LIST] (state, res) {
     state.carList = res
     Util.setLocal('CAR_LIST', res)
-  },
-  [types.SELECT_CAR_LIST] (state, res) {
-    state.selectedCarList = res
   }
 }
 

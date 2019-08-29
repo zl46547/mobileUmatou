@@ -8,7 +8,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import { Toast } from 'mint-ui'
+  import { Toast } from 'vant'
   export default {
     mounted () {
     },

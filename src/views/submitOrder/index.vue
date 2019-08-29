@@ -1,15 +1,13 @@
 <template>
   <div id="submitOrder">
     <div>
-      <v-header>
+      <Header>
         <span slot="title">提交订单</span>
-      </v-header>
+      </Header>
       <div class="content-body">
         <Address/>
         <OrderList/>
-        <v-pay-way @pay-way-selected="payWaySelected"></v-pay-way>
-        <!--<v-ticket @selected-ticket="selectedTicket"></v-ticket>-->
-        <!--<v-bounce @comfirm-selected-item="selectedBounce"></v-bounce>-->
+        <Coupon :totalPrice="totalPrice"/>
         <div class="pannelMargin ammountCount">
           <div>
             <p class="subtitle">商品金额</p>
@@ -21,7 +19,7 @@
           </div>
           <div>
             <p class="subtitle">运费</p>
-            <p class="subValue">+ ¥10.00</p>
+            <p class="subValue">+ ¥4.00</p>
           </div>
         </div>
       </div>
@@ -40,27 +38,21 @@
 <script type="text/ecmascript-6">
   import Header from '@/common/navigator.vue'
   import Address from './components/address.vue'
-  import PayWay from './components/payWay.vue'
   import OrderList from './components/orderList.vue'
-  import Ticket from './components/ticket.vue'
-  import Bounce from './components/bounce.vue'
+  import Coupon from './components/coupon'
   import moment from 'moment'
   import * as actionTypes from '../../vuex/types'
   export default {
     components: {
       OrderList,
       Address,
-      'VPayWay': PayWay,
-      'VTicket': Ticket,
-      'VHeader': Header,
-      'VBounce': Bounce
+      Header,
+      Coupon
     },
     data () {
       return {
         totalPrice: 0,
-        bounce: '', // 选择的优惠券
-        payWay: '', // 选择的支付方式
-        ticket: ''// 选择的发票
+        bounce: ''
       }
     },
     mounted () {
@@ -68,28 +60,15 @@
     },
     computed: {
       getFinalPrice () {
-        return (parseFloat(this.totalPrice) + 10 - (parseFloat(this.bounce.Amount) || 0)).toFixed(2)
+        let {couponSelected} = this.$store.state.orderList
+        let couponAmount = 0
+        if (couponSelected) {
+          couponAmount = couponSelected.amount
+        }
+        return (parseFloat(this.totalPrice) + 4 - couponAmount).toFixed(2)
       }
     },
     methods: {
-      /**
-       * 确认选择的发票
-       **/
-      selectedTicket (val) {
-        this.ticket = val
-      },
-      /**
-       * 确认选择的优惠券
-       **/
-      selectedBounce (val) {
-        this.bounce = val
-      },
-      /**
-       * 确认选择的支付方式
-       **/
-      payWaySelected (val) {
-        this.payWay = val
-      },
       /**
        * 获取订单总金额
        */
@@ -102,15 +81,14 @@
         carList.forEach(item => {
           money += item.productInfo.periodMoney * item.quantity
         })
-        this.totalPrice = money.toFixed(2)
+        this.totalPrice = Number(money.toFixed(2))
       },
       /**
        * 提交订单
        */
       submitOrder () {
-        var vm = this
-        var params = {
-          orderList: vm.$store.state.car.selectedCarList, // 订单列表
+        let params = {
+          orderList: this.$store.state.car.selectedCarList, // 订单列表
           finalPrice: this.getFinalPrice, // 最终价格
           submitTime: moment().format('YYYY年MM月DD日 HH:mm:ss'), // 订单提交时间
           deadTime: moment().add(1, 'minute')._d.getTime(), // 截止日期
@@ -121,29 +99,10 @@
           orderStatus: 'OS', // OS:下单成功；OF:下单失败；PS：支付成功；PF：支付失败
           orderStatusName: '下单成功'
         }
-        vm.$store.commit(actionTypes.SUBMIT_ORDER, params)
+        this.$store.commit(actionTypes.SUBMIT_ORDER, params)
         // 从购物车中删除已经提交的订单
-        vm.delCarList(params.orderList)
-        vm.$router.replace({name: '支付订单'})
-      },
-      /**
-       * 删除已下单成功的商品
-       * @param orderList 支付成功的商品
-       */
-      delCarList (orderList) {
-        var vm = this
-        if (orderList.length > 0) {
-          var submitOrderIdList = orderList.select(function (t) {
-            return t.ProductId
-          })
-          var carlist = vm.$store.state.car.carList
-          submitOrderIdList.forEach(function (e) {
-            carlist.removeAll(function (t) {
-              return parseInt(t.ProductId) === parseInt(e)
-            })
-          })
-          vm.$store.commit(actionTypes.CAR_LIST, carlist)
-        }
+        this.delCarList(params.orderList)
+        this.$router.replace({name: '支付订单'})
       }
     }
   }

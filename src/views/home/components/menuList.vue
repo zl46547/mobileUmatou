@@ -4,13 +4,13 @@
            @click="goToTopicActivity(topCenterInfos[0].LinkUrls[0])"/>
     <Swipe class="swiper" v-if='menuList' :autoplay="0" :show-indicators="false">
         <SwipeItem class="swiper-item">
-          <div class="menuList-item" v-for="(item,index) in menuList" :key="item.Name" v-if="index<10" @click="handleSwipoer">
+          <div class="menuList-item" v-for="(item,index) in menuList" :key="item.Name" v-if="index<10" @click="handleSwipoer(item)">
             <img :src="item.URL" mode="aspectFit"/>
             <p class="menuName">{{item.Name}}</p>
           </div>
         </SwipeItem>
         <SwipeItem class="swiper-item">
-          <div class="menuList-item" v-for="(item,index) in menuList" :key="item.Name" v-if="index>=10" @click="handleSwipoer">
+          <div class="menuList-item" v-for="(item,index) in menuList" :key="item.Name" v-if="index>=10" @click="handleSwipoer(item)">
             <img :src="item.URL" mode="aspectFit"/>
             <p class="menuName">{{item.Name}}</p>
           </div>
@@ -36,10 +36,16 @@
       }
     },
     methods: {
-      handleSwipoer() {
-        Toast({
-          message: '该功能暂未开发'
-        })
+      handleSwipoer(swiperItem) {
+        switch (swiperItem.Name) {
+          case '每日领券':
+            this.$router.push('/getCoupons')
+            break
+          default:
+            Toast({
+              message: '该功能暂未开发'
+            })
+        }
       },
       getMenuListData() {
         getShortcutIcon().then((res) => {

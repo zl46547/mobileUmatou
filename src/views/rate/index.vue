@@ -34,8 +34,8 @@
 
 <script type="text/ecmascript-6">
   import Star from '@/common/star.vue'
-  import { Toast, Field } from 'mint-ui'
-  import Header from '@/common/navigator.vue'
+  import { Toast, Field } from 'vant'
+  import Header from '@/common/navigator'
   export default {
     components: {
       'VStar': Star,

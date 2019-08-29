@@ -19,7 +19,7 @@
 
 <script type="text/ecmascript-6">
   import PayWay from './components/payWay.vue'
-  import { Toast } from 'mint-ui'
+  import { Toast } from 'vant'
   export default {
     components: {
       'VPayWay': PayWay

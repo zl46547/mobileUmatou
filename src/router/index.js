@@ -16,6 +16,9 @@ const User = resolve => require(['@/views/user/index.vue'], resolve)
 const AllOrders = resolve => require(['@/views/allOrders/index.vue'], resolve)
 const Rate = resolve => require(['@/views/rate/index.vue'], resolve)
 const Login = resolve => require(['@/views/login/index.vue'], resolve)
+const AddressManage = resolve => require(['@/views/AddressManage'], resolve)
+const AddAddress = resolve => require(['@/views/AddAddress'], resolve)
+const GetCoupons = resolve => require(['@/views/GetCoupons'], resolve)
 Vue.use(Router)
 
 const router = new Router({
@@ -24,6 +27,11 @@ const router = new Router({
       path: '/',
       name: '首页',
       component: Index
+    },
+    {
+      path: '/getCoupons',
+      name: '获取优惠券',
+      component: GetCoupons
     },
     {
       path: '/category',
@@ -70,6 +78,22 @@ const router = new Router({
         requireAuth: true
       },
       component: SubmitOrder
+    },
+    {
+      path: '/addressManage',
+      name: '地址管理',
+      meta: {
+        requireAuth: true
+      },
+      component: AddressManage
+    },
+    {
+      path: '/addAddress',
+      name: '添加地址',
+      meta: {
+        requireAuth: true
+      },
+      component: AddAddress
     },
     {
       path: '/pay',

@@ -2,12 +2,27 @@ import Util from '../../util/common'
 import * as types from '../types'
 
 const state = {
+  payWaySelected: null, // 选择支付方式
+  couponSelected: null, // 选择优惠券
+  ticketSelected: null, // 选择发票
   submitOrder: '', // 编辑状态
   myOrders: Util.getLocal('MY_ORDERS') || [] // 编辑状态
 }
 
 const mutations = {
-  [types.SUBMIT_ORDER] (state, res) {
+  // 选择支付方式
+  [types.PAY_WAY_SELECTED](state, res) {
+      state.payWaySelected = res
+  },
+  // 选择优惠券
+  [types.COUPON_SELECTED](state, res) {
+      state.couponSelected = res
+  },
+  // 选择发票
+  [types.TICKET_SELECTED](state, res) {
+      state.ticketSelected = res
+  },
+  [types.SUBMIT_ORDER](state, res) {
     // 获取我的订单,并将提交的订单加入到我的订单中
     var myOrders = state.myOrders
     // 根据订单号判断该订单是否存在
@@ -24,7 +39,7 @@ const mutations = {
     state.submitOrder = res
     Util.setLocal('MY_ORDERS', myOrders)
   },
-  [types.MY_ORDERS] (state, res) {
+  [types.MY_ORDERS](state, res) {
     if (res.isUpdate) {
       state.myOrders.forEach(function (e) {
         if (e.orderNo === res.orderNo) {

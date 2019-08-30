@@ -200,7 +200,7 @@
         try {
           let {id} = this.$route.query
           if (id) {
-            updateAddress(this.params).then(res => {
+            updateAddress({...this.params, id}).then(res => {
               if (res) {
                 Toast.success('编辑成功')
                 this.$router.go(-1)

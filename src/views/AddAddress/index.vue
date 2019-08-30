@@ -58,13 +58,14 @@
         </Cell>
       </CellGroup>
     </div>
-    <div class="add-address-btn" @click="handleAddAddress()">
+    <div class="add-address-btn" @click="handleSubmitAddress()">
       确定
     </div>
     <Popup v-model="showArea"
            position="bottom"
     >
       <Area :area-list="areaList"
+            :value="params.area"
             @confirm="handleAreaConfirm"
             @cancel="showArea=false"
       />
@@ -74,7 +75,7 @@
 
 <script type="text/ecmascript-6">
   import Navigator from '../../common/navigator.vue'
-  import {addAddress} from './service'
+  import {addAddress, getAddressDetail, updateAddress} from './service'
   import {Field, CellGroup, Cell, Area, Popup, Switch, Toast} from 'vant'
   import areaList from '../../util/area'
 
@@ -116,15 +117,44 @@
         return this.params.area.map(item => item.name).join('/')
       }
     },
+    mounted() {
+      let {id} = this.$route.query
+      if (id) {
+        getAddressDetail(id).then(res => {
+          this.params = res
+          // this.params = {
+          //   id: res._id,
+          //   contactName: res.contactName,
+          //   contactTel: res.contactTel,
+          //   area: res.area,
+          //   addressDetail: res.addressDetail,
+          //   isDefault: res.isDefault
+          // }
+        })
+      }
+    },
     methods: {
+      /**
+       * 地区选择点击事件
+       */
       handleAreaClick() {
         this.showArea = true
         this.errorMsg.err_area = null
       },
+
+      /**
+       * 地区选择确认事件
+       * @param val
+       */
       handleAreaConfirm(val) {
         this.params.area = val
         this.showArea = false
       },
+
+      /**
+       * 新增地址参数校验
+       * @returns {boolean}
+       */
       beforeSubmit() {
         let {
           contactName,
@@ -140,7 +170,7 @@
           this.errorMsg.err_contact_tel = '联系人电话不能为空'
           return false
         }
-        if (!contactTel.match(/^(1[3456789])\d{9}$/)) {
+        if (!String(contactTel).match(/^(1[3456789])\d{9}$/)) {
           this.errorMsg.err_contact_tel = '请输入正确的手机号码'
           return false
         }
@@ -154,7 +184,12 @@
         }
         return true
       },
-      handleAddAddress() {
+
+      /**
+       * 确认新增地址
+       * @returns {boolean}
+       */
+      handleSubmitAddress() {
         let {user: {customerGuid}} = this.$store.state.login
         if (!customerGuid) {
           return false
@@ -163,14 +198,26 @@
           return false
         }
         try {
-          addAddress({customerGuid, ...this.params}).then(res => {
-            if (res) {
-              Toast.success('添加成功')
-              this.$router.go(-1)
-            } else {
-              Toast.fail('添加失败')
-            }
-          })
+          let {id} = this.$route.query
+          if (id) {
+            updateAddress(this.params).then(res => {
+              if (res) {
+                Toast.success('编辑成功')
+                this.$router.go(-1)
+              } else {
+                Toast.fail('编辑失败')
+              }
+            })
+          } else {
+            addAddress({customerGuid, ...this.params}).then(res => {
+              if (res) {
+                Toast.success('添加成功')
+                this.$router.go(-1)
+              } else {
+                Toast.fail('添加失败')
+              }
+            })
+          }
         } catch (e) {
           console.log(e)
         }
@@ -206,6 +253,9 @@
         &::-webkit-input-placeholder {
           color: #969799;
         }
+      }
+      input:disabled {
+        background-color: #fff;
       }
       .van-field__control {
         font-size: 1.2rem;

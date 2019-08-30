@@ -1,19 +1,21 @@
 <template>
-  <div id="address-item">
-    <div class="checkbox-left">
-      <i class="iconfont icon-checkbox-blank" v-if="!addressItem.checked"></i>
-      <i class="iconfont icon-checkbox-marked" v-if="addressItem.checked"></i>
+  <div class="address-item" @click="handleClick">
+    <!-- 编辑状态不显示checkbox -->
+    <div class="checkbox-left" v-if="!type">
+      <i class="iconfont icon-checkbox-blank" v-if="!addressItem.isDefault"></i>
+      <i class="iconfont icon-checkbox-marked" v-if="addressItem.isDefault"></i>
     </div>
     <div class="checkbox-right">
-      1
+      <p>{{addressItem.contactName}},{{addressItem.contactTel}}</p>
+      <p>{{formateArea(addressItem.area)}}{{addressItem.addressDetail}}</p>
     </div>
-    <i class="iconfont icon-location"></i>
+    <i class="iconfont icon-edit" v-if="type" @click="goToEdit"></i>
+    <i class="iconfont icon-location" v-else></i>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import {deleteGoods, setGoodsQuantity} from '../service'
-  import {Toast} from 'vant'
+  import {ADDRESS_SELECTED} from '../../../vuex/types'
 
   export default {
     props: {
@@ -22,210 +24,97 @@
         type: Object
       }
     },
+    mounted() {
+      let {type} = this.$route.params
+      if (type) {
+        this.type = Number(type)
+      }
+    },
+    data () {
+      return {
+        type: 0
+      }
+    },
     methods: {
+      /**
+       * 跳转编辑页面
+       */
+      goToEdit() {
+        this.$router.push({name: '添加地址', query: {id: this.addressItem._id}})
+      },
+      /**
+       * 点击复选框
+       */
+      handleClick () {
+        // 编辑状态不可点击
+        if (this.type) {
+          return false
+        }
+        this.$store.commit(ADDRESS_SELECTED, this.addressItem)
+        this.$router.go(-1)
+      },
+      /**
+       * 格式化地区
+       */
+      formateArea (area) {
+        if (!area) {
+          return null
+        }
+        return area.map(item => item.name).join('')
+      },
       /**
        * 点击复选框
        * @param index
        * @param productId
        */
-      handleCheckboxClick(index, productId) {
+      handleCheckboxClick (index, productId) {
         let checkedStatus = !this.addressItem.addressItemList[index].checked
         this.$emit('handle-checkbox-click', {productId, checkedStatus})
-      },
-      /**
-       * 删除购物车
-       * @param productId
-       */
-      deleteItem(productId) {
-        let {user: {customerGuid}} = this.$store.state.login
-        if (!customerGuid) {
-          return false
-        }
-        this.$message({
-          description: '删除后订单无法还原,是否继续操作？',
-          onComfirm: () => {
-            deleteGoods({productIds: [productId], customerGuid}).then(res => {
-              if (res) {
-                Toast('删除成功')
-                this.$emit('del-refresh', productId)
-              }
-            })
-          }
-        })
-      },
-      /**
-       * 改变购买数量
-       * @param value 购物车数量+1或者是-1
-       * @param item
-       */
-      changeNum(value, item) {
-        let {user: {customerGuid}} = this.$store.state.login
-        if (!customerGuid) {
-          return false
-        }
-        let quantity = item.quantity + value
-        if (quantity < 1) {
-          quantity = 1
-        }
-        setGoodsQuantity({quantity, productId: item.productId, customerGuid}).then(res => {
-          if (res) {
-            this.$emit('change-number', {quantity, productId: item.productId})
-          }
-        })
       }
     }
   }
 </script>
 
 <style lang="less" scoped>
-  #address-item {
-    width: 100%;
-    box-shadow: 0 1px 6px #d7d7d7;
+  .address-item {
+    border-bottom: 1px solid #eee;
     background-color: #fff;
-    margin-bottom: 10px;
-    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    .checkbox-left {
+      width: 10%;
+      text-align: center;
+      cursor: pointer;
 
-    &:first-of-type {
-      margin-top: 10px;
+      .icon-checkbox-blank {
+        font-size: 1.5rem;
+        color: #b1b1b1;
+      }
+
+      .icon-checkbox-marked {
+        font-size: 1.5rem;
+        color: #00d300;
+      }
     }
-
-    .address-name {
-      padding: 12px;
-      font-size: 1.35rem;
-      font-weight: bold;
-      color: #626262;
-      border-bottom: 1px solid #ddd;
+    .icon-location, .icon-edit {
+      display: block;
+      width: 3rem;
+      text-align: center;
+      font-size: 1.5rem;
     }
-
-    .address-item-container {
-      border-bottom: 1px solid #eee;
-      background-color: #fff;
-
-      .checkbox {
-        display: flex;
-        align-items: center;
-        width: 100%;
-
-        .checkbox-left {
-          width: 10%;
-          text-align: center;
-          cursor: pointer;
-
-          .icon-checkbox-blank {
-            font-size: 1.5rem;
-            color: #b1b1b1;
-          }
-
-          .icon-checkbox-marked {
-            font-size: 1.5rem;
-            color: #00d300;
-          }
+    .checkbox-right {
+      flex: 1;
+      padding: 1rem;
+      p {
+        &:nth-of-type(1) {
+          font-size: 1.2rem;
+          font-weight: bold;
+          color: #666;
+          margin-bottom: 0.5rem;
         }
-
-        .checkbox-right {
-          width: 90%;
-          display: flex;
-          align-items: center;
-
-          .image {
-            width: 100px;
-            padding: 20px 10px;
-
-            img {
-              width: 100%;
-            }
-          }
-
-          .product-info {
-            width: calc(100% - 120px);
-            padding-right: 10px;
-
-            > p {
-              overflow: hidden;
-              text-overflow: ellipsis;
-              white-space: nowrap;
-              margin-bottom: 5px;
-              color: #333;
-              font-size: 1.35rem;
-            }
-
-            .content {
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
-
-              .price {
-                p {
-                  &:nth-of-type(1) {
-                    color: #999;
-                    font-size: 1.3rem;
-                  }
-
-                  &:nth-of-type(2) {
-                    color: #f05423;
-                    font-size: 1.4rem;
-                  }
-                }
-              }
-
-              .operate {
-                .inputNumber {
-                  display: flex;
-                  align-items: center;
-                  justify-content: flex-end;
-                  border: 1px solid #cccccc;
-
-                  div {
-                    font-size: 1.2rem;
-                    width: 25px;
-                    border-right: 1px solid #cccccc;
-
-                    &:last-of-type {
-                      border: none;
-                    }
-
-                    p {
-                      height: 28px;
-                      line-height: 28px;
-                      text-align: center;
-                    }
-                  }
-
-                  div:nth-of-type(1) {
-                    border-radius: 4px 0 0 4px
-                  }
-
-                  div:nth-of-type(2) {
-                    width: 35px;
-
-                    p {
-                      font-size: 1.2rem;
-                    }
-                  }
-
-                  div:nth-of-type(3) {
-                    border-radius: 0 4px 4px 0
-                  }
-                }
-
-                .delete {
-                  margin-top: 1vh;
-                  font-size: 1.3rem;
-                  float: right;
-                  cursor: pointer;
-
-                  p {
-                    padding: 5px 0;
-                    text-align: center;
-                    color: #fff;
-                    width: 80px;
-                    background-color: red;
-                    border-radius: 4px;
-                  }
-                }
-              }
-            }
-          }
+        &:nth-of-type(2) {
+          color: #b1b1b1;
         }
       }
     }

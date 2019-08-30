@@ -5,7 +5,7 @@
       <div class="coupon-selected">{{couponSelected}}</div>
       <p class="arrow-right"><span class="iconfont icon-arrow-right"></span></p>
     </div>
-    <Actionsheet v-model="openModal" title="优惠券选择">
+    <ActionSheet v-model="openModal" title="优惠券选择">
       <div class="modal-content">
         <div class="modal-body">
           <div class="coupon-item"
@@ -22,7 +22,7 @@
           确定
         </div>
       </div>
-    </Actionsheet>
+    </ActionSheet>
   </div>
 </template>
 

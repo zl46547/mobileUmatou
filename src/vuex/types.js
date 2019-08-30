@@ -22,11 +22,8 @@ export const MY_ORDERS = 'MY_ORDERS'
 /* _footer选中的菜单 */
 export const SELECT_MENU = 'SELECT_MENU'
 
-/* 选择支付方式 */
-export const PAY_WAY_SELECTED = 'PAY_WAY_SELECTED'
+/* 选择地址 */
+export const ADDRESS_SELECTED = 'ADDRESS_SELECTED'
 
 /* 选择优惠券 */
 export const COUPON_SELECTED = 'COUPON_SELECTED'
-
-/* 选择发票 */
-export const TICKET_SELECTED = 'TICKET_SELECTED'

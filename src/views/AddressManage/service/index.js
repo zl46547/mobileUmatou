@@ -1,13 +1,13 @@
 import {
-  addCouponsRequest
+  getAddressListRequest
 } from '../api'
 
 /**
- * 添加优惠券
- * @param data
+ * 获取地址
+ * @param parmas
  */
-export const addCoupons = async data => {
-  let res = await addCouponsRequest(data)
+export const getAddressList = async parmas => {
+  let res = await getAddressListRequest(parmas)
   if (res.data.Data) {
     return res.data.Data
   }

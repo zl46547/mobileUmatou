@@ -80,7 +80,7 @@ const router = new Router({
       component: SubmitOrder
     },
     {
-      path: '/addressManage',
+      path: '/addressManage/:type',
       name: '地址管理',
       meta: {
         requireAuth: true

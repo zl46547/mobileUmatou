@@ -1,13 +1,13 @@
 import axios from '../../../http/api'
 
 /**
- * 添加优惠券
- * @param data
+ * 获取地址
+ * @param params
  */
-export const addCouponsRequest = data => {
+export const getAddressListRequest = params => {
   return axios({
-    method: 'post',
-    url: '/orders/addOrderCoupons',
-    data
+    method: 'get',
+    url: '/address/getAddressList',
+    params
   })
 }

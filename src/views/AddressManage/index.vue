@@ -4,6 +4,9 @@
       <span slot="title">选择地址</span>
     </Navigator>
     <div class="content">
+      <div v-for="item in addressList" :key="item._id">
+        <AddressItem :addressItem="item"/>
+      </div>
     </div>
     <div class="add-address" @click="handleAddAddress()">
       +新增地址
@@ -13,29 +16,50 @@
 
 <script type="text/ecmascript-6">
   import Navigator from '../../common/navigator.vue'
-  import {Button} from 'vant'
-  import {addCoupons} from './service'
+  import { Button } from 'vant'
+  import { getAddressList } from './service'
+  import AddressItem from './components/addressItem'
 
   export default {
     components: {
       Button,
-      Navigator
+      Navigator,
+      AddressItem
+    },
+    data () {
+      return {
+        addressList: []
+      }
+    },
+    mounted () {
+      this.initAddressList()
     },
     methods: {
+      /**
+       * 跳转添加地址
+       */
       handleAddAddress() {
+        this.$router.push({name: '添加地址'})
+      },
+      /**
+       * 初始化地址列表
+       * @returns {boolean}
+       */
+      initAddressList () {
         let {user: {customerGuid}} = this.$store.state.login
+        let {addressSelected} = this.$store.state.orderList
         if (!customerGuid) {
           return false
         }
         try {
-          addCoupons({
-            customerGuid,
-            couponName: '测试优惠券',
-            amount: 10,
-            limitMinMoney: 1,
-            description: '无门槛优惠券',
-            beginTime: '2019-8-22',
-            endTime: '2019-9-22'
+          getAddressList({customerGuid}).then(res => {
+            if (addressSelected) {
+              res = res.map(item => {
+                item.isDefault = item._id === addressSelected._id
+                return item
+              })
+            }
+            this.addressList = res
           })
         } catch (e) {
           console.log(e)
@@ -57,7 +81,7 @@
       overflow-y: scroll;
       -webkit-overflow-scrolling: touch;
     }
-    .add-address{
+    .add-address {
       border-radius: 6px;
       background-color: #49aa34;
       color: #fff;

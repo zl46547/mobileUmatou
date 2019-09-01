@@ -51,7 +51,7 @@ import moment from 'moment'
     width: 100%;
 
     .useful-bgc {
-      background-color: #ff4c0a;
+      background: linear-gradient(to bottom right, #ff6058, #ff3fb3);
       .content-right{
         &:after{
           box-shadow: 0 3px #ce2f37 inset;
@@ -84,7 +84,7 @@ import moment from 'moment'
         align-items: center;
         .content-left {
           padding-left: 8%;
-          width: 65%;
+          width: 55%;
           border-right: 2px dashed rgba(255, 255, 255, .3);
 
           .par {
@@ -116,7 +116,7 @@ import moment from 'moment'
         }
 
         .content-right {
-          width: 35%;
+          width: 45%;
           height: 100%;
           font-size: 1.45rem;
           color: #ffffff;
@@ -161,7 +161,7 @@ import moment from 'moment'
               transform: rotate(135deg);
               border-width: 25px;
               border-style: solid;
-              border-color: transparent #c30000 transparent transparent;
+              border-color: transparent #d60000 transparent transparent;
             }
           }
           p {

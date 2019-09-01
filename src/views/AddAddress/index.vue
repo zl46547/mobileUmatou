@@ -1,7 +1,7 @@
 <template>
   <div id="add-address">
     <Navigator>
-      <span slot="title">添加地址</span>
+      <span slot="title">{{navigatorTitle}}</span>
     </Navigator>
     <div class="content">
       <CellGroup>
@@ -94,6 +94,7 @@
       return {
         areaList,
         showArea: false,
+        navigatorTitle: '添加地址',
         params: {
           contactName: null,
           contactTel: null,
@@ -120,16 +121,9 @@
     mounted() {
       let {id} = this.$route.query
       if (id) {
+        this.navigatorTitle = '编辑地址'
         getAddressDetail(id).then(res => {
           this.params = res
-          // this.params = {
-          //   id: res._id,
-          //   contactName: res.contactName,
-          //   contactTel: res.contactTel,
-          //   area: res.area,
-          //   addressDetail: res.addressDetail,
-          //   isDefault: res.isDefault
-          // }
         })
       }
     },

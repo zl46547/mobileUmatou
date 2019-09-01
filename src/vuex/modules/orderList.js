@@ -9,7 +9,7 @@ const state = {
 }
 
 const mutations = {
-  // 选择支付方式
+  // 选择地址
   [types.ADDRESS_SELECTED](state, res) {
       state.addressSelected = res
   },

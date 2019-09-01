@@ -1,5 +1,6 @@
 import {
-  getCouponsRequest
+  getCouponsRequest,
+  getDefaultAddressRequest
 } from '../api'
 
 /**
@@ -12,4 +13,16 @@ export const getCoupons = async params => {
     return data.Data
   }
   return []
+}
+
+/**
+ * 获取默认地址
+ * @param customerGuid
+ */
+export const getDefaultAddress = async customerGuid => {
+  let {data} = await getDefaultAddressRequest(customerGuid)
+  if (data.Data) {
+    return data.Data
+  }
+  return null
 }

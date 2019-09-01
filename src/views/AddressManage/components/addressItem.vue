@@ -7,7 +7,7 @@
     </div>
     <div class="checkbox-right">
       <p>{{addressItem.contactName}},{{addressItem.contactTel}}</p>
-      <p>{{formateArea(addressItem.area)}}{{addressItem.addressDetail}}</p>
+      <p>{{formatArea(addressItem.area)}}{{addressItem.addressDetail}}</p>
     </div>
     <i class="iconfont icon-edit" v-if="type" @click="goToEdit"></i>
     <i class="iconfont icon-location" v-else></i>
@@ -56,7 +56,7 @@
       /**
        * 格式化地区
        */
-      formateArea (area) {
+      formatArea (area) {
         if (!area) {
           return null
         }

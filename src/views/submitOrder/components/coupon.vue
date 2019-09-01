@@ -169,6 +169,7 @@
         padding: 0 2rem;
         height: calc(100% - 50px);
         overflow-y: auto;
+        overflow-x: hidden;
 
         .coupon-item {
           margin-top: 1.5rem;

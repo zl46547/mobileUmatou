@@ -1,6 +1,7 @@
 import {
   getCouponsRequest,
-  getDefaultAddressRequest
+  getDefaultAddressRequest,
+  submitOrderRequest
 } from '../api'
 
 /**
@@ -21,6 +22,18 @@ export const getCoupons = async params => {
  */
 export const getDefaultAddress = async customerGuid => {
   let {data} = await getDefaultAddressRequest(customerGuid)
+  if (data.Data) {
+    return data.Data
+  }
+  return null
+}
+
+/**
+ * 提交订单
+ * @param params
+ */
+export const submitOrder = async params => {
+  let {data} = await submitOrderRequest(params)
   if (data.Data) {
     return data.Data
   }

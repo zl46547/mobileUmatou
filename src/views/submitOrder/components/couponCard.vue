@@ -13,8 +13,9 @@
           </div>
           <div class="content-right">
             <i class="iconfont icon-checked"
-               v-if="coupon.couponName === selected"
-            />
+               v-if="coupon.couponName === selected"></i>
+            <i class="iconfont icon-has-used" v-if="coupon.status === 2"></i>
+            <i class="iconfont icon-has-over-time" v-if="coupon.status === 3"></i>
             <p class="sub-coupon">副券</p>
             <p class="sub-coupon">{{moment(coupon.beginTime).format('YYYY-MM-DD')}}</p>
             <p class="sub-coupon">{{moment(coupon.endTime).format('YYYY-MM-DD')}}</p>
@@ -54,7 +55,7 @@ import moment from 'moment'
       background: linear-gradient(to bottom right, #ff6058, #ff3fb3);
       .content-right{
         &:after{
-          box-shadow: 0 3px #ce2f37 inset;
+          box-shadow: 0 3px #d2288e inset;
         }
         &:before{
           box-shadow: 0 -3px #ce2f37 inset;
@@ -128,7 +129,7 @@ import moment from 'moment'
             content: "";
             left: -10px;
             width: 20px;
-            height: 20px;
+            height: 22px;
             position: absolute;
             z-index: 999;
             background-color: #fff;
@@ -143,11 +144,16 @@ import moment from 'moment'
           .sub-coupon{
             text-align: center;
           }
+          .icon-has-used,.icon-has-over-time{
+            position: absolute;
+            right: 2px;
+            z-index: 999;
+            font-size: 9rem;
+          }
           .icon-checked{
             position: absolute;
             top: 2px;
             right: 2px;
-            /*color: #fff;*/
             font-weight: bold;
             z-index: 999;
             &::after {

@@ -40,8 +40,9 @@
   import Address from './components/address.vue'
   import OrderList from './components/orderList.vue'
   import Coupon from './components/coupon'
-  import moment from 'moment'
-  import * as actionTypes from '../../vuex/types'
+  import {Toast} from 'vant'
+  import {submitOrder} from './service'
+
   export default {
     components: {
       OrderList,
@@ -87,22 +88,42 @@
        * 提交订单
        */
       submitOrder () {
-        let params = {
-          orderList: this.$store.state.car.selectedCarList, // 订单列表
-          finalPrice: this.getFinalPrice, // 最终价格
-          submitTime: moment().format('YYYY年MM月DD日 HH:mm:ss'), // 订单提交时间
-          deadTime: moment().add(1, 'minute')._d.getTime(), // 截止日期
-          bounce: this.bounce.Amount, // 优惠券
-          payWay: this.payWay, // 支付方式
-          ticket: this.ticket, // 发票
-          orderNo: `UMT${new Date().getTime()}`, // 订单号
-          orderStatus: 'OS', // OS:下单成功；OF:下单失败；PS：支付成功；PF：支付失败
-          orderStatusName: '下单成功'
+        let {
+          car: {
+            carList: orderProductInfos
+          },
+          orderList: {
+            addressSelected,
+            couponSelected
+          },
+          login: {
+            user: {customerGuid}
+          }
+        } = this.$store.state
+        if (!customerGuid) {
+          return false
         }
-        this.$store.commit(actionTypes.SUBMIT_ORDER, params)
-        // 从购物车中删除已经提交的订单
-        this.delCarList(params.orderList)
-        this.$router.replace({name: '支付订单'})
+        if (!addressSelected) {
+          Toast('请选择地址')
+          return false
+        }
+        let params = {
+          customerGuid,
+          orderProductInfos, // 订单列表
+          orderStatusCode: 'OS', // OS:下单成功；OF:下单失败；PS：支付成功；PF：支付失败
+          addressId: addressSelected._id,
+          payment: this.getFinalPrice // 最终价格
+        }
+        if (couponSelected) {
+          params.couponId = couponSelected._id
+        }
+        submitOrder(params).then(res => {
+          console.log(res)
+        })
+        // this.$store.commit(actionTypes.SUBMIT_ORDER, params)
+        // // 从购物车中删除已经提交的订单
+        // this.delCarList(params.orderList)
+        // this.$router.replace({name: '支付订单'})
       }
     }
   }

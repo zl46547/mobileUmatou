@@ -26,12 +26,12 @@
         try {
           addCoupons({
             customerGuid,
-            couponName: '测试优惠券',
-            amount: 10,
-            limitMinMoney: 1,
-            description: '无门槛优惠券',
-            beginTime: '2019-8-22',
-            endTime: '2019-9-22'
+            couponName: '满199减150',
+            amount: 150,
+            limitMinMoney: 190,
+            description: '测试优惠券',
+            beginTime: '2019-7-22',
+            endTime: '2019-8-1'
           })
         } catch (e) {
           console.log(e)

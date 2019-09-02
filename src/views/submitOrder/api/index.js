@@ -23,3 +23,15 @@ export const getDefaultAddressRequest = customerGuid => {
     params: {customerGuid}
   })
 }
+
+/**
+ * 提交订单
+ * @param data
+ */
+export const submitOrderRequest = data => {
+  return axios({
+    method: 'post',
+    url: '/orders/submitOrder',
+    data
+  })
+}

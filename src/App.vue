@@ -21,6 +21,7 @@
 </script>
 
 <style lang="less">
+  @import "./less/index.less";
   /* 初始化页面样式 */
   #app{
     max-width:640px;

@@ -3,59 +3,58 @@
     <div class="orderList">
       <div class="myorder-item" v-if="allOrders.length>0" v-for="(item,i) in allOrders"
             :class="{'firstItem':i==0}" :key="i">
-        111
-        <!--<div class="orderNo">-->
-          <!--<div>-->
-            <!--<span>订单编号：</span><span>{{item.orderNo}}</span>-->
-          <!--</div>-->
-          <!--<p>{{item.orderStatusName}}</p>-->
-        <!--</div>-->
-        <!--<div class="content">-->
-          <!--<div v-if="item.orderList.length>0">-->
-            <!--<div class="orderImg" :class="{'imgWidth':item.orderList.length>2}">-->
-              <!--<div v-for="imgItem in item.orderList" :key="imgItem.ProductId">-->
-                <!--<img :src="'http://picpro-sz.34580.com/sz/ImageUrl/'+imgItem.PictureId+'/200.jpeg'"/>-->
-              <!--</div>-->
-            <!--</div>-->
-            <!--<p>共{{item.orderList.length}}个</p>-->
-          <!--</div>-->
-          <!--<div>-->
-            <!--<i class="iconfont icon-right"></i>-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<div class="footer">-->
-          <!--<div class="price">-->
-            <!--<span>实付金额</span>-->
-            <!--<span>¥{{item.finalPrice}}</span>-->
-          <!--</div>-->
-          <!--<div class="footer-btn">-->
+        <div class="orderNo">
+          <div>
+            <span>订单编号：</span><span>{{item.orderNo}}</span>
+          </div>
+          <p>{{item.orderStatusName}}</p>
+        </div>
+        <div class="content">
+          <div v-if="item.orderList.length>0">
+            <div class="orderImg" :class="{'imgWidth':item.orderList.length>2}">
+              <div v-for="imgItem in item.orderList" :key="imgItem.ProductId">
+                <img :src="'http://picpro-sz.34580.com/sz/ImageUrl/'+imgItem.PictureId+'/200.jpeg'"/>
+              </div>
+            </div>
+            <p>共{{item.orderList.length}}个</p>
+          </div>
+          <div>
+            <i class="iconfont icon-right"></i>
+          </div>
+        </div>
+        <div class="footer">
+          <div class="price">
+            <span>实付金额</span>
+            <span>¥{{item.finalPrice}}</span>
+          </div>
+          <div class="footer-btn">
 
-            <!--&lt;!&ndash; 支付订单按钮 &ndash;&gt;-->
-            <!--<div v-if=" item.orderStatusName === '下单成功'" @click="goToPay(item)">-->
-              <!--<OrderButton :button="buttonList[4]"></OrderButton>-->
-            <!--</div>-->
-            <!--&lt;!&ndash; 重新下单按钮 &ndash;&gt;-->
-            <!--<div v-if=" item.orderStatusName === '订单过期'" @click="goToReOrder(item)">-->
-              <!--<OrderButton :button="buttonList[2]"></OrderButton>-->
-            <!--</div>-->
-            <!--&lt;!&ndash; 确认订单按钮 &ndash;&gt;-->
-            <!--<div v-if="item.orderStatus == 'PS'" @click="goToComfirm(item)">-->
-              <!--<OrderButton :button="buttonList[1]"></OrderButton>-->
-            <!--</div>-->
-            <!--&lt;!&ndash; 评论按钮 &ndash;&gt;-->
-            <!--<div v-if="item.orderStatus == 'FS'" @click="goToRate(item)">-->
-              <!--<OrderButton :button="buttonList[0]"></OrderButton>-->
-            <!--</div>-->
-            <!--&lt;!&ndash; 退货按钮 &ndash;&gt;-->
-            <!--<div v-if="item.orderStatus == 'FS'">-->
-              <!--<OrderButton :button="buttonList[5]"></OrderButton>-->
-            <!--</div>-->
-            <!--&lt;!&ndash; 删除订单按钮 &ndash;&gt;-->
-            <!--<div @click="delOrderAlert(item)">-->
-              <!--<OrderButton :button="buttonList[3]"></OrderButton>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
+            <!-- 支付订单按钮 -->
+            <div v-if=" item.orderStatusName === '下单成功'" @click="goToPay(item)">
+              <OrderButton :button="buttonList[4]"></OrderButton>
+            </div>
+            <!-- 重新下单按钮 -->
+            <div v-if=" item.orderStatusName === '订单过期'" @click="goToReOrder(item)">
+              <OrderButton :button="buttonList[2]"></OrderButton>
+            </div>
+            <!-- 确认订单按钮 -->
+            <div v-if="item.orderStatus == 'PS'" @click="goToComfirm(item)">
+              <OrderButton :button="buttonList[1]"></OrderButton>
+            </div>
+            <!-- 评论按钮 -->
+            <div v-if="item.orderStatus == 'FS'" @click="goToRate(item)">
+              <OrderButton :button="buttonList[0]"></OrderButton>
+            </div>
+            <!-- 退货按钮 -->
+            <div v-if="item.orderStatus == 'FS'">
+              <OrderButton :button="buttonList[5]"></OrderButton>
+            </div>
+            <!-- 删除订单按钮 -->
+            <div @click="delOrderAlert(item)">
+              <OrderButton :button="buttonList[3]"></OrderButton>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <Empty v-if="allOrders.length<=0"></Empty>
@@ -65,8 +64,6 @@
 <script type="text/ecmascript-6">
   import OrderButton from './orderButton.vue'
   import Empty from './empty.vue'
-  import {getOrderList} from '../service'
-
   export default {
     data () {
       return {
@@ -110,36 +107,33 @@
       OrderButton,
       Empty
     },
+    computed: {},
+    mounted () {
+    },
     methods: {
       /**
-       * 获取订单列表
+       * 初始化数据,将订单状态码转换成中文
        */
-      initData (orderStatusCode) {
-        this.selected = orderStatusCode
-        let {user: {customerGuid}} = this.$store.state.login
-        if (!customerGuid) {
+      initData (type) {
+        var vm = this
+        vm.selected = type
+        var allOrders = vm.$store.state.orderList.myOrders
+        if (allOrders.length <= 0) {
           return false
         }
-        getOrderList({customerGuid, orderStatusCode}).then(res => {
-          console.log(res)
+        if (type === 'RF') {
+          type = 'FS'
+        }
+        if (type === 'ALL') {
+          vm.allOrders = allOrders
+        } else {
+          vm.allOrders = allOrders.where(function (t) {
+            return t.orderStatus === type
+          })
+        }
+        vm.allOrders.forEach(function (e) {
+          e.orderStatusName = vm.hanleOrderStatle(e)
         })
-        // var allOrders = this.$store.state.orderList.myOrders
-        // if (allOrders.length <= 0) {
-        //   return false
-        // }
-        // if (type === 'RF') {
-        //   type = 'FS'
-        // }
-        // if (type === 'ALL') {
-        //   this.allOrders = allOrders
-        // } else {
-        //   this.allOrders = allOrders.where(function (t) {
-        //     return t.orderStatus === type
-        //   })
-        // }
-        // this.allOrders.forEach(function (e) {
-        //   e.orderStatusName = this.hanleOrderStatle(e)
-        // })
       },
       /**
        * 判断订单是否过期
@@ -161,10 +155,11 @@
        * @param val 删除的对象
        */
       delOrderAlert (val) {
-        this.$message({
+        let vm = this
+        vm.$message({
           description: '确认删除该订单？',
           onComfirm() {
-            this.delOrder(val)
+            vm.delOrder(val)
           }
         })
       },
@@ -173,32 +168,35 @@
        * @param val 删除的对象
        */
       delOrder (val) {
-        this.allOrders.removeAll(function (t) {
+        var vm = this
+        vm.allOrders.removeAll(function (t) {
           return t.orderNo === val.orderNo
         })
         var res = {
           isUpdate: false,
-          allOrders: this.allOrders
+          allOrders: vm.allOrders
         }
-        this.$store.commit('MY_ORDERS', res)
-        this.initData(this.selected)
+        vm.$store.commit('MY_ORDERS', res)
+        vm.initData(vm.selected)
       },
       /**
        * 跳转到支付页面
        * @param val
        */
       goToPay (val) {
-        this.$store.commit('SUBMIT_ORDER', val)
-        this.router.push({name: '支付订单'})
+        var vm = this
+        vm.$store.commit('SUBMIT_ORDER', val)
+        vm.router.push({name: '支付订单'})
       },
       /**
        * 重新下单
        * @param val
        */
       goToReOrder (reOrders) {
+        var vm = this
         // 将商品添加到购物车
-        var carlist = this.$store.state.car.carList
-        this.$message({
+        var carlist = vm.$store.state.car.carList
+        vm.$message({
           description: `确认添加${reOrders.orderList.length}个商品到购物车？`,
           onComfirm() {
             // 设置默认选中
@@ -206,10 +204,10 @@
               e.checked = true
             })
             var newCarlist = reOrders.orderList.union(carlist)
-            this.$store.commit('CAR_LIST', newCarlist)
+            vm.$store.commit('CAR_LIST', newCarlist)
             // 从我的订单中删除
-            this.delOrder(reOrders)
-            this.$router.push({path: '/car'})
+            vm.delOrder(reOrders)
+            vm.$router.push({path: '/car'})
           }
         })
       },
@@ -218,17 +216,18 @@
        * @param val
        */
       goToComfirm(val) {
-        this.$message({
+        var vm = this
+        vm.$message({
           description: '是否确认收货？',
           onComfirm() {
-            this.allOrders.forEach((t) => {
+            vm.allOrders.forEach((t) => {
               if (t.orderNo === val.orderNo) {
                 t.orderStatus = 'FS'
                 t.orderStatusName = '交易完成'
               }
             })
-            this.$store.commit('MY_ORDERS', {isUpdate: true, allOrders: val})
-            this.initData(this.selected)
+            vm.$store.commit('MY_ORDERS', {isUpdate: true, allOrders: val})
+            vm.initData(vm.selected)
           }
         })
       },
@@ -237,9 +236,10 @@
        * @param val
        */
       goToRate(val) {
+        var vm = this
         val.orderStatus = 'CLOSE'
         val.orderStatusName = '订单已关闭'
-        this.$router.push({path: '/rate'})
+        vm.$router.push({path: '/rate'})
       }
     }
   }

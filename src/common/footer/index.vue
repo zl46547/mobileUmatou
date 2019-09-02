@@ -29,12 +29,12 @@
           },
           {
             name: '购物车',
-            icon: 'icon-car',
+            icon: 'icon-cart',
             url: '/car'
           },
           {
             name: '我的',
-            icon: 'icon-user',
+            icon: 'icon-mine',
             url: '/user'
           }
         ]
@@ -110,20 +110,6 @@
       font-style: normal;
     }
 
-    .iconfont {
-      font-family:"iconfont";
-      font-style:normal;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    .icon-category:before { content: "\e619"; }
-
-    .icon-car:before { content: "\e61d"; }
-
-    .icon-home:before { content: "\e609"; }
-
-    .icon-user:before { content: "\e70a"; }
   }
 
   @media screen and (min-width: 640px) {

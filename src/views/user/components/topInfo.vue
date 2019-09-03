@@ -1,6 +1,7 @@
 <template>
   <div id="topInfo">
-    <img v-if="hour>17 || (hour>=0 && hour<6)" src="../../../assets/images/user_bg_night.png"/>
+    <img v-if="hour>17 || (hour>=0 && hour<6)"
+         src="../../../assets/images/user_bg_night.png"/>
     <img src="../../../assets/images/user_bg_day.png" v-else/>
     <div class="user-info">
       <div class="img-face">
@@ -18,9 +19,8 @@
 <script type="text/ecmascript-6">
   export default {
     mounted () {
-      var vm = this
       // 获取小时
-      vm.hour = new Date().getHours()
+      this.hour = new Date().getHours()
     },
     data () {
       return {
@@ -31,6 +31,8 @@
 </script>
 
 <style lang="less" scoped>
+  @import "../../../less/variables";
+
   #topInfo {
     position: relative;
     > img {
@@ -50,38 +52,19 @@
         }
       }
       p {
-        margin: 1vh 0;
-        font-size: 1.5rem;
+        margin: 10rem/@baseFontSize;
+        font-size: 28rem/@baseFontSize;
       }
       .vip {
         display: flex;
         justify-content: center;
         align-items: center;
         img {
-          width: 18px;
-          margin-right: 5px;
+          width: 35rem/@baseFontSize;
+          margin-right: 10rem/@baseFontSize;
         }
         span {
-          font-size: 1.2rem;
-        }
-      }
-    }
-  }
-
-  @media screen and (min-width: 400px) {
-    #topInfo {
-      .user-info {
-        p {
-          font-size: 1.8rem;
-        }
-        .vip {
-          img {
-            width: 25px;
-            margin-right: 5px;
-          }
-          span {
-            font-size: 1.4rem;
-          }
+          font-size: 28rem/@baseFontSize;
         }
       }
     }

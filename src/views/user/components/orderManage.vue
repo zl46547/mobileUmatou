@@ -1,10 +1,10 @@
 <template>
   <div id="orderManage" @click="toMyOrders" v-if="orderStatusNum">
-    <div class="orderService">
+    <div class="order-service">
       <i class="iconfont icon-orders"></i>
       <p>全部订单</p>
     </div>
-    <div class="orderService">
+    <div class="order-service">
       <i class="iconfont icon-wait-pay"></i>
       <p>待付款</p>
       <p class="bage"
@@ -12,7 +12,7 @@
         {{orderStatusNum.os}}
       </p>
     </div>
-    <div class="orderService">
+    <div class="order-service">
       <i class="iconfont icon-receive-goods"></i>
       <p>待收货</p>
       <p class="bage"
@@ -20,7 +20,7 @@
         {{orderStatusNum.ps}}
       </p>
     </div>
-    <div class="orderService">
+    <div class="order-service">
       <i class="iconfont icon-rate"></i>
       <p>待评价</p>
       <p class="bage"
@@ -28,7 +28,7 @@
         {{orderStatusNum.fs}}
       </p>
     </div>
-    <div class="orderService">
+    <div class="order-service">
       <i class="iconfont icon-refund"></i>
       <p>轻松退</p>
       <p class="bage"
@@ -100,49 +100,38 @@
 </script>
 
 <style lang="less" scoped>
+  @import "../../../less/variables";
+
   #orderManage {
-    margin-top: 10px;
+    margin-top: 10rem/@baseFontSize;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 2vh 0 1vh 0;
+    padding: 20rem/@baseFontSize 0 10rem/@baseFontSize 0;
     background-color: #fff;
-    .orderService {
+    .order-service {
       position: relative;
       text-align: center;
       cursor: pointer;
       .iconfont {
-        font-size: 2.2rem;
+        font-size: 50rem/@baseFontSize;
       }
       p {
-        margin-top: 1vh;
-        font-size: 1.2rem;
+        margin-top: 10rem/@baseFontSize;
+        font-size: 26rem/@baseFontSize;
       }
       .bage {
-        font-size: 1rem;
-        height: 17px;
-        width: 17px;
+        font-size: 20rem/@baseFontSize;
+        height: 27rem/@baseFontSize;
+        width: 27rem/@baseFontSize;
         text-align: center;
-        line-height: 18px;
+        line-height: 28rem/@baseFontSize;
         position: absolute;
-        top: -7px;
-        right: -13px;
+        top: -17rem/@baseFontSize;
+        right: -13rem/@baseFontSize;
         background-color: #ec2828;
-        border-radius: 90px;
+        border-radius: 50%;
         color: #fff;
-      }
-    }
-  }
-
-  @media screen and (min-width: 400px) {
-    #orderManage {
-      .orderService {
-        .iconfont {
-          font-size: 2.4rem;
-        }
-        p {
-          font-size: 1.4rem;
-        }
       }
     }
   }

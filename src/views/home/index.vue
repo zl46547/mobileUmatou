@@ -43,12 +43,15 @@
     },
     mounted() {
       this.contentEle = document.getElementsByClassName('content')[0]
-      this.contentEle.addEventListener('scroll', utils.throttle(({target}) => {
-        this.showBackToTop = target.scrollTop > 400
-      }))
+      this.contentEle.addEventListener('scroll', this.getScrollTop)
     },
     beforeDestroy() {
-      this.contentEle.removeEventListener()
+      this.contentEle.removeEventListener('scroll', this.getScrollTop)
+    },
+    methods: {
+      getScrollTop: utils.throttle(function ({target}) {
+        this.showBackToTop = target.scrollTop > 400
+      })
     }
   }
 </script>

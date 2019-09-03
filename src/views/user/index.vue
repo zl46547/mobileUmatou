@@ -1,12 +1,12 @@
 <template>
   <div id="user">
     <div class="content">
-      <v-top-info></v-top-info>
-      <v-order-manage></v-order-manage>
-      <v-account-list></v-account-list>
-      <v-function-list></v-function-list>
+      <TopInfo/>
+      <OrderManage/>
+      <AccountList/>
+      <FunctionList/>
     </div>
-    <v-footer></v-footer>
+    <Footer/>
   </div>
 </template>
 
@@ -18,24 +18,27 @@
   import Footer from '../../common/footer/index.vue'
   export default {
     components: {
-      'VOrderManage': OrderManage,
-      'VTopInfo': TopInfo,
-      'VAccountList': AccountList,
-      'VFunctionList': FunctionList,
-      'VFooter': Footer
+      OrderManage,
+      TopInfo,
+      AccountList,
+      FunctionList,
+      Footer
     }
   }
 </script>
 
 <style lang="less" scoped>
+  @import "../../less/variables";
+
   #user {
+    height: 100vh;
     .content {
       background-color: #f2f2f2;
-      height: calc(100vh - 55px);
+      height: calc(100% - 5rem);
       &::-webkit-scrollbar {
         display: none
       }
-      overflow-y: scroll;
+      overflow-y: auto;
       -webkit-overflow-scrolling: touch;
     }
   }

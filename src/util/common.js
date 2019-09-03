@@ -60,5 +60,63 @@ export default {
       return false
     }
     return true
+  },
+  /**
+   * 深拷贝
+   * @param obj
+   * @returns {*}
+   */
+  deepClone: function deepClone(obj) {
+    // 判断拷贝的要进行深拷贝的是数组还是对象，是数组的话进行数组拷贝，对象的话进行对象拷贝
+    var objClone = Array.isArray(obj) ? [] : {}
+    // 进行深拷贝的不能为空，并且是对象或者是
+    if (obj && typeof obj === 'object') {
+      for (let key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          if (obj[key] && typeof obj[key] === 'object') {
+            objClone[key] = deepClone(obj[key])
+          } else {
+            objClone[key] = obj[key]
+          }
+        }
+      }
+    }
+    return objClone
+  },
+
+  /**
+   * @method 弹簧函数（事件结束后才触发）
+   * @param {function} Func 函数
+   * @param {int} time 弹性时间
+   */
+  debounce (Func, time = 500) {
+    let current = null
+    return function (...args) {
+      if (current) {
+        clearTimeout(current)
+      }
+      current = setTimeout(() => {
+        Func.apply(this, args)
+        current = null
+      }, time)
+    }
+  },
+  /**
+   * @method 节流函数(固定时间内只会触发一次)
+   * @param {function} Func 函数
+   * @param {int} time 节流时间
+   */
+  throttle (Func, time = 500) {
+    let current = null
+    let argsNew = []
+    return function (...args) {
+      argsNew = args
+      if (current === null) {
+        current = setTimeout(() => {
+          Func.apply(this, argsNew)
+          current = null
+        }, time)
+      }
+    }
   }
 }

@@ -1,6 +1,10 @@
 <template>
   <div id="defaultHome">
-    <div class="defaultHome-item" v-for="(item,itemId) in defaultHomeData" :key="itemId" v-if="defaultHomeData">
+    <div class="defaultHome-item"
+         v-for="(item,itemId) in defaultHomeData"
+         :key="itemId"
+         v-if="defaultHomeData"
+    >
       <!-- 左上下 -->
       <div class="flex" v-if="item.FloorType == 1">
         <div>
@@ -173,6 +177,8 @@
   }
 </script>
 <style lang="less" scoped>
+  @import "../../../less/variables";
+
   #defaultHome {
     .defaultHome-item {
       background-color: #fff;
@@ -210,8 +216,8 @@
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
-          font-size: 1.3rem;
-          padding: 10px 5px;
+          font-size: 20rem/@baseFontSize;
+          padding: 10rem/@baseFontSize 5rem/@baseFontSize;
         }
         img {
           width: 90%;
@@ -225,75 +231,35 @@
         overflow-y: hidden;
         .scroll-div-item {
           display: inline-block;
-          margin: 5px 10px;
+          margin: 25rem/@baseFontSize 26rem/@baseFontSize;
           cursor: pointer;
+          width: 180rem/@baseFontSize;
           img {
-            width: 100px;
+            width: 180rem/@baseFontSize;
+            height: 180rem/@baseFontSize;
+            display: block;
+            margin-bottom: 10rem/@baseFontSize;
           }
           .product-name {
             text-align: center;
-            width: 100px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            font-size: 1.3rem;
+            font-size: 30rem/@baseFontSize;
           }
           .price {
             text-align: center;
-            width: 100px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
             .flashSale-list-price {
-              color: #b4282d;
-              font-size: 1.28rem;
+              color: @priceColor;
+              font-size: 30rem/@baseFontSize;
             }
             .flashSale-list-unit {
-              padding-top: 2vh;
+              padding-top: 10rem/@baseFontSize;
               color: rgb(150, 150, 150);
-              font-size: 1.22rem;
-            }
-          }
-        }
-      }
-    }
-  }
-  @media screen and (min-width: 400px) {
-    #defaultHome {
-      .defaultHome-item {
-        .title div:nth-of-type(1) {
-          font-size: 1.5rem;
-        }
-        .title div:nth-of-type(2) {
-          font-size: 1.25rem;
-        }
-        .find-more {
-          .product-name {
-            font-size: 1.5rem;
-            padding: 15px 5px;
-          }
-        }
-        .scroll-div {
-          &::-webkit-scrollbar{
-            display: none;
-          }
-          .scroll-div-item {
-            margin: 15px 20px;
-            img {
-              width: 120px;
-            }
-            .product-name {
-              width: 120px;
-              font-size: 1.3rem;
-            }
-            .price {
-              width: 120px;
-              .flashSale-list-price {
-                font-size: 1.8rem;
-              }
-              .flashSale-list-unit {
-                font-size: 1.22rem;
-              }
+              font-size: 24rem/@baseFontSize;
             }
           }
         }

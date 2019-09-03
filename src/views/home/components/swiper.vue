@@ -66,34 +66,24 @@
 </script>
 
 <style lang="less" scoped>
+  @import "../../../less/variables";
+
   #adverise {
     width: 100%;
-    max-width: 640px;
-    height:180px;
     position: relative;
     img {
+      display: block;
       width: 100%;
-      height: 100%;
       cursor: pointer;
     }
     .custom-indicator {
       position: absolute;
-      right: 5px;
-      bottom: 5px;
-      padding: 2px 5px;
+      right: 5rem/@baseFontSize;
+      bottom: 5rem/@baseFontSize;
+      padding: 2rem/@baseFontSize 5rem/@baseFontSize;
       color: #fff;
-      font-size: 12px;
+      font-size: 20rem/@baseFontSize;
       background: rgba(0, 0, 0, 0.1);
-    }
-  }
-  @media screen and (min-width: 400px) {
-    #adverise {
-      height:230px;
-    }
-  }
-  @media screen and (min-width: 500px) {
-    #adverise {
-      height:280px;
     }
   }
 </style>

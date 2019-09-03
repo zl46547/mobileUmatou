@@ -20,7 +20,6 @@
 </template>
 
 <script type="text/ecmascript-6">
-  // import addCartUtil from '@/util/addCart.js'
   import Header from '../../common/header/index.vue'
   import { Toast } from 'vant'
   import {getCategoryDetail} from './service'

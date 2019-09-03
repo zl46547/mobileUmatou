@@ -1,9 +1,7 @@
 <template>
   <div id="flashSale">
     <div class="flashSale-header">
-      <div class="flashSale-logo">
-        <img src="../../../assets/images/timeoutBuy.png" alt="a">
-      </div>
+      <img src="../../../assets/images/timeoutBuy.png" alt="限时抢购">
       <div class="time">
         <div class="time-col">剩</div>
         <div class="time-num">{{getTime.hour}}</div>
@@ -15,13 +13,16 @@
       </div>
     </div>
     <div class="flashSale-list">
-      <div class="scroll-div" scroll-x="true">
-        <div class="scroll-div-item" v-for="k in flashSaleData.FlashSaleProducts" :key="k.id" @click="goToDetail(k)">
-          <img v-lazy="'http://picpro-sz.34580.com/sz/ImageUrl/'+k.PictureId+'/200.jpeg'"/>
-          <div class="product-name">{{k.ProductName}}</div>
+      <div class="scroll-div">
+        <div class="scroll-div-item"
+             v-for="item in flashSaleData.FlashSaleProducts"
+             :key="item.id" @click="goToDetail(item)"
+        >
+          <img v-lazy="'http://picpro-sz.34580.com/sz/ImageUrl/'+item.PictureId+'/200.jpeg'"/>
+          <div class="product-name">{{item.ProductName}}</div>
           <div class="price">
-            <span class="flashSale-list-price">￥{{k.PeriodMoney}}</span>
-            <span class="flashSale-list-unit">/{{k.PvStandard}}</span>
+            <span class="flashSale-list-price">￥{{item.PeriodMoney}}</span>
+            <span class="flashSale-list-unit">/{{getUnit(item)}}</span>
           </div>
         </div>
       </div>
@@ -31,7 +32,8 @@
 
 <script type="text/ecmascript-6">
   import moment from 'moment'
-  import {getFlashSale} from '../service'
+  import { getFlashSale } from '../service'
+
   export default {
     data () {
       return {
@@ -54,14 +56,20 @@
       this.formateTime()
       this.getFlashSaleData()
     },
-    beforeDestroy() {
+    beforeDestroy () {
       clearInterval(this.setIntervalFunction)
     },
     methods: {
+      getUnit (item) {
+        if (item.Standard) {
+          return item.Unit
+        }
+        return `500${item.Unit}`
+      },
       /**
        * 获取限时抢购数据
        */
-      getFlashSaleData() {
+      getFlashSaleData () {
         getFlashSale().then((res) => {
           this.flashSaleData = res
         }).catch((error) => {
@@ -93,7 +101,7 @@
        * 跳转商品详情页面
        * @param val
        */
-      goToDetail(val) {
+      goToDetail (val) {
         this.$router.push({name: '商品详情', params: {productId: val.ProductId}})
       }
     }
@@ -101,6 +109,8 @@
 </script>
 
 <style lang="less" scoped>
+  @import "../../../less/variables";
+
   #flashSale {
     background-color: #fff;
     .flashSale-header {
@@ -109,7 +119,8 @@
       justify-content: space-between;
       padding: 0 3%;
       img {
-        width: 98px;
+        display: block;
+        width: 128rem/@baseFontSize;
       }
       .time {
         display: flex;
@@ -118,20 +129,20 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 24px;
-          height: 24px;
+          width: 34rem/@baseFontSize;
+          height: 34rem/@baseFontSize;
           border: 1px solid #aaa;
           color: #666;
-          border-radius: 3px;
-          font-size: 1.25rem;
-          letter-spacing: 2px;
+          border-radius: 5rem/@baseFontSize;
+          font-size: 18rem/@baseFontSize;
+          letter-spacing: 2rem/@baseFontSize;
         }
         .time-col {
           color: #666;
-          padding: 0 1vw;
+          padding: 0 10rem/@baseFontSize;
           text-align: center;
-          font-size: 1.3rem;
-          letter-spacing: 2px;
+          font-size: 18rem/@baseFontSize;
+          letter-spacing: 2rem/@baseFontSize;
         }
       }
     }
@@ -144,78 +155,35 @@
         overflow-y: hidden;
         .scroll-div-item {
           display: inline-block;
-          margin: 5px 6px;
+          margin: 25rem/@baseFontSize 26rem/@baseFontSize;
           cursor: pointer;
+          width: 180rem/@baseFontSize;
           img {
-            width: 100px;
+            width: 180rem/@baseFontSize;
+            height: 180rem/@baseFontSize;
+            display: block;
+            margin-bottom: 10rem/@baseFontSize;
           }
           .product-name {
             text-align: center;
-            width: 100px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            font-size: 1.3rem;
+            font-size: 30rem/@baseFontSize;
           }
           .price {
             text-align: center;
-            width: 100px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            margin-top: 5px;
+            margin-top: 5rem/@baseFontSize;
             .flashSale-list-price {
-              color: #b4282d;
-              font-size: 1.28rem;
+              color: @priceColor;
+              font-size: 30rem/@baseFontSize;
             }
             .flashSale-list-unit {
               color: rgb(150, 150, 150);
-              font-size: 1.22rem;
-            }
-          }
-        }
-      }
-    }
-  }
-  @media screen and (min-width: 400px) {
-    #flashSale {
-      .flashSale-header {
-        img {
-          width: 125px;
-        }
-        .time {
-          .time-num {
-            width: 30px;
-            height: 30px;
-            font-size: 1.2rem;
-          }
-          .time-col {
-            font-size: 1.3rem;
-          }
-        }
-      }
-      .flashSale-list {
-        .scroll-div {
-          &::-webkit-scrollbar{
-            display: none;
-          }
-          .scroll-div-item {
-            margin: 15px 16px;
-            img {
-              width: 120px;
-            }
-            .product-name {
-              width: 120px;
-              font-size: 1.3rem;
-            }
-            .price {
-              width: 120px;
-              .flashSale-list-price {
-                font-size: 1.28rem;
-              }
-              .flashSale-list-unit {
-                font-size: 1.22rem;
-              }
+              font-size: 24rem/@baseFontSize;
             }
           }
         }

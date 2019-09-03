@@ -1,4 +1,5 @@
 @charset "UTF-8";
+// 适配混入器
 .adapterMixin(@index) when (@index >0) {
   @media(min-width: extract(@adapterDeviceList,@index)){
     html{

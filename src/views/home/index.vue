@@ -1,17 +1,17 @@
 <template>
   <div id="home">
     <Header></Header>
-    <div class="content" @wheel="getScorlTop()">
-      <Swiper></Swiper>
-      <MenuList></MenuList>
-      <FlashSale></FlashSale>
-      <DefaultHome></DefaultHome>
+    <div class="content">
+      <Swiper/>
+      <MenuList/>
+      <FlashSale/>
+      <DefaultHome/>
       <div class="baseLine">
         <img src="../../assets/images/baseline.png"/>
       </div>
     </div>
-    <BackToTop v-show="showBackToTop" @hide="getScorlTop"></BackToTop>
-    <Footer></Footer>
+    <BackToTop v-show="showBackToTop"/>
+    <Footer/>
   </div>
 </template>
 
@@ -23,6 +23,7 @@
   import Swiper from './components/swiper.vue'
   import MenuList from './components/menuList.vue'
   import BackToTop from './components/backToTop.vue'
+  import utils from '../../util/common'
 
   export default {
     components: {
@@ -36,30 +37,32 @@
     },
     data () {
       return {
+        contentEle: null,
         showBackToTop: false
       }
     },
-    methods: {
-      getScorlTop () {
-        var top = document.getElementsByClassName('content')[0].scrollTop
-        if (top > 400) {
-          this.showBackToTop = true
-        } else {
-          this.showBackToTop = false
-        }
-      }
+    mounted() {
+      this.contentEle = document.getElementsByClassName('content')[0]
+      this.contentEle.addEventListener('scroll', utils.throttle(({target}) => {
+        this.showBackToTop = target.scrollTop > 400
+      }))
+    },
+    beforeDestroy() {
+      this.contentEle.removeEventListener()
     }
   }
 </script>
 
 <style lang="less" scoped>
+  @import "../../less/variables";
+
   #home {
-    height: 100%;
+    height: 100vh;
     position: relative;
     overflow: hidden;
     .content {
-      margin-top: 55px;
-      height: calc(100vh - 110px);
+      margin-top: 100rem/@baseFontSize;
+      height: calc(100% - 10rem);
       &::-webkit-scrollbar {
       display: none
       }
@@ -69,21 +72,7 @@
         text-align: center;
         img {
           width: 50%;
-          margin: 10px auto;
-        }
-      }
-    }
-  }
-
-  @media screen and (min-width: 400px) {
-    #home {
-      .content {
-        margin-top: 60px;
-        height: calc(100vh - 115px);
-        .baseLine {
-          img {
-            margin: 20px auto;
-          }
+          margin: 10rem/@baseFontSize auto;
         }
       }
     }

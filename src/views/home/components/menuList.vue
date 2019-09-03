@@ -1,17 +1,31 @@
 <template>
   <div id="menuList">
-    <img :src="topCenterInfos[0].ImageUrl" v-if="topCenterInfos"
-           @click="goToTopicActivity(topCenterInfos[0].LinkUrls[0])"/>
-    <Swipe class="swiper" v-if='menuList' :autoplay="0" :show-indicators="false">
+    <img class="top-center-infos" :src="topCenterInfos[0].ImageUrl"
+         v-if="topCenterInfos"
+         @click="goToTopicActivity(topCenterInfos[0].LinkUrls[0])"/>
+    <Swipe class="swiper"
+           v-if='menuList'
+           :autoplay="0"
+           :show-indicators="false"
+    >
         <SwipeItem class="swiper-item">
-          <div class="menuList-item" v-for="(item,index) in menuList" :key="item.Name" v-if="index<10" @click="handleSwipoer(item)">
-            <img :src="item.URL" mode="aspectFit"/>
+          <div class="menuList-item"
+               v-for="(item,index) in menuList"
+               :key="item.Name" v-if="index<10"
+               @click="handleSwipoer(item)"
+          >
+            <img :src="item.URL"/>
             <p class="menuName">{{item.Name}}</p>
           </div>
         </SwipeItem>
         <SwipeItem class="swiper-item">
-          <div class="menuList-item" v-for="(item,index) in menuList" :key="item.Name" v-if="index>=10" @click="handleSwipoer(item)">
-            <img :src="item.URL" mode="aspectFit"/>
+          <div class="menuList-item"
+               v-for="(item,index) in menuList"
+               :key="item.Name"
+               v-if="index>=10"
+               @click="handleSwipoer(item)"
+          >
+            <img :src="item.URL"/>
             <p class="menuName">{{item.Name}}</p>
           </div>
         </SwipeItem>
@@ -71,17 +85,20 @@
 </script>
 
 <style lang="less" scoped>
+  @import "../../../less/variables";
+
   #menuList {
     width: 100%;
-    max-width: 640px;
     background-color: #fff;
-    margin-bottom: 16px;
+    margin-bottom: 20rem/@baseFontSize;
     text-align: center;
-    >img{
+    .top-center-infos{
       cursor: pointer;
+      width: 90%;
+      background-color: #fff;
+      margin-bottom: 8rem/@baseFontSize;
     }
     .swiper {
-      height: 180px;
       width: 100%;
       .swiper-item {
         display: flex;
@@ -93,50 +110,16 @@
       text-align: center;
       padding: 3% 0;
       img {
-        width: 42px;
-        height: 42px;
+        width: 82rem/@baseFontSize;
+        height: 82rem/@baseFontSize;
         margin: auto;
         cursor: pointer;
       }
     }
     .menuName {
       width: 100%;
-      margin-top: 10px;
-      font-size: 1.2rem;
-    }
-    > img {
-      width: 90%;
-      background-color: #fff;
-      margin-bottom: 8px;
-    }
-  }
-  @media screen and (min-width: 400px) {
-    #menuList {
-      .swiper {
-        height: 200px;
-      }
-      .menuList-item {
-        img {
-          width: 50px;
-          height: 50px;
-        }
-      }
-      .menuName {
-        font-size: 1.3rem;
-      }
-    }
-  }
-  @media screen and (min-width: 500px) {
-    #menuList {
-      .swiper {
-        height: 240px;
-      }
-      .menuList-item {
-        img {
-          width: 60px;
-          height: 60px;
-        }
-      }
+      margin-top: 20rem/@baseFontSize;
+      font-size: 24rem/@baseFontSize;
     }
   }
 </style>

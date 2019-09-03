@@ -1,10 +1,10 @@
 <template>
-  <div id="orderManage" @click="toMyOrders" v-if="orderStatusNum">
-    <div class="order-service">
+  <div id="orderManage" v-if="orderStatusNum">
+    <div class="order-service" @click="toMyOrders()">
       <i class="iconfont icon-orders"></i>
       <p>全部订单</p>
     </div>
-    <div class="order-service">
+    <div class="order-service" @click="toMyOrders('os')">
       <i class="iconfont icon-wait-pay"></i>
       <p>待付款</p>
       <p class="bage"
@@ -12,7 +12,7 @@
         {{orderStatusNum.os}}
       </p>
     </div>
-    <div class="order-service">
+    <div class="order-service" @click="toMyOrders('ps')">
       <i class="iconfont icon-receive-goods"></i>
       <p>待收货</p>
       <p class="bage"
@@ -20,7 +20,7 @@
         {{orderStatusNum.ps}}
       </p>
     </div>
-    <div class="order-service">
+    <div class="order-service" @click="toMyOrders('fs')">
       <i class="iconfont icon-rate"></i>
       <p>待评价</p>
       <p class="bage"
@@ -28,7 +28,7 @@
         {{orderStatusNum.fs}}
       </p>
     </div>
-    <div class="order-service">
+    <div class="order-service" @click="toMyOrders('rf')">
       <i class="iconfont icon-refund"></i>
       <p>轻松退</p>
       <p class="bage"
@@ -64,35 +64,12 @@
         getOrderStatusNum(customerGuid).then(res => {
           this.orderStatusNum = res
         })
-        // let allOrders = this.$store.state.orderList.myOrders
-        // let allNum = allOrders.length
-        // if (allNum > 0) {
-        //   let ps = allOrders.where(function (t) {
-        //     return t.orderStatus === 'PS'
-        //   })
-        //   let psNum = ps.length
-        //   let fs = allOrders.where(function (t) {
-        //     return t.orderStatus === 'FS'
-        //   })
-        //   let fsNum = fs.length
-        //   let rf = allOrders.where(function (t) {
-        //     return t.orderStatus === 'FS'
-        //   })
-        //   let rfNum = rf.length
-        //   let os = allOrders.where(function (t) {
-        //     return t.orderStatus === 'OS'
-        //   })
-        //   this.orderServiceList[1].num = os.length
-        //   this.orderServiceList[2].num = psNum
-        //   this.orderServiceList[3].num = fsNum
-        //   this.orderServiceList[4].num = rfNum
       },
       /**
        * 跳转到我的订单
-       * @param val 订单类型（ALL：全部订单；OS：下单成功，待付款；PS：支付成功，待收货；FS：交易完成，待评价；RF：退货中）
+       * @param type 订单类型（ALL：全部订单；OS：下单成功，待付款；PS：支付成功，待收货；FS：交易完成，待评价；RF：退货中）
        */
-      toMyOrders (val) {
-        let {type} = val
+      toMyOrders (type) {
         this.$router.push({name: '我的订单', query: {type}})
       }
     }

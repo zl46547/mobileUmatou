@@ -40,7 +40,7 @@
         menus: [
           {
             name: '全部订单',
-            label: ''
+            label: undefined
           },
           {
             name: '待付款',
@@ -67,6 +67,7 @@
 <style lang="less" scoped>
   #allOrders {
     overflow: hidden;
+    position: relative;
     .content {
       background-color: #f2f2f2;
     }

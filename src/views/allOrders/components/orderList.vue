@@ -1,9 +1,8 @@
 <template>
   <div id="myOrders">
     <div class="orderList">
-      <div class="myorder-item" v-if="allOrders.length>0" v-for="(item,i) in allOrders"
-            :class="{'firstItem':i==0}" :key="i">
-        111
+      <div class="my-order-item" v-for="item in allOrders" :key="item._id">
+        <OrderItem :orderItem="item"/>
         <!--<div class="orderNo">-->
           <!--<div>-->
             <!--<span>订单编号：</span><span>{{item.orderNo}}</span>-->
@@ -65,6 +64,7 @@
 <script type="text/ecmascript-6">
   import OrderButton from './orderButton.vue'
   import Empty from './empty.vue'
+  import OrderItem from './orderItem'
   import {getOrderList} from '../service'
 
   export default {
@@ -108,7 +108,8 @@
     },
     components: {
       OrderButton,
-      Empty
+      Empty,
+      OrderItem
     },
     methods: {
       /**
@@ -121,7 +122,7 @@
           return false
         }
         getOrderList({customerGuid, orderStatusCode}).then(res => {
-          console.log(res)
+          this.allOrders = res
         })
         // var allOrders = this.$store.state.orderList.myOrders
         // if (allOrders.length <= 0) {
@@ -246,156 +247,19 @@
 </script>
 
 <style lang="less" scoped>
+  @import "../../../less/variables";
+
   #myOrders {
-    margin-top: 50px;
+    margin-top: 80rem/@baseFontSize;
     .orderList {
-      height: calc(100vh - 50px);
+      height: calc(100vh - 4rem);
       &::-webkit-scrollbar {
         display: none;
       }
       overflow-y: scroll;
       -webkit-overflow-scrolling: touch;
-      .firstItem {
-        margin-top: 2px;
-      }
-      .myorder-item {
-        margin-bottom: 2vh;
-        box-shadow: 0 3px 17px #cccccc;
-        .orderNo {
-          font-size: 1.25rem;
-          background-color: #fff;
-          margin-bottom: 1px;
-          padding: 10px 15px;
-          display: flex;
-          justify-content: space-between;
-          p {
-            color: #ff0045;
-          }
-        }
-        .content {
-          background-color: #fff;
-          padding: 10px 15px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          > div:nth-of-type(1) {
-            display: flex;
-            align-items: center;
-            .imgWidth {
-              width: calc(60vw + 18px);
-              display: flex;
-              overflow-x: auto;
-              overflow-y: hidden;
-              -webkit-overflow-scrolling: touch;
-              &::-webkit-scrollbar {
-                display: none
-              }
-            }
-            .orderImg {
-              display: flex;
-              img {
-                width: 20vw;
-                padding: 3px;
-              }
-            }
-            p {
-              margin-left: 10px;
-              font-size: 1.3rem;
-            }
-          }
-          > div:nth-of-type(2) {
-            .iconfont {
-              font-size: 1.4rem
-            }
-          }
-        }
-        .footer {
-          padding: 10px 15px;
-          background-color: #fff;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          border-top: 1px solid #eee;
-          .price {
-            span:nth-of-type(1) {
-              color: #9a9a9a;
-              font-size: 1.25rem;
-              margin-right: 5px;
-            }
-            span:nth-of-type(2) {
-              color: #ff156a;
-              font-size: 1.4rem;
-            }
-          }
-          .footer-btn {
-            display: flex;
-          }
-        }
-      }
-    }
-  }
-  @media screen and (min-width: 400px) {
-    #myOrders {
-      .orderList {
-        .myorder-item {
-          .orderNo {
-            font-size: 1.45rem;
-            padding: 14px 20px;
-          }
-          .content {
-            > div:nth-of-type(1) {
-              .imgWidth {
-                width: 318px;
-              }
-              .orderImg {
-                display: flex;
-                img {
-                  width: 100px;
-                }
-              }
-              p {
-                font-size: 1.5rem;
-              }
-            }
-            > div:nth-of-type(2) {
-              .iconfont {
-                font-size: 1.6rem
-              }
-            }
-          }
-          .footer {
-            .price {
-              span:nth-of-type(1) {
-                font-size: 1.5rem;
-              }
-              span:nth-of-type(2) {
-                font-size: 1.6rem;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
-  @media screen and (min-width: 550px) {
-    #myOrders {
-      .orderList {
-        .myorder-item {
-          .content {
-            > div:nth-of-type(1) {
-              .imgWidth {
-                width: 408px;
-              }
-              .orderImg {
-                display: flex;
-                img {
-                  width: 130px;
-                }
-              }
-            }
-          }
-        }
+      .my-order-item {
+        margin-bottom: 20rem/@baseFontSize;
       }
     }
   }

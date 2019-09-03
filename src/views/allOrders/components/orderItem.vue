@@ -1,74 +1,75 @@
 <template>
-  <div id="myOrders">
-    <div class="orderList">
-      <div class="myorder-item" v-if="allOrders.length>0" v-for="(item,i) in allOrders"
-            :class="{'firstItem':i==0}" :key="i">
-        <div class="orderNo">
-          <div>
-            <span>订单编号：</span><span>{{item.orderNo}}</span>
-          </div>
-          <p>{{item.orderStatusName}}</p>
-        </div>
-        <div class="content">
-          <div v-if="item.orderList.length>0">
-            <div class="orderImg" :class="{'imgWidth':item.orderList.length>2}">
-              <div v-for="imgItem in item.orderList" :key="imgItem.ProductId">
-                <img :src="'http://picpro-sz.34580.com/sz/ImageUrl/'+imgItem.PictureId+'/200.jpeg'"/>
-              </div>
-            </div>
-            <p>共{{item.orderList.length}}个</p>
-          </div>
-          <div>
-            <i class="iconfont icon-right"></i>
-          </div>
-        </div>
-        <div class="footer">
-          <div class="price">
-            <span>实付金额</span>
-            <span>¥{{item.finalPrice}}</span>
-          </div>
-          <div class="footer-btn">
-
-            <!-- 支付订单按钮 -->
-            <div v-if=" item.orderStatusName === '下单成功'" @click="goToPay(item)">
-              <OrderButton :button="buttonList[4]"></OrderButton>
-            </div>
-            <!-- 重新下单按钮 -->
-            <div v-if=" item.orderStatusName === '订单过期'" @click="goToReOrder(item)">
-              <OrderButton :button="buttonList[2]"></OrderButton>
-            </div>
-            <!-- 确认订单按钮 -->
-            <div v-if="item.orderStatus == 'PS'" @click="goToComfirm(item)">
-              <OrderButton :button="buttonList[1]"></OrderButton>
-            </div>
-            <!-- 评论按钮 -->
-            <div v-if="item.orderStatus == 'FS'" @click="goToRate(item)">
-              <OrderButton :button="buttonList[0]"></OrderButton>
-            </div>
-            <!-- 退货按钮 -->
-            <div v-if="item.orderStatus == 'FS'">
-              <OrderButton :button="buttonList[5]"></OrderButton>
-            </div>
-            <!-- 删除订单按钮 -->
-            <div @click="delOrderAlert(item)">
-              <OrderButton :button="buttonList[3]"></OrderButton>
-            </div>
-          </div>
-        </div>
+  <div class="order-item">
+    <div class="order-no van-hairline--bottom">
+      <div class="order-info">
+        <span>订单编号：</span>
+        <span>{{orderItem.orderNo}}</span>
       </div>
+      <p class="order-status-name">{{getOrderStatusName(orderItem.orderStatusCode)}}</p>
     </div>
-    <Empty v-if="allOrders.length<=0"></Empty>
+    <div class="content">
+      <div>
+        <div class="order-image">
+          <img v-for="item in orderItem.orderProductInfos"
+               :key="item._id"
+               :src="`http://picpro-sz.34580.com/sz/ImageUrl/${item.productInfo.pictureId}/120.jpeg`"
+               alt="订单图片"
+          />
+        </div>
+        <p class="order-count">共{{orderItem.orderProductInfos.length}}个</p>
+      </div>
+      <!--<i class="iconfont icon-arrow-right"></i>-->
+    </div>
+    <!--<div class="footer">-->
+    <!--<div class="price">-->
+    <!--<span>实付金额</span>-->
+    <!--<span>¥{{orderItem.finalPrice}}</span>-->
+    <!--</div>-->
+    <!--<div class="footer-btn">-->
+
+    <!--&lt;!&ndash; 支付订单按钮 &ndash;&gt;-->
+    <!--<div v-if=" orderItem.orderStatusName === '下单成功'" @click="goToPay(orderItem)">-->
+    <!--<OrderButton :button="buttonList[4]"></OrderButton>-->
+    <!--</div>-->
+    <!--&lt;!&ndash; 重新下单按钮 &ndash;&gt;-->
+    <!--<div v-if=" orderItem.orderStatusName === '订单过期'" @click="goToReOrder(orderItem)">-->
+    <!--<OrderButton :button="buttonList[2]"></OrderButton>-->
+    <!--</div>-->
+    <!--&lt;!&ndash; 确认订单按钮 &ndash;&gt;-->
+    <!--<div v-if="orderItem.orderStatus == 'PS'" @click="goToComfirm(orderItem)">-->
+    <!--<OrderButton :button="buttonList[1]"></OrderButton>-->
+    <!--</div>-->
+    <!--&lt;!&ndash; 评论按钮 &ndash;&gt;-->
+    <!--<div v-if="orderItem.orderStatus == 'FS'" @click="goToRate(orderItem)">-->
+    <!--<OrderButton :button="buttonList[0]"></OrderButton>-->
+    <!--</div>-->
+    <!--&lt;!&ndash; 退货按钮 &ndash;&gt;-->
+    <!--<div v-if="orderItem.orderStatus == 'FS'">-->
+    <!--<OrderButton :button="buttonList[5]"></OrderButton>-->
+    <!--</div>-->
+    <!--&lt;!&ndash; 删除订单按钮 &ndash;&gt;-->
+    <!--<div @click="delOrderAlert(orderItem)">-->
+    <!--<OrderButton :button="buttonList[3]"></OrderButton>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import OrderButton from './orderButton.vue'
-  import Empty from './empty.vue'
+  import {ORDER_STATUS_NAME} from '../../../util/enum'
+
   export default {
-    data () {
+    props: {
+      orderItem: {
+        required: true,
+        type: Object
+      }
+    },
+    data() {
       return {
         selected: '',
-        allOrders: [],
         buttonList: [
           {
             name: '评价',
@@ -104,57 +105,20 @@
       }
     },
     components: {
-      OrderButton,
-      Empty
-    },
-    computed: {},
-    mounted () {
+      OrderButton
     },
     methods: {
       /**
-       * 初始化数据,将订单状态码转换成中文
+       * @param status 订单状态名称
        */
-      initData (type) {
-        var vm = this
-        vm.selected = type
-        var allOrders = vm.$store.state.orderList.myOrders
-        if (allOrders.length <= 0) {
-          return false
-        }
-        if (type === 'RF') {
-          type = 'FS'
-        }
-        if (type === 'ALL') {
-          vm.allOrders = allOrders
-        } else {
-          vm.allOrders = allOrders.where(function (t) {
-            return t.orderStatus === type
-          })
-        }
-        vm.allOrders.forEach(function (e) {
-          e.orderStatusName = vm.hanleOrderStatle(e)
-        })
-      },
-      /**
-       * 判断订单是否过期
-       */
-      hanleOrderStatle(item) {
-        if (item.orderStatus === 'OS') {
-          let nowTime = new Date().getTime()
-          let endTime = new Date(item.deadTime).getTime()
-          let remainTime = endTime - nowTime
-          if (remainTime <= 0) {
-            return '订单过期'
-          }
-          return '下单成功'
-        }
-        return item.orderStatusName
+      getOrderStatusName(status) {
+        return ORDER_STATUS_NAME[status]
       },
       /**
        * 删除订单提示框
        * @param val 删除的对象
        */
-      delOrderAlert (val) {
+      delOrderAlert(val) {
         let vm = this
         vm.$message({
           description: '确认删除该订单？',
@@ -167,7 +131,7 @@
        * 删除订单
        * @param val 删除的对象
        */
-      delOrder (val) {
+      delOrder(val) {
         var vm = this
         vm.allOrders.removeAll(function (t) {
           return t.orderNo === val.orderNo
@@ -183,7 +147,7 @@
        * 跳转到支付页面
        * @param val
        */
-      goToPay (val) {
+      goToPay(val) {
         var vm = this
         vm.$store.commit('SUBMIT_ORDER', val)
         vm.router.push({name: '支付订单'})
@@ -192,7 +156,7 @@
        * 重新下单
        * @param val
        */
-      goToReOrder (reOrders) {
+      goToReOrder(reOrders) {
         var vm = this
         // 将商品添加到购物车
         var carlist = vm.$store.state.car.carList
@@ -246,156 +210,89 @@
 </script>
 
 <style lang="less" scoped>
-  #myOrders {
-    margin-top: 50px;
-    .orderList {
-      height: calc(100vh - 50px);
-      &::-webkit-scrollbar {
-        display: none;
-      }
-      overflow-y: scroll;
-      -webkit-overflow-scrolling: touch;
-      .firstItem {
-        margin-top: 2px;
-      }
-      .myorder-item {
-        margin-bottom: 2vh;
-        box-shadow: 0 3px 17px #cccccc;
-        .orderNo {
-          font-size: 1.25rem;
-          background-color: #fff;
-          margin-bottom: 1px;
-          padding: 10px 15px;
-          display: flex;
-          justify-content: space-between;
-          p {
-            color: #ff0045;
-          }
-        }
-        .content {
-          background-color: #fff;
-          padding: 10px 15px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          > div:nth-of-type(1) {
-            display: flex;
-            align-items: center;
-            .imgWidth {
-              width: calc(60vw + 18px);
-              display: flex;
-              overflow-x: auto;
-              overflow-y: hidden;
-              -webkit-overflow-scrolling: touch;
-              &::-webkit-scrollbar {
-                display: none
-              }
-            }
-            .orderImg {
-              display: flex;
-              img {
-                width: 20vw;
-                padding: 3px;
-              }
-            }
-            p {
-              margin-left: 10px;
-              font-size: 1.3rem;
-            }
-          }
-          > div:nth-of-type(2) {
-            .iconfont {
-              font-size: 1.4rem
-            }
-          }
-        }
-        .footer {
-          padding: 10px 15px;
-          background-color: #fff;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          border-top: 1px solid #eee;
-          .price {
-            span:nth-of-type(1) {
-              color: #9a9a9a;
-              font-size: 1.25rem;
-              margin-right: 5px;
-            }
-            span:nth-of-type(2) {
-              color: #ff156a;
-              font-size: 1.4rem;
-            }
-          }
-          .footer-btn {
-            display: flex;
-          }
-        }
-      }
-    }
-  }
-  @media screen and (min-width: 400px) {
-    #myOrders {
-      .orderList {
-        .myorder-item {
-          .orderNo {
-            font-size: 1.45rem;
-            padding: 14px 20px;
-          }
-          .content {
-            > div:nth-of-type(1) {
-              .imgWidth {
-                width: 318px;
-              }
-              .orderImg {
-                display: flex;
-                img {
-                  width: 100px;
-                }
-              }
-              p {
-                font-size: 1.5rem;
-              }
-            }
-            > div:nth-of-type(2) {
-              .iconfont {
-                font-size: 1.6rem
-              }
-            }
-          }
-          .footer {
-            .price {
-              span:nth-of-type(1) {
-                font-size: 1.5rem;
-              }
-              span:nth-of-type(2) {
-                font-size: 1.6rem;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+  @import "../../../less/variables";
 
-  @media screen and (min-width: 550px) {
-    #myOrders {
-      .orderList {
-        .myorder-item {
-          .content {
-            > div:nth-of-type(1) {
-              .imgWidth {
-                width: 408px;
-              }
-              .orderImg {
-                display: flex;
-                img {
-                  width: 130px;
-                }
-              }
-            }
+  .order-item {
+    background-color: #fff;
+
+    .order-no {
+      padding: 20rem/@baseFontSize 25rem/@baseFontSize;
+      display: flex;
+      justify-content: space-between;
+
+      .order-info {
+        font-size: 26rem/@baseFontSize;
+      }
+
+      .order-status-name {
+        font-size: 28rem/@baseFontSize;
+        color: @priceColor;
+      }
+    }
+
+    .content {
+      background-color: #fff;
+      padding: 20rem/@baseFontSize 25rem/@baseFontSize;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      > div:nth-of-type(1) {
+        display: flex;
+        align-items: center;
+        /*.imgWidth {*/
+        /*width: calc(60vw + 18px);*/
+        /*display: flex;*/
+        /*overflow-x: auto;*/
+        /*overflow-y: hidden;*/
+        /*-webkit-overflow-scrolling: touch;*/
+        /*&::-webkit-scrollbar {*/
+        /*display: none*/
+        /*}*/
+        /*}*/
+
+        .order-image {
+          display: flex;
+          img {
+            display: block;
+            width: 120rem/@baseFontSize;
+            padding: 16rem/@baseFontSize;
           }
         }
+        .order-count {
+          margin-left: 20rem/@baseFontSize;
+          font-size: 30rem/@baseFontSize;
+        }
+      }
+
+      .icon-arrow-right {
+        font-size: 28rem/@baseFontSize;
+      }
+    }
+
+    .footer {
+      padding: 10px 15px;
+      background-color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #eee;
+
+      .price {
+        span:nth-of-type(1) {
+          color: #9a9a9a;
+          font-size: 1.25rem;
+          margin-right: 5px;
+        }
+
+        span:nth-of-type(2) {
+          color: #ff156a;
+          font-size: 1.4rem;
+        }
+      }
+
+      .footer-btn {
+        display: flex;
       }
     }
   }

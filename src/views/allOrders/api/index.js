@@ -7,7 +7,7 @@ import axios from '../../../http/api'
 export const getOrderListRequest = params => {
   return axios({
     method: 'get',
-    url: '/shoppingCart/getOrderList',
+    url: '/orders/getOrderList',
     params
   })
 }

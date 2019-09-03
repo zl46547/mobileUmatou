@@ -11,5 +11,5 @@ export const getOrderList = async params => {
   if (data.Data) {
     return data.Data
   }
-  return null
+  return []
 }

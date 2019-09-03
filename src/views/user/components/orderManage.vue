@@ -4,7 +4,7 @@
       <i class="iconfont icon-orders"></i>
       <p>全部订单</p>
     </div>
-    <div class="order-service" @click="toMyOrders('os')">
+    <div class="order-service" @click="toMyOrders('OS')">
       <i class="iconfont icon-wait-pay"></i>
       <p>待付款</p>
       <p class="bage"
@@ -12,7 +12,7 @@
         {{orderStatusNum.os}}
       </p>
     </div>
-    <div class="order-service" @click="toMyOrders('ps')">
+    <div class="order-service" @click="toMyOrders('PS')">
       <i class="iconfont icon-receive-goods"></i>
       <p>待收货</p>
       <p class="bage"
@@ -20,7 +20,7 @@
         {{orderStatusNum.ps}}
       </p>
     </div>
-    <div class="order-service" @click="toMyOrders('fs')">
+    <div class="order-service" @click="toMyOrders('FS')">
       <i class="iconfont icon-rate"></i>
       <p>待评价</p>
       <p class="bage"
@@ -28,7 +28,7 @@
         {{orderStatusNum.fs}}
       </p>
     </div>
-    <div class="order-service" @click="toMyOrders('rf')">
+    <div class="order-service" @click="toMyOrders('RF')">
       <i class="iconfont icon-refund"></i>
       <p>轻松退</p>
       <p class="bage"

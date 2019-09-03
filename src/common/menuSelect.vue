@@ -1,7 +1,7 @@
 <template>
   <div id="menuSelect">
     <div v-if="menuItems.length>0" class="menu-item" v-for="(item,i) in menuItems" :key="i"
-         :class="{'isActive':item.label === getSelected }" @click="menuClick(item.label)">
+         :class="{'isActive':item.label === selected }" @click="menuClick(item.label)">
       <span>{{item.name}}</span>
     </div>
   </div>
@@ -16,51 +16,34 @@
       },
       selected: ''
     },
-    data() {
-      return {
-        menuSelected: ''
-      }
-    },
-    computed: {
-      getSelected() {
-        var vm = this
-        vm.menuSelected = vm.selected
-        return vm.menuSelected
-      }
-    },
-    mounted() {
-      var vm = this
-      vm.menuSelected = vm.selected
-    },
     methods: {
       /**
        * 菜单点击事件
        * @param val 被点击的index
        */
       menuClick(val) {
-        var vm = this
         // 模拟请求数据
-        vm.menuSelected = val
-        vm.$emit('menu-selected', vm.menuSelected)
+        this.$emit('menu-selected', val)
       }
     }
   }
 </script>
 
 <style lang="less" scoped>
+  @import "../less/variables";
+
   #menuSelect {
     position: absolute;
     left: 50%;
     top: 0;
     width: 100%;
-    height: 50px;
+    height: 80rem/@baseFontSize;
     display: flex;
     align-items: center;
     justify-content: space-around;
     z-index: 999;
     background-color: #fafafa;
-    box-shadow: 0 3px 20px rgb(235, 235, 235);
-    max-width:640px;
+    border-bottom: 1px solid rgb(235, 235, 235);
     transform: translateX(-50%);
     .menu-item {
       width: 100%;
@@ -68,6 +51,7 @@
       display: flex;
       cursor: pointer;
       border-bottom: 2px solid #fafafa;
+      font-size: 28rem/@baseFontSize;
       span {
         margin: auto;
       }

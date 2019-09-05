@@ -11,3 +11,26 @@ export const getOrderListRequest = params => {
     params
   })
 }
+
+/**
+ * 删除订单
+ * @param data
+ */
+export const deleteOrderRequest = data => {
+  return axios({
+    method: 'POST',
+    url: '/orders/deleteOrder',
+    data
+  })
+}
+/**
+ * 删除订单
+ * @param data
+ */
+export const reOrderRequest = data => {
+  return axios({
+    method: 'POST',
+    url: '/orders/reOrder',
+    data
+  })
+}

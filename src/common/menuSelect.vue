@@ -57,8 +57,8 @@
       }
     }
     .isActive {
-      color: #ff3d5b;
-      border-bottom: 2px solid #ff3d5b;
+      color: @themeColor;
+      border-bottom: 2px solid @themeColor;
     }
   }
 </style>

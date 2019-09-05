@@ -23,10 +23,10 @@
     <div class="footer">
       <div class="price">
         <span>实付金额</span>
-        <span>¥{{orderItem.finalPrice}}</span>
+        <span>¥{{orderItem.payment}}</span>
       </div>
       <div class="footer-btn">
-        <Button v-show="orderItem.orderStatusCode==='OS'"
+        <Button v-show="showPayOrderBtn(orderItem)"
                 @click="goToPay(orderItem)"
                 color="#f04a18"
                 size="small"
@@ -34,7 +34,7 @@
         >
           立即支付
         </Button>
-        <Button v-show="orderItem.orderStatusCode==='OS'"
+        <Button v-show="showReOrderBtn(orderItem)"
                 @click="goToReOrder(orderItem)"
                 color="#909090"
                 size="small"
@@ -42,30 +42,37 @@
         >
           重新下单
         </Button>
-        <!--&lt;!&ndash; 支付订单按钮 &ndash;&gt;-->
-        <!--<div v-if=" orderItem.orderStatusName === '下单成功'" @click="goToPay(orderItem)">-->
-        <!--<OrderButton :button="buttonList[4]"></OrderButton>-->
-        <!--</div>-->
-        <!--&lt;!&ndash; 重新下单按钮 &ndash;&gt;-->
-        <!--<div v-if=" orderItem.orderStatusName === '订单过期'" @click="goToReOrder(orderItem)">-->
-        <!--<OrderButton :button="buttonList[2]"></OrderButton>-->
-        <!--</div>-->
-        <!--&lt;!&ndash; 确认订单按钮 &ndash;&gt;-->
-        <!--<div v-if="orderItem.orderStatus == 'PS'" @click="goToComfirm(orderItem)">-->
-        <!--<OrderButton :button="buttonList[1]"></OrderButton>-->
-        <!--</div>-->
-        <!--&lt;!&ndash; 评论按钮 &ndash;&gt;-->
-        <!--<div v-if="orderItem.orderStatus == 'FS'" @click="goToRate(orderItem)">-->
-        <!--<OrderButton :button="buttonList[0]"></OrderButton>-->
-        <!--</div>-->
-        <!--&lt;!&ndash; 退货按钮 &ndash;&gt;-->
-        <!--<div v-if="orderItem.orderStatus == 'FS'">-->
-        <!--<OrderButton :button="buttonList[5]"></OrderButton>-->
-        <!--</div>-->
-        <!--&lt;!&ndash; 删除订单按钮 &ndash;&gt;-->
-        <!--<div @click="delOrderAlert(orderItem)">-->
-        <!--<OrderButton :button="buttonList[3]"></OrderButton>-->
-        <!--</div>-->
+        <Button v-show="orderItem.orderStatusCode==='PS'"
+                @click="goToComfirm(orderItem)"
+                color="#f04a18"
+                size="small"
+                plain round
+        >
+          确认收货
+        </Button>
+        <Button v-show="orderItem.orderStatusCode==='FS'"
+                @click="goToRate(orderItem)"
+                color="#f04a18"
+                size="small"
+                plain round
+        >
+          评价
+        </Button>
+        <Button v-show="orderItem.orderStatusCode==='FS'"
+                @click="goToReFund(orderItem)"
+                color="#ff7314"
+                size="small"
+                plain round
+        >
+          退款
+        </Button>
+        <Button @click="delOrderAlert(orderItem)"
+                color="#909090"
+                size="small"
+                plain round
+        >
+          删除
+        </Button>
       </div>
     </div>
   </div>
@@ -73,7 +80,9 @@
 
 <script type="text/ecmascript-6">
   import { ORDER_STATUS_NAME } from '../../../util/enum'
-  import { Button } from 'vant'
+  import { Button, Toast } from 'vant'
+  import {deleteOrder, getOrderList, reOrder} from '../service'
+  import moment from 'moment'
 
   export default {
     props: {
@@ -84,39 +93,7 @@
     },
     data () {
       return {
-        selected: '',
-        buttonList: [
-          {
-            name: '评价',
-            color: '#f04a18',
-            showStatus: ['交易完成']
-          },
-          {
-            name: '确认收货',
-            color: '#f04a18',
-            showStatus: ['支付成功']
-          },
-          {
-            name: '重新下单',
-            color: '#909090',
-            showStatus: ['订单过期']
-          },
-          {
-            name: '删除',
-            color: '#909090',
-            showStatus: ['下单成功', '支付成功', '订单过期', '交易完成', '订单已关闭']
-          },
-          {
-            name: '立即支付',
-            color: '#f04a18',
-            showStatus: ['下单成功']
-          },
-          {
-            name: '退款',
-            color: '#ff7314',
-            showStatus: ['支付成功', '交易完成']
-          }
-        ]
+        selected: ''
       }
     },
     components: {
@@ -124,69 +101,101 @@
     },
     methods: {
       /**
+       * 显示重新下单按钮
+       * @param orderItem
+       */
+      showReOrderBtn (orderItem) {
+        return orderItem.orderStatusCode === 'OS' && (moment(orderItem.orderTimeOut).diff(new Date()) < 0)
+      },
+      /**
+       * 显示立即支付按钮
+       * @param orderItem
+       */
+      showPayOrderBtn (orderItem) {
+        return orderItem.orderStatusCode === 'OS' && (moment(orderItem.orderTimeOut).diff(new Date()) > 0)
+      },
+      /**
        * @param status 订单状态名称
        */
       getOrderStatusName (status) {
         return ORDER_STATUS_NAME[status]
       },
       /**
-       * 删除订单提示框
+       * 退货
        * @param val 删除的对象
        */
-      delOrderAlert (val) {
-        let vm = this
-        vm.$message({
+      goToReFund (val) {
+        this.$message({
           description: '确认删除该订单？',
           onComfirm () {
-            vm.delOrder(val)
+            // this.delOrder(val)
           }
         })
       },
       /**
-       * 删除订单
-       * @param val 删除的对象
+       * 删除订单提示框
+       * @param orderItem 删除的对象
        */
-      delOrder (val) {
-        var vm = this
-        vm.allOrders.removeAll(function (t) {
-          return t.orderNo === val.orderNo
-        })
-        var res = {
-          isUpdate: false,
-          allOrders: vm.allOrders
+      delOrderAlert (orderItem) {
+        let {user: {customerGuid}} = this.$store.state.login
+        if (!customerGuid) {
+          return false
         }
-        vm.$store.commit('MY_ORDERS', res)
-        vm.initData(vm.selected)
+        this.$message({
+          description: '确认删除该订单？',
+          onComfirm () {
+            deleteOrder({
+              customerGuid,
+              orderNo: orderItem.orderNo
+            }).then(res => {
+              if (res) {
+                Toast.success('删除成功')
+                getOrderList({
+                  customerGuid,
+                  orderStatusCode: orderItem.orderStatusCode
+                })
+              }
+            }).catch(err => {
+              Toast.fail(err)
+              console.log(err)
+            })
+          }
+        })
       },
       /**
        * 跳转到支付页面
-       * @param val
+       * @param orderNo
        */
-      goToPay (val) {
-        var vm = this
-        vm.$store.commit('SUBMIT_ORDER', val)
-        vm.router.push({name: '支付订单'})
+      goToPay ({orderNo}) {
+        this.router.push({name: '支付订单', query: {orderNo}})
       },
       /**
        * 重新下单
-       * @param val
+       * @param orderItem
        */
-      goToReOrder (reOrders) {
-        var vm = this
-        // 将商品添加到购物车
-        var carlist = vm.$store.state.car.carList
-        vm.$message({
-          description: `确认添加${reOrders.orderList.length}个商品到购物车？`,
+      goToReOrder (orderItem) {
+        let _this = this
+        let {user: {customerGuid}} = this.$store.state.login
+        if (!customerGuid) {
+          return false
+        }
+        this.$message({
+          description: '确认重新下单？',
           onComfirm () {
-            // 设置默认选中
-            reOrders.orderList.forEach(e => {
-              e.checked = true
+            reOrder({
+              customerGuid,
+              orderNo: orderItem.orderNo
+            }).then(res => {
+              if (res) {
+                Toast.success('重新下单成功')
+                setTimeout(() => {
+                  _this.$router.push({path: '/car'})
+                }, 2000)
+              }
+            }).catch(err => {
+              Toast.fail('重新下单失败')
+              console.log(err)
             })
-            var newCarlist = reOrders.orderList.union(carlist)
-            vm.$store.commit('CAR_LIST', newCarlist)
-            // 从我的订单中删除
-            vm.delOrder(reOrders)
-            vm.$router.push({path: '/car'})
           }
         })
       },
@@ -195,18 +204,17 @@
        * @param val
        */
       goToComfirm (val) {
-        var vm = this
-        vm.$message({
+        this.$message({
           description: '是否确认收货？',
           onComfirm () {
-            vm.allOrders.forEach((t) => {
+            this.allOrders.forEach((t) => {
               if (t.orderNo === val.orderNo) {
                 t.orderStatus = 'FS'
                 t.orderStatusName = '交易完成'
               }
             })
-            vm.$store.commit('MY_ORDERS', {isUpdate: true, allOrders: val})
-            vm.initData(vm.selected)
+            this.$store.commit('MY_ORDERS', {isUpdate: true, allOrders: val})
+            this.initData(this.selected)
           }
         })
       },
@@ -215,10 +223,9 @@
        * @param val
        */
       goToRate (val) {
-        var vm = this
         val.orderStatus = 'CLOSE'
         val.orderStatusName = '订单已关闭'
-        vm.$router.push({path: '/rate'})
+        this.$router.push({path: '/rate'})
       }
     }
   }
@@ -229,23 +236,19 @@
 
   .order-item {
     background-color: #fff;
-
     .order-no {
       padding: 20rem/@baseFontSize 25rem/@baseFontSize;
       display: flex;
       justify-content: space-between;
-
       .order-info {
         font-size: 28rem/@baseFontSize;
         color: #333;
       }
-
       .order-status-name {
         font-size: 30rem/@baseFontSize;
         color: @priceColor;
       }
     }
-
     .content {
       padding: 20rem/@baseFontSize 25rem/@baseFontSize;
       display: flex;
@@ -267,7 +270,6 @@
         }
       }
     }
-
     .footer {
       padding: 20rem/@baseFontSize 25rem/@baseFontSize;
       display: flex;
@@ -277,17 +279,29 @@
         span:nth-of-type(1) {
           color: #9a9a9a;
           font-size: 28rem/@baseFontSize;
-          margin-right: 5px;
+          margin-right: 15rem/@baseFontSize;;
         }
-
         span:nth-of-type(2) {
-          color: #ff156a;
+          color: @priceColor;
           font-size: 28rem/@baseFontSize;
         }
       }
-
       .footer-btn {
-        display: flex;
+        Button {
+          margin-right: 5rem/@baseFontSize;
+          &:last-of-type{
+            margin-right: 0;
+          }
+        }
+        .van-button__text{
+          font-size: 24rem/@baseFontSize;
+        }
+        .van-button--small {
+          min-width: 100rem/@baseFontSize;
+          height: 50rem/@baseFontSize;
+          padding: 0 16rem/@baseFontSize;
+          line-height: 46rem/@baseFontSize;
+        }
       }
     }
   }

@@ -31,6 +31,7 @@
 
 <script type="text/ecmascript-6">
   import {getDefaultAddress} from '../service'
+  import {ADDRESS_SELECTED} from '../../../vuex/types'
 
   export default {
     mounted() {
@@ -54,6 +55,7 @@
         getDefaultAddress(customerGuid).then(res => {
           if (res) {
             this.addressInfo = res
+            this.$store.commit(ADDRESS_SELECTED, res)
           }
         })
       },

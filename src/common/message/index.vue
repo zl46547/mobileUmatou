@@ -1,7 +1,7 @@
 <template>
   <div class="mask" v-if="visible">
     <div class="content">
-      <div class="title">
+      <div class="title van-hairline--bottom">
         {{title}}
       </div>
       <main>
@@ -33,11 +33,16 @@
 </script>
 
 <style lang="less" scoped>
+  @import "../../less/variables";
+
   .mask {
+    max-width: 640px;
+    min-width: 320px;
+    width: 100%;
     z-index: 999;
     position: fixed;
     left: 50%;
-    margin-left: -50%;
+    transform: translateX(-50%);
     right: 0;
     top: 0;
     height: 100vh;
@@ -45,44 +50,44 @@
     background-color: rgba(0, 0, 0, 0.5);
     .content {
       margin: auto;
-      width: 80vw;
+      width: 400rem/@baseFontSize;
       background-color: rgb(249, 249, 249);
-      padding: 2.5vh 2vw;
-      border-radius: 3px;
+      border-radius: 5rem/@baseFontSize;
       animation: bounce-in .5s;
       .title {
+        padding: 20rem/@baseFontSize;
         text-align: center;
-        padding-bottom: 2.5vh;
-        border-bottom: 1px solid #d4d4d4;
-        font-size: 1.5rem;
+        font-size: 30rem/@baseFontSize;
+        font-weight: bold;
       }
       main {
         margin: auto;
         .description {
+          padding: 30rem/@baseFontSize;
           text-align: center;
-          padding: 3vh 1.5vw;
-          font-size: 1.2rem;
+          font-size: 28rem/@baseFontSize;
         }
         .button {
+          padding-bottom: 20rem/@baseFontSize;
           display: flex;
           align-items: center;
           justify-content: center;
           .cancel, .comfirm {
-            width: 40%;
-            padding: 1.5vh 0;
+            width: 30%;
+            padding: 15rem/@baseFontSize;
             text-align: center;
-            border-radius: 5px;
+            border-radius: 5rem/@baseFontSize;
             cursor: pointer;
-            font-size: 1.2rem;
+            font-size: 28rem/@baseFontSize;
           }
           .cancel {
-            margin-right: 5vw;
-            border: 1px solid #0bd235;
-            color: #0bd235;
+            margin-right: 15rem/@baseFontSize;
+            border: 1px solid @themeColor;
+            color: @themeColor;
           }
           .comfirm {
             color: #fff;
-            background-color: #0bd235;
+            background-color: @themeColor;
           }
         }
       }
@@ -93,36 +98,6 @@
       }
       100% {
         transform: translateY(0);
-      }
-    }
-  }
-
-  @media screen and (min-width: 640px) {
-    .mask {
-      width: 640px;
-      margin-left: -320px;
-      .content {
-        width: 510px;
-        padding: 20px 15px;
-        .title {
-          padding-bottom: 20px;
-          font-size: 1.7rem;
-        }
-        main {
-          .description {
-            padding: 30px 10px;
-            font-size: 1.4rem;
-          }
-          .button {
-            .cancel, .comfirm {
-              padding: 15px 0;
-              font-size: 1.4rem;
-            }
-            .cancel {
-              margin-right: 35px;
-            }
-          }
-        }
       }
     }
   }

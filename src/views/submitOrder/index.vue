@@ -118,12 +118,16 @@
           params.couponId = couponSelected._id
         }
         submitOrder(params).then(res => {
-          console.log(res)
+          if (res) {
+            Toast.success('提交订单成功')
+            setTimeout(() => {
+              // this.router.push({name: '支付订单', query: {orderNo: res}})
+            }, 2000)
+          }
+        }).catch(err => {
+          Toast.fail('提交订单失败')
+          console.log(err)
         })
-        // this.$store.commit(actionTypes.SUBMIT_ORDER, params)
-        // // 从购物车中删除已经提交的订单
-        // this.delCarList(params.orderList)
-        // this.$router.replace({name: '支付订单'})
       }
     }
   }

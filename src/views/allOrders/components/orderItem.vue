@@ -81,7 +81,7 @@
 <script type="text/ecmascript-6">
   import { ORDER_STATUS_NAME } from '../../../util/enum'
   import { Button, Toast } from 'vant'
-  import {deleteOrder, getOrderList, reOrder} from '../service'
+  import {deleteOrder, reOrder} from '../service'
   import moment from 'moment'
 
   export default {
@@ -137,6 +137,7 @@
        * @param orderItem 删除的对象
        */
       delOrderAlert (orderItem) {
+        let _this = this
         let {user: {customerGuid}} = this.$store.state.login
         if (!customerGuid) {
           return false
@@ -150,10 +151,7 @@
             }).then(res => {
               if (res) {
                 Toast.success('删除成功')
-                getOrderList({
-                  customerGuid,
-                  orderStatusCode: orderItem.orderStatusCode
-                })
+                _this.$emit('refresh')
               }
             }).catch(err => {
               Toast.fail(err)

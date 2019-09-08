@@ -31,7 +31,7 @@
        */
       handleSelect (orderStatus) {
         this.selected = orderStatus
-        this.$refs.orderList.initData(orderStatus)
+        this.$refs.orderList.initData()
       }
     },
     data () {

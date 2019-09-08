@@ -121,7 +121,7 @@
           if (res) {
             Toast.success('提交订单成功')
             setTimeout(() => {
-              // this.router.push({name: '支付订单', query: {orderNo: res}})
+              this.$router.push({name: '支付订单', query: {orderNo: res}})
             }, 2000)
           }
         }).catch(err => {

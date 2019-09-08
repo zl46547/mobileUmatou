@@ -2,7 +2,9 @@
   <div id="myOrders">
     <div class="orderList">
       <div class="my-order-item" v-for="item in allOrders" :key="item._id">
-        <OrderItem :orderItem="item"/>
+        <OrderItem :orderItem="item"
+                   @refresh="initData"
+        />
       </div>
     </div>
     <Empty v-if="allOrders.length<=0"></Empty>
@@ -30,7 +32,8 @@
       /**
        * 获取订单列表
        */
-      initData (orderStatusCode) {
+      initData () {
+        let orderStatusCode = this.$route.query.type
         let {user: {customerGuid}} = this.$store.state.login
         if (!customerGuid) {
           return false

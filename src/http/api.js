@@ -8,8 +8,10 @@ api.defaults.timeout = 10000
 api.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 api.defaults.headers.post['X-Requested-With'] = 'XMLHttpRequest'
 // 请求拦截
-api.interceptors.request.use((config) => {
-  loading.showLoading()
+api.interceptors.request.use(config => {
+  if (config.showLoading) {
+    loading.showLoading()
+  }
   return axiosHelper.filterParams(config)
 }, null)
 // 响应拦截

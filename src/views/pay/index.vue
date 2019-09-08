@@ -1,31 +1,35 @@
 <template>
   <div id="pay">
     <div class="content-body">
-      <v-pay-way @remain-time="getRemainTime"></v-pay-way>
+      <PayWay :orderDetail="orderDetail"
+              ref="payWay"
+      />
     </div>
-    <div class="footer" @click="comfirmPay()"
-         :class="{'enable':remainTime>0,'disable':remainTime<=0}">
-      <div v-if="remainTime>0">
-        <span>确认支付</span>
-        <span>¥</span>
-        <span>{{submitOrder.finalPrice}}</span>
-      </div>
-      <div v-if="remainTime<=0">
-        <span>订单已过期</span>
-      </div>
-    </div>
+    <!--<div class="footer" @click="comfirmPay()"-->
+         <!--:class="{'enable':remainTime>0,'disable':remainTime<=0}">-->
+      <!--<div v-if="remainTime>0">-->
+        <!--<span>确认支付</span>-->
+        <!--<span>¥</span>-->
+        <!--<span>{{submitOrder.finalPrice}}</span>-->
+      <!--</div>-->
+      <!--<div v-if="remainTime<=0">-->
+        <!--<span>订单已过期</span>-->
+      <!--</div>-->
+    <!--</div>-->
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import PayWay from './components/payWay.vue'
+  import PayWay from './components/payWay'
+  import {getOrderDetail} from './service'
   import { Toast } from 'vant'
   export default {
     components: {
-      'VPayWay': PayWay
+      PayWay
     },
     data () {
       return {
+        orderDetail: null,
         submitOrder: '',
         myOrders: '',
         remainTime: 1,
@@ -33,10 +37,22 @@
       }
     },
     mounted () {
-      this.submitOrder = this.$store.state.orderList.submitOrder
-      this.myOrders = this.$store.state.orderList.myOrders
+      let {orderNo} = this.$route.query
+      this.init(orderNo)
+      // this.submitOrder = this.$store.state.orderList.submitOrder
+      // this.myOrders = this.$store.state.orderList.myOrders
     },
     methods: {
+      init(orderNo) {
+        let {user: {customerGuid}} = this.$store.state.login
+        if (!customerGuid) {
+          return false
+        }
+        getOrderDetail({customerGuid, orderNo}).then(res => {
+          this.orderDetail = res
+          // this.$ref.getRemainTime()
+        })
+      },
       /**
        * 获取剩余时间
        * @param val 剩余时间
@@ -49,26 +65,25 @@
        * @returns {boolean}
        */
       comfirmPay () {
-        var vm = this
-        if (vm.remainTime <= 0) {
+        if (this.remainTime <= 0) {
           return
         }
         // 获取我的订单,并将提交的订单加入到我的订单中
         var index = 0
-        for (var i = 0; i < vm.myOrders.length; i++) {
-          if (vm.myOrders[i].orderNo === vm.submitOrder.orderNo) {
+        for (var i = 0; i < this.myOrders.length; i++) {
+          if (this.myOrders[i].orderNo === this.submitOrder.orderNo) {
             index = i
             break
           }
         }
-        vm.myOrders[index].orderStatus = 'PS'
-        vm.myOrders[index].orderStatusName = '支付成功'
-        vm.$store.commit('MY_ORDERS', {isUpdate: false, allOrders: vm.myOrders})
+        this.myOrders[index].orderStatus = 'PS'
+        this.myOrders[index].orderStatusName = '支付成功'
+        this.$store.commit('MY_ORDERS', {isUpdate: false, allOrders: this.myOrders})
         Toast({
           message: '订单支付成功'
         })
         setTimeout(() => {
-          vm.$router.replace({name: '我的订单', query: {type: 'ALL'}})
+          this.$router.replace({name: '我的订单', query: {type: 'ALL'}})
         }, 1500)
       }
     }

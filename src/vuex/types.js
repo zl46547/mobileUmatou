@@ -27,3 +27,9 @@ export const ADDRESS_SELECTED = 'ADDRESS_SELECTED'
 
 /* 选择优惠券 */
 export const COUPON_SELECTED = 'COUPON_SELECTED'
+
+/* 支付方式 */
+export const PAY_WAY = 'PAY_WAY'
+
+/* 剩余支付时间 */
+export const REMAIN_TIME = 'REMAIN_TIME'

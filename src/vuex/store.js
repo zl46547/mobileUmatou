@@ -5,7 +5,7 @@ import detail from './modules/detail'
 import login from './modules/login'
 import category from './modules/category'
 import car from './modules/car'
-import orderList from './modules/orderList'
+import order from './modules/order'
 import common from './modules/common'
 Vue.use(Vuex)
 
@@ -15,7 +15,7 @@ export default new Vuex.Store({
     login,
     category,
     car,
-    orderList,
+    order,
     common
   }
 })

@@ -165,7 +165,7 @@
        * @param orderNo
        */
       goToPay ({orderNo}) {
-        this.router.push({name: '支付订单', query: {orderNo}})
+        this.$router.push({name: '支付订单', query: {orderNo}})
       },
       /**
        * 重新下单

@@ -47,7 +47,7 @@
        */
       initAddressList () {
         let {user: {customerGuid}} = this.$store.state.login
-        let {addressSelected} = this.$store.state.orderList
+        let {addressSelected} = this.$store.state.order
         if (!customerGuid) {
           return false
         }

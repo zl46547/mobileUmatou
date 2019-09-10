@@ -61,7 +61,7 @@
     },
     computed: {
       getFinalPrice () {
-        let {couponSelected} = this.$store.state.orderList
+        let {couponSelected} = this.$store.state.order
         let couponAmount = 0
         if (couponSelected) {
           couponAmount = couponSelected.amount
@@ -92,7 +92,7 @@
           car: {
             carList: orderProductInfos
           },
-          orderList: {
+          order: {
             addressSelected,
             couponSelected
           },
@@ -121,7 +121,7 @@
           if (res) {
             Toast.success('提交订单成功')
             setTimeout(() => {
-              this.$router.push({name: '支付订单', query: {orderNo: res}})
+              this.$router.replace({name: '支付订单', query: {orderNo: res}})
             }, 2000)
           }
         }).catch(err => {

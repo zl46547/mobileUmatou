@@ -1,5 +1,6 @@
 import {
-  getOrderDetailRequest
+  getOrderDetailRequest,
+  payOrderRequest
 } from '../api'
 
 /**
@@ -12,4 +13,20 @@ export const getOrderDetail = async params => {
     return data.Data
   }
   return []
+}
+/**
+ * 支付订单
+ * @param params
+ */
+export const payOrder = async params => {
+  try {
+    let {data} = await payOrderRequest(params)
+    if (data.Data) {
+      return data.Data
+    }
+    return null
+  } catch (e) {
+    console.log(e)
+    return null
+  }
 }

@@ -44,7 +44,7 @@
     },
     methods: {
       init() {
-        let {login: {user: {customerGuid}}, orderList: {addressSelected}} = this.$store.state
+        let {login: {user: {customerGuid}}, order: {addressSelected}} = this.$store.state
         if (!customerGuid) {
           return false
         }

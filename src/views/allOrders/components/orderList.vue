@@ -12,7 +12,6 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import OrderButton from './orderButton.vue'
   import Empty from './empty.vue'
   import OrderItem from './orderItem'
   import {getOrderList} from '../service'
@@ -24,7 +23,6 @@
       }
     },
     components: {
-      OrderButton,
       Empty,
       OrderItem
     },
@@ -32,8 +30,7 @@
       /**
        * 获取订单列表
        */
-      initData () {
-        let orderStatusCode = this.$route.query.type
+      initData (orderStatusCode) {
         let {user: {customerGuid}} = this.$store.state.login
         if (!customerGuid) {
           return false

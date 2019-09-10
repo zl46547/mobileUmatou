@@ -11,3 +11,15 @@ export const getOrderDetailRequest = params => {
     params
   })
 }
+
+/**
+ * 支付订单
+ * @param data
+ */
+export const payOrderRequest = data => {
+  return axios({
+    method: 'post',
+    url: '/orders/payOrder',
+    data
+  })
+}

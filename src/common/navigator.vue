@@ -1,8 +1,6 @@
 <template>
   <header>
-    <div class="back" @click="goBack">
-      <i class="icon iconfont icon-arrow-left"></i>
-    </div>
+    <i class="icon iconfont icon-arrow-left" @click="goBack"></i>
     <div class="title">
       <slot name="title"></slot>
     </div>
@@ -19,8 +17,8 @@
         })
       },
       goBack() {
-        var vm = this
-        vm.$router.go(-1)
+        console.log(this.$router)
+        this.$router.go(-1)
       }
     }
   }
@@ -41,13 +39,12 @@
     align-items: center;
     z-index: 999;
     box-shadow: 0 0.5px 5px rgba(219, 219, 219, 0.48);
-    .back{
+    .icon-arrow-left{
       width:50px;
       text-align: center;
       cursor: pointer;
-      i{
-        font-size:1.8rem;
-      }
+      display: block;
+      font-size:1.8rem;
     }
     .title{
       width:100%;

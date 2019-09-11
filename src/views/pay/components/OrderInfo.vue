@@ -27,7 +27,7 @@
         remainTime: '00:00' // 剩余时间
       }
     },
-    mounted () {
+    created () {
       let {orderNo} = this.$route.query
       this.init(orderNo)
     },
@@ -48,25 +48,26 @@
         getOrderDetail({customerGuid, orderNo}).then(res => {
           this.orderDetail = res
           this.getRemainTime()
+          this.timeInterval = setInterval(() => {
+            this.getRemainTime()
+          }, 1000)
         })
       },
       /**
        * 获取剩余支付时间
        */
       getRemainTime () {
-        this.timeInterval = setInterval(() => {
-          if (this.orderDetail) {
-            let remainTime = moment(this.orderDetail.orderTimeOut).diff(moment())
-            if (remainTime <= 0) {
-              remainTime = 0
-            }
-            this.$store.commit(REMAIN_TIME, remainTime)
-            let sy = parseInt(remainTime / 1000)
-            let minute = parseInt(sy % 3600 / 60).toString().padStart(2, '0')
-            let second = parseInt(sy % 60).toString().padStart(2, '0')
-            this.remainTime = `${minute}:${second}`
+        if (this.orderDetail) {
+          let remainTime = moment(this.orderDetail.orderTimeOut).diff(moment())
+          if (remainTime <= 0) {
+            remainTime = 0
           }
-        }, 1000)
+          this.$store.commit(REMAIN_TIME, remainTime)
+          let sy = parseInt(remainTime / 1000)
+          let minute = parseInt(sy % 3600 / 60).toString().padStart(2, '0')
+          let second = parseInt(sy % 60).toString().padStart(2, '0')
+          this.remainTime = `${minute}:${second}`
+        }
       }
     }
   }

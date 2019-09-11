@@ -18,9 +18,9 @@ Message.install = function (Vue) {
     instance.title = config.title ? config.title : '提示'
     instance.description = config.description
     instance.visible = true
-    instance.onComfirm = config.onComfirm ? () => {
+    instance.onConfirm = config.onConfirm ? () => {
       instance.visible = false
-      config.onComfirm()
+      config.onConfirm()
     } : () => { instance.visible = false }
     instance.onCancel = config.onCancel ? () => {
       instance.visible = false

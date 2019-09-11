@@ -11,7 +11,6 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import { Toast } from 'vant'
   import { payOrder } from '../service'
 
   export default {
@@ -34,10 +33,11 @@
         }
         let params = {customerGuid, payWay, orderNo}
         payOrder(params).then(res => {
-          Toast.success('订单支付成功')
-          setTimeout(() => {
-            this.$router.replace({name: '我的订单'})
-          }, 1500)
+          if (res) {
+            setTimeout(() => {
+              this.$router.replace({name: '我的订单'})
+            }, 1500)
+          }
         })
       }
     }

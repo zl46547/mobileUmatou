@@ -74,7 +74,7 @@
         }
         this.$message({
           description: '删除后订单无法还原,是否继续操作？',
-          onComfirm: () => {
+          onConfirm: () => {
             deleteGoods({productIds: [productId], customerGuid}).then(res => {
               if (res) {
                 Toast('删除成功')

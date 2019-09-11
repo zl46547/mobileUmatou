@@ -25,6 +25,8 @@
 </script>
 
 <style lang="less" scoped>
+  @import "../less/variables";
+
   header {
     position: fixed;
     left: 50%;
@@ -33,30 +35,23 @@
     background-color: #fff;
     max-width:640px;
     width:100%;
-    height: 45px;
+    height: 80rem/@baseFontSize;
     display: flex;
-    flex: 1;
     align-items: center;
     z-index: 999;
-    box-shadow: 0 0.5px 5px rgba(219, 219, 219, 0.48);
+    border-bottom: 1px solid rgba(219, 219, 219, 0.48);
     .icon-arrow-left{
-      width:50px;
+      width:60rem/@baseFontSize;
       text-align: center;
       cursor: pointer;
       display: block;
-      font-size:1.8rem;
+      font-size:40rem/@baseFontSize;
     }
     .title{
-      width:100%;
-      margin-left: -25px;
+      margin-left: -60rem/@baseFontSize;
+      flex: 1;
       text-align: center;
-      font-size:1.3rem;
-    }
-  }
-
-  @media screen and (min-width: 400px) {
-    header {
-      height: 50px;
+      font-size:30rem/@baseFontSize;
     }
   }
 </style>

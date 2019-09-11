@@ -43,7 +43,7 @@
           重新下单
         </Button>
         <Button v-show="orderItem.orderStatusCode==='PS'"
-                @click="goToComfirm(orderItem)"
+                @click="goToConfirm(orderItem)"
                 color="#f04a18"
                 size="small"
                 plain round
@@ -81,7 +81,7 @@
 <script type="text/ecmascript-6">
   import { ORDER_STATUS_NAME } from '../../../util/enum'
   import { Button, Toast } from 'vant'
-  import {deleteOrder, reOrder} from '../service'
+  import { deleteOrder, reOrder, confirmOrder } from '../service'
   import moment from 'moment'
 
   export default {
@@ -127,7 +127,7 @@
       goToReFund (val) {
         this.$message({
           description: '确认删除该订单？',
-          onComfirm () {
+          onConfirm () {
             // this.delOrder(val)
           }
         })
@@ -144,7 +144,7 @@
         }
         this.$message({
           description: '确认删除该订单？',
-          onComfirm () {
+          onConfirm () {
             deleteOrder({
               customerGuid,
               orderNo: orderItem.orderNo
@@ -179,7 +179,7 @@
         }
         this.$message({
           description: '确认重新下单？',
-          onComfirm () {
+          onConfirm () {
             reOrder({
               customerGuid,
               orderNo: orderItem.orderNo
@@ -199,31 +199,33 @@
       },
       /**
        * 确认收货
-       * @param val
+       * @param orderItem
        */
-      goToComfirm (val) {
+      goToConfirm (orderItem) {
+        let _this = this
+        let {user: {customerGuid}} = this.$store.state.login
+        if (!customerGuid) {
+          return false
+        }
+        let params = {
+          customerGuid,
+          orderNo: orderItem.orderNo
+        }
         this.$message({
           description: '是否确认收货？',
-          onComfirm () {
-            this.allOrders.forEach((t) => {
-              if (t.orderNo === val.orderNo) {
-                t.orderStatus = 'FS'
-                t.orderStatusName = '交易完成'
-              }
+          onConfirm () {
+            confirmOrder(params).then(res => {
+              _this.$emit('refresh')
             })
-            this.$store.commit('MY_ORDERS', {isUpdate: true, allOrders: val})
-            this.initData(this.selected)
           }
         })
       },
       /**
        * 评价
-       * @param val
+       * @param orderItem
        */
-      goToRate (val) {
-        val.orderStatus = 'CLOSE'
-        val.orderStatusName = '订单已关闭'
-        this.$router.push({path: '/rate'})
+      goToRate (orderItem) {
+        this.$router.push({path: '/rate', query: {orderNo: orderItem.orderNo}})
       }
     }
   }
@@ -287,11 +289,11 @@
       .footer-btn {
         Button {
           margin-right: 5rem/@baseFontSize;
-          &:last-of-type{
+          &:last-of-type {
             margin-right: 0;
           }
         }
-        .van-button__text{
+        .van-button__text {
           font-size: 24rem/@baseFontSize;
         }
         .van-button--small {

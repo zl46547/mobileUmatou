@@ -10,7 +10,7 @@
         </div>
         <div class="button">
           <div class="cancel" @click="onCancel">取消</div>
-          <div class="comfirm" @click="onComfirm">确定</div>
+          <div class="confirm" @click="onConfirm">确定</div>
         </div>
       </main>
     </div>
@@ -23,10 +23,10 @@
     props: ['title', 'description', 'visible'],
     methods: {
       onCancel() {
-        this.$emit('is-comfirm', false)
+        this.$emit('is-confirm', false)
       },
-      onComfirm() {
-        this.$emit('is-comfirm', true)
+      onConfirm() {
+        this.$emit('is-confirm', true)
       }
     }
   }
@@ -72,7 +72,7 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          .cancel, .comfirm {
+          .cancel, .confirm {
             width: 30%;
             padding: 15rem/@baseFontSize;
             text-align: center;
@@ -85,7 +85,7 @@
             border: 1px solid @themeColor;
             color: @themeColor;
           }
-          .comfirm {
+          .confirm {
             color: #fff;
             background-color: @themeColor;
           }

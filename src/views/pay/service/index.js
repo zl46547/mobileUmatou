@@ -2,6 +2,7 @@ import {
   getOrderDetailRequest,
   payOrderRequest
 } from '../api'
+import {Toast} from 'vant'
 
 /**
  * 获取优惠券列表
@@ -22,11 +23,12 @@ export const payOrder = async params => {
   try {
     let {data} = await payOrderRequest(params)
     if (data.Data) {
+      Toast.success('订单支付成功')
       return data.Data
     }
-    return null
+    Toast.fail('订单支付失败')
   } catch (e) {
-    console.log(e)
-    return null
+    Toast.fail('订单支付异常')
+    console.error(e)
   }
 }

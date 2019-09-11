@@ -6,6 +6,7 @@ import axios from '../../../http/api'
  */
 export const getOrderDetailRequest = params => {
   return axios({
+    showLoading: true,
     method: 'get',
     url: '/orders/getOrderDetail',
     params

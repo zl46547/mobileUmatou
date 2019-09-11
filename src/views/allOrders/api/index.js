@@ -24,13 +24,25 @@ export const deleteOrderRequest = data => {
   })
 }
 /**
- * 删除订单
+ * 重新下单
  * @param data
  */
 export const reOrderRequest = data => {
   return axios({
     method: 'POST',
     url: '/orders/reOrder',
+    data
+  })
+}
+
+/**
+ * 确认订单
+ * @param data
+ */
+export const confirmOrderRequest = data => {
+  return axios({
+    method: 'POST',
+    url: '/orders/confirmOrder',
     data
   })
 }

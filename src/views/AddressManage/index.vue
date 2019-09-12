@@ -51,43 +51,43 @@
         if (!customerGuid) {
           return false
         }
-        try {
-          getAddressList({customerGuid}).then(res => {
-            if (addressSelected) {
-              res = res.map(item => {
-                item.isDefault = item._id === addressSelected._id
-                return item
-              })
-            }
-            this.addressList = res
-          })
-        } catch (e) {
-          console.log(e)
-        }
+        getAddressList({customerGuid}).then(res => {
+          if (addressSelected) {
+            res = res.map(item => {
+              item.isDefault = item._id === addressSelected._id
+              return item
+            })
+          }
+          this.addressList = res
+        })
       }
     }
   }
 </script>
 
 <style lang="less" scoped>
+  @import "../../less/variables";
+
   #address-manage {
     display: flex;
     flex-direction: column;
     height: 100vh;
     .content {
-      margin-top: 45px;
+      margin-top: 80rem/@baseFontSize;
       background-color: #f2f2f2;
       flex: 1;
-      overflow-y: scroll;
+      overflow-y: auto;
       -webkit-overflow-scrolling: touch;
     }
     .add-address {
-      border-radius: 6px;
-      background-color: #49aa34;
+      cursor: pointer;
+      height: 70rem/@baseFontSize;;
+      line-height: 70rem/@baseFontSize;;
+      border-radius: 5rem/@baseFontSize;
+      background-color: @themeColor;
       color: #fff;
       text-align: center;
-      font-size: 1.2rem;
-      padding: 1rem;
+      font-size: 22rem/@baseFontSize;;
     }
   }
 </style>

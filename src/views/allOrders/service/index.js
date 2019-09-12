@@ -10,11 +10,16 @@ import {Toast} from 'vant'
  * @param params
  */
 export const getOrderList = async params => {
-  let {data} = await getOrderListRequest(params)
-  if (data.Data) {
-    return data.Data
+  try {
+    let {data} = await getOrderListRequest(params)
+    if (data.Data) {
+      return data.Data
+    }
+    return []
+  } catch (e) {
+    Toast.fail('获取订单列表异常！')
+    console.error(e)
   }
-  return []
 }
 
 /**
@@ -22,11 +27,18 @@ export const getOrderList = async params => {
  * @param params
  */
 export const deleteOrder = async params => {
-  let {data} = await deleteOrderRequest(params)
-  if (data.Data) {
-    return data.Data
+  try {
+    let {data} = await deleteOrderRequest(params)
+    if (data.Data) {
+      Toast.success('订单删除成功！')
+      return data.Data
+    }
+    Toast.fail('订单删除失败！')
+    return null
+  } catch (e) {
+    Toast.fail('订单删除异常！')
+    console.error(e)
   }
-  return null
 }
 
 /**
@@ -34,11 +46,18 @@ export const deleteOrder = async params => {
  * @param params
  */
 export const reOrder = async params => {
-  let {data} = await reOrderRequest(params)
-  if (data.Data) {
-    return data.Data
+  try {
+    let {data} = await reOrderRequest(params)
+    if (data.Data) {
+      Toast.success('重新下单成功！')
+      return data.Data
+    }
+    Toast.fail('重新下单失败！')
+    return null
+  } catch (e) {
+    Toast.fail('重新下单异常！')
+    console.error(e)
   }
-  return null
 }
 
 /**

@@ -80,7 +80,7 @@
 
 <script type="text/ecmascript-6">
   import { ORDER_STATUS_NAME } from '../../../util/enum'
-  import { Button, Toast } from 'vant'
+  import { Button } from 'vant'
   import { deleteOrder, reOrder, confirmOrder } from '../service'
   import moment from 'moment'
 
@@ -150,12 +150,8 @@
               orderNo: orderItem.orderNo
             }).then(res => {
               if (res) {
-                Toast.success('删除成功')
                 _this.$emit('refresh')
               }
-            }).catch(err => {
-              Toast.fail(err)
-              console.log(err)
             })
           }
         })
@@ -185,14 +181,10 @@
               orderNo: orderItem.orderNo
             }).then(res => {
               if (res) {
-                Toast.success('重新下单成功')
                 setTimeout(() => {
                   _this.$router.push({path: '/car'})
                 }, 2000)
               }
-            }).catch(err => {
-              Toast.fail('重新下单失败')
-              console.log(err)
             })
           }
         })

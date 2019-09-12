@@ -4,6 +4,7 @@
       <span slot="title">{{navigatorTitle}}</span>
     </Navigator>
     <div class="content">
+
       <CellGroup>
         <Field
           v-model="params.contactName"
@@ -196,19 +197,13 @@
           if (id) {
             updateAddress({...this.params, id}).then(res => {
               if (res) {
-                Toast.success('编辑成功')
                 this.$router.go(-1)
-              } else {
-                Toast.fail('编辑失败')
               }
             })
           } else {
             addAddress({customerGuid, ...this.params}).then(res => {
               if (res) {
-                Toast.success('添加成功')
                 this.$router.go(-1)
-              } else {
-                Toast.fail('添加失败')
               }
             })
           }
@@ -221,26 +216,19 @@
 </script>
 
 <style lang="less" scoped>
+  @import "../../less/variables";
+
   #add-address {
     display: flex;
     flex-direction: column;
     height: 100vh;
 
     .content {
-      margin-top: 45px;
+      margin-top: 80rem/@baseFontSize;
       background-color: #f2f2f2;
       flex: 1;
-      overflow-y: scroll;
+      overflow-y: auto;
       -webkit-overflow-scrolling: touch;
-
-      .van-cell__title {
-        max-width: 90px;
-      }
-
-      .van-cell__value {
-        text-align: left;
-      }
-
       input, textarea{
         color: #323233;
         width: 100%;
@@ -248,21 +236,39 @@
           color: #969799;
         }
       }
+
       input:disabled {
         background-color: #fff;
       }
+
+      .van-cell__title{
+        width: 90px;
+        flex: none;
+      }
+
+      .van-cell__value {
+        text-align: left;
+      }
+
+      .van-cell{
+        font-size: 22rem/@baseFontSize;
+        padding: 20rem/@baseFontSize 30rem/@baseFontSize;
+      }
+
       .van-field__control {
-        font-size: 1.2rem;
+        font-size: 22rem/@baseFontSize;;
       }
     }
 
     .add-address-btn {
-      border-radius: 6px;
-      background-color: #49aa34;
+      cursor: pointer;
+      border-radius: 5rem/@baseFontSize;;
+      background-color: @themeColor;
       color: #fff;
       text-align: center;
-      font-size: 1.2rem;
-      padding: 1rem;
+      font-size: 22rem/@baseFontSize;
+      height: 70rem/@baseFontSize;
+      line-height: 70rem/@baseFontSize;
     }
   }
 </style>

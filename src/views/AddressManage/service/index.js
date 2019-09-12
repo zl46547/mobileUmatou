@@ -7,9 +7,13 @@ import {
  * @param parmas
  */
 export const getAddressList = async parmas => {
-  let res = await getAddressListRequest(parmas)
-  if (res.data.Data) {
-    return res.data.Data
+  try {
+    let res = await getAddressListRequest(parmas)
+    if (res.data.Data) {
+      return res.data.Data
+    }
+    return null
+  } catch (e) {
+    console.error(e)
   }
-  return null
 }

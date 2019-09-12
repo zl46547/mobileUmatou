@@ -1,6 +1,6 @@
 <template>
   <div id="functionList">
-    <div class="function" v-for="item in functionList" :key="item.id" @click="showFunction()">
+    <div class="function" v-for="item in functionList" :key="item.id" @click="showFunction(item)">
       <i class="iconfont" :class="item.icon" :style="{'color':item.color}"></i>
       <p>{{item.name}}</p>
     </div>
@@ -63,7 +63,11 @@
       }
     },
     methods: {
-      showFunction() {
+      showFunction(item) {
+        if (item.name === '地址管理') {
+          this.$router.push({name: '地址管理', params: {type: 1}})
+          return false
+        }
         Toast({
           message: '该功能暂未开发'
         })

@@ -1,5 +1,5 @@
 <template>
-  <div class="address-item" @click="handleClick">
+  <div class="address-item van-hairline--bottom" @click="handleClick">
     <!-- 编辑状态不显示checkbox -->
     <div class="checkbox-left" v-if="!type">
       <i class="iconfont icon-checkbox-blank" v-if="!addressItem.isDefault"></i>
@@ -76,8 +76,9 @@
 </script>
 
 <style lang="less" scoped>
+  @import "../../../less/variables";
+
   .address-item {
-    border-bottom: 1px solid #eee;
     background-color: #fff;
     display: flex;
     align-items: center;
@@ -88,30 +89,31 @@
       cursor: pointer;
 
       .icon-checkbox-blank {
-        font-size: 1.5rem;
+        font-size: 30rem/@baseFontSize;
         color: #b1b1b1;
       }
 
       .icon-checkbox-marked {
-        font-size: 1.5rem;
-        color: #00d300;
+        font-size: 30rem/@baseFontSize;
+        color: @themeColor;
       }
     }
     .icon-location, .icon-edit {
       display: block;
-      width: 3rem;
+      width: 60rem/@baseFontSize;
       text-align: center;
-      font-size: 1.5rem;
+      font-size: 30rem/@baseFontSize;
+      cursor: pointer;
     }
     .checkbox-right {
       flex: 1;
-      padding: 1rem;
+      padding: 20rem/@baseFontSize;
       p {
         &:nth-of-type(1) {
-          font-size: 1.2rem;
+          font-size: 24rem/@baseFontSize;
           font-weight: bold;
           color: #666;
-          margin-bottom: 0.5rem;
+          margin-bottom: 10rem/@baseFontSize;
         }
         &:nth-of-type(2) {
           color: #b1b1b1;

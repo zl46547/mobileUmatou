@@ -22,4 +22,7 @@
 
 <style lang="less">
   @import "./less/index.less";
+  #app{
+    overflow: hidden;
+  }
 </style>

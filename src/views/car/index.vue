@@ -1,30 +1,29 @@
 <template>
-  <div id="car">
-    <v-navigator>
+  <div id="cart">
+    <Navigator>
       <span slot="title">购物车</span>
-    </v-navigator>
-    <v-car-list></v-car-list>
-    <v-footer></v-footer>
+    </Navigator>
+    <CarList></CarList>
+    <Footer></Footer>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import Navigator from '../../common/navigator.vue'
-  import CarList from './components/carList.vue'
-  import Footer from '../../common/footer/index.vue'
+  import Navigator from '../../common/navigator'
+  import CarList from './components/carList'
+  import Footer from '../../common/footer'
   export default {
     components: {
-      'VCarList': CarList,
-      'VNavigator': Navigator,
-      'VFooter': Footer
+      CarList,
+      Navigator,
+      Footer
     }
   }
 </script>
 
 <style scoped>
-  #car {
+  #cart{
+    height: 100vh;
     background-color: #f2f2f2;
-    overflow: hidden;
-    width: 100%;
   }
 </style>

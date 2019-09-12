@@ -1,14 +1,15 @@
 <template>
-  <div id="cars">
-    <div class="groupCarList" v-if="groupCarList.length>0">
-      <div class="carList" v-for="(groupItem,groupIndex) in groupCarList" :key="groupIndex">
-        <CardItem
-          :groupItem="groupItem"
-          @handle-checkbox-click="handleCheckboxClick"
-          @del-refresh="delRefresh"
-          @change-number="changeNumber"
-        />
-      </div>
+  <div class="cart-list">
+    <div class="group-carList"
+         v-for="(groupItem,groupIndex) in groupCarList"
+         :key="groupIndex"
+    >
+      <CardItem
+        :groupItem="groupItem"
+        @handle-checkbox-click="handleCheckboxClick"
+        @del-refresh="delRefresh"
+        @change-number="changeNumber"
+      />
     </div>
 
     <!-- 购物车为空 -->
@@ -36,12 +37,12 @@
       CartEmpty,
       TotalCount
     },
-    mounted() {
+    created() {
       let {user: {customerGuid}} = this.$store.state.login
       if (!customerGuid) {
         return false
       }
-      this.getCarList(customerGuid)
+      this.initCarList(customerGuid)
     },
     data() {
       return {
@@ -52,8 +53,10 @@
       /**
        * 获取购物车列表
        */
-      async getCarList(customerGuid) {
-        this.carList = await getCartList({customerGuid})
+      initCarList(customerGuid) {
+        getCartList(customerGuid).then(res => {
+          this.carList = res
+        })
       },
       /**
        * 复选框点击
@@ -136,6 +139,9 @@
        * @returns {*}
        */
       groupCarList() {
+        if (this.carList.length <= 0) {
+          return []
+        }
         return this.carList.groupBy(item => {
           return item.productInfo.financeCName
         }).map(groupItemList => {
@@ -151,31 +157,16 @@
 </script>
 
 <style lang="less" scoped>
-  #cars {
-    overflow: hidden;
-    margin-top: 45px;
+  @import "../../../less/variables";
 
-    .groupCarList {
-      margin: 0 10px;
-      height: calc(100vh - 145px);
-
-      &::-webkit-scrollbar {
-        display: none
-      }
-
-      overflow-y: scroll;
-      -webkit-overflow-scrolling: touch;
+  .cart-list {
+    margin-top: 80rem/@baseFontSize;
+    height: calc(100% - 12.5rem);
+    &::-webkit-scrollbar {
+      display: none
     }
-  }
 
-  @media screen and (min-width: 400px) {
-    #cars {
-      margin-top: 50px;
-
-      .groupCarList {
-        margin: 0 18px;
-        height: calc(100vh - 160px);
-      }
-    }
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 </style>

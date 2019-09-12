@@ -49,7 +49,7 @@
         this.$store.commit('SELECT_MENU', val)
       }
     },
-    mounted () {
+    created () {
       this.selected = this.$store.state.common.selectMenu
       let routerName = this.$route.name
       switch (routerName) {
@@ -77,8 +77,7 @@
     background-color: #fff;
     width: 100%;
     max-width: 640px;
-    min-width: 320px;
-    height: 100rem/@baseFontSize;
+    height: 90rem/@baseFontSize;
     position: fixed;
     bottom: 0;
     left: 50%;
@@ -95,7 +94,7 @@
         text-align: center;
         cursor: pointer;
         .iconfont {
-          font-size: 40rem/@baseFontSize;
+          font-size: 36rem/@baseFontSize;
           display: block;
         }
         .tabbar-item-name {

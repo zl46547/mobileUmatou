@@ -2,13 +2,13 @@ import axios from '../../../http/api'
 
 /**
  * 获取购物车列表
- * @param params
+ * @param customerGuid
  */
-export const getCartListRequest = params => {
+export const getCartListRequest = customerGuid => {
   return axios({
     method: 'get',
     url: '/shoppingCart/getCartList',
-    params
+    params: {customerGuid}
   })
 }
 

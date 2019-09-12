@@ -1,14 +1,8 @@
 <template>
-  <div id="cartEmpty">
-    <div>
-      <img src="../../../assets/images/emptyCart.png" mode="widthFix"/>
-      <div class="state">您的购物车空空如也</div>
-      <div>
-        <div class="goToShop" @click="goHome">
-          <p>去逛逛</p>
-        </div>
-      </div>
-    </div>
+  <div class="cart-empty">
+    <img src="../../../assets/images/emptyCart.png"/>
+    <div class="state">您的购物车空空如也</div>
+    <p class="go-home-btn" @click="goHome">去逛逛</p>
   </div>
 </template>
 
@@ -24,39 +18,30 @@
 </script>
 
 <style lang="less" scoped>
-  #cartEmpty {
-    height: calc(100vh - 100px);
-    display: flex;
-    > div {
-      margin: auto;
-      image {
-        width: 100%;
-      }
-      .state {
-        color: #ccc;
-        width: 100%;
-        text-align: center;
-        font-size: 1.45rem;
-      }
-      > div {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        margin-top: 2vh;
-        .goToShop {
-          font-size: 1.3rem;
-          cursor: pointer;
-          display: flex;
-          width: 25%;
-          height: 6vh;
-          border-radius: 5px;
-          color: #fff;
-          background-color: #49aa34;
-          p {
-            margin: auto
-          }
-        }
-      }
+  @import "../../../less/variables";
+
+  .cart-empty {
+    img {
+      margin: 15% auto 0;
+      display: block;
+    }
+    .state {
+      color: #ccc;
+      width: 100%;
+      text-align: center;
+      font-size: 26rem/@baseFontSize;
+    }
+    .go-home-btn {
+      margin: 20rem/@baseFontSize auto;
+      line-height: 60rem/@baseFontSize;
+      border-radius: 5rem/@baseFontSize;
+      font-size: 22rem/@baseFontSize;
+      background-color: @themeColor;
+      width: 130rem/@baseFontSize;
+      height: 60rem/@baseFontSize;
+      text-align: center;
+      cursor: pointer;
+      color: #fff;
     }
   }
 </style>

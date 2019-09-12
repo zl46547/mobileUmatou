@@ -1,20 +1,18 @@
 <template>
   <div id="totalCount" v-if="carList.length>0">
-    <div>
-      <div class="checkAll">
-        <div class="checkAll-btn" @click="checkAll">
-          <i class="iconfont icon-checkbox-blank" v-if="!checkAllStatus"></i>
-          <i class="iconfont icon-checkbox-marked" v-if="checkAllStatus"></i>
-          <span>全选</span>
-        </div>
-        <div class="allPrice">
-          <span class="count">合计：</span>
-          <span class="money">¥{{lastTotalMoney}}</span>
-        </div>
-      </div>
-      <div class="count-btn" @click="goToAccount">
-        <div><span>去结算</span><span>（{{checkCount}}）</span></div>
-      </div>
+    <div class="checkAll-btn" @click="checkAll">
+      <i class="iconfont" :class="{
+          'icon-checkbox-blank':!checkAllStatus,
+          'icon-checkbox-marked':checkAllStatus
+        }"></i>
+      <span>全选</span>
+    </div>
+    <div class="allPrice">
+      <span class="label">合计：</span>
+      <span class="money">¥{{lastTotalMoney}}</span>
+    </div>
+    <div class="count-btn" @click="goToAccount">
+      <span>去结算</span><span>({{checkCount}})</span>
     </div>
   </div>
 </template>
@@ -71,113 +69,58 @@
 </script>
 
 <style lang="less" scoped>
+  @import "../../../less/variables";
+
   #totalCount {
     width: 100%;
-    height: 45px;
+    height: 80rem/@baseFontSize;
     background-color: #fff;
     position: fixed;
-    bottom: 55px;
+    bottom: 90rem/@baseFontSize;
     left: 50%;
     max-width: 640px;
     transform: translateX(-50%);
-    box-shadow: 0 -0.5px 20px rgb(221, 221, 221);
-    > div {
-      height: 100%;
-      display: flex;
-      justify-content: space-between;
-      .checkAll {
-        display: flex;
-        align-items: center;
-        padding-left: 3%;
-        .checkAll-btn {
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          white-space: nowrap;
-          .icon-checkbox-blank {
-            font-size: 1.5rem;
-            color: #b1b1b1;
-          }
-          .icon-checkbox-marked {
-            font-size: 1.5rem;
-            color: #00d300;
-          }
-          span {
-            margin-left: 5px;
-            margin-right: 5px;
-            font-size: 1.3rem;
-            padding-left: 1%;
-          }
-        }
-        .allPrice {
-          display: flex;
-          align-items: baseline;
-          white-space: nowrap;
-          .count {
-            padding-left: 5%;
-            font-size: 1.38rem;
-          }
-          .money {
-            font-size: 1.3rem;
-            color: #ff2b1c;
-            display: table-cell;
-            vertical-align: bottom
-          }
-        }
+    border-top: 1px solid rgb(221, 221, 221);
+    display: flex;
+    align-items: center;
+    .checkAll-btn {
+      width: 120rem/@baseFontSize;
+      text-align: center;
+      cursor: pointer;
+      .iconfont{
+        font-size: 30rem/@baseFontSize;
       }
-      .count-btn {
-        cursor: pointer;
-        background-color: #ff822a;
-        color: #fff;
-        height: 100%;
-        display: flex;
-        text-align: center;
-        width: 25%;
-        font-size: 1.1rem;
-        > div {
-          margin: auto
-        }
+      .icon-checkbox-blank {
+        color: #b1b1b1;
+      }
+      .icon-checkbox-marked {
+        color: @themeColor;
+      }
+      span {
+        margin-left: 5rem/@baseFontSize;
+        font-size: 26rem/@baseFontSize;
       }
     }
-  }
-
-  @font-face {
-    font-family: 'iconfont';
-    src: url(data:font/truetype;charset=utf-8;base64,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) format('truetype');
-    font-weight: normal;
-    font-style: normal;
-  }
-
-  @media screen and (min-width: 400px) {
-    #totalCount {
-      height: 55px;
-      > div {
-        .checkAll {
-          .checkAll-btn {
-            .icon-uncheck {
-              font-size: 1.8rem;
-            }
-            .icon-checked {
-              font-size: 1.8rem;
-            }
-            span {
-              font-size: 1.6rem;
-            }
-          }
-          .allPrice {
-            .count {
-              font-size: 1.5rem;
-            }
-            .money {
-              font-size: 1.4rem;
-            }
-          }
-        }
-        .count-btn {
-          white-space: nowrap;
-          font-size: 1.3rem;
-        }
+    .allPrice {
+      flex: 1;
+      margin-left: 10rem/@baseFontSize;
+      font-size: 26rem/@baseFontSize;
+      display: flex;
+      align-items: baseline;
+      white-space: nowrap;
+      .money {
+        color: @priceColor;
       }
+    }
+    .count-btn {
+      cursor: pointer;
+      background-color: @themeColor;
+      color: #fff;
+      text-align: center;
+      height: 100%;
+      line-height: 80rem/@baseFontSize;
+      width: 150rem/@baseFontSize;
+      font-size: 24rem/@baseFontSize;
     }
   }
 </style>

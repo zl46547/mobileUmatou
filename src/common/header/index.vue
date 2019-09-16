@@ -42,12 +42,12 @@
     border-bottom: 1px solid rgba(219, 219, 219, 0.48);
     .address{
       margin-left: 10rem/@baseFontSize;
-      font-size: 30rem/@baseFontSize;
+      font-size: 26rem/@baseFontSize;
       white-space: nowrap;
     }
     .icon-arrow-down {
       padding-left: 7rem/@baseFontSize;
-      font-size: 34rem/@baseFontSize;
+      font-size: 30rem/@baseFontSize;
     }
     .search {
       margin-left: 10rem/@baseFontSize;

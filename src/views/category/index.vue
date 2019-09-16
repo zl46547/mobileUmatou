@@ -1,45 +1,38 @@
 <template>
   <div id="category">
-    <v-header></v-header>
-    <div class="div">
-      <v-aside></v-aside>
+    <Header></Header>
+    <div class="category-container">
+      <Aside></Aside>
       <router-view></router-view>
     </div>
-    <v-footer></v-footer>
+    <Footer></Footer>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import Header from '@/common/header/index.vue'
-  import Footer from '@/common/footer/index.vue'
-  import Aside from './components/aside.vue'
-  import Main from './components/main.vue'
+  import Header from '../../common/header'
+  import Footer from '../../common/footer'
+  import Aside from './components/aside'
 
   export default {
     components: {
-      'VAside': Aside,
-      'VHeader': Header,
-      'VFooter': Footer,
-      'VMain': Main
+      Aside,
+      Header,
+      Footer
     }
   }
 </script>
 
 <style lang="less" scoped>
+  @import "../../less/variables";
+
   #category {
     width: 100%;
-    height: 100%;
-    overflow-y: hidden;
-    .div {
+    height: 100vh;
+    .category-container {
+      height: calc(100% - 9.5rem);
       display: flex;
-      margin-top: 55px;
-    }
-  }
-  @media screen and (min-width: 400px) {
-    #category {
-      .div {
-        margin-top: 60px;
-      }
+      margin-top: 100rem/@baseFontSize;
     }
   }
 </style>

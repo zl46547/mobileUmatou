@@ -33,7 +33,7 @@
   #user {
     height: 100vh;
     .content {
-      background-color: #f2f2f2;
+      /*background-color: #f2f2f2;*/
       height: calc(100% - 5rem);
       &::-webkit-scrollbar {
         display: none

@@ -24,5 +24,6 @@
   @import "./less/index.less";
   #app{
     overflow: hidden;
+    background-color: #ebebeb;
   }
 </style>

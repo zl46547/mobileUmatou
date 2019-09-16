@@ -74,7 +74,7 @@
     height: 100vh;
     .content {
       margin-top: 80rem/@baseFontSize;
-      background-color: #f2f2f2;
+      /*background-color: #f2f2f2;*/
       flex: 1;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;

@@ -135,7 +135,7 @@
 
 <style lang="less" scoped>
   #submitOrder {
-    background-color: #f2f2f2;
+    /*background-color: #f2f2f2;*/
     overflow: hidden;
     width: 100%;
     .content-body {

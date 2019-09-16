@@ -44,7 +44,7 @@
 <style lang="less" scoped>
   #get-coupons {
     .content {
-      background-color: #f2f2f2;
+      /*background-color: #f2f2f2;*/
       height: calc(100vh - 55px);
       &::-webkit-scrollbar {
         display: none

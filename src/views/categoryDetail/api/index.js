@@ -10,3 +10,14 @@ export const getCategoryDetailRequest = params => {
     params
   })
 }
+
+/**
+ * 加入购物车
+ */
+export const addGoodsRequest = data => {
+  return axios({
+    method: 'post',
+    url: '/shoppingCart/addGoods',
+    data
+  })
+}

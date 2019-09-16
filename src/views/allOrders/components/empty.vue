@@ -37,7 +37,7 @@
       width:120px;
       height:120px;
       border-radius: 50%;
-      background-color: #d6d6d6;
+      /*background-color: #d6d6d6;*/
       margin: 0 auto;
       margin-top: 16%;
       .iconfont {

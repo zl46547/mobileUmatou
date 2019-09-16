@@ -53,7 +53,6 @@
     width: 22%;
     height: 100%;
     overflow-y: auto;
-    background-color: rgb(247, 247, 247);
     &::-webkit-scrollbar {
       display: none;
     }

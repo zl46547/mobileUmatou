@@ -1,23 +1,19 @@
 <template>
-  <div class="backToTop" @click="backToTop()">
+  <div class="backToTop" @click="toTop()">
     <i class="icon iconfont icon-scrollTop"></i>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+import utils from '../../../util/common'
 
   export default {
     methods: {
-      backToTop () {
-        let timer = setInterval(() => {
-          var top = document.getElementsByClassName('content')[0].scrollTop
-          let speed = Math.ceil(top / 5)
-          document.getElementsByClassName('content')[0].scrollTop = top - speed
-          if (top === 0) {
-            this.$emit('hide', false)
-            clearInterval(timer)
-          }
-        }, 20)
+      toTop () {
+        let dom = document.getElementsByClassName('content')[0]
+        utils.backToTop(dom, () => {
+          this.$emit('hide', false)
+        })
       }
     }
   }

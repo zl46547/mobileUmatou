@@ -52,7 +52,7 @@
         return this.timeOut
       }
     },
-    mounted () {
+    created () {
       this.formateTime()
       this.getFlashSaleData()
     },

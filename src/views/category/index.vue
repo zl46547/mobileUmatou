@@ -29,6 +29,7 @@
   #category {
     width: 100%;
     height: 100vh;
+    background-color: #fff;
     .category-container {
       height: calc(100% - 9.5rem);
       display: flex;

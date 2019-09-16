@@ -3,10 +3,9 @@
     <div class="defaultHome-item"
          v-for="(item,itemId) in defaultHomeData"
          :key="itemId"
-         v-if="defaultHomeData"
     >
       <!-- 左上下 -->
-      <div class="flex" v-if="item.FloorType == 1">
+      <div class="flex" v-if="item.FloorType === 1">
         <div>
           <img v-lazy="item.PicAdvItems[0].BackGroundImg" alt="" class="width-50"/>
         </div>
@@ -16,7 +15,7 @@
         </div>
       </div>
       <!-- 上下右 -->
-      <div class="flex" v-if="item.FloorType == 2">
+      <div class="flex" v-if="item.FloorType === 2">
         <div>
           <img v-lazy="item.PicAdvItems[0].BackGroundImg" alt="" class="width-50"/>
           <img v-lazy="item.PicAdvItems[1].BackGroundImg" alt="" class="width-50"/>
@@ -26,12 +25,12 @@
         </div>
       </div>
       <!-- 一列 -->
-      <div v-if="item.FloorType == 7">
+      <div v-if="item.FloorType === 7">
         <img v-lazy="item.PicAdvItems[0].BackGroundImg" alt="" class="width-100"
              @click="goToJump(item.FloorType,item.PicAdvItems[0])"/>
       </div>
       <!-- 两列 -->
-      <div class="flex" v-if="item.FloorType == 6">
+      <div class="flex" v-if="item.FloorType === 6">
         <div class="width-50">
           <img v-lazy="item.PicAdvItems[0].BackGroundImg" alt=""
                @click="goToJump(item.FloorType,item.PicAdvItems[0])"/>
@@ -42,7 +41,7 @@
         </div>
       </div>
       <!-- 三列 -->
-      <div class="flex" v-if="item.FloorType == 4">
+      <div class="flex" v-if="item.FloorType === 4">
         <div class="width-33">
           <img v-lazy="item.PicAdvItems[0].BackGroundImg"
                @click="goToJump(item.FloorType,item.PicAdvItems[0])"/>
@@ -57,7 +56,7 @@
         </div>
       </div>
       <!-- 横向滚动 -->
-      <div class="flex" v-if="item.FloorType == 12">
+      <div class="flex" v-if="item.FloorType === 12">
         <div class="scroll-div">
           <div class="scroll-div-item" v-for="(scrollItem,scrollItemIndex) in item.ProductItems" :key="scrollItemIndex"
                @click="goToJump(item.FloorType,scrollItem)">
@@ -79,7 +78,7 @@
         </Swipe>
       </div>
       <!-- 发现更多 -->
-      <div class="flex flex-wrap find-more" v-if="item.FloorType == 15">
+      <div class="flex flex-wrap find-more" v-if="item.FloorType === 15">
         <div v-for="(k,kId) in item.CategoryProductItems[0].ProductItems" class="width-50" :key="kId">
           <img v-lazy="'http://picpro-sz.34580.com/sz/ImageUrl/'+k.PictureId+'/500.jpeg'" class="width-50"
                @click="goToJump(item.FloorType,k)"/>
@@ -96,14 +95,14 @@
   export default {
     data() {
       return {
-        defaultHomeData: ''
+        defaultHomeData: []
       }
     },
     components: {
       Swipe,
       SwipeItem
     },
-    mounted() {
+    created() {
       this.initDefaultHome()
     },
     methods: {
@@ -113,8 +112,6 @@
       initDefaultHome() {
         getDefaultHome().then((res) => {
           this.defaultHomeData = res.FloorInfo.ConfigHomeFloors
-        }).catch(error => {
-          console.log(error)
         })
       },
       /**
@@ -133,13 +130,13 @@
               this.goToTopicActivity(picAdvItems.JumpValue)
             } else {
               Toast({
-                message: '该功能暂未开发'
+                message: '该活动已下架'
               })
             }
             break
           case 2:
             Toast({
-              message: '该功能暂未开发'
+              message: '该活动已下架'
             })
             break
           case 4:

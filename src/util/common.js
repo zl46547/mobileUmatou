@@ -118,5 +118,23 @@ export default {
         }, time)
       }
     }
+  },
+  /**
+   * 回到顶部
+   * @param dom
+   * @param callback
+   */
+  backToTop (dom, callback) {
+    let timer = setInterval(() => {
+      var top = dom.scrollTop
+      let speed = Math.ceil(top / 5)
+      dom.scrollTop = top - speed
+      if (top === 0) {
+        if (callback) {
+          callback()
+        }
+        clearInterval(timer)
+      }
+    }, 20)
   }
 }

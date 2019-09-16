@@ -60,12 +60,11 @@
   @import "../../less/variables";
 
   #home {
-    height: 100vh;
     position: relative;
     overflow: hidden;
     .content {
       margin-top: 100rem/@baseFontSize;
-      height: calc(100% - 10rem);
+      height: calc(100vh - 9.5rem);
       &::-webkit-scrollbar {
       display: none
       }

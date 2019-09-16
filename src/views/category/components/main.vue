@@ -37,6 +37,7 @@
 <script type="text/ecmascript-6">
   import { Toast } from 'vant'
   import Swiper from './swiper'
+  import utils from '../../../util/common'
   import {
     getHotCategory,
     getSubCategory,
@@ -90,7 +91,7 @@
         getHotCategory().then((res) => {
           this.category = res.HotCategoryList
           this.randerAdvertise = this.allAdvertise
-          this.$refs.categoryMain.scrollTop = 0
+          utils.backToTop(this.$refs.categoryMain)
         })
       },
       /**
@@ -102,7 +103,7 @@
         getSubCategory({id}).then((res) => {
           this.category = res.SubCategories
           this.randerAdvertise = this.allAdvertise.filter(item => item.CategotyId === id)
-          this.$refs.categoryMain.scrollTop = 0
+          utils.backToTop(this.$refs.categoryMain)
         })
       },
       /**

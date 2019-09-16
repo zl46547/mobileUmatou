@@ -15,7 +15,7 @@
                @click="handleSwipoer(item)"
           >
             <img :src="item.URL"/>
-            <p class="menuName">{{item.Name}}</p>
+            <p class="menu-name">{{item.Name}}</p>
           </div>
         </SwipeItem>
         <SwipeItem class="swiper-item">
@@ -26,7 +26,7 @@
                @click="handleSwipoer(item)"
           >
             <img :src="item.URL"/>
-            <p class="menuName">{{item.Name}}</p>
+            <p class="menu-name">{{item.Name}}</p>
           </div>
         </SwipeItem>
     </Swipe>
@@ -116,7 +116,7 @@
         cursor: pointer;
       }
     }
-    .menuName {
+    .menu-name {
       width: 100%;
       margin-top: 20rem/@baseFontSize;
       font-size: 24rem/@baseFontSize;

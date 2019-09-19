@@ -48,13 +48,11 @@
   @import "../../../less/variables";
 
   .footer {
-    position: fixed;
+    position: absolute;
     bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
     border-top: 1px solid rgb(221, 221, 221);
     width: 100%;
-    max-width: 640px;
     .footer-btn {
       height: 100rem/@baseFontSize;
       line-height: 100rem/@baseFontSize;

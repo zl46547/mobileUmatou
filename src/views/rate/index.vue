@@ -160,7 +160,6 @@
       height: 80rem/@baseFontSize;
       line-height: 80rem/@baseFontSize;
       text-align: center;
-      max-width: 640px;
       background-color: @themeColor;
     }
     .van-rate__icon{

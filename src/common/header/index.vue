@@ -27,13 +27,10 @@
   @import "../../less/variables";
 
   header {
-    position: fixed;
-    left: 50%;
+    position: absolute;
+    left: 0;
     top: 0;
-    transform: translateX(-50%);
     background-color: #fff;
-    max-width:640px;
-    min-width: 320px;
     width:100%;
     height: 100rem/@baseFontSize;
     display: flex;

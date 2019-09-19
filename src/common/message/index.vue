@@ -36,11 +36,9 @@
   @import "../../less/variables";
 
   .mask {
-    max-width: 640px;
-    min-width: 320px;
     width: 100%;
-    z-index: 999;
-    position: fixed;
+    z-index: 9999;
+    position: absolute;
     left: 50%;
     transform: translateX(-50%);
     right: 0;

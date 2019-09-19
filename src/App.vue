@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <transition name="slide-fade" mode="out-in">
+      <router-view></router-view>
+    </transition>
     <Loading v-show="fetchLoading"></Loading>
   </div>
 </template>
@@ -23,7 +25,22 @@
 <style lang="less">
   @import "./less/index.less";
   #app{
+    position: relative;
+    max-width:640px;
+    min-width: 320px;
+    margin: 0 auto;
+    height: 100vh;
     overflow: hidden;
     background-color: #ebebeb;
+    /* 可以设置不同的进入和离开动画 */
+    /* 设置持续时间和动画函数 */
+    .slide-fade-enter-active, .slide-fade-leave-active {
+      transition: all .5s ease;
+    }
+    .slide-fade-enter, .slide-fade-leave-to
+      /* .slide-fade-leave-active for below version 2.1.8 */ {
+      transform: translateX(20rem/@baseFontSize);
+      opacity: 0;
+    }
   }
 </style>

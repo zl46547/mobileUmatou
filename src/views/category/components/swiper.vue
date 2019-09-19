@@ -49,7 +49,6 @@
 
   .swiper {
     width: 100%;
-    max-width: 640px;
     position: relative;
     img {
       width: 100%;

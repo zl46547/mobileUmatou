@@ -1,5 +1,5 @@
 <template>
-  <div class="backToTop" @click="toTop()">
+  <div class="back-to-top" @click="toTop()">
     <i class="icon iconfont icon-scrollTop"></i>
   </div>
 </template>
@@ -10,10 +10,8 @@ import utils from '../../../util/common'
   export default {
     methods: {
       toTop () {
-        let dom = document.getElementsByClassName('content')[0]
-        utils.backToTop(dom, () => {
-          this.$emit('hide', false)
-        })
+        let dom = this.$parent.$refs.content
+        utils.backToTop(dom)
       }
     }
   }
@@ -23,9 +21,9 @@ import utils from '../../../util/common'
   @import "../../../less/variables";
 
   /* 加载字体样式 */
-  .backToTop {
+  .back-to-top {
     cursor: pointer;
-    position: fixed;
+    position: absolute;
     right: 10rem/@baseFontSize;
     bottom: 130rem/@baseFontSize;
     width: 70rem/@baseFontSize;
@@ -37,12 +35,6 @@ import utils from '../../../util/common'
       margin: auto;
       font-size: 40rem/@baseFontSize;
       color: #4c4949;
-    }
-  }
-  @media screen and (min-width: 640px) {
-    .backToTop {
-      right: 50%;
-      transform: translate(300px, 0);
     }
   }
 </style>

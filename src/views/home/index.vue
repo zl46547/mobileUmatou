@@ -1,7 +1,7 @@
 <template>
   <div id="home">
     <Header></Header>
-    <div class="content">
+    <div class="content" ref="content">
       <Swiper/>
       <MenuList/>
       <FlashSale/>
@@ -10,7 +10,9 @@
         <img src="../../assets/images/baseline.png"/>
       </div>
     </div>
-    <BackToTop v-show="showBackToTop"/>
+    <transition name="slide-fade">
+      <BackToTop v-show="showBackToTop"/>
+    </transition>
     <Footer/>
   </div>
 </template>
@@ -41,11 +43,11 @@
         showBackToTop: false
       }
     },
-    mounted() {
-      this.contentEle = document.getElementsByClassName('content')[0]
+    mounted () {
+      this.contentEle = this.$refs.content
       this.contentEle.addEventListener('scroll', this.getScrollTop)
     },
-    beforeDestroy() {
+    beforeDestroy () {
       this.contentEle.removeEventListener('scroll', this.getScrollTop)
     },
     methods: {
@@ -60,13 +62,13 @@
   @import "../../less/variables";
 
   #home {
-    position: relative;
+    height: 100%;
     overflow: hidden;
     .content {
       margin-top: 100rem/@baseFontSize;
-      height: calc(100vh - 9.5rem);
+      height: calc(100% - 9.5rem);
       &::-webkit-scrollbar {
-      display: none
+        display: none
       }
       overflow-y: scroll;
       -webkit-overflow-scrolling: touch;
@@ -77,6 +79,16 @@
           margin: 10rem/@baseFontSize auto;
         }
       }
+    }
+    /* 可以设置不同的进入和离开动画 */
+    /* 设置持续时间和动画函数 */
+    .slide-fade-enter-active, .slide-fade-leave-active {
+      transition: all .5s ease;
+    }
+    .slide-fade-enter, .slide-fade-leave-to
+      /* .slide-fade-leave-active for below version 2.1.8 */ {
+      transform: translateX(10rem/@baseFontSize);
+      opacity: 0;
     }
   }
 </style>

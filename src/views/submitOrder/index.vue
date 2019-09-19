@@ -135,7 +135,6 @@
 
 <style lang="less" scoped>
   #submitOrder {
-    /*background-color: #f2f2f2;*/
     overflow: hidden;
     width: 100%;
     .content-body {
@@ -170,14 +169,14 @@
       }
     }
     .footer {
-      position: fixed;
+      position: absolute;
       bottom: 0;
+      left: 0;
       display: flex;
       box-shadow: 0 0 10px 0 hsla(0, 6%, 50%, .23);
       align-items: center;
       height: 50px;
       background-color: #fff;
-      max-width:640px;
       width: 100%;
       > div:nth-of-type(1) {
         width: 65%;
@@ -201,39 +200,6 @@
         .submit-btn {
           margin: auto;
           font-size: 1.3rem;
-        }
-      }
-    }
-  }
-  @media screen and (min-width: 400px) {
-    #submitOrder {
-      .content-body {
-        margin-top: 50px;
-        height: calc(100vh - 100px);
-        .ammountCount {
-          padding: 10px 25px;
-          > div {
-            font-size: 1.5rem;
-            .subtitle {
-              font-size: 1.5rem;
-            }
-            .subValue {
-              font-size: 1.6rem;
-            }
-          }
-        }
-      }
-      .footer {
-        > div:nth-of-type(1) {
-          font-size: 1.6rem;
-          sub {
-            font-size: 1.6rem;
-          }
-        }
-        > div:nth-of-type(2) {
-          .submit-btn {
-            font-size: 1.5rem;
-          }
         }
       }
     }

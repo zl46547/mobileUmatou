@@ -144,7 +144,6 @@
       transform: translateX(50%);
       opacity: 0;
     }
-    max-width: 640px;
     width: 100%;
     height: 100vh;
     .wrapper {

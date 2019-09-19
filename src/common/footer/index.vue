@@ -76,12 +76,10 @@
   #footer {
     background-color: #fff;
     width: 100%;
-    max-width: 640px;
     height: 90rem/@baseFontSize;
-    position: fixed;
+    position: absolute;
     bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
     display: flex;
     align-items: center;
     border-top: 1px solid rgb(221, 221, 221);

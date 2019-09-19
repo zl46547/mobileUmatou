@@ -1,27 +1,17 @@
 <template>
-  <div id="productDetail">
+  <div id="product-detail">
     <MenuSelect
       :menuItems="menus"
       @menu-selected="menuSelected"
-      :selected="selected"
+      :selected="viewComponent"
     />
-    <!-- 商品页 -->
-    <div v-if="selected === '0'" class="product">
-      <Banners :banners="productInfo.banners"/>
-      <Price :price="productInfo"></Price>
-      <Service :service="productInfoServices"
-               :activity="productActivities"
-               :lastTime="productInfo"
+    <transition name="component-fade" mode="out-in">
+      <component :is="viewComponent"
+                 :productInfo="productInfo"
+                 :productInfoServices="productInfoServices"
+                 :productActivities="productActivities"
       />
-    </div>
-    <!-- 详情页 -->
-    <div v-if="selected === '1'" class="detail">
-      <Detail :detail="productInfo"/>
-    </div>
-    <!-- 评价页 -->
-    <div v-if="selected === '2'" class="rate">
-      <RateDetail/>
-    </div>
+    </transition>
     <!-- 脚部区域 -->
     <Footer v-if="productInfo.productId"
             :productId="productInfo.productId"
@@ -30,41 +20,37 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Banners from './components/banners.vue'
+  import Product from './components/Product'
   import MenuSelect from '../../common/menuSelect.vue'
-  import Price from './components/price.vue'
-  import Service from './components/service.vue'
   import Footer from './components/footer.vue'
   import RateDetail from './components/rateDetail.vue'
   import Detail from './components/detail.vue'
-  import {getProductDetail} from './service'
+  import { getProductDetail } from './service'
 
   export default {
     components: {
+      Product,
       MenuSelect,
-      Banners,
-      Price,
-      Service,
       Footer,
       Detail,
       RateDetail
     },
-    mounted() {
+    mounted () {
       let {productId} = this.$route.params
-      this.selected = '0'
+      this.viewComponent = 'Product'
       this.getProductDetailData(productId)
     },
-    data() {
+    data () {
       return {
+        viewComponent: 'Product',
         productInfo: {}, // 商品详情
         productInfoServices: '', // 商品服务
         productActivities: '', // 商品活动
         menus: [ // 菜单切换
-          { name: '商品', label: '0' },
-          { name: '详情', label: '1' },
-          { name: '评价', label: '2' }
-        ],
-        selected: '0' // 选中的navbar
+          {name: '商品', label: 'Product'},
+          {name: '详情', label: 'Detail'},
+          {name: '评价', label: 'RateDetail'}
+        ]
       }
     },
     methods: {
@@ -72,42 +58,35 @@
        * 获取商品详情
        * @param ssuId
        */
-      getProductDetailData(ssuId) {
+      getProductDetailData (ssuId) {
         getProductDetail({ssuId}).then(({productInfo, productInfoServiceList, productActivityList}) => {
           this.productInfo = productInfo
           this.productInfo.fullDescription = productInfo.fullDescription.match(/http.*?jpg/g)
           this.productInfoServices = productInfoServiceList
           this.productActivities = productActivityList
-        }).catch((error) => {
-          console.log(error)
         })
       },
       /**
        * 菜单选择
        * @param val
        */
-      menuSelected(val) {
-        this.selected = val
+      menuSelected (val) {
+        this.viewComponent = val
       }
     }
   }
 </script>
 
 <style lang="less" scoped>
-  #productDetail {
+  #product-detail {
+    background-color: #fff;
     overflow: hidden;
-
-    .detail, .rate, .product {
-      margin-top: 50px;
-      height: calc(100vh - 100px);
-      overflow-y: auto;
-      overflow-x: hidden;
-
-      &::-webkit-scrollbar {
-        display: none
-      }
-
-      -webkit-overflow-scrolling: touch;
+    .component-fade-enter-active, .component-fade-leave-active {
+      transition: all .3s ease;
+    }
+    .component-fade-enter, .component-fade-leave-to{
+      opacity: 0;
+      transform: translateX(100px);
     }
   }
 </style>

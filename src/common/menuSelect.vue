@@ -34,7 +34,7 @@
 
   #menuSelect {
     position: absolute;
-    left: 50%;
+    left: 0;
     top: 0;
     width: 100%;
     height: 80rem/@baseFontSize;
@@ -44,21 +44,27 @@
     z-index: 999;
     background-color: #fafafa;
     border-bottom: 1px solid rgb(235, 235, 235);
-    transform: translateX(-50%);
     .menu-item {
       width: 100%;
       height: 100%;
-      display: flex;
+      line-height: 80rem/@baseFontSize;
+      text-align: center;
       cursor: pointer;
-      border-bottom: 2px solid #fafafa;
       font-size: 28rem/@baseFontSize;
-      span {
-        margin: auto;
-      }
     }
     .isActive {
       color: @themeColor;
-      border-bottom: 2px solid @themeColor;
+      position: relative;
+      &::after{
+        position: absolute;
+        content: "";
+        width: 80%;
+        height: 3rem/@baseFontSize;
+        background-color: @themeColor;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+      }
     }
   }
 </style>

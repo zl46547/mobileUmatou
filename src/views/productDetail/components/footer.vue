@@ -1,28 +1,39 @@
 <template>
-  <div id="footer">
+  <div class="footer van-hairline--top">
     <div class="icon" @click="toService">
-      <div class="iconfont icon-kefu"></div>
-      <div class="icon-text">客服</div>
+      <i class="iconfont icon-kefu"></i>
+      <span class="icon-text">客服</span>
     </div>
     <div class="icon" @click="onLike">
-      <div class="iconfont icon-shoucang" :class="{'myLikeProduct':isLikeProduct}"></div>
-      <div :class="{'myLikeProduct':isLikeProduct}" class="icon-text">收藏</div>
+      <i class="iconfont"
+           :class="{
+           'icon-like':!isLikeProduct,
+           'icon-like-checked':isLikeProduct,
+           'my-like-product':isLikeProduct
+           }"
+      ></i>
+      <span :class="{'my-like-product':isLikeProduct}"
+           class="icon-text">收藏</span>
     </div>
     <div class="icon cart" @click="toCartPage">
-      <div class="iconfont icon-gouwuche"></div>
+      <i class="iconfont icon-cart"></i>
       <div class="badge" v-if="count>0">{{count}}</div>
-      <div class="icon-text">购物车</div>
+      <span class="icon-text">购物车</span>
     </div>
-    <div class="addCart" @click="addCart">
-      <div>加入购物车</div>
+    <div class="add-cart" @click="addCart">
+      加入购物车
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import Util from '@/util/common.js'
-  import {handleAddGoods, fetchCartCount} from '../service'
-  import {Toast} from 'vant'
+  import {
+    handleAddGoods,
+    fetchCartCount,
+    addCollect,
+    productIsCollect
+  } from '../service'
+  import { Toast } from 'vant'
 
   export default {
     props: {
@@ -31,22 +42,26 @@
         required: true
       }
     },
-    data() {
+    data () {
       return {
         count: 0,
         isLikeProduct: false
       }
     },
-    async mounted() {
+    async created () {
       // 初始化购物车数量
       let {user: {customerGuid}} = this.$store.state.login
       this.count = await fetchCartCount({customerGuid})
+      this.isLikeProduct = await productIsCollect({
+        customerGuid,
+        productId: this.productId
+      })
     },
     methods: {
       /**
        * 加入购物车
        */
-      addCart() {
+      addCart () {
         let {user: {customerGuid}} = this.$store.state.login
         let data = {
           customerGuid,
@@ -55,37 +70,26 @@
         handleAddGoods(data).then(res => {
           if (res) {
             this.count = res.count
-            Toast({
-              message: '加入购物车成功'
-            })
           }
         })
       },
       /**
        * 收藏
        */
-      onLike() {
-        var vm = this
-        // 这边本应该是操作数据库的，但我这里不做后台的服务，所以直接存入localstore
-        var likeList = Util.getLocal('LIKE_PRODUCT') || []
-        var length = likeList.where(function (e) {
-          return e.ProductId === vm.productInfo.ProductId
-        }).length
-        if (length > 0) {
-          vm.isLikeProduct = false
-          likeList.removeAll(function (e) {
-            return e.ProductId === vm.productInfo.ProductId
-          })
-        } else {
-          vm.isLikeProduct = true
-          likeList.push(vm.productInfo)
+      onLike () {
+        let {user: {customerGuid}} = this.$store.state.login
+        let data = {
+          customerGuid,
+          productId: this.productId
         }
-        Util.setLocal('LIKE_PRODUCT', likeList)
+        addCollect(data).then(res => {
+          this.isLikeProduct = res
+        })
       },
       /**
        * 客服功能
        */
-      toService() {
+      toService () {
         Toast({
           message: '该功能暂未开发'
         })
@@ -93,59 +97,59 @@
       /**
        * 跳转至购物车页面
        */
-      toCartPage() {
-        var vm = this
-        vm.$router.push({name: '购物车页'})
+      toCartPage () {
+        this.$router.push({name: '购物车页'})
       }
     }
   }
 </script>
 
 <style lang="less" scoped>
-  #footer {
+  @import "../../../less/variables";
+
+  .footer {
     width: 100%;
-    height: 50px;
+    height: 90rem/@baseFontSize;
     background-color: #fff;
-    position: fixed;
+    position: absolute;
     bottom: 0;
-    left: 50%;
-    max-width: 640px;
-    transform: translateX(-50%);
+    left: 0;
     display: flex;
     align-items: center;
-    box-shadow: 0 -0.5px 10px rgb(235, 235, 235);
-
     .icon {
+      line-height: 90rem/@baseFontSize;
+      height: 100%;
       margin: auto;
       text-align: center;
       cursor: pointer;
-      width: 20%;
+      flex: 1;
 
       .iconfont {
-        font-size: 1.5rem;
+        font-size: 32rem/@baseFontSize;
       }
 
       .icon-text {
-        font-size: 1.25rem;
+        font-size: 28rem/@baseFontSize;
       }
 
-      .myLikeProduct {
-        color: #ff1908;
+      .my-like-product {
+        color: @red;
       }
 
       .badge {
-        font-size: 1rem;
+        z-index: 999;
+        font-size: 20rem/@baseFontSize;
+        width: 30rem/@baseFontSize;
+        height: 30rem/@baseFontSize;
+        line-height: 30rem/@baseFontSize;
         position: absolute;
-        right: 20%;
-        top: -10%;
-        background-color: #ff1908;
+        right: 0;
+        top: 50%;
+        transform: translate(-10%,-110%);
+        background-color: @red;
         color: #fff;
-        width: 18px;
-        height: 18px;
-        justify-content: center;
-        display: flex;
-        align-items: center;
-        border-radius: 90px;
+        text-align: center;
+        border-radius: 50%;
       }
     }
 
@@ -153,44 +157,15 @@
       position: relative;
     }
 
-    .addCart {
+    .add-cart {
+      font-size: 32rem/@baseFontSize;
+      line-height: 90rem/@baseFontSize;
       height: 100%;
-      width: 40%;
-      background-color: #f05423;
-      display: flex;
+      text-align: center;
+      width: 30%;
+      background-color: @red;
       cursor: pointer;
-
-      div {
-        font-size: 1.25rem;
-        margin: auto;
-        color: #fff;
-      }
-    }
-
-    @font-face {
-      font-family: 'iconfont';
-      src: url(data:font/truetype;charset=utf-8;base64,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) format('truetype');
-      font-weight: normal;
-      font-style: normal;
-    }
-
-    .iconfont {
-      font-family: "iconfont";
-      font-style: normal;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    .icon-kefu:before {
-      content: "\e646";
-    }
-
-    .icon-shoucang:before {
-      content: "\e612";
-    }
-
-    .icon-gouwuche:before {
-      content: "\e622";
+      color: #fff;
     }
   }
 </style>

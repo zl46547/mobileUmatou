@@ -7,36 +7,36 @@
         <p class="sub-title">Product Standard</p>
       </header>
       <div class="standard-list">
-        <div class="product-name">商品名称</div>
-        <div>{{detail.productName}}</div>
+        <p class="product-name">商品名称</p>
+        <p>{{productInfo.productName}}</p>
       </div>
       <div class="standard-list">
-        <div class="product-name">编号</div>
-        <div>{{detail.number}}</div>
+        <p class="product-name">编号</p>
+        <p>{{productInfo.number}}</p>
       </div>
       <div class="standard-list">
-        <div class="product-name">规格</div>
-        <div>{{detail.pvStandard}}</div>
+        <p class="product-name">规格</p>
+        <p>{{productInfo.pvStandard}}</p>
       </div>
       <div class="standard-list">
-        <div class="product-name">产地</div>
-        <div>{{detail.place}}</div>
+        <p class="product-name">产地</p>
+        <p>{{productInfo.place}}</p>
       </div>
       <div class="standard-list">
-        <div class="product-name">储存方式</div>
-        <div>{{detail.number}}</div>
+        <p class="product-name">储存方式</p>
+        <p>{{productInfo.number}}</p>
       </div>
       <div class="standard-list">
-        <div class="product-name">开票内容</div>
-        <div>{{detail.financeCName}}</div>
+        <p class="product-name">开票内容</p>
+        <p>{{productInfo.financeCName}}</p>
       </div>
       <div class="standard-list">
-        <div class="product-name">截单时间</div>
-        <div>{{detail.lastTimeInfo?detail.lastTimeInfo:'未截单'}}</div>
+        <p class="product-name">截单时间</p>
+        <p>{{productInfo.lastTimeInfo?productInfo.lastTimeInfo:'未截单'}}</p>
       </div>
     </div>
-    <div class="introduce" v-if="detail.fullDescription && detail.fullDescription.length>0">
-      <img v-lazy="item" alt="" v-for="(item,index) in detail.fullDescription" :key="index"/>
+    <div class="introduce" v-if="productInfo.fullDescription && productInfo.fullDescription.length>0">
+      <img v-lazy="item" alt="" v-for="(item,index) in productInfo.fullDescription" :key="index"/>
     </div>
   </div>
 </template>
@@ -44,7 +44,12 @@
 <script type="text/ecmascript-6">
 
   export default {
-    props: ['detail'],
+    props: {
+      productInfo: {
+        required: true,
+        type: Object
+      }
+    },
     data () {
       return {
         nowIndex: 0,
@@ -74,24 +79,35 @@
 </script>
 
 <style lang="less" scoped>
+  @import "../../../less/variables";
+
   #detail {
+    margin-top: 80rem/@baseFontSize;
+    height: calc(100vh - 8.5rem);
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+      display: none
+    }
+
+    -webkit-overflow-scrolling: touch;
     .standard {
       margin-bottom: 1px;
-      padding: 1vh 0;
+      padding: 10rem/@baseFontSize 0;
       background-color: #fff;
       header {
         display: flex;
         align-items: baseline;
-        padding: 12px 18px;
+        padding: 22rem/@baseFontSize 28rem/@baseFontSize;
         .title {
-          font-size: 1.5rem;
-          border-left: 10px solid #90c320;
-          padding: 0 5px 0 10px;
+          font-size: 25rem/@baseFontSize;
+          border-left: 10rem/@baseFontSize solid @themeColor;
+          padding: 0 15rem/@baseFontSize 0 20rem/@baseFontSize;
           word-break: break-all;
           white-space: nowrap;
         }
         .sub-title {
-          font-size: 1.3rem;
+          font-size: 23rem/@baseFontSize;
           color: #888;
           width: 80%;
           border-bottom: 1.3px solid #c3c3c3;
@@ -99,47 +115,29 @@
       }
 
       .standard-list {
-        font-size: 1.3rem;
+        font-size: 23rem/@baseFontSize;
         display: flex;
-        padding-bottom: 2vh;
+        padding-bottom: 10rem/@baseFontSize;
         align-items: center;
         .product-name {
-          width: 108px;
+          width: 108rem/@baseFontSize;
           display: flex;
           justify-content: flex-end;
           color: rgba(0, 0, 0, 0.43);
-          margin: 0 20px 0 15px;
+          margin: 0 30rem/@baseFontSize 0 25rem/@baseFontSize;
           white-space: nowrap;
         }
-        div:nth-of-type(2){
+        div:nth-of-type(2) {
           width: 100%;
-          padding-right: 10px;
+          padding-right: 20rem/@baseFontSize;
         }
       }
     }
     .introduce {
-      padding-bottom: 2vh;
+      padding-bottom: 20rem/@baseFontSize;
       background-color: #fff;
       img {
         width: 100%;
-      }
-    }
-  }
-  @media screen and (min-width: 400px) {
-    #detail {
-      .standard {
-        header {
-          padding: 18px 24px;
-          .title {
-            font-size: 1.8rem;
-          }
-          .sub-title {
-            font-size: 1.5rem;
-          }
-        }
-        .standard-list {
-          font-size: 1.4rem;
-        }
       }
     }
   }

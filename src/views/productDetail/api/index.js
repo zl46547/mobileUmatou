@@ -54,3 +54,25 @@ export const getCartCount = params => {
     params
   })
 }
+
+/**
+ * 加入收藏
+ */
+export const addCollectRequest = data => {
+  return axios({
+    method: 'post',
+    url: '/products/addCollect',
+    data
+  })
+}
+
+/**
+ * 判断商品是否已收藏
+ */
+export const productIsCollectRequest = params => {
+  return axios({
+    method: 'get',
+    url: '/products/productIsCollect',
+    params
+  })
+}

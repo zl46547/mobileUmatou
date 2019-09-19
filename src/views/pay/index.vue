@@ -24,7 +24,6 @@
   @import "../../less/variables";
 
   #pay {
-    background-color: @backgroundColor;
     height: 100vh;
     &::-webkit-scrollbar {
       display: none

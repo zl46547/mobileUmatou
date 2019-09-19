@@ -75,11 +75,9 @@
     width: 100%;
     height: 80rem/@baseFontSize;
     background-color: #fff;
-    position: fixed;
+    position: absolute;
     bottom: 90rem/@baseFontSize;
-    left: 50%;
-    max-width: 640px;
-    transform: translateX(-50%);
+    left: 0;
     border-top: 1px solid rgb(221, 221, 221);
     display: flex;
     align-items: center;

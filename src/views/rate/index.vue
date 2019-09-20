@@ -110,7 +110,6 @@
   @import "../../less/variables";
 
   #rate {
-    /*background-color: #f2f2f2;*/
     overflow: hidden;
     height: 100vh;
     width: 100%;

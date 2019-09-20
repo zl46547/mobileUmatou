@@ -1,35 +1,36 @@
 <template>
   <div id="submitOrder">
-    <div>
-      <Header>
-        <span slot="title">提交订单</span>
-      </Header>
-      <div class="content-body">
-        <Address/>
-        <OrderList/>
-        <Coupon :totalPrice="totalPrice"/>
-        <div class="pannelMargin ammountCount">
-          <div>
-            <p class="subtitle">商品金额</p>
-            <p class="subValue">¥{{totalPrice}}</p>
-          </div>
-          <div v-if="bounce.Amount">
-            <p class="subtitle">优惠</p>
-            <p class="subValue">- ¥{{bounce.Amount}}</p>
-          </div>
-          <div>
-            <p class="subtitle">运费</p>
-            <p class="subValue">+ ¥4.00</p>
-          </div>
+    <Header>
+      <span slot="title">提交订单</span>
+    </Header>
+    <div class="content-body">
+      <Address/>
+      <OrderList/>
+      <Coupon :totalPrice="totalPrice"/>
+      <div class="form ammountCount">
+        <div class="form-item van-hairline--bottom">
+          <p class="sub-title">商品金额</p>
+          <p class="sub-value">¥{{totalPrice}}</p>
+        </div>
+        <div class="form-item van-hairline--bottom"
+             v-if="bounce.Amount"
+        >
+          <p class="sub-title">优惠</p>
+          <p class="sub-value">- ¥{{bounce.Amount}}</p>
+        </div>
+        <div class="form-item">
+          <p class="sub-title">运费</p>
+          <p class="sub-value">+ ¥4.00</p>
         </div>
       </div>
-      <div class="footer">
-        <div>
-          <sub>¥</sub>{{getFinalPrice}}
-        </div>
-        <div @click="submitOrder">
-          <div class="submit-btn">提交订单</div>
-        </div>
+    </div>
+    <div class="footer van-hairline--top">
+      <div class="final-price">
+        <sub>¥</sub>
+        <span>{{getFinalPrice}}</span>
+      </div>
+      <div class="submit-btn" @click="submitOrder">
+        提交订单
       </div>
     </div>
   </div>
@@ -40,8 +41,8 @@
   import Address from './components/address.vue'
   import OrderList from './components/orderList.vue'
   import Coupon from './components/coupon'
-  import {Toast} from 'vant'
-  import {submitOrder} from './service'
+  import { Toast } from 'vant'
+  import { submitOrder } from './service'
 
   export default {
     components: {
@@ -56,7 +57,7 @@
         bounce: ''
       }
     },
-    mounted () {
+    created () {
       this.getTotalPrice()
     },
     computed: {
@@ -134,34 +135,34 @@
 </script>
 
 <style lang="less" scoped>
+  @import "../../less/variables";
+
   #submitOrder {
+    height: 100%;
     overflow: hidden;
-    width: 100%;
     .content-body {
-      margin-top: 45px;
-      height: calc(100vh - 95px);
+      margin-top: 80rem/@baseFontSize;
+      height: calc(100vh - 8.5rem);
       &::-webkit-scrollbar {
         display: none
       }
       overflow-y: scroll;
       -webkit-overflow-scrolling: touch;
-      .pannelMargin {
-        margin-top: 15px;
+      .form {
+        margin-top: 15rem/@baseFontSize;
         background-color: #fff;
-        box-shadow: 0 2px 6px #dedede;
-      }
-      .ammountCount {
-        padding: 10px 15px;
-        > div {
+        .form-item {
           display: flex;
           justify-content: space-between;
           align-items: center;
           font-size: 1.3rem;
-          margin: 1vh 0;
-          .subtitle {
+          padding: 20rem/@baseFontSize 25rem/@baseFontSize;
+          .sub-title {
+            width: 6rem;
+            text-align: right;
             font-size: 1.3rem;
           }
-          .subValue {
+          .sub-value {
             font-size: 1.4rem;
             color: #f05423;
           }
@@ -173,34 +174,32 @@
       bottom: 0;
       left: 0;
       display: flex;
-      box-shadow: 0 0 10px 0 hsla(0, 6%, 50%, .23);
-      align-items: center;
-      height: 50px;
+      height: 90rem/@baseFontSize;
       background-color: #fff;
       width: 100%;
-      > div:nth-of-type(1) {
+      .final-price {
+        height: 100%;
+        line-height: 90rem/@baseFontSize;
         width: 65%;
         margin-left: 5%;
-        font-size: 1.4rem;
+        font-size: 1.8rem;
         color: #f05423;
         display: flex;
         align-items: baseline;
         sub {
           font-size: 1.4rem;
-          padding-right: 5px;
+          margin-right: 10rem/@baseFontSize;
         }
       }
-      > div:nth-of-type(2) {
+      .submit-btn {
         cursor: pointer;
-        height: 50px;
-        display: flex;
         width: 35%;
         color: #fff;
-        background-color: rgb(255, 92, 34);
-        .submit-btn {
-          margin: auto;
-          font-size: 1.3rem;
-        }
+        height: 100%;
+        line-height: 90rem/@baseFontSize;
+        background-color: @red;
+        text-align: center;
+        font-size: 1.3rem;
       }
     }
   }

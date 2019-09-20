@@ -72,9 +72,9 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
+    overflow: hidden;
     .content {
       margin-top: 80rem/@baseFontSize;
-      /*background-color: #f2f2f2;*/
       flex: 1;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;

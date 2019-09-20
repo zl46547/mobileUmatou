@@ -37,8 +37,7 @@
     .slide-fade-enter-active, .slide-fade-leave-active {
       transition: all .5s ease;
     }
-    .slide-fade-enter, .slide-fade-leave-to
-      /* .slide-fade-leave-active for below version 2.1.8 */ {
+    .slide-fade-enter, .slide-fade-leave-to{
       transform: translateX(20rem/@baseFontSize);
       opacity: 0;
     }

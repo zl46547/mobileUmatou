@@ -1,31 +1,24 @@
 <template>
-  <div id="order-item">
-    <div class="title">{{groupItem.groupName}}</div>
-    <div class="group-item" v-for="item in groupItem.groupItemList" :key="item.productId">
-      <div class="checkbox">
-        <div class="checkbox-right">
-          <div class="image">
-            <img :src="`http://picpro-sz.34580.com/sz/ImageUrl/${item.productInfo.pictureId}/120.jpeg`"
-                 alt="购物车图片"/>
-          </div>
-          <div class="product-info">
-            <p>{{item.productInfo.productName}}</p>
-            <div class="content">
-              <div class="price">
-                <p>{{item.productInfo.pvStandard}}</p>
-                <p>¥{{item.productInfo.periodMoney}}</p>
-              </div>
-              <div class="operate">
-                <p>X{{item.quantity}}</p>
-              </div>
-            </div>
-          </div>
+  <div class="order-item">
+    <p class="title van-hairline--bottom">{{groupItem.groupName}}</p>
+    <div class="group-item van-hairline--bottom"
+         v-for="item in groupItem.groupItemList"
+         :key="item.productId"
+    >
+      <img :src="`http://picpro-sz.34580.com/sz/ImageUrl/${item.productInfo.pictureId}/120.jpeg`"
+           alt="购物车图片"/>
+      <div class="product-info">
+        <p class="product-name">{{item.productInfo.productName}}</p>
+        <div class="content">
+          <p class="price">
+            <span class="period-money">¥{{item.productInfo.periodMoney}}</span>
+            <span class="pv-standard">{{item.productInfo.pvStandard}}</span>
+          </p>
+          <p class="quantity">×{{item.quantity}}</p>
         </div>
       </div>
     </div>
-    <div class="carList-bottom">
-      <p>小计：¥{{groupItem.groupSum}}元</p>
-    </div>
+    <p class="carList-bottom">小计：¥ <span>{{groupItem.groupSum}}</span>元</p>
   </div>
 </template>
 
@@ -41,78 +34,69 @@
 </script>
 
 <style lang="less" scoped>
-  #order-item {
+  @import "../../../less/variables";
+
+  .order-item {
     .title {
-      padding: 12px;
+      padding: 22rem/@baseFontSize;
       font-size: 1.35rem;
       font-weight: bold;
       color: #626262;
-      border-bottom: 1px solid #ddd;
     }
     .group-item {
-      border-bottom: 1px solid #eee;
       background-color: #fff;
-      .checkbox {
-        display: flex;
-        align-items: center;
-        width: 100%;
-        .checkbox-right {
+      display: flex;
+      align-items: center;
+      padding: 20rem/@baseFontSize;
+      img {
+        display: block;
+        width: 180rem/@baseFontSize;
+      }
+      .product-info {
+        padding-left: 1rem;
+        flex: 1;
+        min-width: 0;
+        .product-name {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          margin-bottom: 1rem;
+          color: #333;
+          font-size: 1.65rem;
+        }
+        .content {
           display: flex;
           align-items: center;
-          width:100%;
-          .image {
-            width: 100px;
-            padding: 20px 10px;
-            img {
-              width: 100%;
-            }
+          justify-content: space-between;
+          .pv-standard {
+            color: #999;
+            font-size: 1.5rem;
           }
-          .product-info {
-            width: calc(100% - 120px);
-            margin-right: 20px;
-            > p {
-              overflow: hidden;
-              text-overflow: ellipsis;
-              white-space: nowrap;
-              margin-bottom: 5px;
-              color: #333;
-              font-size: 1.35rem;
-            }
-            .content {
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
-              .price {
-                p {
-                  &:nth-of-type(1) {
-                    color: #999;
-                    font-size: 1.3rem;
-                  }
-                  &:nth-of-type(2) {
-                    color: #f05423;
-                    font-size: 1.4rem;
-                  }
-                }
-              }
-              .operate {
-                p {
-                  color: #333;
-                  font-size: 1.35rem;
-                }
-              }
-            }
+          .period-money {
+            margin-right: .5rem;
+            color: @priceColor;
+            font-size: 1.8rem;
+          }
+          .quantity {
+            letter-spacing: .2rem;
+            color: #333;
+            font-size: 1.65rem;
           }
         }
       }
     }
     .carList-bottom {
-      border-radius: 5px;
-      color: #f05423;
+      border-radius: 5rem/@baseFontSize;
       display: flex;
       align-items: center;
-      p {
-        font-size: 1.35rem;
-        padding: 14px 20px
+      padding-left: 2rem;
+      height: 4rem;
+      line-height: 4rem;
+      font-size: 1.3rem;
+      span{
+        padding: 0 .3rem;
+        color: @priceColor;
+        font-size: 2rem;
       }
     }
   }

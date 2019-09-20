@@ -1,9 +1,9 @@
 <template>
-  <div id="coupon">
-    <div class="coupon-select-wapper" @click="showModal()">
-      <p class="title">优惠券</p>
-      <div class="coupon-selected">{{couponSelected}}</div>
-      <p class="arrow-right"><i class="iconfont icon-arrow-right"></i></p>
+  <div class="coupon van-hairline--bottom">
+    <div class="coupon-form" @click="showModal()">
+      <p class="coupon-form-label">优惠券</p>
+      <p class="coupon-form-value">{{couponSelected}}</p>
+      <i class="iconfont icon-arrow-right"></i>
     </div>
     <ActionSheet v-model="openModal" title="优惠券选择">
       <div class="modal-content">
@@ -46,18 +46,14 @@
         default: 0
       }
     },
-    mounted () {
+    created () {
       let {user: {customerGuid}} = this.$store.state.login
       if (!customerGuid) {
         return false
       }
-      try {
-        getCoupons({customerGuid}).then(res => {
-          this.couponList = this.formatCouponList(res)
-        })
-      } catch (e) {
-        console.log(e)
-      }
+      getCoupons({customerGuid}).then(res => {
+        this.couponList = this.formatCouponList(res)
+      })
     },
     data () {
       return {
@@ -143,17 +139,17 @@
 </script>
 
 <style lang="less" scoped>
-  #coupon {
-    border-bottom: 1px solid #eee;
-    padding: 15px;
-    background-color: #fff;
-    position: relative;
+  @import "../../../less/variables";
 
-    .coupon-select-wapper {
+  .coupon {
+    padding: 25rem/@baseFontSize;
+    background-color: #fff;
+
+    .coupon-form {
       display: flex;
       align-items: center;
 
-      .title {
+      .coupon-form-label {
         color: #333;
         width: 6rem;
         text-align: right;
@@ -161,26 +157,26 @@
         margin-right: 1rem;
       }
 
-      .coupon-selected {
+      .coupon-form-value {
+        flex: 1;
         font-size: 1.2rem;
         color: #c0c0c0;
       }
 
-      .arrow-right {
+      .icon-arrow-right {
         color: #333;
         font-size: 1rem;
-        flex: 1;
+        width: 2rem;
         text-align: right;
       }
     }
 
     .modal-content {
       height: 50vh;
-      position: relative;
-
+      background-color: #fff;
       .modal-body {
         padding: 0 2rem;
-        height: calc(100% - 50px);
+        height: calc(100% - 4rem);
         overflow-y: auto;
         overflow-x: hidden;
 
@@ -208,10 +204,10 @@
         position: absolute;
         bottom: 0;
         cursor: pointer;
-        font-size: 1.3rem;
-        letter-spacing: 2px;
-        height: 50px;
-        line-height: 50px;
+        font-size: 1.8rem;
+        letter-spacing: 1rem;
+        height: 4rem;
+        line-height: 4rem;
         background-color: #ff2b1c;
         color: #fff;
         text-align: center;

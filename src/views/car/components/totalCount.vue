@@ -112,7 +112,7 @@
     }
     .count-btn {
       cursor: pointer;
-      background-color: @themeColor;
+      background-color: @red;
       color: #fff;
       text-align: center;
       height: 100%;

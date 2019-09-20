@@ -1,49 +1,48 @@
 <template>
-  <div id="addAddress">
-    <div class="addressContent" @click="handleAddressChange" v-if="addressInfo">
-      <span class="iconfont icon-location"></span>
-      <div>
-        <div class="address-info">
-          <p class="receiveMan-title">收货人：</p>
-          <div>
-            <p class="receiveMan-name">{{addressInfo.contactName}}</p>
-            <p class="receiveMan-tel">{{addressInfo.contactTel}}</p>
+  <div class="add-address">
+    <div class="address-content"
+         @click="handleAddressChange"
+         v-if="addressInfo"
+    >
+      <i class="iconfont icon-location"></i>
+      <div class="address-form">
+        <div class="address-form-item">
+          <p class="address-form-item-label">收货人：</p>
+          <div class="address-form-item-value">
+            <span>{{addressInfo.contactName}}</span>
+            <span>{{addressInfo.contactTel}}</span>
           </div>
         </div>
-        <div class="address-info">
-          <p class="receiveMan-title">收货地址：</p>
-          <div>
-            <p class="receiveMan-tel">{{formatArea(addressInfo.area)}}{{addressInfo.addressDetail}}</p>
-          </div>
+        <div class="address-form-item">
+          <p class="address-form-item-label">收货地址：</p>
+          <p class="address-form-item-value">{{formatArea(addressInfo.area)}}{{addressInfo.addressDetail}}</p>
         </div>
       </div>
-      <span class="iconfont icon-arrow-right"></span>
+      <i class="iconfont icon-arrow-right"></i>
     </div>
     <div v-else class="add-address" @click="handleAddressChange">
       <i class="iconfont icon-add"></i>
       <span>添加地址</span>
     </div>
-    <div class="divider">
-      <img src="../../../assets/images/divider.png" alt="分割线" mode="widthFix"/>
-    </div>
+    <img class="divider" src="../../../assets/images/divider.png" alt="分割线" mode="widthFix"/>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import {getDefaultAddress} from '../service'
-  import {ADDRESS_SELECTED} from '../../../vuex/types'
+  import { getDefaultAddress } from '../service'
+  import { ADDRESS_SELECTED } from '../../../vuex/types'
 
   export default {
-    mounted() {
+    mounted () {
       this.init()
     },
-    data() {
+    data () {
       return {
         addressInfo: null
       }
     },
     methods: {
-      init() {
+      init () {
         let {login: {user: {customerGuid}}, order: {addressSelected}} = this.$store.state
         if (!customerGuid) {
           return false
@@ -72,7 +71,7 @@
       /**
        * 选择地址
        */
-      handleAddressChange() {
+      handleAddressChange () {
         this.$router.push('/addressManage/0')
       }
     }
@@ -80,80 +79,56 @@
 </script>
 
 <style lang="less" scoped>
-  #addAddress {
-    background-color: #fff;
-    margin-top: 1px;
+  @import "../../../less/variables";
 
-    .addressContent {
+  .add-address {
+    background-color: #fff;
+    .address-content {
       display: flex;
       align-items: center;
-      justify-content: space-between;
       width: 100%;
-      padding: 1vh 0;
+      padding: 20rem/@baseFontSize 0;
       cursor: pointer;
 
       .icon-location, .icon-arrow-right {
+        display: block;
+        width: 4rem;
+        text-align: center;
         font-size: 1.8rem;
-        margin: 0 10px 0 10px;
       }
-
-      > div {
+      .address-form {
+        flex: 1;
+      }
+      .address-form-item {
+        display: flex;
         width: 100%;
+        padding: 10rem/@baseFontSize 0;
+        font-size: 1.3rem;
 
-        .iconfont {
-          text-align: center;
-          display: table-cell;
-          vertical-align: middle;
-          width: 10%;
+        .address-form-item-label {
+          width: 6rem;
+          text-align: right;
+          white-space: nowrap;
         }
 
-        .address-info {
+        .address-form-item-value {
+          flex: 1;
           display: flex;
-          width: 100%;
-          padding: 1vh 0;
-          font-size: 1.3rem;
-
-          .receiveMan-title {
-            width: 6rem;
-            text-align: right;
-            white-space: nowrap;
-          }
-
-          > div {
-            width: 70%;
-            display: flex;
-            justify-content: space-between;
-          }
+          justify-content: space-between;
         }
       }
     }
-    .add-address{
+    .add-address {
       text-align: center;
       font-size: 1.4rem;
-      padding: 20px 0;
-      .icon-add{
+      padding: 20rem/@baseFontSize 0;
+      .icon-add {
         font-size: 1.6rem;
       }
     }
-    .divider img {
+    .divider {
+      display: block;
       width: 100%;
-    }
-  }
-
-  @media screen and (min-width: 400px) {
-    #addAddress {
-      .addressContent {
-        .icon-location, .icon-arrow {
-          font-size: 2rem;
-          margin: 0 10px 0 20px;
-        }
-
-        > div {
-          .address-info {
-            font-size: 1.5rem;
-          }
-        }
-      }
     }
   }
 </style>

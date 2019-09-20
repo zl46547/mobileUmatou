@@ -153,9 +153,8 @@
         .product-info {
           flex: 1;
           padding-right: 10px;
-
+          min-width: 0;
           .product-name {
-            width: 300rem/@baseFontSize;
             margin: 25rem/@baseFontSize 0;
             font-size: 28rem/@baseFontSize;
             overflow: hidden;

@@ -24,6 +24,6 @@
 <style scoped>
   #cart{
     height: 100vh;
-    /*background-color: #f2f2f2;*/
+    overflow: hidden;
   }
 </style>

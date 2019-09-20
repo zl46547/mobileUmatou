@@ -1,7 +1,11 @@
 <template>
   <div id="big-category">
-    <div class="big-category-item" v-for="item in bigCategory" @click="changeTabIndex(item)"
-         :key="item.Id" :class="{active:item.Name === activeItem.Name}">
+    <div class="big-category-item"
+         :class="{active:item.Name === activeItem.Name}"
+         v-for="item in bigCategory"
+         @click="changeTabIndex(item)"
+         :key="item.Id"
+    >
       <div>{{item.Name}}</div>
     </div>
   </div>
@@ -53,6 +57,7 @@
     width: 22%;
     height: 100%;
     overflow-y: auto;
+    background-color: #f7f7f7;
     &::-webkit-scrollbar {
       display: none;
     }

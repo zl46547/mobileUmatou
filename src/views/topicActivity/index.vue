@@ -1,36 +1,46 @@
 <template>
-  <div id="adverise" v-if="topicActivityList">
-    <v-header>
+  <div class="advertise" v-if="topicActivityList">
+    <Header>
       <span slot="title">优惠活动</span>
-    </v-header>
-    <div class="content">
-      <div v-for="(item) in topicActivityList" :key="item.uid">
-        <div v-if="item.type === 'a'" class="typeA">
-          <img v-lazy="item.picUrl" alt="typeA图片"/>
+    </Header>
+    <div class="content" ref="content">
+      <div v-for="activityItem in topicActivityList" :key="activityItem.uid">
+        <img v-lazy="activityItem.picUrl"
+             alt="typeA图片"
+             v-if="activityItem.type === 'a'"
+             class="type-a"
+        />
+        <div v-if="activityItem.type === 'b'" class="type-b">
+          <img v-lazy="item.picUrl"
+               alt="typeB图片"
+               @click="goTop(activityItem.list[0])"
+               v-for="item in activityItem.list"
+               :key="item.index"
+          />
         </div>
-        <div v-if="item.type === 'b'" class="typeB">
-          <div v-for="(k) in item.list" :key="k.index">
-            <img v-lazy="k.picUrl" alt="typeB图片" @click="goTop(item.list[0])"/>
-          </div>
-        </div>
-        <div v-if="item.type === 'c'" class="typeC">
-          <div class="typeC-content" v-for="(k) in item.list" :key="k.index">
-            <img v-lazy="k.entity.imgUrl" alt="typeC图片" @click="goToDetail(k.entity.productId)"/>
-            <div class="title" @click="goToDetail(k.entity.productId)">
-              {{k.entity.name}}
-            </div>
-            <div class="price" @click="goToDetail(k.entity.productId)">
-              <div class="newestPrice">
+        <div v-if="activityItem.type === 'c'" class="type-c">
+          <div class="type-c-content"
+               v-for="item in activityItem.list"
+               :key="item.index"
+               @click="goToDetail(item.entity.productId)"
+          >
+            <img v-lazy="item.entity.imgUrl" alt="typeC图片"/>
+            <p class="title">{{item.entity.name}}</p>
+            <div class="price">
+              <p class="newest-price">
                 <span>¥</span>
-                <span>{{k.entity.periodPrice}}</span>
-                <span>/{{k.entity.unit}}</span>
-              </div>
-              <div class="defaultPrice">
-                <span>¥&nbsp;{{k.entity.shiHangPrice}}</span>
-              </div>
+                <span class="period-price">{{item.entity.periodPrice}}</span>
+                <span>/{{item.entity.unit}}</span>
+              </p>
+              <p class="default-price">
+                <span>¥</span>
+                <span class="shihang-price">{{item.entity.shiHangPrice}}</span>
+              </p>
             </div>
-            <div class="addCart-btn" :style="{'background-color':item.cartBgColor}" @click="addTocart(k)">
-              <div class="addCart-btn-text">加入购物车</div>
+            <div class="add-cart-btn"
+                 :style="{'background-color':activityItem.cartBgColor}"
+                 @click.stop="addTocart(item)">
+              加入购物车
             </div>
           </div>
         </div>
@@ -40,22 +50,23 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Header from '../../common/navigator.vue'
-  import {getTopicActivity} from './service'
+  import Header from '../../common/navigator'
+  import { getTopicActivity } from './service'
+  import utils from '../../util/common'
 
   export default {
-    mounted() {
-      this.$store.commit('SET_LOADING', true)
+    created () {
+      // this.$store.commit('SET_LOADING', true)
       let {queryId} = this.$route.query
       this.getTopicActivityData(queryId)
     },
     components: {
-      'VHeader': Header
+      Header
     },
-    beforeDestroy() {
+    beforeDestroy () {
       this.topicActivityList = []
     },
-    data() {
+    data () {
       return {
         scrollTop: 0,
         topicActivityList: [],
@@ -67,40 +78,34 @@
        * 获取主题活动信息
        * @param topicId 活动id
        */
-      async getTopicActivityData(topicId) {
+      async getTopicActivityData (topicId) {
         this.topicActivityList = await getTopicActivity({topicId})
       },
-      goToDetail(productId) {
+      /**
+       * 跳转商品详情页
+       */
+      goToDetail (productId) {
         if (productId) {
           this.$router.push({name: '商品详情', params: {productId}})
         }
       },
-      backToTop() {
-        let timer = setInterval(() => {
-          var top = document.getElementsByClassName('content')[0].scrollTop
-          let speed = Math.ceil(top / 5)
-          document.getElementsByClassName('content')[0].scrollTop = top - speed
-          if (top === 0) {
-            clearInterval(timer)
-          }
-        }, 20)
-      },
       /**
        * 回到顶部
        */
-      goTop(item) {
-        if (item.linkType === '5') {
-          this.backToTop()
+      goTop (activityItem) {
+        if (activityItem.linkType === '5') {
+          let dom = this.$refs.content
+          utils.backToTop(dom)
         }
-        if (item.linkTo && item.linkType !== '5') {
-          this.goToDetail(item.linkTo)
+        if (activityItem.linkTo && activityItem.linkType !== '5') {
+          this.goToDetail(activityItem.linkTo)
         }
       },
       /**
        * 加入购物车
        * @param product
        */
-      addTocart(product) {
+      addTocart (product) {
         if (product.entity) {
           this.getProductDetailData(product.entity.productId)
         }
@@ -110,156 +115,98 @@
 </script>
 
 <style lang="less" scoped>
-  #adverise {
+  @import "../../less/variables";
+
+  .advertise {
     overflow: hidden;
 
     .content {
       margin-top: 45px;
-      height: calc(100vh - 45px);
-      overflow-y: auto;
-      overflow-x: hidden;
+      height: calc(100vh - 4rem);
+      overflow: auto;
 
       &::-webkit-scrollbar {
         display: none;
       }
     }
 
-    .typeA {
+    .type-a {
+      width: 100%;
+      display: block;
+    }
+
+    .type-b {
+      cursor: pointer;
       img {
         width: 100%;
+        display: block;
       }
     }
 
-    .typeB {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      flex-wrap: nowrap;
-
-      > div {
-        width: 100%;
-
-        img {
-          width: 100%;
-          display: block;
-        }
-      }
-    }
-
-    .typeC {
+    .type-c {
       display: flex;
       align-items: center;
       justify-content: flex-start;
       flex-wrap: wrap;
 
-      .typeC-content {
+      .type-c-content {
         width: 32%;
-        padding: 0 0.65%;
-        margin-bottom: 10px;
-
+        margin: 0.85% 0.65% ;
+        cursor: pointer;
         img {
+          display: block;
           width: 100%;
-          cursor: pointer;
         }
       }
     }
 
     .title {
-      font-size: 1.2rem;
-      padding: 3% 3% 0 3%;
+      background-color: #fff;
+      font-size: 1.5rem;
+      padding: .8rem .5rem 0;
       text-overflow: ellipsis;
+      box-sizing: border-box;
       width: 100%;
       overflow: hidden;
       white-space: nowrap;
     }
 
     .price {
+      background-color: #fff;
       display: flex;
       align-items: baseline;
       justify-content: space-between;
-      padding: 3% 4%;
+      padding: .5rem;
 
-      .newestPrice {
+      .newest-price {
         display: flex;
         white-space: nowrap;
         align-items: baseline;
-        color: #ff718e;
+        color: @priceColor;
         font-size: 1.25rem;
-
-        span:nth-of-type(2) {
+        .period-price{
           font-size: 1.3rem;
         }
       }
 
-      .defaultPrice {
-        span {
-          font-size: 1.25rem;
-          color: #aaa;
-          text-decoration: line-through;
+      .default-price {
+        font-size: 1.25rem;
+        color: @defaultPriceColor;
+        text-decoration: line-through;
+        .shihang-price {
+          font-size: 1.3rem;
         }
       }
     }
 
-    .addCart-btn {
-      display: flex;
-      height: 38px;
-      width: 100%;
+    .add-cart-btn {
       cursor: pointer;
-      border-radius: 0 0 10px 10px;
-
-      .addCart-btn-text {
-        font-size: 1.35rem;
-        color: #fff;
-        margin: auto;
-      }
-    }
-  }
-
-  @media screen and (min-width: 400px) {
-    #adverise {
-      .content {
-        margin-top: 50px;
-        height: calc(100vh - 50px);
-      }
-
-      .title {
-        font-size: 1.3rem;
-        padding: 6% 6% 0 6%;
-      }
-
-      .price {
-        padding: 6% 8%;
-
-        .newestPrice {
-          font-size: 1.3rem;
-
-          span:nth-of-type(2) {
-            font-size: 1.35rem;
-          }
-        }
-
-        .defaultPrice {
-          span {
-            font-size: 1.3rem;
-          }
-        }
-      }
-
-      .addCart-btn {
-        height: 45px;
-
-        .addCart-btn-text {
-          font-size: 1.35rem;
-        }
-      }
-    }
-  }
-
-  @media screen and (min-width: 500px) {
-    #adverise {
-      .addCart-btn {
-        height: 55px;
-      }
+      height: 3rem;
+      line-height: 3rem;
+      border-radius: 0 0 .5rem .5rem;
+      font-size: 1.35rem;
+      color: #fff;
+      text-align: center;
     }
   }
 </style>

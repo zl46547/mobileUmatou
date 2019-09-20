@@ -1,17 +1,15 @@
 <template>
-  <div id="orderList">
-    <div class="groupOrderList">
-      <div class="orderList"
-           v-for="(groupItem,groupIndex) in groupOrderList"
-           :key="groupIndex">
-        <OrderItem :groupItem="groupItem"/>
-      </div>
+  <div class="order-list">
+    <div class="order"
+         v-for="(groupItem,groupIndex) in groupOrderList"
+         :key="groupIndex">
+      <OrderItem :groupItem="groupItem"/>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-import OrderItem from './orderItem'
+  import OrderItem from './orderItem'
 
   export default {
     components: {
@@ -29,7 +27,7 @@ import OrderItem from './orderItem'
       /**
        * 获取分组后的购物车列表
        */
-      getGroupOrderList() {
+      getGroupOrderList () {
         let orderList = this.$store.state.car.carList
         this.groupOrderList = orderList.groupBy(item => {
           return item.productInfo.financeCName
@@ -45,7 +43,7 @@ import OrderItem from './orderItem'
        * 获取分组后的总金额
        * @param groupItemList
        */
-      getGroupSum(groupItemList) {
+      getGroupSum (groupItemList) {
         let sum = 0
         if (groupItemList) {
           groupItemList.forEach(item => {
@@ -59,33 +57,17 @@ import OrderItem from './orderItem'
 </script>
 
 <style lang="less" scoped>
-  #orderList {
-    overflow: hidden;
-    .groupOrderList {
-      margin: 0 10px;
-    }
-    .orderList {
-      width: 100%;
-      box-shadow: 0 1px 6px #d7d7d7;
-      background-color: #fff;
-      margin-bottom: 10px;
-      border-radius: 5px;
-      &:first-of-type {
-        margin-top: 10px;
-      }
-    }
-  }
+  @import "../../../less/variables";
 
-  @media screen and (min-width: 400px) {
-    #orderList {
-      .groupOrderList {
-        margin: 0 18px;
-      }
-      .orderList {
-        margin-bottom: 18px;
-        &:first-of-type {
-          margin-top: 18px;
-        }
+  .order-list {
+    .order{
+      margin: 0 auto 1rem;
+      width: 95%;
+      box-shadow: 0 .1rem 5rem #d7d7d7;
+      background-color: #fff;
+      border-radius: .5rem;
+      &:first-of-type {
+        margin-top: 1rem;
       }
     }
   }

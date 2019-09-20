@@ -86,6 +86,7 @@
   @import "../../less/variables";
 
   #category-detail {
+    overflow: hidden;
     .category-detail-content {
       margin-top: 100rem/@baseFontSize;
       height: calc(100vh - 5rem);

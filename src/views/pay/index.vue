@@ -25,6 +25,7 @@
 
   #pay {
     height: 100vh;
+    overflow: hidden;
     &::-webkit-scrollbar {
       display: none
     }

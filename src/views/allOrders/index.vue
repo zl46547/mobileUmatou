@@ -1,13 +1,12 @@
 <template>
   <div id="allOrders">
-    <div class="content">
       <!-- 顶部菜单 -->
-      <MenuSelect :menuItems="menus"
-                  @menu-selected="handleSelect"
-                  :selected="selected"
+      <MenuSelect
+          :menuItems="menus"
+          @menu-selected="handleSelect"
+          :selected="selected"
       />
       <OrderList ref="orderList"/>
-    </div>
   </div>
 </template>
 
@@ -20,7 +19,7 @@
       MenuSelect,
       OrderList
     },
-    mounted () {
+    created () {
       this.selected = this.$route.query.type
       this.handleSelect(this.selected)
     },
@@ -68,8 +67,5 @@
   #allOrders {
     overflow: hidden;
     position: relative;
-    .content {
-      /*background-color: #f2f2f2;*/
-    }
   }
 </style>

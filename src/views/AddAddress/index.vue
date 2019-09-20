@@ -222,7 +222,7 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
-
+    overflow: hidden;
     .content {
       margin-top: 80rem/@baseFontSize;
       /*background-color: #f2f2f2;*/

@@ -9,11 +9,16 @@ import {Toast} from 'vant'
  * @param params
  */
 export const getOrderDetail = async params => {
-  let {data} = await getOrderDetailRequest(params)
-  if (data.Data) {
-    return data.Data
+  try {
+    let {data} = await getOrderDetailRequest(params)
+    if (data.Data) {
+      return data.Data
+    }
+    return []
+  } catch (e) {
+    Toast.fail('获取优惠券列表异常')
+    console.error(e)
   }
-  return []
 }
 /**
  * 支付订单

@@ -6,6 +6,7 @@ import axios from '../../../http/api'
  */
 export const getTopicActivityRequest = params => {
   return axios({
+    showLoading: true,
     method: 'get',
     url: '/topicInfo/getAdvisementData',
     params

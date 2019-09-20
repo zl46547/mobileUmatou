@@ -1,8 +1,11 @@
 <template>
-  <footer id="footer" @click.stop="gotoRouter">
+  <footer id="footer">
     <div class="tabbar">
-      <div class="tabbar-item" v-for="item in tabbarItem" :key="item.name"
-           :class="{'isSelected':item.url === selected}" @click="selectMenu(item.url)">
+      <div class="tabbar-item"
+           v-for="item in tabbarItem"
+           :key="item.name"
+           :class="{'isSelected':item.url === selected}"
+           @click="footSelect(item.url)">
         <i :class="[`${item.icon}`]" class="iconfont"></i>
         <span class="tabbar-item-name">{{item.name}}</span>
       </div>
@@ -11,7 +14,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-
+import { FOOT_SELECT_MENU } from '../../vuex/types'
   export default {
     data () {
       return {
@@ -41,16 +44,14 @@
       }
     },
     methods: {
-      gotoRouter () {
-        this.$router.replace(this.selected)
-      },
-      selectMenu(val) {
+      footSelect(val) {
         this.selected = val
-        this.$store.commit('SELECT_MENU', val)
+        this.$router.replace(val)
+        this.$store.commit(FOOT_SELECT_MENU, val)
       }
     },
     created () {
-      this.selected = this.$store.state.common.selectMenu
+      this.selected = this.$store.state.common.footSelectMenu
       let routerName = this.$route.name
       switch (routerName) {
         case '首页':

@@ -1,18 +1,22 @@
 <template>
   <div id="allOrders">
-      <!-- 顶部菜单 -->
-      <MenuSelect
-          :menuItems="menus"
-          @menu-selected="handleSelect"
-          :selected="selected"
-      />
-      <OrderList ref="orderList"/>
+    <!-- 顶部菜单 -->
+    <MenuSelect
+      :menuItems="menus"
+      @menu-selected="handleSelect"
+      :selected="orderStatusCode"
+    />
+    <OrderList :allOrders="allOrders"
+               :orderStatusCode="orderStatusCode"
+               @refresh="handleSelect"
+    />
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import MenuSelect from '@/common/menuSelect.vue'
-  import OrderList from './components/orderList.vue'
+  import MenuSelect from '@/common/menuSelect'
+  import OrderList from './components/orderList'
+  import { getOrderList } from './service'
 
   export default {
     components: {
@@ -20,22 +24,31 @@
       OrderList
     },
     created () {
-      this.selected = this.$route.query.type
-      this.handleSelect(this.selected)
+      let orderStatusCode = this.$route.query.type
+      this.handleSelect(orderStatusCode)
     },
     methods: {
       /**
-       * tab切换事件
-       * @param orderStatus  订单状态
+       * 获取订单列表
        */
-      handleSelect (orderStatus) {
-        this.selected = orderStatus
-        this.$refs.orderList.initData(orderStatus)
+      handleSelect (orderStatusCode) {
+        this.orderStatusCode = orderStatusCode
+        let {user: {customerGuid}} = this.$store.state.login
+        if (!customerGuid) {
+          return false
+        }
+        getOrderList({
+          customerGuid,
+          orderStatusCode: this.orderStatusCode
+        }).then(res => {
+          this.allOrders = res
+        })
       }
     },
     data () {
       return {
-        selected: '',
+        allOrders: [],
+        orderStatusCode: '',
         menus: [
           {
             name: '全部订单',

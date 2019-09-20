@@ -1,12 +1,12 @@
 import * as types from '../types'
 
 const state = {
-  selectMenu: ''
+  footSelectMenu: ''
 }
 
 const mutations = {
-  [types.SELECT_MENU] (state, res) {
-    state.selectMenu = res
+  [types.FOOT_SELECT_MENU] (state, res) {
+    state.footSelectMenu = res
   }
 }
 

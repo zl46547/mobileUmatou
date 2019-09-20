@@ -1,10 +1,11 @@
 <template>
-  <div id="myOrders">
-    <div class="orderList">
-      <div class="my-order-item" v-for="item in allOrders" :key="item._id">
-        <OrderItem :orderItem="item"
-                   @refresh="refresh"
-        />
+  <div class="my-orders">
+    <div class="order-list">
+      <div class="my-order-item"
+           v-for="item in allOrders"
+           :key="item._id"
+      >
+        <OrderItem :orderItem="item" @refresh="refresh"/>
       </div>
     </div>
     <Empty v-if="allOrders.length<=0"></Empty>
@@ -14,13 +15,15 @@
 <script type="text/ecmascript-6">
   import Empty from './empty.vue'
   import OrderItem from './orderItem'
-  import {getOrderList} from '../service'
 
   export default {
-    data () {
-      return {
-        allOrders: [],
-        orderStatusCode: null
+    props: {
+      allOrders: {
+        type: Array,
+        required: true
+      },
+      orderStatusCode: {
+        required: true
       }
     },
     components: {
@@ -28,34 +31,8 @@
       OrderItem
     },
     methods: {
-      /**
-       * 获取订单列表
-       */
-      initData (orderStatusCode) {
-        this.orderStatusCode = orderStatusCode
-        let {user: {customerGuid}} = this.$store.state.login
-        if (!customerGuid) {
-          return false
-        }
-        getOrderList({customerGuid, orderStatusCode}).then(res => {
-          this.allOrders = res
-        })
-      },
-      /**
-       * 刷新
-       * @returns {boolean}
-       */
       refresh() {
-        let {user: {customerGuid}} = this.$store.state.login
-        if (!customerGuid) {
-          return false
-        }
-        getOrderList({
-          customerGuid,
-          orderStatusCode: this.orderStatusCode
-        }).then(res => {
-          this.allOrders = res
-        })
+        this.$emit('refresh', this.orderStatusCode)
       }
     }
   }
@@ -64,9 +41,9 @@
 <style lang="less" scoped>
   @import "../../../less/variables";
 
-  #myOrders {
+  .my-orders {
     margin-top: 80rem/@baseFontSize;
-    .orderList {
+    .order-list {
       height: calc(100vh - 4rem);
       &::-webkit-scrollbar {
         display: none;

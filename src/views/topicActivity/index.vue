@@ -19,28 +19,29 @@
           />
         </div>
         <div v-if="activityItem.type === 'c'" class="type-c">
-          <div class="type-c-content"
-               v-for="item in activityItem.list"
+          <div v-for="item in activityItem.list"
                :key="item.index"
-               @click="goToDetail(item.entity.productId)"
+               @click="goToDetail(item)"
           >
-            <img v-lazy="item.entity.imgUrl" alt="typeC图片"/>
-            <p class="title">{{item.entity.name}}</p>
-            <div class="price">
-              <p class="newest-price">
-                <span>¥</span>
-                <span class="period-price">{{item.entity.periodPrice}}</span>
-                <span>/{{item.entity.unit}}</span>
-              </p>
-              <p class="default-price">
-                <span>¥</span>
-                <span class="shihang-price">{{item.entity.shiHangPrice}}</span>
-              </p>
-            </div>
-            <div class="add-cart-btn"
-                 :style="{'background-color':activityItem.cartBgColor}"
-                 @click.stop="addTocart(item)">
-              加入购物车
+            <div v-if="item.entity" class="type-c-content">
+              <img  v-lazy="item.entity.imgUrl" alt="typeC图片"/>
+              <p class="title">{{item.entity.name}}</p>
+              <div class="price">
+                <p class="newest-price">
+                  <span>¥</span>
+                  <span class="period-price">{{item.entity.periodPrice}}</span>
+                  <span>/{{item.entity.unit}}</span>
+                </p>
+                <p class="default-price">
+                  <span>¥</span>
+                  <span class="shihang-price">{{item.entity.shiHangPrice}}</span>
+                </p>
+              </div>
+              <div class="add-cart-btn"
+                   :style="{'background-color':activityItem.cartBgColor}"
+                   @click.stop="addTocart(item)">
+                加入购物车
+              </div>
             </div>
           </div>
         </div>
@@ -84,9 +85,9 @@
       /**
        * 跳转商品详情页
        */
-      goToDetail (productId) {
-        if (productId) {
-          this.$router.push({name: '商品详情', params: {productId}})
+      goToDetail ({entity}) {
+        if (entity) {
+          this.$router.push({name: '商品详情', params: {productId: entity.productId}})
         }
       },
       /**
@@ -98,7 +99,7 @@
           utils.backToTop(dom)
         }
         if (activityItem.linkTo && activityItem.linkType !== '5') {
-          this.goToDetail(activityItem.linkTo)
+          this.$router.push({name: '商品详情', params: {productId: activityItem.linkTo}})
         }
       },
       /**

@@ -3,7 +3,6 @@ import Vuex from 'vuex'
 
 import detail from './modules/detail'
 import login from './modules/login'
-import category from './modules/category'
 import car from './modules/car'
 import order from './modules/order'
 import common from './modules/common'
@@ -13,7 +12,6 @@ export default new Vuex.Store({
   modules: {
     detail,
     login,
-    category,
     car,
     order,
     common

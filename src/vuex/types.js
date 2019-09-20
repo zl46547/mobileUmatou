@@ -20,7 +20,7 @@ export const SUBMIT_ORDER = 'SUBMIT_ORDER'
 export const MY_ORDERS = 'MY_ORDERS'
 
 /* _footer选中的菜单 */
-export const SELECT_MENU = 'SELECT_MENU'
+export const FOOT_SELECT_MENU = 'FOOT_SELECT_MENU'
 
 /* 选择地址 */
 export const ADDRESS_SELECTED = 'ADDRESS_SELECTED'

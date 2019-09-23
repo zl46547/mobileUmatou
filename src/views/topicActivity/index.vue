@@ -1,47 +1,53 @@
 <template>
-  <div class="advertise" v-if="topicActivityList">
+  <div class="advertise" v-if="topicInfo">
     <Header>
       <span slot="title">优惠活动</span>
     </Header>
-    <div class="content" ref="content">
-      <div v-for="activityItem in topicActivityList" :key="activityItem.uid">
+    <div class="content"
+         ref="content"
+         :style="{'background-color':bgColor}"
+    >
+      <div v-for="activityItem in topicInfo" :key="activityItem.uid">
         <img v-lazy="activityItem.picUrl"
              alt="typeA图片"
              v-if="activityItem.type === 'a'"
              class="type-a"
         />
-        <div v-if="activityItem.type === 'b'" class="type-b">
+        <div v-if="activityItem.type === 'b'"
+             class="type-b"
+        >
           <img v-lazy="item.picUrl"
                alt="typeB图片"
                @click="goTop(activityItem.list[0])"
                v-for="item in activityItem.list"
                :key="item.index"
+               :style="{width:getTypeBWidth(activityItem.cols)}"
           />
         </div>
         <div v-if="activityItem.type === 'c'" class="type-c">
-          <div v-for="item in activityItem.list"
+          <div v-if="item.entity"
+               class="type-c-content"
+               v-for="item in activityItem.list"
                :key="item.index"
                @click="goToDetail(item)"
           >
-            <div v-if="item.entity" class="type-c-content">
-              <img  v-lazy="item.entity.imgUrl" alt="typeC图片"/>
-              <p class="title">{{item.entity.name}}</p>
-              <div class="price">
-                <p class="newest-price">
-                  <span>¥</span>
-                  <span class="period-price">{{item.entity.periodPrice}}</span>
-                  <span>/{{item.entity.unit}}</span>
-                </p>
-                <p class="default-price">
-                  <span>¥</span>
-                  <span class="shihang-price">{{item.entity.shiHangPrice}}</span>
-                </p>
-              </div>
-              <div class="add-cart-btn"
-                   :style="{'background-color':activityItem.cartBgColor}"
-                   @click.stop="addTocart(item)">
-                加入购物车
-              </div>
+            <img v-lazy="item.entity.imgUrl" alt="typeC图片"/>
+            <p class="title">{{item.entity.name}}</p>
+            <div class="price">
+              <p class="newest-price">
+                <span>¥</span>
+                <span class="period-price">{{item.entity.periodPrice}}</span>
+                <span>/{{item.entity.unit}}</span>
+              </p>
+              <p class="default-price">
+                <span>¥</span>
+                <span class="shihang-price">{{item.entity.shiHangPrice}}</span>
+              </p>
+            </div>
+            <div class="add-cart-btn"
+                 :style="{'background-color':activityItem.cartBgColor}"
+                 @click.stop="addTocart(item)">
+              加入购物车
             </div>
           </div>
         </div>
@@ -57,7 +63,6 @@
 
   export default {
     created () {
-      // this.$store.commit('SET_LOADING', true)
       let {queryId} = this.$route.query
       this.getTopicActivityData(queryId)
     },
@@ -65,29 +70,42 @@
       Header
     },
     beforeDestroy () {
-      this.topicActivityList = []
+      this.topicInfo = []
     },
     data () {
       return {
+        bgColor: null,
         scrollTop: 0,
-        topicActivityList: [],
+        topicInfo: [],
         pictureData: ''
       }
     },
     methods: {
+      getTypeBWidth(cols) {
+        switch (cols) {
+          case 1:
+            return '33.33%'
+          default:return '100%'
+        }
+      },
       /**
        * 获取主题活动信息
        * @param topicId 活动id
        */
       async getTopicActivityData (topicId) {
-        this.topicActivityList = await getTopicActivity({topicId})
+        let {topic_info: topicInfo, bg_color: bgColor} = await getTopicActivity({topicId})
+        this.topicInfo = topicInfo
+        this.bgColor = bgColor
       },
       /**
        * 跳转商品详情页
        */
       goToDetail ({entity}) {
         if (entity) {
-          this.$router.push({name: '商品详情', params: {productId: entity.productId}})
+          this.$router.push({
+            name: '商品详情',
+            params: {productId: entity.productId}
+          })
         }
       },
       /**
@@ -99,7 +117,10 @@
           utils.backToTop(dom)
         }
         if (activityItem.linkTo && activityItem.linkType !== '5') {
-          this.$router.push({name: '商品详情', params: {productId: activityItem.linkTo}})
+          this.$router.push({
+            name: '商品详情',
+            params: {productId: activityItem.linkTo}
+          })
         }
       },
       /**
@@ -135,11 +156,11 @@
       width: 100%;
       display: block;
     }
-
     .type-b {
+      display: flex;
+      flex-wrap: wrap;
       cursor: pointer;
       img {
-        width: 100%;
         display: block;
       }
     }
@@ -149,10 +170,11 @@
       align-items: center;
       justify-content: flex-start;
       flex-wrap: wrap;
-
+      margin: 0.5rem;
       .type-c-content {
-        width: 32%;
-        margin: 0.85% 0.65% ;
+        box-sizing: border-box;
+        width: 33.33%;
+        padding: 0.5rem 0.2rem;
         cursor: pointer;
         img {
           display: block;
@@ -185,7 +207,7 @@
         align-items: baseline;
         color: @priceColor;
         font-size: 1.25rem;
-        .period-price{
+        .period-price {
           font-size: 1.3rem;
         }
       }

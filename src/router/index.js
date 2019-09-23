@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import store from '@/vuex/store.js'
+import store from '../vuex/store'
 import {USER} from '../vuex/types'
 // 按需加载,当渲染其他页面时才加载其组件,并缓存,减少首屏加载时间
 const Index = resolve => require(['@/views/home/index.vue'], resolve)
@@ -22,11 +22,15 @@ const GetCoupons = resolve => require(['@/views/GetCoupons'], resolve)
 Vue.use(Router)
 
 const router = new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
       name: '首页',
-      component: Index
+      component: Index,
+      meta: {
+        keepAlive: true
+      }
     },
     {
       path: '/getCoupons',

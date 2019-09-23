@@ -13,10 +13,11 @@
 <script type="text/ecmascript-6">
   import { Swipe, SwipeItem, Toast } from 'vant'
   import {getSwipper} from '../service'
+  import {SCROLL_TOP} from '../../../vuex/types'
+
   export default {
-    mounted() {
-      var vm = this
-      vm.getSwiperData()
+    created() {
+      this.getSwiperData()
     },
     components: {
       Swipe,
@@ -51,10 +52,10 @@
        * @param JumpValue
        */
       goToIndexAdv(JumpValue) {
-        var vm = this
+        this.$store.commit(SCROLL_TOP, this.$parent.$refs.content.scrollTop)
         if (JumpValue.indexOf('topics') > -1) {
-          var queryId = JumpValue.replace('https://wechatx.34580.com/topics/', '')
-          vm.$router.push({path: '/topicActivity', query: {queryId}})
+          let queryId = JumpValue.replace('https://wechatx.34580.com/topics/', '')
+          this.$router.push({path: '/topicActivity', query: {queryId}})
         } else {
           Toast({
             message: '不支持该跳转'

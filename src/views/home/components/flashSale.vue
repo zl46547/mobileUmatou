@@ -33,6 +33,7 @@
 <script type="text/ecmascript-6">
   import moment from 'moment'
   import { getFlashSale } from '../service'
+  import {SCROLL_TOP} from '../../../vuex/types'
 
   export default {
     data () {
@@ -102,6 +103,7 @@
        * @param val
        */
       goToDetail (val) {
+        this.$store.commit(SCROLL_TOP, this.$parent.$refs.content.scrollTop)
         this.$router.push({name: '商品详情', params: {productId: val.ProductId}})
       }
     }

@@ -50,6 +50,11 @@
     beforeDestroy () {
       this.contentEle.removeEventListener('scroll', this.getScrollTop)
     },
+    beforeRouteEnter (to, from, next) {
+      next(_this => {
+        _this.$refs.content.scrollTop = _this.$store.state.common.scrollTop
+      })
+    },
     methods: {
       getScrollTop: utils.throttle(function ({target}) {
         this.showBackToTop = target.scrollTop > 400

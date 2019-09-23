@@ -33,3 +33,6 @@ export const PAY_WAY = 'PAY_WAY'
 
 /* 剩余支付时间 */
 export const REMAIN_TIME = 'REMAIN_TIME'
+
+/* 滚动条高度 */
+export const SCROLL_TOP = 'SCROLL_TOP'

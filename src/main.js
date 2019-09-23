@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import store from '@/vuex/store.js' // vuex
-import api from '@/http/api.js' // http请求
+import store from './vuex/store.js' // vuex
+import api from './http/api.js' // http请求
 import linq from 'linqjs'
 import lazyLoad from 'vue-lazyload'
 // 字体样式

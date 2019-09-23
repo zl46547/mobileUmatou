@@ -72,7 +72,10 @@
       <!-- 轮播 -->
       <div v-if="item.FloorType ===13">
         <Swipe :autoplay="3000" indicator-color="white">
-          <SwipeItem v-for="image in item.AdvInfo.AdvItems" :key="image.Id">
+          <SwipeItem v-for="image in item.AdvInfo.AdvItems"
+                     :key="image.Id"
+                     @click="goToTopicActivity(image.JumpValue)"
+          >
             <img :src="image.PicUrl" :alt="image.ContentName"/>
           </SwipeItem>
         </Swipe>
@@ -92,6 +95,8 @@
 <script type="text/ecmascript-6">
   import { Toast, Swipe, SwipeItem } from 'vant'
   import {getDefaultHome} from '../service'
+  import {SCROLL_TOP} from '../../../vuex/types'
+
   export default {
     data() {
       return {
@@ -120,6 +125,7 @@
        * @param picAdvItems
        */
       goToJump(floorType, picAdvItems) {
+        this.$store.commit(SCROLL_TOP, this.$parent.$refs.content.scrollTop)
         if (floorType === 12 || floorType === 15) {
           this.goToDetail(picAdvItems.ProductId)
           return false

@@ -4,10 +4,9 @@ import {
 
 /**
  * 获取订单状态列表
- * @param customerGuid
  */
-export const getOrderStatusNum = async customerGuid => {
-  let {data} = await getOrderStatusNumRequest(customerGuid)
+export const getOrderStatusNum = async () => {
+  let {data} = await getOrderStatusNumRequest()
   if (data.Data) {
     return data.Data
   }

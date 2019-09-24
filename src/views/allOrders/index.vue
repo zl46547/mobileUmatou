@@ -33,12 +33,7 @@
        */
       handleSelect (orderStatusCode) {
         this.orderStatusCode = orderStatusCode
-        let {user: {customerGuid}} = this.$store.state.login
-        if (!customerGuid) {
-          return false
-        }
         getOrderList({
-          customerGuid,
           orderStatusCode: this.orderStatusCode
         }).then(res => {
           this.allOrders = res

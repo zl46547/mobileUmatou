@@ -43,15 +43,12 @@
     },
     methods: {
       init () {
-        let {login: {user: {customerGuid}}, order: {addressSelected}} = this.$store.state
-        if (!customerGuid) {
-          return false
-        }
+        let {order: {addressSelected}} = this.$store.state
         if (addressSelected) {
           this.addressInfo = addressSelected
           return false
         }
-        getDefaultAddress(customerGuid).then(res => {
+        getDefaultAddress().then(res => {
           if (res) {
             this.addressInfo = res
             this.$store.commit(ADDRESS_SELECTED, res)

@@ -19,13 +19,8 @@
     },
     methods: {
       addCoupons() {
-        let {user: {customerGuid}} = this.$store.state.login
-        if (!customerGuid) {
-          return false
-        }
         try {
           addCoupons({
-            customerGuid,
             couponName: '满199减150',
             amount: 150,
             limitMinMoney: 190,

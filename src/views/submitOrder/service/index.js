@@ -6,11 +6,10 @@ import {
 import { Toast } from 'vant'
 /**
  * 获取优惠券列表
- * @param params
  */
-export const getCoupons = async params => {
+export const getCoupons = async () => {
   try {
-    let {data} = await getCouponsRequest(params)
+    let {data} = await getCouponsRequest()
     if (data.Data) {
       return data.Data
     }
@@ -23,11 +22,10 @@ export const getCoupons = async params => {
 
 /**
  * 获取默认地址
- * @param customerGuid
  */
-export const getDefaultAddress = async customerGuid => {
+export const getDefaultAddress = async () => {
   try {
-    let {data} = await getDefaultAddressRequest(customerGuid)
+    let {data} = await getDefaultAddressRequest()
     if (data.Data) {
       return data.Data
     }

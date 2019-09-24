@@ -22,9 +22,9 @@ export const getCategoryDetail = async params => {
 /**
  * 加入购物车
  */
-export const addGoods = async params => {
+export const addGoods = async productId => {
   try {
-    let {data} = await addGoodsRequest(params)
+    let {data} = await addGoodsRequest(productId)
     if (data.Data) {
       Toast.success('加入成功')
     } else {

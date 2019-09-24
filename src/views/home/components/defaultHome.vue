@@ -125,7 +125,6 @@
        * @param picAdvItems
        */
       goToJump(floorType, picAdvItems) {
-        this.$store.commit(SCROLL_TOP, this.$parent.$refs.content.scrollTop)
         if (floorType === 12 || floorType === 15) {
           this.goToDetail(picAdvItems.ProductId)
           return false
@@ -159,6 +158,7 @@
        * @param JumpValue
        */
       goToTopicActivity(JumpValue) {
+        this.$store.commit(SCROLL_TOP, this.$parent.$refs.content.scrollTop)
         var queryId = JumpValue.replace('https://wechatx.34580.com/topics/', '')
         this.$router.push({path: '/topicActivity', query: {queryId}})
       },
@@ -167,6 +167,7 @@
        * @param productId
        */
       goToDetail(productId) {
+        this.$store.commit(SCROLL_TOP, this.$parent.$refs.content.scrollTop)
         this.$router.push({name: '商品详情', params: {productId}})
       },
       /**
@@ -174,6 +175,7 @@
        * @param categoryIds
        */
       goToCategoryDetail(categoryIds) {
+        this.$store.commit(SCROLL_TOP, this.$parent.$refs.content.scrollTop)
         this.$router.push({path: '/categoryDetail', params: {categoryIds}})
       }
     }

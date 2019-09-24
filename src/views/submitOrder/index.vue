@@ -96,20 +96,13 @@
           order: {
             addressSelected,
             couponSelected
-          },
-          login: {
-            user: {customerGuid}
           }
         } = this.$store.state
-        if (!customerGuid) {
-          return false
-        }
         if (!addressSelected) {
           Toast('请选择地址')
           return false
         }
         let params = {
-          customerGuid,
           orderProductInfos, // 订单列表
           orderStatusCode: 'OS', // OS:下单成功；OF:下单失败；PS：支付成功；PF：支付失败
           addressId: addressSelected._id,

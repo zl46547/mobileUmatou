@@ -2,12 +2,10 @@ import axios from '../../../http/api'
 
 /**
  * 获取地址
- * @param params
  */
-export const getAddressListRequest = params => {
+export const getAddressListRequest = () => {
   return axios({
     method: 'get',
-    url: '/address/getAddressList',
-    params
+    url: '/address/getAddressList'
   })
 }

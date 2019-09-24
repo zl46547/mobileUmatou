@@ -67,16 +67,7 @@
        * @param productId
        */
       addCart (productId) {
-        let {
-          login: {user: {customerGuid}}
-        } = this.$store.state
-        if (!customerGuid) {
-          return false
-        }
-        addGoods({
-          productId,
-          customerGuid
-        })
+        addGoods(productId)
       }
     }
   }

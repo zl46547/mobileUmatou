@@ -57,11 +57,7 @@
        * 获取订单数量
        */
       getOrderServiceNum () {
-        let {user: {customerGuid}} = this.$store.state.login
-        if (!customerGuid) {
-          return false
-        }
-        getOrderStatusNum(customerGuid).then(res => {
+        getOrderStatusNum().then(res => {
           this.orderStatusNum = res
         })
       },

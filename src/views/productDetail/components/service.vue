@@ -59,7 +59,7 @@
       font-size: 1.35rem;
       .service-tip {
         padding-bottom: 20rem/@baseFontSize;
-        color: #f05423;
+        color: @red;
         display: flex;
         align-items: center;
         .icon-zhong {
@@ -73,15 +73,17 @@
         align-items: center;
         flex-wrap: wrap;
         .iconfont{
-          color: @themeColor;
+          color: @green;
           font-size: 1.6rem;
           font-weight: bold;
         }
         .name{
+          font-size: 1.4rem;
           margin-right: 20rem/@baseFontSize;
         }
       }
       .service-item{
+        line-height: 2;
         white-space: nowrap;
       }
     }

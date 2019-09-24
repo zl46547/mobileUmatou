@@ -1,15 +1,18 @@
 import { Toast } from 'vant'
-import store from '@/vuex/store.js'
+import store from '../vuex/store.js'
 import router from '../router'
 import 'vant/lib/index.css'
-// import { clearUserInfo } from '../utils'
 class BaseAxiosHelper {
   /**
    * 处理请求参数，过滤null的字段
    * @param config
-   * @returns {{[p: string]: *}}
+   * @returns {{params}}
    */
   filterParams (config) {
+    let user = store.state.login.user
+    if (user) {
+      config.headers.customer_guid = user.customer_guid
+    }
     // 过滤 undefined params
     const { params = {} } = config
     let temp = {}
@@ -24,25 +27,17 @@ class BaseAxiosHelper {
     }
   }
 
-  returnToLoginIn (code) {
-    // local.remove('TOKEN')
-    // window.document.cookie = 'token=;'
-    // clearUserInfo()
-    router.push({ name: 'login' })
-  }
-
   /**
    * 处理响应错误信息
    * @param error
    * @returns {Promise<never>}
    */
   handleError (error) {
-    store.commit('SET_LOADING', false)
     if (!error.response) {
       Toast.success(error.Message)
       return Promise.reject(error)
     }
-    const { status, data: { Message, code } } = error.response
+    const { status, data: { Message } } = error.response
     switch (status) {
       case 500:
         if (Message) {
@@ -60,8 +55,13 @@ class BaseAxiosHelper {
         Toast.fail(`${Message || 'Not Found'}`)
         break
       case 401:
-        Toast.fail('身份过期，请重新登录')
-        this.returnToLoginIn(code)
+        Toast.fail({
+          duration: 2000,
+          message: '身份过期，请重新登录'
+        })
+        setTimeout(() => {
+          router.push('/login')
+        }, 2000)
         break
       default:
         Toast.fail(`${Message || '未知错误'}`)

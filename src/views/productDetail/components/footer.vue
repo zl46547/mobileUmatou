@@ -50,10 +50,8 @@
     },
     async created () {
       // 初始化购物车数量
-      let {user: {customerGuid}} = this.$store.state.login
-      this.count = await fetchCartCount({customerGuid})
+      this.count = await fetchCartCount()
       this.isLikeProduct = await productIsCollect({
-        customerGuid,
         productId: this.productId
       })
     },
@@ -62,9 +60,7 @@
        * 加入购物车
        */
       addCart () {
-        let {user: {customerGuid}} = this.$store.state.login
         let data = {
-          customerGuid,
           productId: this.productId
         }
         handleAddGoods(data).then(res => {
@@ -77,9 +73,7 @@
        * 收藏
        */
       onLike () {
-        let {user: {customerGuid}} = this.$store.state.login
         let data = {
-          customerGuid,
           productId: this.productId
         }
         addCollect(data).then(res => {

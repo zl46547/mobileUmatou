@@ -21,7 +21,7 @@
                @click="goTop(activityItem.list[0])"
                v-for="item in activityItem.list"
                :key="item.index"
-               :style="{width:getTypeBWidth(activityItem.cols)}"
+               :style="{width:getTypeBWidth(activityItem.style,item.isExpired)}"
           />
         </div>
         <div v-if="activityItem.type === 'c'" class="type-c">
@@ -81,12 +81,11 @@
       }
     },
     methods: {
-      getTypeBWidth(cols) {
-        switch (cols) {
-          case 1:
-            return '33.33%'
-          default:return '100%'
+      getTypeBWidth (style, isExpired) {
+        if (style === 2 && !isExpired) {
+          return '33.33%'
         }
+        return '100%'
       },
       /**
        * 获取主题活动信息
@@ -134,13 +133,8 @@
        * 加入购物车
        */
       addCart (product) {
-        debugger
-        let {user: {customerGuid}} = this.$store.state.login
-        let data = {
-          customerGuid,
-          productId: product.entity.productId
-        }
-        handleAddGoods(data).then(res => {
+        let productId = product.entity.productId
+        handleAddGoods(productId).then(res => {
           if (res) {
             this.count = res.count
           }

@@ -46,12 +46,8 @@
        * @returns {boolean}
        */
       initAddressList () {
-        let {user: {customerGuid}} = this.$store.state.login
         let {addressSelected} = this.$store.state.order
-        if (!customerGuid) {
-          return false
-        }
-        getAddressList({customerGuid}).then(res => {
+        getAddressList().then(res => {
           if (addressSelected) {
             res = res.map(item => {
               item.isDefault = item._id === addressSelected._id

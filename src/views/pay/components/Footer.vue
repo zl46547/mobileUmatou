@@ -24,14 +24,10 @@
           return false
         }
         let {
-          login: {user: {customerGuid}},
           order: {payWay}
         } = this.$store.state
         let {orderNo} = this.$route.query
-        if (!customerGuid) {
-          return false
-        }
-        let params = {customerGuid, payWay, orderNo}
+        let params = {payWay, orderNo}
         payOrder(params).then(res => {
           if (res) {
             setTimeout(() => {

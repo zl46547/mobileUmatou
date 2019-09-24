@@ -79,8 +79,9 @@
 
 <style lang="less" scoped>
   #product-detail {
-    background-color: #fff;
+    height: 100%;
     overflow: hidden;
+    background-color: #fff;
     .component-fade-enter-active, .component-fade-leave-active {
       transition: all .3s ease;
     }

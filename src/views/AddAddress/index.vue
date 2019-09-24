@@ -185,10 +185,6 @@
        * @returns {boolean}
        */
       handleSubmitAddress() {
-        let {user: {customerGuid}} = this.$store.state.login
-        if (!customerGuid) {
-          return false
-        }
         if (!this.beforeSubmit()) {
           return false
         }
@@ -201,7 +197,7 @@
               }
             })
           } else {
-            addAddress({customerGuid, ...this.params}).then(res => {
+            addAddress(this.params).then(res => {
               if (res) {
                 this.$router.go(-1)
               }

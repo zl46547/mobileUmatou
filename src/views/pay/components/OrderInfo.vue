@@ -41,11 +41,7 @@
        * @param orderNo
        */
       init (orderNo) {
-        let {user: {customerGuid}} = this.$store.state.login
-        if (!customerGuid) {
-          return false
-        }
-        getOrderDetail({customerGuid, orderNo}).then(res => {
+        getOrderDetail({orderNo}).then(res => {
           this.orderDetail = res
           this.getRemainTime()
           this.timeInterval = setInterval(() => {

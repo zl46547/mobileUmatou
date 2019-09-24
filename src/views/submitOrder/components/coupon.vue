@@ -47,11 +47,7 @@
       }
     },
     created () {
-      let {user: {customerGuid}} = this.$store.state.login
-      if (!customerGuid) {
-        return false
-      }
-      getCoupons({customerGuid}).then(res => {
+      getCoupons().then(res => {
         this.couponList = this.formatCouponList(res)
       })
     },

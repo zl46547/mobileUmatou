@@ -25,9 +25,9 @@ export const getTopicActivity = async params => {
 /**
  * 加入购物车
  */
-export const handleAddGoods = async params => {
+export const handleAddGoods = async productId => {
   try {
-    let {data} = await submitAddGoods(params)
+    let {data} = await submitAddGoods(productId)
     if (data.Data) {
       Toast.success('加入成功')
       return data.Data

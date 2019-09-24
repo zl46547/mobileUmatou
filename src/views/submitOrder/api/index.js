@@ -2,25 +2,21 @@ import axios from '../../../http/api'
 
 /**
  * 获取优惠券列表
- * @param params
  */
-export const getCouponsRequest = params => {
+export const getCouponsRequest = () => {
   return axios({
     method: 'get',
-    url: '/orders/getOrderCoupons',
-    params
+    url: '/orders/getOrderCoupons'
   })
 }
 
 /**
  * 获取默认地址列表
- * @param customerGuid
  */
-export const getDefaultAddressRequest = customerGuid => {
+export const getDefaultAddressRequest = () => {
   return axios({
     method: 'get',
-    url: '/address/getDefaultAddress',
-    params: {customerGuid}
+    url: '/address/getDefaultAddress'
   })
 }
 

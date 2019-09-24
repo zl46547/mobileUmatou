@@ -4,11 +4,10 @@ import {
 
 /**
  * 获取地址
- * @param parmas
  */
-export const getAddressList = async parmas => {
+export const getAddressList = async () => {
   try {
-    let res = await getAddressListRequest(parmas)
+    let res = await getAddressListRequest()
     if (res.data.Data) {
       return res.data.Data
     }

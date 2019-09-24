@@ -99,9 +99,10 @@
           return false
         }
         submitSignIn(this.user).then(res => {
-          debugger
           this.$store.commit(types.USER, {...res, token: new Date().getTime()})
-          this.$router.go(-1)
+          setTimeout(() => {
+            this.$router.go(-1)
+          }, 2000)
         })
       },
       /**
@@ -121,9 +122,10 @@
           return false
         }
         submitRegster(this.user).then(res => {
-          Toast('注册成功！')
           this.$store.commit(types.USER, {...res, token: new Date().getTime()})
-          this.$router.go(-1)
+          setTimeout(() => {
+            this.$router.go(-1)
+          }, 2000)
         })
       }
     }

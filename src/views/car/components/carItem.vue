@@ -22,7 +22,7 @@
             <div class="operate">
               <div class="input-number">
                 <p @click.stop="changeNum(-1,item)"
-                  :class="{'disabled':item.quantity === 1}"
+                   :class="{'disabled':item.quantity === 1}"
                 >-</p>
                 <p>{{item.quantity}}</p>
                 <p @click.stop="changeNum(1,item)">+</p>
@@ -201,14 +201,14 @@
                   &:nth-of-type(2) {
                     width: 50rem/@baseFontSize;
                     font-size: 26rem/@baseFontSize;
-                    &:nth-of-type(3) {
-                      border: none;
-                      border-radius: 0 5rem/@baseFontSize 5rem/@baseFontSize 0
-                    }
+                  }
+                  &:nth-of-type(3) {
+                    border: none;
+                    border-radius: 0 5rem/@baseFontSize 5rem/@baseFontSize 0
                   }
                 }
               }
-              .disabled{
+              .disabled {
                 color: #ccc;
                 cursor: not-allowed;
               }
@@ -221,7 +221,7 @@
                 width: 80rem/@baseFontSize;
                 text-align: center;
                 color: #fff;
-                background-color: red;
+                background-color: @red;
                 float: right;
                 cursor: pointer;
               }

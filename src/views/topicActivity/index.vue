@@ -46,7 +46,7 @@
             </div>
             <div class="add-cart-btn"
                  :style="{'background-color':activityItem.cartBgColor}"
-                 @click.stop="addTocart(item)">
+                 @click.stop="addCart(item)">
               加入购物车
             </div>
           </div>
@@ -58,7 +58,7 @@
 
 <script type="text/ecmascript-6">
   import Header from '../../common/navigator'
-  import { getTopicActivity } from './service'
+  import { getTopicActivity, handleAddGoods } from './service'
   import utils from '../../util/common'
 
   export default {
@@ -93,9 +93,16 @@
        * @param topicId 活动id
        */
       async getTopicActivityData (topicId) {
-        let {topic_info: topicInfo, bg_color: bgColor} = await getTopicActivity({topicId})
-        this.topicInfo = topicInfo
-        this.bgColor = bgColor
+        let res = await getTopicActivity({topicId})
+        if (res) {
+          let {topic_info: topicInfo, bg_color: bgColor} = res
+          this.topicInfo = topicInfo
+          this.bgColor = bgColor
+        } else {
+          setTimeout(() => {
+            this.$router.go(-1)
+          }, 3000)
+        }
       },
       /**
        * 跳转商品详情页
@@ -109,7 +116,7 @@
         }
       },
       /**
-       * 回到顶部
+       * 回到顶部或跳转详情
        */
       goTop (activityItem) {
         if (activityItem.linkType === '5') {
@@ -125,12 +132,19 @@
       },
       /**
        * 加入购物车
-       * @param product
        */
-      addTocart (product) {
-        if (product.entity) {
-          this.getProductDetailData(product.entity.productId)
+      addCart (product) {
+        debugger
+        let {user: {customerGuid}} = this.$store.state.login
+        let data = {
+          customerGuid,
+          productId: product.entity.productId
         }
+        handleAddGoods(data).then(res => {
+          if (res) {
+            this.count = res.count
+          }
+        })
       }
     }
   }

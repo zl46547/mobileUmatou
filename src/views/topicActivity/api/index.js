@@ -12,3 +12,14 @@ export const getTopicActivityRequest = params => {
     params
   })
 }
+
+/**
+ * 加入购物车
+ */
+export const submitAddGoods = data => {
+  return axios({
+    method: 'post',
+    url: '/shoppingCart/addGoods',
+    data
+  })
+}

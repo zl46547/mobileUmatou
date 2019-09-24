@@ -17,9 +17,7 @@
 
 > [vuex]  是一个专为 vue.js 应用程序开发的状态管理模式，简单来说Vuex就是管理数据的。
 
-> [Mint UI] 由饿了么前端团队推出的 Mint UI 是一个基于 vue.js 的移动端组件库。
-
-> [Element UI] 同样是由饿了么前端团队推出的 Element UI 一套基于 Vue 2.0 的桌面端组件库。
+> [Vant UI] Vant UI 是一个基于 vue.js 的移动端组件库。
 
 > [LESS] Less CSS预编译语言，扩充了 CSS 语言,增加了诸如变量、混合(mixin)、运算、函数等。
 

@@ -9,7 +9,7 @@
     <Loading v-show="fetchLoading"></Loading>
   </div>
 </template>
-
+`
 <script>
   import Loading from '@/common/_loading'
 

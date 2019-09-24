@@ -1,5 +1,6 @@
 import {
-  getTopicActivityRequest
+  getTopicActivityRequest,
+  submitAddGoods
 } from '../api'
 import { Toast } from 'vant'
 
@@ -9,13 +10,32 @@ import { Toast } from 'vant'
  */
 export const getTopicActivity = async params => {
   try {
-    let {data} = await getTopicActivityRequest(params)
-    if (data.data) {
-      return data.data
+    let res = await getTopicActivityRequest(params)
+    if (res.data.data) {
+      return res.data.data
     }
+    Toast.fail(res.data.message)
     return null
   } catch (e) {
     Toast.fail('获取主题活动信息异常')
+    console.log(e)
+  }
+}
+
+/**
+ * 加入购物车
+ */
+export const handleAddGoods = async params => {
+  try {
+    let {data} = await submitAddGoods(params)
+    if (data.Data) {
+      Toast.success('加入成功')
+      return data.Data
+    }
+    Toast.fail('加入购物车失败')
+    return null
+  } catch (e) {
+    Toast.fail('加入购物车异常')
     console.log(e)
   }
 }

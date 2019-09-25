@@ -10,7 +10,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import OrderItem from './orderItem'
+  import OrderItem from './OrderItem'
 
   export default {
     props: {

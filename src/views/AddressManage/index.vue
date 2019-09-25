@@ -19,10 +19,10 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Navigator from '../../common/navigator.vue'
+  import Navigator from '../../common/navigator'
   import { Button } from 'vant'
   import { getAddressList } from './service'
-  import AddressItem from './components/addressItem'
+  import AddressItem from './components/AddressItem'
 
   export default {
     components: {

@@ -13,7 +13,7 @@ const Car = resolve => require(['@/views/car/index.vue'], resolve)
 const SubmitOrder = resolve => require(['@/views/submitOrder/index.vue'], resolve)
 const Pay = resolve => require(['@/views/pay/index.vue'], resolve)
 const User = resolve => require(['@/views/user/index.vue'], resolve)
-const AllOrders = resolve => require(['@/views/allOrders/index.vue'], resolve)
+const AllOrders = resolve => require(['@/views/AllOrders/index.vue'], resolve)
 const Rate = resolve => require(['@/views/rate/index.vue'], resolve)
 const Login = resolve => require(['@/views/login/index.vue'], resolve)
 const AddressManage = resolve => require(['@/views/AddressManage'], resolve)
@@ -108,7 +108,7 @@ const router = new Router({
       component: Pay
     },
     {
-      path: '/allOrders',
+      path: '/AllOrders',
       name: '我的订单',
       meta: {
         requireAuth: true

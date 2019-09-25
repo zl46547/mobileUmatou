@@ -41,6 +41,8 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     // 创建路径的别名，比如增加'components': resolve('src/components')等
     alias: {
+      // import Vue from 'vue'根据包查找规则，会先查找package.json中main属性所指定的路径：dist/vue.runtime.common.js，
+      // 而这个文件是非完整的文件，所以需要修改指定的文件路径，将'vue'结尾的解析成 import Vue from 'vue/dist/vue.esm.js'
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
     }

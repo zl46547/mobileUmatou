@@ -20,8 +20,8 @@
 
 <script type="text/ecmascript-6">
   import MenuSelect from '@/common/menuSelect'
-  import Empty from './components/empty'
-  import OrderList from './components/orderList'
+  import Empty from './components/Empty'
+  import OrderList from './components/OrderList'
   import { getOrderList } from './service'
 
   export default {

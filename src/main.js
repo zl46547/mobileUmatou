@@ -8,7 +8,7 @@ import lazyLoad from 'vue-lazyload'
 // 字体样式
 import './assets/font/index.css'
 // 全局消息组件
-import Message from './common/message/index.js'
+import Message from './common/Message/index.js'
 
 Vue.use(Message)
 Vue.use(lazyLoad, {

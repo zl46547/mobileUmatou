@@ -8,7 +8,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Footer from '../../common/footer/index.vue'
+  import Footer from '../../common/TabBar/index.vue'
   import {Button} from 'vant'
   import {addCoupons} from './service'
 

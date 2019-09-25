@@ -177,7 +177,7 @@
             }).then(res => {
               if (res) {
                 setTimeout(() => {
-                  _this.$router.push({path: '/car'})
+                  _this.$router.push({path: '/cart'})
                 }, 2000)
               }
             })

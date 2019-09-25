@@ -3,22 +3,22 @@ import Router from 'vue-router'
 import store from '../vuex/store'
 import {USER} from '../vuex/types'
 // 按需加载,当渲染其他页面时才加载其组件,并缓存,减少首屏加载时间
-const Index = resolve => require(['@/views/home/index.vue'], resolve)
-const TopicActivity = resolve => require(['@/views/topicActivity/index.vue'], resolve)
-const Category = resolve => require(['@/views/category/index.vue'], resolve)
-const CategoryMain = resolve => require(['@/views/category/components/main.vue'], resolve)
-const CategoryDetail = resolve => require(['@/views/categoryDetail/index.vue'], resolve)
-const ProductDetail = resolve => require(['@/views/productDetail/index.vue'], resolve)
-const Car = resolve => require(['@/views/car/index.vue'], resolve)
-const SubmitOrder = resolve => require(['@/views/submitOrder/index.vue'], resolve)
-const Pay = resolve => require(['@/views/pay/index.vue'], resolve)
-const User = resolve => require(['@/views/user/index.vue'], resolve)
 const AllOrders = resolve => require(['@/views/AllOrders/index.vue'], resolve)
-const Rate = resolve => require(['@/views/rate/index.vue'], resolve)
-const Login = resolve => require(['@/views/login/index.vue'], resolve)
 const AddressManage = resolve => require(['@/views/AddressManage'], resolve)
 const AddAddress = resolve => require(['@/views/AddAddress'], resolve)
+const Category = resolve => require(['@/views/Category/index.vue'], resolve)
+const CategoryMain = resolve => require(['@/views/Category/components/main.vue'], resolve)
+const CategoryDetail = resolve => require(['@/views/CategoryDetail/index.vue'], resolve)
+const Cart = resolve => require(['@/views/Cart/index.vue'], resolve)
 const GetCoupons = resolve => require(['@/views/GetCoupons'], resolve)
+const Home = resolve => require(['@/views/Home/index.vue'], resolve)
+const Login = resolve => require(['@/views/Login/index.vue'], resolve)
+const Pay = resolve => require(['@/views/Pay/index.vue'], resolve)
+const ProductDetail = resolve => require(['@/views/ProductDetail/index.vue'], resolve)
+const Rate = resolve => require(['@/views/Rate/index.vue'], resolve)
+const SubmitOrder = resolve => require(['@/views/SubmitOrder/index.vue'], resolve)
+const TopicActivity = resolve => require(['@/views/TopicActivity/index.vue'], resolve)
+const User = resolve => require(['@/views/User/index.vue'], resolve)
 Vue.use(Router)
 
 const router = new Router({
@@ -27,7 +27,7 @@ const router = new Router({
     {
       path: '/',
       name: '首页',
-      component: Index,
+      component: Home,
       meta: {
         keepAlive: true
       }
@@ -55,12 +55,12 @@ const router = new Router({
       component: CategoryDetail
     },
     {
-      path: '/car',
+      path: '/cart',
       name: '购物车页',
       meta: {
         requireAuth: true // 添加该字段，表示进入这个路由是需要登录的
       },
-      component: Car
+      component: Cart
     },
     {
       path: '/user',

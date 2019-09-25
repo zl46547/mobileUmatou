@@ -1,17 +1,14 @@
 <template>
   <div id="app">
-    <keep-alive>
-        <router-view v-if="$route.meta.keepAlive"></router-view>
-    </keep-alive>
     <transition name="slide-fade" mode="out-in">
-      <router-view v-if="!$route.meta.keepAlive"></router-view>
+      <router-view></router-view>
     </transition>
     <Loading v-show="fetchLoading"></Loading>
   </div>
 </template>
 `
 <script>
-  import Loading from '@/common/_loading'
+  import Loading from './common/Loading'
 
   export default {
     components: {

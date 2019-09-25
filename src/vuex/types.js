@@ -8,7 +8,7 @@ export const USER = 'USER'
 export const CHANGE_TABINDEX = 'CHANGE_TABINDEX'
 
 /* 购物车列表 */
-export const CAR_LIST = 'CAR_LIST'
+export const CART_LIST = 'CART_LIST'
 
 /* 选中的购物车列表，提交订单 */
 export const SELECT_CAR_LIST = 'SELECT_CAR_LIST'

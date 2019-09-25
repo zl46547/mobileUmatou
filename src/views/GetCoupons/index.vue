@@ -19,18 +19,14 @@
     },
     methods: {
       addCoupons() {
-        try {
-          addCoupons({
-            couponName: '满199减150',
-            amount: 150,
-            limitMinMoney: 190,
-            description: '测试优惠券',
-            beginTime: '2019-7-22',
-            endTime: '2019-8-1'
-          })
-        } catch (e) {
-          console.log(e)
-        }
+        addCoupons({
+          couponName: '满199减150',
+          amount: 150,
+          limitMinMoney: 190,
+          description: '测试优惠券',
+          beginTime: '2019-7-22',
+          endTime: '2019-8-1'
+        })
       }
     }
   }

@@ -17,7 +17,6 @@ export const getOrderList = async params => {
     }
     return []
   } catch (e) {
-    Toast.fail('获取订单列表异常！')
     console.error(e)
   }
 }
@@ -36,7 +35,6 @@ export const deleteOrder = async params => {
     Toast.fail('订单删除失败！')
     return null
   } catch (e) {
-    Toast.fail('订单删除异常！')
     console.error(e)
   }
 }
@@ -55,7 +53,6 @@ export const reOrder = async params => {
     Toast.fail('重新下单失败！')
     return null
   } catch (e) {
-    Toast.fail('重新下单异常！')
     console.error(e)
   }
 }
@@ -73,7 +70,6 @@ export const confirmOrder = async params => {
     }
     Toast.fail('收货失败！')
   } catch (e) {
-    Toast.fail('收货异常！')
     console.error(e)
   }
 }

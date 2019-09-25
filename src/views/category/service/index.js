@@ -5,7 +5,6 @@ import {
   getSwipperRequest
 } from '../api'
 
-import {Toast} from 'vant'
 /**
  * 获取大分类数据
  */
@@ -17,7 +16,6 @@ export const getBigCategory = async () => {
     }
     return null
   } catch (e) {
-    Toast.fail('获取大分类数据异常')
     console.error(e)
   }
 }
@@ -33,7 +31,6 @@ export const getHotCategory = async () => {
     }
     return null
   } catch (e) {
-    Toast.fail('获取小分类数据异常')
     console.error(e)
   }
 }
@@ -49,7 +46,6 @@ export const getSubCategory = async params => {
     }
     return null
   } catch (e) {
-    Toast.fail('获取小分类其他数据异常')
     console.error(e)
   }
 }
@@ -66,7 +62,6 @@ export const getSwipper = async params => {
     }
     return null
   } catch (e) {
-    Toast.fail('获取分类轮播图图片异常')
     console.error(e)
   }
 }

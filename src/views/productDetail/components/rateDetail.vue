@@ -79,6 +79,8 @@
        */
       handleTagClick (item) {
         this.activeTag = item.tag
+        this.finished = false
+        this.pageIndex = 0
         let {productId} = this.$route.params
         this.getCommentList({productId, tag: item.tag})
         let dom = this.$refs.rateContainer

@@ -38,11 +38,7 @@
       TotalCount
     },
     created() {
-      let {user: {customerGuid}} = this.$store.state.login
-      if (!customerGuid) {
-        return false
-      }
-      this.initCarList(customerGuid)
+      this.initCarList()
     },
     data() {
       return {
@@ -53,8 +49,8 @@
       /**
        * 获取购物车列表
        */
-      initCarList(customerGuid) {
-        getCartList(customerGuid).then(res => {
+      initCarList() {
+        getCartList().then(res => {
           this.carList = res
         })
       },

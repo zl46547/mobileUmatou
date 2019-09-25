@@ -62,9 +62,20 @@
   import utils from '../../util/common'
 
   export default {
-    created () {
-      let {queryId} = this.$route.query
-      this.getTopicActivityData(queryId)
+    watch: {
+      '$route': {
+        handler() {
+          let {queryId} = this.$route.query
+          if (!queryId) {
+            return false
+          }
+          this.getTopicActivityData(queryId).then(() => {
+            let dom = this.$refs.content
+            utils.backToTop(dom)
+          })
+        },
+        immediate: true
+      }
     },
     components: {
       Header
@@ -118,15 +129,24 @@
        * 回到顶部或跳转详情
        */
       goTop (activityItem) {
-        if (activityItem.linkType === '5') {
-          let dom = this.$refs.content
-          utils.backToTop(dom)
-        }
-        if (activityItem.linkTo && activityItem.linkType !== '5') {
-          this.$router.push({
-            name: '商品详情',
-            params: {productId: activityItem.linkTo}
-          })
+        switch (activityItem.linkType) {
+          case '5':
+            let dom = this.$refs.content
+            utils.backToTop(dom)
+            break
+          case '4':
+            let queryId = activityItem.linkTo.replace('https://wechatx.34580.com/topics/', '')
+            this.$router.push({
+              name: '专题',
+              query: {queryId}
+            })
+
+            break
+          default:
+            this.$router.push({
+              name: '商品详情',
+              params: {productId: activityItem.linkTo}
+            })
         }
       },
       /**

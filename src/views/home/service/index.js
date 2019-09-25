@@ -5,7 +5,6 @@ import {
   getDefaultHomeRequest
 } from '../api'
 
-import {Toast} from 'vant'
 /**
  * 获取首页轮播图图片
  * @param params
@@ -18,7 +17,6 @@ export const getSwipper = async params => {
     }
     return null
   } catch (e) {
-    Toast.fail('获取首页轮播图图片异常')
     console.log(e)
   }
 }
@@ -34,7 +32,6 @@ export const getShortcutIcon = async () => {
     }
     return null
   } catch (e) {
-    Toast.fail('获取菜单数据异常')
     console.log(e)
   }
 }
@@ -50,7 +47,6 @@ export const getFlashSale = async () => {
     }
     return null
   } catch (e) {
-    Toast.fail('获取限时抢购数据异常')
     console.log(e)
   }
 }
@@ -65,7 +61,6 @@ export const getDefaultHome = async () => {
     }
     return null
   } catch (e) {
-    Toast.fail('获取首页列表数据异常')
     console.log(e)
   }
 }

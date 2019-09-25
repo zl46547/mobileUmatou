@@ -15,7 +15,6 @@ export const getCoupons = async () => {
     }
     return []
   } catch (e) {
-    Toast.fail('获取优惠券列表异常')
     console.log(e)
   }
 }
@@ -31,7 +30,6 @@ export const getDefaultAddress = async () => {
     }
     return null
   } catch (e) {
-    Toast.fail('获取默认地址异常')
     console.log(e)
   }
 }
@@ -50,7 +48,6 @@ export const submitOrder = async params => {
     Toast.fail('提交订单失败')
     return null
   } catch (e) {
-    Toast.fail('提交订单异常')
     console.log(e)
   }
 }

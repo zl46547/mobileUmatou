@@ -123,7 +123,7 @@
       }
 
       .icon-text {
-        font-size: 28rem/@baseFontSize;
+        font-size: 30rem/@baseFontSize;
       }
 
       .my-like-product {
@@ -152,7 +152,7 @@
     }
 
     .add-cart {
-      font-size: 32rem/@baseFontSize;
+      font-size: 30rem/@baseFontSize;
       line-height: 90rem/@baseFontSize;
       height: 100%;
       text-align: center;

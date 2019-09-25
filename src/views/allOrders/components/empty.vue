@@ -1,8 +1,6 @@
 <template>
   <div id="empty">
-    <div class="img-icon">
-      <i class="icon iconfont icon-empty"></i>
-    </div>
+    <i class="iconfont icon-empty-list"></i>
     <div>您还没有相关的订单</div>
     <div>可以去看看有哪些想买</div>
     <div class="goToBuy" @click="goToBuy">随便逛逛</div>
@@ -16,97 +14,43 @@
        * 随便逛逛
        */
       goToBuy () {
-        var vm = this
-        vm.$router.push({name: '首页'})
+        this.$router.push({name: '首页'})
       }
-    },
-    data () {
-      return {}
     }
   }
 </script>
 
 <style lang="less" scoped>
   #empty {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    .img-icon {
-      display: flex;
-      width:120px;
-      height:120px;
-      border-radius: 50%;
-      /*background-color: #d6d6d6;*/
-      margin: 0 auto;
-      margin-top: 16%;
-      .iconfont {
-        color: #fff;
-        margin: auto;
-        font-size: 5.2rem;
-      }
+    text-align: center;
+    margin-top: 40%;
+    .iconfont {
+      color: #c2c2c2;
+      margin: auto;
+      font-size: 6rem;
     }
-    div:nth-of-type(2) {
+    div:nth-of-type(1) {
       font-size: 1.6rem;
       white-space: nowrap;
       padding: 1.5vh;
       text-align: center;
     }
-    div:nth-of-type(3) {
+    div:nth-of-type(2) {
       font-size: 1.3rem;
-      color: #cecece;
-      padding-bottom: 1.2vh;
+      padding-bottom: 1.2rem;
       text-align: center;
       white-space: nowrap;
     }
     .goToBuy {
-      width: 30%;
+      width: 5rem;
       font-size: 1.3rem;
       text-align: center;
-      margin: 1vh auto;
-      padding: 8px 10px;
+      margin: 0.5rem auto;
+      padding: .6rem 1rem;
       border: 1px solid #a0a0a0;
-      border-radius: 2px;
+      border-radius: .5rem;
       cursor: pointer;
       white-space: nowrap;
-    }
-    @font-face {
-      font-family: 'iconfont';
-      src: url(data:font/truetype;charset=utf-8;base64,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) format('truetype');
-      font-weight: normal;
-      font-style: normal;
-    }
-
-    .iconfont {
-      font-family: "iconfont";
-      font-style: normal;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-    .icon-empty:before {
-      content: "\e617";
-    }
-  }
-
-  @media screen and (min-width: 400px) {
-    #empty {
-      .img-icon {
-        width:150px;
-        height:150px;
-        .iconfont {
-          font-size: 7.2rem;
-        }
-      }
-      div:nth-of-type(2) {
-        font-size: 1.8rem;
-      }
-      div:nth-of-type(3) {
-        font-size: 1.5rem;
-      }
-      .goToBuy {
-        width: 35%;
-        font-size: 1.5rem;
-      }
     }
   }
 </style>

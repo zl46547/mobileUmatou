@@ -16,7 +16,6 @@ export const getOrderDetail = async params => {
     }
     return []
   } catch (e) {
-    Toast.fail('获取优惠券列表异常')
     console.error(e)
   }
 }
@@ -33,7 +32,6 @@ export const payOrder = async params => {
     }
     Toast.fail('订单支付失败')
   } catch (e) {
-    Toast.fail('订单支付异常')
     console.error(e)
   }
 }

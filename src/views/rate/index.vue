@@ -84,13 +84,8 @@
        * @returns {boolean}
        */
       submitRate () {
-        let {user: {customerGuid}} = this.$store.state.login
-        if (!customerGuid) {
-          return false
-        }
         let {orderNo} = this.$route.query
         let params = {
-          customerGuid,
           orderNo,
           ...this.formData
         }
@@ -130,7 +125,7 @@
         cursor: pointer;
       }
       .active {
-        color: @themeColor;
+        color: @red;
       }
     }
     .rate-star {
@@ -155,9 +150,9 @@
       width: 100%;
       cursor: pointer;
       color: #fff;
-      font-size: 24rem/@baseFontSize;
-      height: 80rem/@baseFontSize;
-      line-height: 80rem/@baseFontSize;
+      font-size: 30rem/@baseFontSize;
+      height: 90rem/@baseFontSize;
+      line-height: 90rem/@baseFontSize;
       text-align: center;
       background-color: @themeColor;
     }

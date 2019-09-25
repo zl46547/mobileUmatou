@@ -50,7 +50,7 @@
       padding: 20rem/@baseFontSize;
       img {
         display: block;
-        width: 180rem/@baseFontSize;
+        width: 150rem/@baseFontSize;
       }
       .product-info {
         padding-left: 1rem;
@@ -70,17 +70,17 @@
           justify-content: space-between;
           .pv-standard {
             color: #999;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
           }
           .period-money {
             margin-right: .5rem;
             color: @priceColor;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
           }
           .quantity {
             letter-spacing: .2rem;
             color: #333;
-            font-size: 1.65rem;
+            font-size: 1.35rem;
           }
         }
       }
@@ -96,7 +96,7 @@
       span{
         padding: 0 .3rem;
         color: @priceColor;
-        font-size: 2rem;
+        font-size: 1.6rem;
       }
     }
   }

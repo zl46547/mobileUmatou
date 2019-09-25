@@ -14,7 +14,6 @@ export const getCategoryDetail = async params => {
     }
     return null
   } catch (e) {
-    Toast.fail('获取分类详情异常')
     console.log(e)
   }
 }
@@ -31,7 +30,6 @@ export const addGoods = async productId => {
       Toast.fail('加入失败')
     }
   } catch (e) {
-    Toast.fail('加入异常')
     console.log(e)
   }
 }

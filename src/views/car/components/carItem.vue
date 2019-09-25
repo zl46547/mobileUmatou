@@ -63,14 +63,10 @@
        * @param productId
        */
       deleteItem (productId) {
-        let {user: {customerGuid}} = this.$store.state.login
-        if (!customerGuid) {
-          return false
-        }
         this.$message({
           description: '删除后订单无法还原,是否继续操作？',
           onConfirm: () => {
-            deleteGoods({productIds: [productId], customerGuid}).then(res => {
+            deleteGoods({productIds: [productId]}).then(res => {
               if (res) {
                 this.$emit('del-refresh', productId)
               }
@@ -84,15 +80,11 @@
        * @param item
        */
       changeNum (value, item) {
-        let {user: {customerGuid}} = this.$store.state.login
-        if (!customerGuid) {
-          return false
-        }
         let quantity = item.quantity + value
         if (quantity < 1) {
           quantity = 1
         }
-        setGoodsQuantity({quantity, productId: item.productId, customerGuid}).then(res => {
+        setGoodsQuantity({quantity, productId: item.productId}).then(res => {
           if (res) {
             this.$emit('change-number', {quantity, productId: item.productId})
           }

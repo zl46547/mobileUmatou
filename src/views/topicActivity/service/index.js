@@ -17,7 +17,6 @@ export const getTopicActivity = async params => {
     Toast.fail(res.data.message)
     return null
   } catch (e) {
-    Toast.fail('获取主题活动信息异常')
     console.log(e)
   }
 }
@@ -35,7 +34,6 @@ export const handleAddGoods = async productId => {
     Toast.fail('加入购物车失败')
     return null
   } catch (e) {
-    Toast.fail('加入购物车异常')
     console.log(e)
   }
 }

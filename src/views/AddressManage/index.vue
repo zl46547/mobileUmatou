@@ -7,6 +7,10 @@
       <div v-for="item in addressList" :key="item._id">
         <AddressItem :addressItem="item"/>
       </div>
+      <div class="address-empty" v-if="addressList.length<=0">
+        <i class="iconfont icon-empty-list"></i>
+        <span>空空如也</span>
+      </div>
     </div>
     <div class="add-address" @click="handleAddAddress()">
       +新增地址
@@ -74,16 +78,27 @@
       flex: 1;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
+      .address-empty {
+        text-align: center;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color: #c2c2c2;
+        .icon-empty-list {
+          font-size: 6rem;
+        }
+      }
     }
     .add-address {
       cursor: pointer;
-      height: 70rem/@baseFontSize;;
-      line-height: 70rem/@baseFontSize;;
+      height: 90rem/@baseFontSize;;
+      line-height: 90rem/@baseFontSize;;
       border-radius: 5rem/@baseFontSize;
       background-color: @themeColor;
       color: #fff;
       text-align: center;
-      font-size: 22rem/@baseFontSize;;
+      font-size: 30rem/@baseFontSize;;
     }
   }
 </style>

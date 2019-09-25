@@ -113,14 +113,10 @@
         }
         submitOrder(params).then(res => {
           if (res) {
-            Toast.success('提交订单成功')
             setTimeout(() => {
               this.$router.replace({name: '支付订单', query: {orderNo: res}})
             }, 2000)
           }
-        }).catch(err => {
-          Toast.fail('提交订单失败')
-          console.log(err)
         })
       }
     }
@@ -192,7 +188,7 @@
         line-height: 90rem/@baseFontSize;
         background-color: @red;
         text-align: center;
-        font-size: 1.3rem;
+        font-size: 30rem/@baseFontSize;
       }
     }
   }

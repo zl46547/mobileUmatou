@@ -7,18 +7,16 @@ import {Toast} from 'vant'
 
 /**
  * 获取购物车列表
- * @param customerGuid
  */
-export const getCartList = async customerGuid => {
+export const getCartList = async () => {
   try {
-    let {data} = await getCartListRequest(customerGuid)
+    let {data} = await getCartListRequest()
     if (data.Data) {
       return data.Data
     }
     return null
   } catch (e) {
     console.error(e)
-    Toast.fail('获取购物车列表异常')
   }
 }
 
@@ -37,7 +35,6 @@ export const deleteGoods = async params => {
     return null
   } catch (e) {
     console.error(e)
-    Toast.fail('删除购物车异常')
   }
 }
 
@@ -55,6 +52,5 @@ export const setGoodsQuantity = async params => {
     return null
   } catch (e) {
     console.error(e)
-    Toast.fail('加减购物车数量异常')
   }
 }

@@ -15,7 +15,6 @@ export const rateOrder = async params => {
     }
     Toast.fail('评价失败')
   } catch (e) {
-    Toast.fail('评价异常')
     console.error(e)
   }
 }

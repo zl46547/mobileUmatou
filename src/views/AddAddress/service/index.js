@@ -18,7 +18,6 @@ export const addAddress = async data => {
     }
     Toast.fail('添加失败')
   } catch (e) {
-    Toast.fail('添加异常')
     console.error(e)
   }
 }
@@ -35,7 +34,6 @@ export const updateAddress = async data => {
     }
     Toast.fail('编辑失败')
   } catch (e) {
-    Toast.fail('编辑异常')
     console.error(e)
   }
 }
@@ -51,7 +49,6 @@ export const getAddressDetail = async id => {
     }
     return null
   } catch (e) {
-    Toast.fail('查询地址详情异常')
     console.error(e)
   }
 }

@@ -92,8 +92,9 @@ export const addCollect = async params => {
     let {data} = await addCollectRequest(params)
     if (data.Data) {
       Toast.success('收藏成功')
+      return data.Data
     }
-    return data.Data
+    return null
   } catch (e) {
     console.log(e)
   }

@@ -50,8 +50,8 @@
     border-top: 1px solid rgb(221, 221, 221);
     width: 100%;
     .footer-btn {
-      height: 100rem/@baseFontSize;
-      line-height: 100rem/@baseFontSize;
+      height: 90rem/@baseFontSize;
+      line-height: 90rem/@baseFontSize;
       color: #fff;
       text-align: center;
       font-size: 30rem/@baseFontSize;

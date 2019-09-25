@@ -5,7 +5,7 @@
         <span>订单编号：</span>
         <span>{{orderItem.orderNo}}</span>
       </div>
-      <p class="order-status-name">{{getOrderStatusName(orderItem.orderStatusCode)}}</p>
+      <p class="order-status-name">{{getOrderStatusName(orderItem)}}</p>
     </div>
     <div class="content van-hairline--bottom">
       <div class="order-image">
@@ -26,7 +26,7 @@
         <span>¥{{orderItem.payment}}</span>
       </div>
       <div class="footer-btn">
-        <Button v-show="showPayOrderBtn(orderItem)"
+        <Button v-show="isPayStatus(orderItem)"
                 @click="goToPay(orderItem)"
                 color="#f04a18"
                 size="small"
@@ -34,7 +34,7 @@
         >
           立即支付
         </Button>
-        <Button v-show="showReOrderBtn(orderItem)"
+        <Button v-show="isOverTime(orderItem)"
                 @click="goToReOrder(orderItem)"
                 color="#909090"
                 size="small"
@@ -101,24 +101,29 @@
     },
     methods: {
       /**
-       * 显示重新下单按钮
+       * 判断订单是否已过期
        * @param orderItem
        */
-      showReOrderBtn (orderItem) {
+      isOverTime (orderItem) {
         return orderItem.orderStatusCode === 'OS' && (moment(orderItem.orderTimeOut).diff(new Date()) < 0)
       },
       /**
-       * 显示立即支付按钮
+       * 判断订单是否可支付
        * @param orderItem
        */
-      showPayOrderBtn (orderItem) {
+      isPayStatus (orderItem) {
         return orderItem.orderStatusCode === 'OS' && (moment(orderItem.orderTimeOut).diff(new Date()) > 0)
       },
+
       /**
-       * @param status 订单状态名称
+       * 订单状态名称
+       * @param orderItem
        */
-      getOrderStatusName (status) {
-        return ORDER_STATUS_NAME[status]
+      getOrderStatusName (orderItem) {
+        if (this.isOverTime(orderItem)) {
+          return '已过期'
+        }
+        return ORDER_STATUS_NAME[orderItem.orderStatusCode]
       },
       /**
        * 退货
@@ -126,7 +131,7 @@
        */
       goToReFund (val) {
         this.$message({
-          description: '确认删除该订单？',
+          description: '确认退货？',
           onConfirm () {
             // this.delOrder(val)
           }
@@ -138,15 +143,10 @@
        */
       delOrderAlert (orderItem) {
         let _this = this
-        let {user: {customerGuid}} = this.$store.state.login
-        if (!customerGuid) {
-          return false
-        }
         this.$message({
           description: '确认删除该订单？',
           onConfirm () {
             deleteOrder({
-              customerGuid,
               orderNo: orderItem.orderNo
             }).then(res => {
               if (res) {
@@ -169,15 +169,10 @@
        */
       goToReOrder (orderItem) {
         let _this = this
-        let {user: {customerGuid}} = this.$store.state.login
-        if (!customerGuid) {
-          return false
-        }
         this.$message({
           description: '确认重新下单？',
           onConfirm () {
             reOrder({
-              customerGuid,
               orderNo: orderItem.orderNo
             }).then(res => {
               if (res) {
@@ -195,12 +190,7 @@
        */
       goToConfirm (orderItem) {
         let _this = this
-        let {user: {customerGuid}} = this.$store.state.login
-        if (!customerGuid) {
-          return false
-        }
         let params = {
-          customerGuid,
           orderNo: orderItem.orderNo
         }
         this.$message({
@@ -270,12 +260,12 @@
       .price {
         span:nth-of-type(1) {
           color: #9a9a9a;
-          font-size: 28rem/@baseFontSize;
+          font-size: 30rem/@baseFontSize;
           margin-right: 15rem/@baseFontSize;;
         }
         span:nth-of-type(2) {
           color: @priceColor;
-          font-size: 28rem/@baseFontSize;
+          font-size: 30rem/@baseFontSize;
         }
       }
       .footer-btn {

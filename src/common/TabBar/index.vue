@@ -1,71 +1,30 @@
 <template>
   <footer id="footer">
-    <div class="tabbar">
-      <div class="tab-bar-item"
-           v-for="item in tabBarItem"
-           :key="item.name"
-           :class="{'is-selected':item.url === selected}"
-           @click="footSelect(item.url)">
-        <i :class="[`${item.icon}`]" class="iconfont"></i>
-        <span class="tab-bar-item-name">{{item.name}}</span>
-      </div>
+    <div class="tab-bar">
+      <router-link class="tab-bar-item" exact to="/">
+        <i class="iconfont icon-home"></i>
+        <span class="tab-bar-item-name">首页</span>
+      </router-link>
+      <router-link class="tab-bar-item" to="/category">
+        <i class="iconfont icon-category"></i>
+        <span class="tab-bar-item-name">分类</span>
+      </router-link>
+      <router-link class="tab-bar-item" to="/cart">
+        <i class="iconfont icon-cart"></i>
+        <span class="tab-bar-item-name">购物侧</span>
+      </router-link>
+      <router-link class="tab-bar-item" to="/user">
+        <i class="iconfont icon-mine"></i>
+        <span class="tab-bar-item-name">我的</span>
+      </router-link>
     </div>
   </footer>
 </template>
 
 <script type="text/ecmascript-6">
-import { FOOT_SELECT_MENU } from '../../vuex/types'
   export default {
     data () {
       return {
-        selected: '/',
-        tabBarItem: [
-          {
-            name: '首页',
-            icon: 'icon-home',
-            url: '/'
-          },
-          {
-            name: '分类',
-            icon: 'icon-category',
-            url: '/category'
-          },
-          {
-            name: '购物车',
-            icon: 'icon-cart',
-            url: '/cart'
-          },
-          {
-            name: '我的',
-            icon: 'icon-mine',
-            url: '/user'
-          }
-        ]
-      }
-    },
-    methods: {
-      footSelect(val) {
-        this.selected = val
-        this.$router.replace(val)
-        this.$store.commit(FOOT_SELECT_MENU, val)
-      }
-    },
-    created () {
-      this.selected = this.$store.state.common.footSelectMenu
-      let routerName = this.$route.name
-      switch (routerName) {
-        case '首页':
-          this.selected = '/'
-          break
-        case '分类页':
-          this.selected = '/category'
-          break
-        case '购物车页':
-          this.selected = '/cart'
-          break
-        case '用户页':
-          this.selected = '/user'
-          break
       }
     }
   }
@@ -84,7 +43,7 @@ import { FOOT_SELECT_MENU } from '../../vuex/types'
     display: flex;
     align-items: center;
     border-top: 1px solid rgb(221, 221, 221);
-    .tabbar {
+    .tab-bar {
       display: flex;
       align-items: center;
       justify-content: space-around;

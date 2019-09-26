@@ -1,8 +1,8 @@
 <template>
   <div id="rate">
-    <Header>
+    <Navigator>
       <span slot="title">评价商品</span>
-    </Header>
+    </Navigator>
     <div class="top-rate van-hairline--bottom">
       <div v-for="item in rateList"
            :key="item.label"
@@ -41,13 +41,13 @@
 
 <script type="text/ecmascript-6">
   import { Field, Rate } from 'vant'
-  import Header from '@/common/navigator'
+  import Navigator from '../../common/Navigator'
   import {rateOrder} from './service'
 
   export default {
     components: {
       Rate,
-      Header,
+      Navigator,
       Field
     },
     data () {

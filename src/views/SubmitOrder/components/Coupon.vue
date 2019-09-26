@@ -32,7 +32,6 @@
 
 <script type="text/ecmascript-6">
   import CouponCard from './CouponCard'
-  import MenuSelect from '@/common/menuSelect'
   import { ActionSheet } from 'vant'
   import { COUPON_SELECTED } from '../../../vuex/types'
   import { getCoupons } from '../service'
@@ -61,7 +60,6 @@
     },
     components: {
       ActionSheet,
-      MenuSelect,
       CouponCard
     },
     methods: {

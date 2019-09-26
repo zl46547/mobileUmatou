@@ -1,7 +1,7 @@
 <template>
   <div id="allOrders">
     <!-- 顶部菜单 -->
-    <MenuSelect
+    <TabMenu
       :menuItems="menus"
       @menu-selected="handleSelect"
       :selected="orderStatusCode"
@@ -19,7 +19,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import MenuSelect from '@/common/menuSelect'
+  import TabMenu from '../../common/TabMenu'
   import Empty from './components/Empty'
   import OrderList from './components/OrderList'
   import { getOrderList } from './service'
@@ -27,7 +27,7 @@
   export default {
     components: {
       Empty,
-      MenuSelect,
+      TabMenu,
       OrderList
     },
     created () {

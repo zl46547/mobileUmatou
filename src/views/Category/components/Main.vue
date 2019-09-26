@@ -1,37 +1,39 @@
 <template>
-  <div id="category-main" ref="categoryMain">
-    <Swiper :adverse="randerAdvertise"></Swiper>
-    <div class="hot-category" v-if="!pathId">
-      <div class="category-list"
-           v-for="item in category"
-           :key="item.Id"
-           @click="goToCategoryDetail(item.Id)">
-        <img :src="`http://picpro-sz.34580.com/sz/ImageUrl/${item.PictureId}/160.jpeg`"/>
-        <div class="title">{{item.Name}}</div>
-      </div>
-    </div>
-    <div class="sub-category" v-else>
-      <div v-for="(item,index) in category" :key="index">
-        <div class="sub-title">
-          <div class="meta-keywords">{{item.MetaKeywords}}</div>
-          <div class="all-product" @click="allProduct">
-            <span>全部商品</span>
-            <span class="icon iconfont icon-arrow-right"></span>
-          </div>
-        </div>
-        <div class="sub-content">
-          <div class="category-list"
-               v-for="smallItem in item.SmallCategories"
-               :key="smallItem.Id"
-               @click="goToCategoryDetail(smallItem.Id)"
-          >
-            <img :src="`http://picpro-sz.34580.com/sz/ImageUrl/${smallItem.PictureId}/160.jpeg`"/>
-            <div class="title">{{smallItem.Name}}</div>
-          </div>
+    <div id="category-main"
+         ref="categoryMain"
+    >
+      <Swiper :adverse="randerAdvertise"></Swiper>
+      <div class="hot-category" v-if="!pathId">
+        <div class="category-list"
+             v-for="item in category"
+             :key="item.Id"
+             @click="goToCategoryDetail(item.Id)">
+          <img :src="`http://picpro-sz.34580.com/sz/ImageUrl/${item.PictureId}/160.jpeg`"/>
+          <div class="title">{{item.Name}}</div>
         </div>
       </div>
+      <div class="sub-category" v-else>
+        <div v-for="(item,index) in category" :key="index">
+          <div class="sub-title">
+            <div class="meta-keywords">{{item.MetaKeywords}}</div>
+            <div class="all-product" @click="allProduct">
+              <span>全部商品</span>
+              <span class="icon iconfont icon-arrow-right"></span>
+            </div>
+          </div>
+          <div class="sub-content">
+            <div class="category-list"
+                 v-for="smallItem in item.SmallCategories"
+                 :key="smallItem.Id"
+                 @click="goToCategoryDetail(smallItem.Id)"
+            >
+              <img :src="`http://picpro-sz.34580.com/sz/ImageUrl/${smallItem.PictureId}/160.jpeg`"/>
+              <div class="title">{{smallItem.Name}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
 </template>
 
 <script type="text/ecmascript-6">
@@ -59,11 +61,6 @@
     created () {
       this.getAllAdvertisement()
     },
-    watch: {
-      '$route': function () {
-        this.getCategoryDetailById()
-      }
-    },
     methods: {
       /**
        * 获取所有广告数据
@@ -75,8 +72,7 @@
       /**
        * 根据id获取分类数据
        */
-      getCategoryDetailById () {
-        let id = Number(this.$route.params.id)
+      getCategoryDetailById (id) {
         if (!id) {
           this.initHotCategory()
         } else {
@@ -192,5 +188,11 @@
         flex-wrap: wrap;
       }
     }
+  }
+  .fade-enter-active,.fade-leave-active {
+    transition: all 1.5s ease-in;
+  }
+  .fade-enter, .slide-fade-leave-to {
+    opacity: 0;
   }
 </style>

@@ -64,7 +64,6 @@
         }
       },
       getMenuListData() {
-        this.$store.commit(SCROLL_TOP, this.$parent.$refs.content.scrollTop)
         getShortcutIcon().then((res) => {
           this.menuList = res.ShortcutIcons
           this.topCenterInfos = res.TopCenterInfos

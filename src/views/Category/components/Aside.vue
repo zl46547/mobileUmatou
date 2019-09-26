@@ -23,11 +23,7 @@
       }
     },
     created () {
-      let id = this.$route.params.id
-      if (!id) {
-        return false
-      }
-      this.getAsideData(Number(id))
+      this.getAsideData()
     },
     methods: {
       /**
@@ -35,7 +31,7 @@
        */
       changeTabIndex (val) {
         this.activeItem = val
-        this.$router.replace({name: '分类页', params: {id: val.Id}})
+        this.$emit('change-tab', val)
       },
       /**
        * 获取左侧大分类数据
@@ -43,7 +39,7 @@
       getAsideData (id) {
         getBigCategory().then((res) => {
           this.bigCategory = res
-          this.activeItem = this.bigCategory.find(item => (item.Id === id))
+          this.activeItem = this.bigCategory[0]
         })
       }
     }

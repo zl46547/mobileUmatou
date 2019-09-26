@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <transition name="slide-fade" mode="out-in">
-      <router-view></router-view>
+    <transition name="page-slide">
+      <router-view class="position-div"></router-view>
     </transition>
     <Loading v-show="fetchLoading"></Loading>
   </div>
@@ -11,6 +11,11 @@
   import Loading from './common/Loading'
 
   export default {
+    data: function () {
+      return {
+        show: true
+      }
+    },
     components: {
       Loading
     },
@@ -35,12 +40,25 @@
     background-color: #ebebeb;
     /* 可以设置不同的进入和离开动画 */
     /* 设置持续时间和动画函数 */
-    .slide-fade-enter-active, .slide-fade-leave-active {
-      transition: all .5s ease;
+    .page-slide-enter-active,
+    .page-slide-leave-active {
+      transition: all 0.5s ease;
     }
-    .slide-fade-enter, .slide-fade-leave-to {
-      transform: translateX(20rem/@baseFontSize);
+    .page-slide-leave-to {
+      transform: translateX(-100%);
       opacity: 0;
+    }
+    .page-slide-enter {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    /* 解决动画留白 */
+    .position-div{
+      position:absolute;
+      left:0;
+      right:0;
+      top:0;
+      bottom:0;
     }
   }
 </style>

@@ -27,7 +27,7 @@
           {
             name: '收藏',
             icon: 'icon-collect',
-            color: '#aaa'
+            color: '#e23a00'
           },
           {
             name: '签到',
@@ -66,6 +66,10 @@
       showFunction(item) {
         if (item.name === '地址管理') {
           this.$router.push({name: '地址管理', params: {type: 1}})
+          return false
+        }
+        if (item.name === '收藏') {
+          this.$router.push({name: '收藏'})
           return false
         }
         Toast({

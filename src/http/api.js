@@ -16,7 +16,9 @@ api.interceptors.request.use(config => {
 }, null)
 // 响应拦截
 api.interceptors.response.use(response => {
-  loading.hideLoading()
+  if (response.config.showLoading) {
+    loading.hideLoading()
+  }
   return response
 }, error => {
   return axiosHelper.handleError(error)

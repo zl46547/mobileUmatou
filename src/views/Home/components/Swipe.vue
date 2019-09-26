@@ -48,7 +48,7 @@
         })
       },
       /**
-       * 跳转至广告详情页
+       * 跳转至专题详情页
        * @param JumpValue
        */
       goToIndexAdv(JumpValue) {

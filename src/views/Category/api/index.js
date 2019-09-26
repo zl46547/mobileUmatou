@@ -15,7 +15,6 @@ export const getBigCategoryRequest = () => {
  */
 export const getHotCategoryRequest = () => {
   return axios({
-    showLoading: true,
     method: 'get',
     url: '/products/hotCategory'
   })
@@ -26,7 +25,6 @@ export const getHotCategoryRequest = () => {
  */
 export const getSubCategoryRequest = params => {
   return axios({
-    showLoading: true,
     method: 'get',
     url: '/products/subCategory',
     params

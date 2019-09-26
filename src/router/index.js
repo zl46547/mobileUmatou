@@ -7,7 +7,7 @@ const AllOrders = resolve => require(['@/views/AllOrders/index.vue'], resolve)
 const AddressManage = resolve => require(['@/views/AddressManage'], resolve)
 const AddAddress = resolve => require(['@/views/AddAddress'], resolve)
 const Category = resolve => require(['@/views/Category/index.vue'], resolve)
-const CategoryMain = resolve => require(['@/views/Category/components/main.vue'], resolve)
+// const CategoryMain = resolve => require(['@/views/Category/components/main.vue'], resolve)
 const CategoryDetail = resolve => require(['@/views/CategoryDetail/index.vue'], resolve)
 const Cart = resolve => require(['@/views/Cart/index.vue'], resolve)
 const GetCoupons = resolve => require(['@/views/GetCoupons'], resolve)
@@ -19,10 +19,12 @@ const Rate = resolve => require(['@/views/Rate/index.vue'], resolve)
 const SubmitOrder = resolve => require(['@/views/SubmitOrder/index.vue'], resolve)
 const TopicActivity = resolve => require(['@/views/TopicActivity/index.vue'], resolve)
 const User = resolve => require(['@/views/User/index.vue'], resolve)
+const Collections = resolve => require(['@/views/Collections/index.vue'], resolve)
 Vue.use(Router)
 
 const router = new Router({
   mode: 'history',
+  linkActiveClass: 'is-selected',
   routes: [
     {
       path: '/',
@@ -39,15 +41,8 @@ const router = new Router({
     },
     {
       path: '/category',
-      redirect: '/category/0',
-      component: Category,
-      children: [
-        {
-          path: '/category/:id',
-          name: '分类页',
-          component: CategoryMain
-        }
-      ]
+      name: '分类',
+      component: Category
     },
     {
       path: '/categoryDetail',
@@ -126,6 +121,11 @@ const router = new Router({
       component: Rate
     },
     {
+      path: '/collections',
+      name: '收藏',
+      component: Collections
+    },
+    {
       path: '/login',
       name: '登录',
       component: Login
@@ -147,7 +147,8 @@ router.beforeEach((to, from, next) => {
   }
 
   if (user) {
-    store.commit(USER, {...user, token: new Date().getTime()}) // 在token未失效的情况下，每次切换路由时都刷新一下token，保持登录状态
+    // 在token未失效的情况下，每次切换路由时都刷新一下token，保持登录状态
+    store.commit(USER, {...user, token: new Date().getTime()})
   }
   if (to.meta.requireAuth) { // 需要权限,进一步进行判断
     if (flag) { // 通过vuex state获取当前的token是否存在

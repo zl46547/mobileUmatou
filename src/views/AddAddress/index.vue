@@ -75,7 +75,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Navigator from '../../common/navigator.vue'
+  import Navigator from '../../common/Navigator'
   import {addAddress, getAddressDetail, updateAddress} from './service'
   import {Field, CellGroup, Cell, Area, Popup, Switch, Toast} from 'vant'
   import areaList from '../../util/area'

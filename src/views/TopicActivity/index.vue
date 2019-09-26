@@ -1,8 +1,8 @@
 <template>
   <div class="advertise" v-if="topicInfo">
-    <Header>
+    <Navigator>
       <span slot="title">优惠活动</span>
-    </Header>
+    </Navigator>
     <div class="content"
          ref="content"
          :style="{'background-color':bgColor}"
@@ -57,7 +57,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Header from '../../common/navigator'
+  import Navigator from '../../common/Navigator'
   import { getTopicActivity, handleAddGoods } from './service'
   import utils from '../../util/common'
 
@@ -78,7 +78,7 @@
       }
     },
     components: {
-      Header
+      Navigator
     },
     beforeDestroy () {
       this.topicInfo = []

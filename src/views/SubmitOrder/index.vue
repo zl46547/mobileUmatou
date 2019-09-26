@@ -1,8 +1,8 @@
 <template>
   <div id="submitOrder">
-    <Header>
+    <Navigator>
       <span slot="title">提交订单</span>
-    </Header>
+    </Navigator>
     <div class="content-body">
       <Address/>
       <OrderList/>
@@ -37,7 +37,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Header from '@/common/navigator'
+  import Navigator from '../../common/Navigator'
   import Address from './components/Address'
   import OrderList from './components/OrderList'
   import Coupon from './components/Coupon'
@@ -48,7 +48,7 @@
     components: {
       OrderList,
       Address,
-      Header,
+      Navigator,
       Coupon
     },
     data () {

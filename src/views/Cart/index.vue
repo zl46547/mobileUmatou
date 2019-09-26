@@ -9,7 +9,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Navigator from '../../common/navigator'
+  import Navigator from '../../common/Navigator'
   import CartList from './components/CartList'
   import TabBar from '../../common/TabBar'
   export default {

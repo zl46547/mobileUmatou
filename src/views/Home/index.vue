@@ -46,14 +46,13 @@
     mounted () {
       this.contentEle = this.$refs.content
       this.contentEle.addEventListener('scroll', this.getScrollTop)
+      let scrollTop = this.$store.state.common.scrollTop
+      setTimeout(() => {
+        this.$refs.content.scrollTop = scrollTop
+      }, 200)
     },
     beforeDestroy () {
       this.contentEle.removeEventListener('scroll', this.getScrollTop)
-    },
-    beforeRouteEnter (to, from, next) {
-      next(_this => {
-        _this.$refs.content.scrollTop = _this.$store.state.common.scrollTop
-      })
     },
     methods: {
       getScrollTop: utils.throttle(function ({target}) {
@@ -90,8 +89,7 @@
     .slide-fade-enter-active, .slide-fade-leave-active {
       transition: all .5s ease;
     }
-    .slide-fade-enter, .slide-fade-leave-to
-      /* .slide-fade-leave-active for below version 2.1.8 */ {
+    .slide-fade-enter, .slide-fade-leave-to{
       transform: translateX(10rem/@baseFontSize);
       opacity: 0;
     }

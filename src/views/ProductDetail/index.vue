@@ -1,6 +1,6 @@
 <template>
   <div id="product-detail">
-    <MenuSelect
+    <TabMenu
       :menuItems="menus"
       @menu-selected="menuSelected"
       :selected="viewComponent"
@@ -21,16 +21,16 @@
 
 <script type="text/ecmascript-6">
   import Product from './components/Product'
-  import MenuSelect from '../../common/menuSelect.vue'
+  import TabMenu from '../../common/TabMenu'
   import Footer from './components/Footer.vue'
-  import RateDetail from './components/RateDetail.vue'
+  import RateDetail from './components/RateDetail'
   import Detail from './components/Detail.vue'
   import { getProductDetail } from './service'
 
   export default {
     components: {
       Product,
-      MenuSelect,
+      TabMenu,
       Footer,
       Detail,
       RateDetail

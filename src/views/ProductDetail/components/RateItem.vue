@@ -7,7 +7,7 @@
       <img src="../../../assets/images/face.png" v-else/>
       <div>
         <div class="customer-name">{{rateItem.customerName}}</div>
-        <Star :satisfyValue="parseInt(rateItem.star)"></Star>
+        <Rate v-model="rateItem.star" readonly></Rate>
       </div>
     </div>
     <div class="rate-recommond-container">
@@ -40,9 +40,8 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Star from '@/common/star.vue'
+  import { Rate, ImagePreview } from 'vant'
   import moment from 'moment'
-  import { ImagePreview } from 'vant'
 
   export default {
     props: {
@@ -52,7 +51,7 @@
       }
     },
     components: {
-      Star
+      Rate
     },
     data () {
       return {
@@ -98,7 +97,7 @@
       }
 
       .customer-name {
-        font-size: 1.3rem;
+        font-size: 1.5rem;
       }
     }
     .rate-recommond-container {

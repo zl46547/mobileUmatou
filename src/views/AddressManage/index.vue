@@ -19,7 +19,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Navigator from '../../common/navigator'
+  import Navigator from '../../common/Navigator'
   import { Button } from 'vant'
   import { getAddressList } from './service'
   import AddressItem from './components/AddressItem'

@@ -2,8 +2,8 @@
   <div id="category">
     <CityHeader></CityHeader>
     <div class="category-container">
-      <Aside></Aside>
-      <router-view></router-view>
+      <Aside @change-tab="changeTab"/>
+      <Main ref="mainComponent"/>
     </div>
     <TabBar/>
   </div>
@@ -13,12 +13,19 @@
   import CityHeader from '../../common/CityHeader'
   import TabBar from '../../common/TabBar'
   import Aside from './components/Aside'
+  import Main from './components/Main'
 
   export default {
     components: {
       Aside,
       CityHeader,
-      TabBar
+      TabBar,
+      Main
+    },
+    methods: {
+      changeTab({Id}) {
+        this.$refs.mainComponent.getCategoryDetailById(Id)
+      }
     }
   }
 </script>

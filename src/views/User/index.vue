@@ -34,7 +34,7 @@
     overflow: hidden;
     height: 100vh;
     .content {
-      height: calc(100% - 4.5rem);
+      height: calc(100% - 5rem);
       &::-webkit-scrollbar {
         display: none
       }

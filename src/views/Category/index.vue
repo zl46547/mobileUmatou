@@ -39,9 +39,9 @@
     background-color: #fff;
     overflow: hidden;
     .category-container {
-      height: calc(100% - 9.5rem);
+      height: calc(100% - 10rem);
       display: flex;
-      margin-top: 100rem/@baseFontSize;
+      margin-top: 5rem;
     }
   }
 </style>

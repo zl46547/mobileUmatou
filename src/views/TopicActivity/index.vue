@@ -1,8 +1,5 @@
 <template>
   <div class="advertise" v-if="topicInfo">
-    <Navigator>
-      <span slot="title">优惠活动</span>
-    </Navigator>
     <div class="content"
          ref="content"
          :style="{'background-color':bgColor}"
@@ -13,17 +10,15 @@
              v-if="activityItem.type === 'a'"
              class="type-a"
         />
-        <div v-if="activityItem.type === 'b'"
+        <img v-if="activityItem.type === 'b'"
              class="type-b"
-        >
-          <img v-lazy="item.picUrl"
-               alt="typeB图片"
-               @click="goTop(activityItem.list[0])"
-               v-for="item in activityItem.list"
-               :key="item.index"
-               :style="{width:getTypeBWidth(activityItem.style,item.isExpired)}"
-          />
-        </div>
+             v-lazy="item.picUrl"
+             alt="typeB图片"
+             @click="goTop(activityItem.list[0])"
+             v-for="item in activityItem.list"
+             :key="item.index"
+             :style="{width:getTypeBWidth(activityItem.style,item.isExpired)}"
+        />
         <div v-if="activityItem.type === 'c'" class="type-c">
           <div v-if="item.entity"
                class="type-c-content"
@@ -58,7 +53,7 @@
 
 <script type="text/ecmascript-6">
   import Navigator from '../../common/Navigator'
-  import { getTopicActivity, handleAddGoods } from './service'
+  import {getTopicActivity, handleAddGoods} from './service'
   import utils from '../../util/common'
 
   export default {
@@ -80,10 +75,10 @@
     components: {
       Navigator
     },
-    beforeDestroy () {
+    beforeDestroy() {
       this.topicInfo = []
     },
-    data () {
+    data() {
       return {
         bgColor: null,
         scrollTop: 0,
@@ -92,7 +87,7 @@
       }
     },
     methods: {
-      getTypeBWidth (style, isExpired) {
+      getTypeBWidth(style, isExpired) {
         if (style === 2 && !isExpired) {
           return '33.33%'
         }
@@ -102,7 +97,7 @@
        * 获取主题活动信息
        * @param topicId 活动id
        */
-      async getTopicActivityData (topicId) {
+      async getTopicActivityData(topicId) {
         let res = await getTopicActivity({topicId})
         if (res) {
           let {topic_info: topicInfo, bg_color: bgColor} = res
@@ -117,7 +112,7 @@
       /**
        * 跳转商品详情页
        */
-      goToDetail ({entity}) {
+      goToDetail({entity}) {
         if (entity) {
           this.$router.push({
             name: '商品详情',
@@ -128,7 +123,7 @@
       /**
        * 回到顶部或跳转详情
        */
-      goTop (activityItem) {
+      goTop(activityItem) {
         switch (activityItem.linkType) {
           case '5':
             let dom = this.$refs.content
@@ -152,7 +147,7 @@
       /**
        * 加入购物车
        */
-      addCart (product) {
+      addCart(product) {
         let productId = product.entity.productId
         handleAddGoods(productId).then(res => {
           if (res) {
@@ -171,8 +166,7 @@
     overflow: hidden;
 
     .content {
-      margin-top: 45px;
-      height: calc(100vh - 4rem);
+      height: 100vh;
       overflow: auto;
 
       &::-webkit-scrollbar {
@@ -184,10 +178,12 @@
       width: 100%;
       display: block;
     }
+
     .type-b {
       display: flex;
       flex-wrap: wrap;
       cursor: pointer;
+
       img {
         display: block;
       }
@@ -199,11 +195,13 @@
       justify-content: flex-start;
       flex-wrap: wrap;
       margin: 0.5rem;
+
       .type-c-content {
         box-sizing: border-box;
         width: 33.33%;
         padding: 0.5rem 0.2rem;
         cursor: pointer;
+
         img {
           display: block;
           width: 100%;
@@ -235,6 +233,7 @@
         align-items: baseline;
         color: @priceColor;
         font-size: 1.25rem;
+
         .period-price {
           font-size: 1.3rem;
         }
@@ -244,6 +243,7 @@
         font-size: 1.25rem;
         color: @defaultPriceColor;
         text-decoration: line-through;
+
         .shihang-price {
           font-size: 1.3rem;
         }

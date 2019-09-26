@@ -157,7 +157,7 @@
 
   .cart-list {
     margin-top: 80rem/@baseFontSize;
-    height: calc(100% - 12.5rem);
+    height: calc(100% - 13rem);
     &::-webkit-scrollbar {
       display: none
     }

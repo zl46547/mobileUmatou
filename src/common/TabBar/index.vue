@@ -11,7 +11,7 @@
       </router-link>
       <router-link class="tab-bar-item" to="/cart">
         <i class="iconfont icon-cart"></i>
-        <span class="tab-bar-item-name">购物侧</span>
+        <span class="tab-bar-item-name">购物车</span>
       </router-link>
       <router-link class="tab-bar-item" to="/user">
         <i class="iconfont icon-mine"></i>
@@ -36,7 +36,7 @@
   #footer {
     background-color: #fff;
     width: 100%;
-    height: 90rem/@baseFontSize;
+    height: 100rem/@baseFontSize;
     position: absolute;
     bottom: 0;
     left: 0;

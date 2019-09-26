@@ -45,11 +45,11 @@
       transition: all 0.5s ease;
     }
     .page-slide-leave-to {
-      transform: translateX(-100%);
+      /*transform: translateX(-100%);*/
       opacity: 0;
     }
     .page-slide-enter {
-      transform: translateX(100%);
+      /*transform: translateX(100%);*/
       opacity: 0;
     }
     /* 解决动画留白 */

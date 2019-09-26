@@ -69,8 +69,8 @@
     height: 100%;
     overflow: hidden;
     .content {
-      margin-top: 100rem/@baseFontSize;
-      height: calc(100% - 9.5rem);
+      margin-top: 5rem;
+      height: calc(100% - 10rem);
       &::-webkit-scrollbar {
         display: none
       }

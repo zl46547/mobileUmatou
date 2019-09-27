@@ -10,15 +10,17 @@
              v-if="activityItem.type === 'a'"
              class="type-a"
         />
-        <img v-if="activityItem.type === 'b'"
-             class="type-b"
-             v-lazy="item.picUrl"
-             alt="typeB图片"
-             @click="goTop(activityItem.list[0])"
-             v-for="item in activityItem.list"
-             :key="item.index"
-             :style="{width:getTypeBWidth(activityItem.style,item.isExpired)}"
-        />
+        <div class="type-b" v-if="activityItem.type === 'b'">
+          <div v-for="item in activityItem.list"
+               :key="item.index"
+               :style="{width:getTypeBWidth(activityItem,item.isExpired)}"
+          >
+            <img v-lazy="item.picUrl"
+                 alt="typeB图片"
+                 @click="goTop(activityItem.list[0])"
+            />
+          </div>
+        </div>
         <div v-if="activityItem.type === 'c'" class="type-c">
           <div v-if="item.entity"
                class="type-c-content"
@@ -87,8 +89,8 @@
       }
     },
     methods: {
-      getTypeBWidth(style, isExpired) {
-        if (style === 2 && !isExpired) {
+      getTypeBWidth({style, cols}, isExpired) {
+        if (cols === 3 && style === 2 && !isExpired) {
           return '33.33%'
         }
         return '100%'
@@ -185,7 +187,7 @@
       cursor: pointer;
 
       img {
-        display: block;
+        width: 100%;
       }
     }
 

@@ -1,22 +1,25 @@
 <template>
-  <div class="cart-list">
-    <div class="group-cartList"
-         v-for="(groupItem,groupIndex) in groupCartList"
-         :key="groupIndex"
-    >
-      <CardItem
-        :groupItem="groupItem"
-        @handle-checkbox-click="handleCheckboxClick"
-        @del-refresh="delRefresh"
-        @change-number="changeNumber"
-      />
+  <div class="cart-list-container">
+    <div class="cart-list-wapper" v-if="groupCartList.length>0">
+      <div class="group-cartList"
+           v-for="(groupItem,groupIndex) in groupCartList"
+           :key="groupIndex"
+      >
+        <CardItem
+          :groupItem="groupItem"
+          @handle-checkbox-click="handleCheckboxClick"
+          @del-refresh="delRefresh"
+          @change-number="changeNumber"
+        />
+      </div>
     </div>
 
     <!-- 购物车为空 -->
     <CartEmpty v-if="groupCartList.length<=0"></CartEmpty>
 
-     <!--合计-->
+    <!--合计-->
     <TotalCount
+      v-if="groupCartList.length>0"
       :checkAllStatus="checkAllStatus"
       :lastTotalMoney="lastTotalMoney"
       :cartList="cartList"
@@ -29,7 +32,7 @@
   import CartEmpty from './CartEmpty'
   import TotalCount from './TotalCount'
   import CardItem from './CartItem'
-  import {getCartList} from '../service'
+  import { getCartList } from '../service'
 
   export default {
     components: {
@@ -37,10 +40,10 @@
       CartEmpty,
       TotalCount
     },
-    created() {
+    created () {
       this.initCartList()
     },
-    data() {
+    data () {
       return {
         cartList: [] // 购物车列表
       }
@@ -49,7 +52,7 @@
       /**
        * 获取购物车列表
        */
-      initCartList() {
+      initCartList () {
         getCartList().then(res => {
           this.cartList = res
         })
@@ -59,7 +62,7 @@
        * @params checkedStatus
        * @params productId
        */
-      handleCheckboxClick({checkedStatus, productId}) {
+      handleCheckboxClick ({checkedStatus, productId}) {
         this.cartList = this.cartList.map(item => {
           if (item.productId === productId) {
             item.checked = checkedStatus
@@ -70,14 +73,14 @@
       /**
        * 全选
        */
-      checkAll() {
+      checkAll () {
         this.cartList = this.cartList.map(item => ({...item, checked: !this.checkAllStatus}))
       },
       /**
        * 获取分组后的总金额
        * @param groupItemList
        */
-      getGroupSum(groupItemList) {
+      getGroupSum (groupItemList) {
         let sum = 0
         if (groupItemList) {
           groupItemList.forEach(item => {
@@ -90,7 +93,7 @@
        * 删除后刷新
        * @param productId
        */
-      delRefresh(productId) {
+      delRefresh (productId) {
         this.cartList = this.cartList.filter(
           item => item.productInfo.productId !== Number(productId))
       },
@@ -99,7 +102,7 @@
        * @param quantity 购物车数量+1或者是-1
        * @param productId
        */
-      changeNumber({quantity, productId}) {
+      changeNumber ({quantity, productId}) {
         this.cartList = this.cartList.map(item => {
           if (item.productId === productId) {
             item.quantity = quantity
@@ -113,7 +116,7 @@
        * 获取总价
        * @returns {string}
        */
-      lastTotalMoney() {
+      lastTotalMoney () {
         let totalMoney = 0
         this.cartList.forEach(item => {
           if (item.checked) {
@@ -126,7 +129,7 @@
        * 全选状态
        * @returns {boolean}
        */
-      checkAllStatus() {
+      checkAllStatus () {
         let checkedList = this.cartList.filter(item => item.checked)
         return checkedList.length === this.cartList.length
       },
@@ -134,7 +137,7 @@
        * 分组后的购物车列表
        * @returns {*}
        */
-      groupCartList() {
+      groupCartList () {
         if (this.cartList.length <= 0) {
           return []
         }
@@ -155,14 +158,19 @@
 <style lang="less" scoped>
   @import "../../../less/variables";
 
-  .cart-list {
-    margin-top: 80rem/@baseFontSize;
-    height: calc(100% - 13rem);
-    &::-webkit-scrollbar {
-      display: none
-    }
+  .cart-list-container {
+    margin: 80rem/@baseFontSize 0 100rem/@baseFontSize;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    .cart-list-wapper {
+      flex: 1;
+      &::-webkit-scrollbar {
+        display: none
+      }
 
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
   }
 </style>

@@ -1,45 +1,43 @@
 <template>
   <div class="group-item">
     <div class="group-name van-hairline--bottom">{{groupItem.groupName}}</div>
-    <div class="group-item-container"
-         v-for="(item,index) in groupItem.groupItemList"
-         :key="item.productId"
-         @click="handleCheckboxClick(index,item.productId)"
-    >
-      <i class="iconfont"
-         :class="{'icon-checkbox-blank':!item.checked,'icon-checkbox-marked':item.checked}"
-      ></i>
-      <div class="checkbox-right">
-        <img class="image" :src="`http://picpro-sz.34580.com/sz/ImageUrl/${item.productInfo.pictureId}/120.jpeg`"
-             alt=" 购物车图片"/>
-        <div class="product-info">
-          <p class="product-name">{{item.productInfo.productName}}</p>
-          <div class="content">
-            <div class="price">
-              <p>{{item.productInfo.pvStandard}}</p>
-              <p>¥{{item.productInfo.periodMoney}}</p>
-            </div>
-            <div class="operate">
-              <div class="input-number">
-                <p @click.stop="changeNum(-1,item)"
-                   :class="{'disabled':item.quantity === 1}"
-                >-</p>
-                <p>{{item.quantity}}</p>
-                <p @click.stop="changeNum(1,item)">+</p>
-              </div>
-              <div class="delete" @click.stop="deleteItem(item.productId)">
-                删除
-              </div>
-            </div>
+    <SwipeCell v-for="(item,index) in groupItem.groupItemList"
+               :key="item.productId">
+      <div class="group-item-container"
+           @click="handleCheckboxClick(index,item.productId)"
+      >
+        <i class="iconfont"
+           :class="{'icon-checkbox-blank':!item.checked,'icon-checkbox-marked':item.checked}"
+        ></i>
+        <div class="checkbox-right">
+          <img class="image" :src="`http://picpro-sz.34580.com/sz/ImageUrl/${item.productInfo.pictureId}/120.jpeg`"
+               alt=" 购物车图片"/>
+          <div class="product-info">
+            <p class="product-name">{{item.productInfo.productName}}</p>
+            <p class="standard">{{item.productInfo.pvStandard}}</p>
+            <p class="period-money">¥{{item.productInfo.periodMoney}}</p>
+          </div>
+          <div class="input-number">
+            <p @click.stop="changeNum(-1,item)"
+               :class="{'disabled':item.quantity === 1}"
+            >-</p>
+            <p>{{item.quantity}}</p>
+            <p @click.stop="changeNum(1,item)">+</p>
           </div>
         </div>
       </div>
-    </div>
+      <template slot="right">
+        <div class="delete"
+             @click.stop="deleteItem(item.productId)"
+        >删除</div>
+      </template>
+    </SwipeCell>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import { deleteGoods, setGoodsQuantity } from '../service'
+  import { SwipeCell } from 'vant'
 
   export default {
     props: {
@@ -47,6 +45,9 @@
         required: true,
         type: Object
       }
+    },
+    components: {
+      SwipeCell
     },
     methods: {
       /**
@@ -109,7 +110,17 @@
       font-weight: bold;
       color: #626262;
     }
-
+    .delete{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 5rem;
+      letter-spacing: .2rem;
+      height: 100%;
+      background-color: @red;
+      color: #fff;
+      font-size: 1.4rem;
+    }
     .group-item-container {
       display: flex;
       align-items: center;
@@ -155,71 +166,46 @@
             white-space: nowrap;
             color: #333;
           }
+          .standard {
+            color: #999;
+            font-size: 28rem/@baseFontSize;
+          }
 
-          .content {
-            display: flex;
-            justify-content: space-between;
+          .period-money {
+            color: #f05423;
+            font-size: 28rem/@baseFontSize;
+          }
+        }
+        .input-number {
+          margin-right: 1rem;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          border: 1px solid #cccccc;
 
-            .price {
-              p {
-                &:nth-of-type(1) {
-                  color: #999;
-                  font-size: 28rem/@baseFontSize;
-                }
-
-                &:nth-of-type(2) {
-                  color: #f05423;
-                  font-size: 28rem/@baseFontSize;
-                }
-              }
+          p {
+            height: 45rem/@baseFontSize;
+            line-height: 45rem/@baseFontSize;
+            text-align: center;
+            font-size: 1.2rem;
+            width: 45rem/@baseFontSize;
+            border-right: 1px solid #cccccc;
+            &:nth-of-type(1) {
+              border-radius: 5rem/@baseFontSize 0 0 5rem/@baseFontSize
             }
-
-            .operate {
-              .input-number {
-                display: flex;
-                align-items: center;
-                justify-content: flex-end;
-                border: 1px solid #cccccc;
-
-                p {
-                  height: 45rem/@baseFontSize;
-                  line-height: 45rem/@baseFontSize;
-                  text-align: center;
-                  font-size: 1.2rem;
-                  width: 45rem/@baseFontSize;
-                  border-right: 1px solid #cccccc;
-                  &:nth-of-type(1) {
-                    border-radius: 5rem/@baseFontSize 0 0 5rem/@baseFontSize
-                  }
-                  &:nth-of-type(2) {
-                    width: 50rem/@baseFontSize;
-                    font-size: 26rem/@baseFontSize;
-                  }
-                  &:nth-of-type(3) {
-                    border: none;
-                    border-radius: 0 5rem/@baseFontSize 5rem/@baseFontSize 0
-                  }
-                }
-              }
-              .disabled {
-                color: #ccc;
-                cursor: not-allowed;
-              }
-              .delete {
-                height: 46rem/@baseFontSize;
-                line-height: 46rem/@baseFontSize;
-                margin: 10rem/@baseFontSize 0;
-                border-radius: 5rem/@baseFontSize;
-                font-size: 20rem/@baseFontSize;
-                width: 80rem/@baseFontSize;
-                text-align: center;
-                color: #fff;
-                background-color: @red;
-                float: right;
-                cursor: pointer;
-              }
+            &:nth-of-type(2) {
+              width: 50rem/@baseFontSize;
+              font-size: 26rem/@baseFontSize;
+            }
+            &:nth-of-type(3) {
+              border: none;
+              border-radius: 0 5rem/@baseFontSize 5rem/@baseFontSize 0
             }
           }
+        }
+        .disabled {
+          color: #ccc;
+          cursor: not-allowed;
         }
       }
     }

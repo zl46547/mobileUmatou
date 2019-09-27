@@ -21,24 +21,29 @@
   @import "../../../less/variables";
 
   .cart-empty {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     img {
-      margin: 15% auto 0;
       display: block;
+      width: 20rem;
+      margin: 0 auto;
     }
     .state {
-      color: #ccc;
+      color: #b9b9b9;
       width: 100%;
       text-align: center;
-      font-size: 26rem/@baseFontSize;
+      font-size: 30rem/@baseFontSize;
     }
     .go-home-btn {
       margin: 20rem/@baseFontSize auto;
-      line-height: 60rem/@baseFontSize;
+      line-height: 70rem/@baseFontSize;
       border-radius: 5rem/@baseFontSize;
-      font-size: 22rem/@baseFontSize;
+      font-size: 26rem/@baseFontSize;
       background-color: @themeColor;
-      width: 130rem/@baseFontSize;
-      height: 60rem/@baseFontSize;
+      width: 150rem/@baseFontSize;
+      height: 70rem/@baseFontSize;
       text-align: center;
       cursor: pointer;
       color: #fff;

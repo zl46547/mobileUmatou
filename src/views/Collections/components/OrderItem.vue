@@ -93,11 +93,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 4rem;
+      width: 5rem;
+      letter-spacing: .2rem;
       height: 100%;
       background-color: @red;
       color: #fff;
-      font-size: 1.6rem;
+      font-size: 1.4rem;
     }
   }
 </style>

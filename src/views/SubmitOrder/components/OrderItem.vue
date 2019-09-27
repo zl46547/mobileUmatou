@@ -57,12 +57,12 @@
         flex: 1;
         min-width: 0;
         .product-name {
+          margin: 25rem/@baseFontSize 0;
+          font-size: 28rem/@baseFontSize;
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
-          margin-bottom: 1rem;
           color: #333;
-          font-size: 1.65rem;
         }
         .content {
           display: flex;
@@ -70,12 +70,12 @@
           justify-content: space-between;
           .pv-standard {
             color: #999;
-            font-size: 1.4rem;
+            font-size: 28rem/@baseFontSize;
           }
           .period-money {
             margin-right: .5rem;
-            color: @priceColor;
-            font-size: 1.6rem;
+            color: #f05423;
+            font-size: 28rem/@baseFontSize;
           }
           .quantity {
             letter-spacing: .2rem;

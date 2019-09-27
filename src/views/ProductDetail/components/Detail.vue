@@ -83,7 +83,7 @@
 
   #detail {
     margin-top: 80rem/@baseFontSize;
-    height: calc(100vh - 8.5rem);
+    flex: 1;
     overflow: auto;
 
     &::-webkit-scrollbar {

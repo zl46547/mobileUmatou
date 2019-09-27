@@ -68,7 +68,7 @@
     methods: {
       changeShowStatus() {
         if (this.pullDown) {
-          this.$refs.statisticsContainer.style.maxHeight = '2rem'
+          this.$refs.statisticsContainer.style.maxHeight = '2.6rem'
         } else {
           this.$refs.statisticsContainer.style.maxHeight = '10rem'
         }
@@ -158,7 +158,7 @@
 
   .rate {
     margin-top: 4rem;
-    height: calc(100vh - 8.5rem);
+    flex: 1;
     overflow-y: auto;
     overflow-x: hidden;
 
@@ -175,13 +175,13 @@
         width: 100%;
         text-align: center;
         cursor: pointer;
-        font-size: 1rem;
+        font-size: 1.5rem;
       }
     }
     .statistics-container {
       transition: all 0.3s ease-in;
       overflow: hidden;
-      max-height: 2rem;
+      max-height: 2.6rem;
       display: flex;
       align-items: center;
       flex-wrap: wrap;
@@ -189,9 +189,9 @@
       padding-bottom: 0;
       .tag-item {
         cursor: pointer;
-        height: 2rem;
-        line-height: 2rem;
-        font-size: 1rem;
+        height: 2.6rem;
+        line-height: 2.6rem;
+        font-size: 1.2rem;
         border-radius: 1rem;
         margin-right: .4rem;
         margin-bottom: .6rem;

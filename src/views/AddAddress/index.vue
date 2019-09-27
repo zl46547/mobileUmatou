@@ -59,9 +59,7 @@
         </Cell>
       </CellGroup>
     </div>
-    <div class="add-address-btn" @click="handleSubmitAddress()">
-      确定
-    </div>
+    <CommonButton @on-click="handleSubmitAddress">确定</CommonButton>
     <Popup v-model="showArea"
            position="bottom"
     >
@@ -76,6 +74,7 @@
 
 <script type="text/ecmascript-6">
   import Navigator from '../../common/Navigator'
+  import CommonButton from '../../common/CommonButton'
   import {addAddress, getAddressDetail, updateAddress} from './service'
   import {Field, CellGroup, Cell, Area, Popup, Switch, Toast} from 'vant'
   import areaList from '../../util/area'
@@ -89,7 +88,8 @@
       Popup,
       MySwitch: Switch,
       Toast,
-      Navigator
+      Navigator,
+      CommonButton
     },
     data() {
       return {
@@ -221,7 +221,6 @@
     overflow: hidden;
     .content {
       margin-top: 80rem/@baseFontSize;
-      /*background-color: #f2f2f2;*/
       flex: 1;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
@@ -254,17 +253,6 @@
       .van-field__control {
         font-size: 22rem/@baseFontSize;;
       }
-    }
-
-    .add-address-btn {
-      cursor: pointer;
-      border-radius: 5rem/@baseFontSize;;
-      background-color: @themeColor;
-      color: #fff;
-      text-align: center;
-      font-size: 22rem/@baseFontSize;
-      height: 70rem/@baseFontSize;
-      line-height: 70rem/@baseFontSize;
     }
   }
 </style>

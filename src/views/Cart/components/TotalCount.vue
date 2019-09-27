@@ -11,7 +11,10 @@
       <span class="label">合计：</span>
       <span class="money">¥{{lastTotalMoney}}</span>
     </div>
-    <div class="count-btn" @click="goToAccount">
+    <div class="count-btn"
+         :class="{'count-btn-forbidden':cartList.length<=0}"
+         @click="goToAccount"
+    >
       <span>去结算</span><span>({{checkCount}})</span>
     </div>
   </div>
@@ -73,11 +76,8 @@
 
   #totalCount {
     width: 100%;
-    height: 80rem/@baseFontSize;
+    height: 100rem/@baseFontSize;
     background-color: #fff;
-    position: absolute;
-    bottom: 90rem/@baseFontSize;
-    left: 0;
     border-top: 1px solid rgb(221, 221, 221);
     display: flex;
     align-items: center;
@@ -116,9 +116,13 @@
       color: #fff;
       text-align: center;
       height: 100%;
-      line-height: 80rem/@baseFontSize;
+      line-height: 100rem/@baseFontSize;
       width: 150rem/@baseFontSize;
       font-size: 24rem/@baseFontSize;
+    }
+    .count-btn-forbidden{
+      cursor: not-allowed;
+      background-color: @gray;
     }
   }
 </style>

@@ -12,20 +12,20 @@
         <span>空空如也</span>
       </div>
     </div>
-    <div class="add-address" @click="handleAddAddress()">
-      +新增地址
-    </div>
+    <CommonButton @on-click="handleAddAddress">+新增地址</CommonButton>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import Navigator from '../../common/Navigator'
+  import CommonButton from '../../common/CommonButton'
   import { Button } from 'vant'
   import { getAddressList } from './service'
   import AddressItem from './components/AddressItem'
 
   export default {
     components: {
+      CommonButton,
       Button,
       Navigator,
       AddressItem
@@ -89,16 +89,6 @@
           font-size: 6rem;
         }
       }
-    }
-    .add-address {
-      cursor: pointer;
-      height: 90rem/@baseFontSize;;
-      line-height: 90rem/@baseFontSize;;
-      border-radius: 5rem/@baseFontSize;
-      background-color: @themeColor;
-      color: #fff;
-      text-align: center;
-      font-size: 30rem/@baseFontSize;;
     }
   }
 </style>

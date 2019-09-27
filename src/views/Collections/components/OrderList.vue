@@ -58,7 +58,6 @@
   @import "../../../less/variables";
 
   .order-list {
-    height: 100%;
     .order{
       margin: 0 auto 1rem;
       box-shadow: 0 .1rem 5rem #d7d7d7;

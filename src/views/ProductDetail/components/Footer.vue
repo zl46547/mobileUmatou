@@ -103,15 +103,12 @@
 
   .footer {
     width: 100%;
-    height: 90rem/@baseFontSize;
+    height: 100rem/@baseFontSize;
     background-color: #fff;
-    position: absolute;
-    bottom: 0;
-    left: 0;
     display: flex;
     align-items: center;
     .icon {
-      line-height: 90rem/@baseFontSize;
+      line-height: 100rem/@baseFontSize;
       height: 100%;
       margin: auto;
       text-align: center;
@@ -153,7 +150,7 @@
 
     .add-cart {
       font-size: 30rem/@baseFontSize;
-      line-height: 90rem/@baseFontSize;
+      line-height: 100rem/@baseFontSize;
       height: 100%;
       text-align: center;
       width: 30%;

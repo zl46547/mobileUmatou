@@ -82,6 +82,8 @@
     height: 100%;
     overflow: hidden;
     background-color: #fff;
+    display: flex;
+    flex-direction: column;
     .component-fade-enter-active, .component-fade-leave-active {
       transition: all .3s ease;
     }

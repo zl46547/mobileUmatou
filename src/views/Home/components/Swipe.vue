@@ -1,11 +1,11 @@
 <template>
-  <div v-if='adveriseList' id="adverise">
+  <div id="adverise">
     <Swipe :autoplay="4000" @change="onChange">
-      <SwipeItem v-for="k in adveriseList" :key="k.Id">
+      <SwipeItem v-for="k in adverseList" :key="k.Id">
           <img :src="k.PicUrl" @click="goToIndexAdv(k.JumpValue)">
       </SwipeItem>
       <div class="custom-indicator" slot="indicator">
-        {{ current + 1 }}/{{adveriseList.length}}
+        {{ current + 1 }}/{{adverseList.length}}
       </div>
     </Swipe>
   </div>
@@ -25,7 +25,7 @@
     },
     data() {
       return {
-        adveriseList: '',
+        adverseList: [],
         current: 0
       }
     },
@@ -42,7 +42,7 @@
        */
       getSwiperData() {
         getSwipper({typeCode: 1011}).then((res) => {
-          this.adveriseList = res
+          this.adverseList = res
         }).catch((error) => {
           console.log(error)
         })

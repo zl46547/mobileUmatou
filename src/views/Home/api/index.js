@@ -6,6 +6,7 @@ import axios from '../../../http/api'
  */
 export const getSwipperRequest = params => {
   return axios({
+    showLoading: true,
     method: 'get',
     url: '/home/advertisementPhotoshoot',
     params
@@ -17,6 +18,7 @@ export const getSwipperRequest = params => {
  */
 export const getShortcutIconRequest = () => {
   return axios({
+    showLoading: true,
     method: 'get',
     url: '/home/shortcutIcon'
   })
@@ -26,6 +28,7 @@ export const getShortcutIconRequest = () => {
  */
 export const getFlashSaleRequest = () => {
   return axios({
+    showLoading: true,
     method: 'get',
     url: '/home/flashSale'
   })
@@ -36,6 +39,7 @@ export const getFlashSaleRequest = () => {
  */
 export const getDefaultHomeRequest = () => {
   return axios({
+    showLoading: true,
     method: 'get',
     url: '/home/defaultHome'
   })

@@ -4,6 +4,8 @@ import {
   submitOrderRequest
 } from '../api'
 import { Toast } from 'vant'
+Toast.setDefaultOptions({duration: 1000})
+
 /**
  * 获取优惠券列表
  */

@@ -12,7 +12,7 @@ import Message from './common/Message/index.js'
 
 Vue.use(Message)
 Vue.use(lazyLoad, {
-  preLoad: 1.3,
+  preLoad: 3.3,
   attempt: 1,
   loading: require('./assets/images/loading.gif'),
   error: require('./assets/images/loadError.png')

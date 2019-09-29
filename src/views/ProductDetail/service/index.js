@@ -8,6 +8,8 @@ import {
   productIsCollectRequest
 } from '../api'
 import {Toast} from 'vant'
+Toast.setDefaultOptions({duration: 1000})
+
 /**
  * 获取商品详情
  */

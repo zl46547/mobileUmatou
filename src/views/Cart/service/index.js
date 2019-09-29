@@ -4,6 +4,7 @@ import {
   setGoodsQuantityRequest
 } from '../api'
 import {Toast} from 'vant'
+Toast.setDefaultOptions({duration: 1000})
 
 /**
  * 获取购物车列表

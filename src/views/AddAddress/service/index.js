@@ -4,6 +4,7 @@ import {
   getAddressDetailRequest
 } from '../api'
 import {Toast} from 'vant'
+Toast.setDefaultOptions({duration: 1000})
 
 /**
  * 添加地址

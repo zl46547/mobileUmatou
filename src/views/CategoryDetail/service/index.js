@@ -3,6 +3,8 @@ import {
   addGoodsRequest
 } from '../api'
 import {Toast} from 'vant'
+Toast.setDefaultOptions({duration: 1000})
+
 /**
  * 获取分类详情
  */

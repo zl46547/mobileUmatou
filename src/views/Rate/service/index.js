@@ -2,8 +2,10 @@ import {
   rateOrderRequest
 } from '../api'
 import {Toast} from 'vant'
+Toast.setDefaultOptions({duration: 1000})
+
 /**
- * 提交订单
+ * 评价订单
  * @param params
  */
 export const rateOrder = async params => {

@@ -48,11 +48,7 @@ module.exports = {
     }
   },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin('common.js'),
-    new webpack.ProvidePlugin({
-      jQuery: "jquery",
-      $: "jquery"
-    })
+    new webpack.optimize.CommonsChunkPlugin('common.js')
   ],
   // 使用插件配置相应文件的处理方法
   module: {

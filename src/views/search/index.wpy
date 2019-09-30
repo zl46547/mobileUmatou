@@ -1,0 +1,73 @@
+<style lang="less">
+  .search-wapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    .search-container{
+      flex: 1;
+      overflow-y: auto;
+    }
+  }
+</style>
+<template>
+  <view class="search-wapper">
+    <SearchBar @handle-search="handleSearch"/>
+    <div class="search-container" wx:if="{{!showSearchResult}}">
+      <KeywordPanel/>
+      <Recommend/>
+    </div>
+    <div class="search-container" wx:if="{{showSearchResult}}">
+      <SearchResult/>
+    </div>
+    <SearchTip/>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import { connect } from 'wepy-redux'
+  import SearchBar from './components/SearchBar'
+  import KeywordPanel from './components/KeywordPanel'
+  import Recommend from './components/Recommend'
+  import SearchTip from './components/SearchTip'
+  import SearchResult from './components/SearchResult'
+  import {fetchSearchHotAction} from '../../store/actions/search'
+  @connect(
+    {},
+    {
+      fetchSearchHotAction
+    })
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '搜索'
+    }
+    components = {
+      SearchBar,
+      KeywordPanel,
+      Recommend,
+      SearchTip,
+      SearchResult
+    }
+
+    data = {
+      showSearchResult: false
+    }
+
+    computed = {
+    }
+
+    methods = {
+    }
+
+    events = {
+      'handle-search': value => {
+        this.showSearchResult = value
+      }
+    }
+
+    onLoad() {
+      this.methods.fetchSearchHotAction()
+    }
+  }
+</script>

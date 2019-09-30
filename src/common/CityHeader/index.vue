@@ -4,7 +4,7 @@
       苏州市
     </div>
     <i class="iconfont icon-arrow-down"></i>
-    <div class="search">
+    <div class="search" @click="goToSearch">
       <img src="../../assets/images/search.png"/>
     </div>
   </header>
@@ -18,6 +18,9 @@
         Toast({
           message: '该功能暂未开发'
         })
+      },
+      goToSearch() {
+        this.$router.push({name: '商品搜索'})
       }
     }
   }

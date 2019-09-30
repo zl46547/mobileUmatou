@@ -1,0 +1,47 @@
+<style lang="less">
+  .recommend {
+    box-sizing: border-box;
+
+    .title {
+      box-sizing: border-box;
+      padding: 60rpx 0 40rpx 30rpx;
+      font-size: 30rpx;
+      color: #666;
+      font-weight: bold;
+    }
+  }
+</style>
+<template>
+  <view class="recommend van-hairline--bottom">
+    <view class="title">查询结果</view>
+    <view class="keyword-list">
+      <repeat for="{{searchRes}}" key="{{item.sku}}">
+        <ProductItem :productItem="item"/>
+      </repeat>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import { connect } from 'wepy-redux'
+  import ProductItem from './ProductItem'
+  @connect({
+    searchRes(state) {
+      let searchRes = state.search.searchRes
+      if (searchRes && searchRes.data[0]) {
+        return searchRes.data[0].active_item
+      } else {
+        return []
+      }
+    }
+  })
+  export default class SearchResult extends wepy.component {
+    components = {
+      ProductItem
+    };
+
+    data = {};
+    methods = {};
+  }
+</script>

@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "start": "webpack-dev-server --config build/webpack.dev.conf.js --host 10.1.44.191 --disableHostCheck=true",
+    "start": "npm run dev --host 10.1.44.191 --disableHostCheck=true",
     "unit": "jest --config test/unit/jest.conf.js --coverage",
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit",

@@ -33,3 +33,9 @@ export const REMAIN_TIME = 'REMAIN_TIME'
 
 /* 滚动条高度 */
 export const SCROLL_TOP = 'SCROLL_TOP'
+
+/* 关键字搜索 */
+export const KEYWORD_SUGGEST = 'KEYWORD_SUGGEST'
+
+/* 关键字搜索请求 */
+export const KEYWORD_SUGGEST_REQUEST = 'KEYWORD_SUGGEST_REQUEST'

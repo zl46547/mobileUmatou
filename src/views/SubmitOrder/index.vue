@@ -29,9 +29,14 @@
         <sub>¥</sub>
         <span>{{getFinalPrice}}</span>
       </div>
-      <div class="submit-btn" @click="submitOrder">
+      <Button size="normal"
+              :loading="loading"
+              :disabled="loading"
+              @click="submitOrder"
+              loading-type="spinner"
+      >
         提交订单
-      </div>
+      </Button>
     </div>
   </div>
 </template>
@@ -41,11 +46,12 @@
   import Address from './components/Address'
   import OrderList from './components/OrderList'
   import Coupon from './components/Coupon'
-  import { Toast } from 'vant'
+  import { Toast, Button } from 'vant'
   import { submitOrder } from './service'
 
   export default {
     components: {
+      Button,
       OrderList,
       Address,
       Navigator,
@@ -54,6 +60,7 @@
     data () {
       return {
         totalPrice: 0,
+        loading: false,
         bounce: ''
       }
     },
@@ -111,12 +118,15 @@
         if (couponSelected) {
           params.couponId = couponSelected._id
         }
+        this.loading = true
         submitOrder(params).then(res => {
           if (res) {
             setTimeout(() => {
               this.$router.replace({name: '支付订单', query: {orderNo: res}})
             }, 2000)
           }
+        }).finally(e => {
+          this.loading = false
         })
       }
     }
@@ -186,10 +196,18 @@
         color: #fff;
         height: 100%;
         line-height: 90rem/@baseFontSize;
-        background-color: @red;
         text-align: center;
-        font-size: 30rem/@baseFontSize;
       }
+    }
+    .van-button--normal {
+      flex: 1;
+      font-size: 30rem/@baseFontSize;
+      background-color: @red;
+      height: 100%;
+      color: #fff;
+    }
+    span.van-loading__spinner.van-loading__spinner--spinner {
+      color: #fff !important;
     }
   }
 </style>

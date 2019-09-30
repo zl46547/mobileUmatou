@@ -99,10 +99,12 @@
           return false
         }
         submitSignIn(this.user).then(res => {
-          this.$store.commit(types.USER, {...res, token: new Date().getTime()})
-          setTimeout(() => {
-            this.$router.go(-1)
-          }, 2000)
+          if (res) {
+            this.$store.commit(types.USER, {...res, token: new Date().getTime()})
+            setTimeout(() => {
+              this.$router.go(-1)
+            }, 2000)
+          }
         })
       },
       /**

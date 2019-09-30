@@ -7,7 +7,6 @@ const AllOrders = resolve => require(['@/views/AllOrders/index.vue'], resolve)
 const AddressManage = resolve => require(['@/views/AddressManage'], resolve)
 const AddAddress = resolve => require(['@/views/AddAddress'], resolve)
 const Category = resolve => require(['@/views/Category/index.vue'], resolve)
-// const CategoryMain = resolve => require(['@/views/Category/components/main.vue'], resolve)
 const CategoryDetail = resolve => require(['@/views/CategoryDetail/index.vue'], resolve)
 const Cart = resolve => require(['@/views/Cart/index.vue'], resolve)
 const GetCoupons = resolve => require(['@/views/GetCoupons'], resolve)
@@ -19,6 +18,7 @@ const Rate = resolve => require(['@/views/Rate/index.vue'], resolve)
 const SubmitOrder = resolve => require(['@/views/SubmitOrder/index.vue'], resolve)
 const TopicActivity = resolve => require(['@/views/TopicActivity/index.vue'], resolve)
 const User = resolve => require(['@/views/User/index.vue'], resolve)
+const ProductSearch = resolve => require(['@/views/ProductSearch/index.vue'], resolve)
 const Collections = resolve => require(['@/views/Collections/index.vue'], resolve)
 Vue.use(Router)
 
@@ -124,6 +124,11 @@ const router = new Router({
       path: '/collections',
       name: '收藏',
       component: Collections
+    },
+    {
+      path: '/productSearch',
+      name: '商品搜索',
+      component: ProductSearch
     },
     {
       path: '/login',

@@ -22,9 +22,10 @@
             <span>暂无优惠券</span>
           </div>
         </div>
-        <div class="confirm" @click="handleConfirm" v-if="couponList.length>0">
-          确定
-        </div>
+        <CommonButton
+          v-if="couponList.length>0"
+          @on-click="handleConfirm"
+        >确定</CommonButton>
       </div>
     </ActionSheet>
   </div>
@@ -32,6 +33,7 @@
 
 <script type="text/ecmascript-6">
   import CouponCard from './CouponCard'
+  import CommonButton from '../../../common/CommonButton'
   import { ActionSheet } from 'vant'
   import { COUPON_SELECTED } from '../../../vuex/types'
   import { getCoupons } from '../service'
@@ -59,6 +61,7 @@
       }
     },
     components: {
+      CommonButton,
       ActionSheet,
       CouponCard
     },
@@ -168,9 +171,11 @@
     .modal-content {
       height: 50vh;
       background-color: #fff;
+      display: flex;
+      flex-direction: column;
       .modal-body {
         padding: 0 2rem;
-        height: calc(100% - 4rem);
+        flex: 1;
         overflow-y: auto;
         overflow-x: hidden;
 
@@ -192,20 +197,6 @@
             font-size: 6rem;
           }
         }
-      }
-
-      .confirm {
-        position: absolute;
-        bottom: 0;
-        cursor: pointer;
-        font-size: 1.8rem;
-        letter-spacing: 1rem;
-        height: 4rem;
-        line-height: 4rem;
-        background-color: #ff2b1c;
-        color: #fff;
-        text-align: center;
-        width: 100%;
       }
     }
   }

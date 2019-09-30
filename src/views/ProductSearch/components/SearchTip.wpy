@@ -1,0 +1,48 @@
+<style lang="less">
+
+</style>
+<template>
+  <view class="search-tip" wx:if="{{searchTip && searchTip.length>0}}">
+    <repeat for="{{searchTip}}" key="{{item.sku}}">
+      <view class="select-item van-hairline--bottom" @tap="goToDetail({{item}})">{{item.displayName}}</view>
+    </repeat>
+  </view>
+  <view class="search-tip" wx:if="{{keywords && searchTip && searchTip.length <= 0}}">
+      <view class="select-item">未找到相关商品</view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import { connect } from 'wepy-redux'
+  @connect({
+    searchTip(state) {
+      let searchTip = state.search.searchTip
+      if (searchTip && searchTip.data[0]) {
+        return searchTip.data[0].active_item
+      } else {
+        return null
+      }
+    },
+    keywords (state) {
+      return state.search.keywords
+    }
+  })
+  export default class SearchTip extends wepy.component {
+    components = {
+    }
+
+    data = {
+    }
+    methods = {
+      /**
+       * 跳转详情页
+       */
+      goToDetail(productItem) {
+        wx.navigateTo({
+          url: `/pages/productDetail/index?sku=${productItem.sku}`
+        })
+      }
+    }
+  }
+</script>

@@ -1,0 +1,106 @@
+<style lang="less">
+  .content-item {
+    .product-list-item-wrap{
+      .product-item{
+        padding: 20rpx;
+        display: flex;
+        align-items: center;
+        image{
+          width: 200rpx;
+          height: 200rpx;
+          display: block;
+        }
+        .item-detail{
+          flex: 1;
+          padding: 20rpx;
+          .sub-title{
+            font-size:30rpx;
+            color:#474245;
+            width: 320rpx;
+          }
+          .mess-title{
+            width: 320rpx;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size:24rpx;
+            color:#969696;
+            margin-top:8rpx;
+          }
+        }
+        .item-price-wrap{
+          margin-top: 20rpx;
+          display: flex;
+          justify-content: space-between;
+          align-items: baseline;
+          .down-price{
+            color: rgb(255, 72, 145);
+            .sign{
+              font-size: 24rpx;
+            }
+            .price{
+              margin-left: 5rpx;
+              font-size: 36rpx;
+            }
+            .has-line{
+              font-size: 26rpx;
+              margin-left: 10rpx;
+              color: #969696;
+              text-decoration: line-through;
+            }
+          }
+          .icon-share{
+            color: #969696;
+            font-size: 40rpx;
+          }
+        }
+      }
+    }
+  }
+</style>
+<template>
+  <view class="content-item">
+    <view class="product-list-item-wrap">
+      <view class="product-item van-hairline--bottom" @tap="goToDetail({{productItem}})">
+        <image class="rc_selector-radius" lazy-load="true" mode="width-fixed" src="{{productItem.image}}"></image>
+        <div class="item-detail">
+          <view class="sub-title van-ellipsis"><text class="rc_selector-rect">{{productItem.name}}</text></view>
+          <view class="mess-title"><text class="rc_selector-rect">{{productItem.subtitle}}</text></view>
+          <div class="item-price-wrap rc_selector-rect">
+            <view class="down-price">
+              <text class="sign">¥</text>
+              <text class="price">{{productItem.price/100}}</text>
+              <text class="has-line"
+                wx:if="{{productItem.pricePro.vip}}">￥{{productItem.pricePro.vip.price}}</text>
+            </view>
+            <button class="iconfont icon-share" plain open-type="share" data-item="{{productItem}}" id="share"></button>
+          </div>
+        </div>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class ProductItem extends wepy.component {
+    components = {
+    }
+
+    data = {
+    }
+    methods = {
+      /**
+       * 跳转详情页
+       */
+      goToDetail(productItem, event) {
+        if (event.target.id === 'share') {
+          return false
+        }
+        wx.navigateTo({
+          url: `/pages/productDetail/index?sku=${productItem.sku}`
+        })
+      }
+    }
+    props = ['productItem']
+  }
+</script>

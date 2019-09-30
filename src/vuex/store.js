@@ -6,6 +6,8 @@ import login from './modules/login'
 import cart from './modules/cart'
 import order from './modules/order'
 import common from './modules/common'
+import products from './modules/products'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -14,6 +16,7 @@ export default new Vuex.Store({
     login,
     cart,
     order,
-    common
+    common,
+    products
   }
 })

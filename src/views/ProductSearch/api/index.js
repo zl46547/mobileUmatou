@@ -33,3 +33,14 @@ export const searchProductRequest = params => {
     params
   })
 }
+
+/**
+ * 加入购物车
+ */
+export const addGoodsRequest = productId => {
+  return axios({
+    method: 'post',
+    url: '/shoppingCart/addGoods',
+    data: {productId}
+  })
+}

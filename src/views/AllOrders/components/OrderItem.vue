@@ -100,6 +100,9 @@
       Button
     },
     methods: {
+      getOrderProducts(orderProducts) {
+        return orderProducts.filter((item, index) => index < 3)
+      },
       /**
        * 判断订单是否已过期
        * @param orderItem
@@ -235,17 +238,21 @@
       padding: 20rem/@baseFontSize 25rem/@baseFontSize;
       display: flex;
       align-items: center;
-      justify-content: space-between;
       .order-image {
+        white-space: nowrap;
+        flex: 1;
+        overflow-x: auto;
         img {
-          width: 120rem/@baseFontSize;
+          width: 140rem/@baseFontSize;
           padding: 16rem/@baseFontSize;
         }
       }
       .order-count {
+        width: 6rem;
         font-size: 30rem/@baseFontSize;
         display: flex;
         align-items: center;
+        justify-content: flex-end;
         color: #333;
         .icon-arrow-right {
           font-size: 36rem/@baseFontSize;

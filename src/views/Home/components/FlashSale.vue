@@ -13,10 +13,11 @@
       </div>
     </div>
     <div class="flashSale-list">
-      <div class="scroll-div">
+      <div class="scroll-div" v-if="flashSaleData">
         <div class="scroll-div-item"
              v-for="item in flashSaleData.FlashSaleProducts"
-             :key="item.id" @click="goToDetail(item)"
+             :key="item.id"
+             @click="goToDetail(item)"
         >
           <img v-lazy="'http://picpro-sz.34580.com/sz/ImageUrl/'+item.PictureId+'/200.jpeg'"/>
           <div class="product-name">{{item.ProductName}}</div>
@@ -38,7 +39,7 @@
   export default {
     data () {
       return {
-        flashSaleData: '',
+        flashSaleData: null,
         remainTime: 330000,
         timeOut: {
           hour: 0,

@@ -5,7 +5,7 @@
         <span v-for="item in searchHotList"
               :key="item.Id"
               class="item-box"
-              @click="handleKeyWord(item)">{{item.HotWordName}}</span>
+              @click="handleKeyWord(item.HotWordName)">{{item.HotWordName}}</span>
     </div>
   </div>
 </template>
@@ -14,7 +14,7 @@
   import {productHotWord} from '../service'
 
   export default {
-    mounted() {
+    created() {
       productHotWord().then(res => {
         this.searchHotList = res
       })
@@ -26,7 +26,8 @@
     },
     methods: {
       handleKeyWord(val) {
-        this.$invoke('SearchBar', 'handleSearch', val)
+        this.$parent.$refs.searchBar.keywords = val
+        this.$parent.$refs.searchBar.handleSearch()
       }
     }
   }

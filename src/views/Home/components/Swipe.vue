@@ -1,5 +1,5 @@
 <template>
-  <div id="adverise">
+  <div id="adverise" v-if="adverseList">
     <Swipe :autoplay="4000" @change="onChange">
       <SwipeItem v-for="k in adverseList" :key="k.Id">
           <img :src="k.PicUrl" @click="goToIndexAdv(k.JumpValue)">

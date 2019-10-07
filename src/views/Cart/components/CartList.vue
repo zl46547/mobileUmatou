@@ -161,6 +161,7 @@
   .cart-list-container {
     margin: 80rem/@baseFontSize 0 100rem/@baseFontSize;
     flex: 1;
+    min-height: 0;
     display: flex;
     flex-direction: column;
     .cart-list-wapper {

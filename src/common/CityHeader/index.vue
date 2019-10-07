@@ -4,7 +4,7 @@
       苏州市
     </div>
     <i class="iconfont icon-arrow-down"></i>
-    <div class="search" @click="goToSearch">
+    <div class="search" @click.stop="goToSearch">
       <img src="../../assets/images/search.png"/>
     </div>
   </header>

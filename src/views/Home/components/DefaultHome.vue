@@ -116,7 +116,9 @@
        */
       initDefaultHome() {
         getDefaultHome().then((res) => {
-          this.defaultHomeData = res.FloorInfo.ConfigHomeFloors
+          if (res) {
+            this.defaultHomeData = res.FloorInfo.ConfigHomeFloors
+          }
         })
       },
       /**

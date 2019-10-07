@@ -38,6 +38,7 @@ class BaseAxiosHelper {
       return Promise.reject(error)
     }
     const { status, data: { Message } } = error.response
+    console.log(error.response)
     switch (status) {
       case 500:
         if (Message) {
@@ -67,6 +68,7 @@ class BaseAxiosHelper {
         Toast.fail(`${Message || '未知错误'}`)
         break
     }
+    store.commit('SET_LOADING', false)
     return Promise.reject(error)
   }
 }

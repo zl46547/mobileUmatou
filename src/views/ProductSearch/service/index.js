@@ -1,8 +1,10 @@
 import {
   productHotWordRequest,
   keywordSuggestRequest,
-  searchProductRequest
+  searchProductRequest,
+  addGoodsRequest
 } from '../api'
+import {Toast} from 'vant'
 
 /**
  * 获取查询关键字
@@ -36,15 +38,30 @@ export const keywordSuggest = async keyword => {
 
 /**
  * 商品查询
- * @param keyword
+ * @param params
  */
-export const searchProduct = async keyword => {
+export const searchProduct = async params => {
   try {
-    let res = await searchProductRequest(keyword)
+    let res = await searchProductRequest(params)
     if (res.data.Data) {
       return res.data.Data
     }
   } catch (e) {
     console.error(e)
+  }
+}
+/**
+ * 加入购物车
+ */
+export const addGoods = async productId => {
+  try {
+    let {data} = await addGoodsRequest(productId)
+    if (data.Data) {
+      Toast.success('加入成功')
+    } else {
+      Toast.fail('加入失败')
+    }
+  } catch (e) {
+    console.log(e)
   }
 }

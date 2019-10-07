@@ -15,7 +15,7 @@ export const getCartList = async () => {
     if (data.Data) {
       return data.Data
     }
-    return null
+    return []
   } catch (e) {
     console.error(e)
   }

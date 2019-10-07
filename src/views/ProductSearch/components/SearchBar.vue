@@ -3,9 +3,10 @@
     <i class="icon iconfont icon-arrow-left" @click="goBack"></i>
     <div class="search-input">
       <i class="iconfont icon-search"></i>
-      <input type="text"
+      <Field placeholder="请输入商品名称"
+             @input="handleChange"
+             clearable
              v-model="keywords"
-             placeholder="请输入商品名称"
       />
     </div>
     <div class="search-btn" @click="handleSearch()">搜索</div>
@@ -13,8 +14,12 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import { Field } from 'vant'
   import utils from '../../../util/common'
-  import {KEYWORD_SUGGEST_REQUEST} from '../../../vuex/types'
+  import {
+    KEYWORD_SUGGEST_REQUEST,
+    KEYWORD_SEARCH_RESULT_REQUEST
+  } from '../../../vuex/types'
   export default {
     props: {
     },
@@ -24,11 +29,7 @@
       }
     },
     components: {
-    },
-    watch: {
-      keywords(value) {
-        this.handleChange(value)
-      }
+      Field
     },
     methods: {
       goBack() {
@@ -37,14 +38,23 @@
       /**
        * 点击搜索
        */
-      handleSearch(keywords) {
+      handleSearch() {
+        if (!this.keywords) {
+          return false
+        }
+        let params = {
+          keyword: this.keywords,
+          pageIndex: 1,
+          pageSize: 20
+        }
+        this.$store.dispatch(KEYWORD_SEARCH_RESULT_REQUEST, params)
       },
       /**
        * 搜索提示
        */
-      handleChange: utils.debounce(function (value) {
+      handleChange: utils.debounce(function (keywords) {
         this.$store.dispatch(KEYWORD_SUGGEST_REQUEST, {
-          keywords: this.keywords
+          keywords
         })
       })
     }
@@ -72,16 +82,9 @@
       border-radius: 90rem;
       background-color: #f5f5f5;
       padding: .5rem .5rem .5rem 1rem;
-      input{
+      .van-cell{
         background-color: transparent;
-        width: 100%;
-        display: inline-block;
-        vertical-align: middle;
-        margin-left: 1rem;
-        height: 2rem;
-        line-height: 2rem;
-        font-size: 1.2rem;
-        color: #666;
+        padding: 0 1rem;
       }
     }
     .search-btn{

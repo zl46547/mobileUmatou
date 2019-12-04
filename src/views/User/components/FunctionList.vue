@@ -15,11 +15,6 @@
         hour: 0,
         functionList: [
           {
-            name: '充值',
-            icon: 'icon-chongzhi',
-            color: '#aaa'
-          },
-          {
             name: '地址管理',
             icon: 'icon-address',
             color: '#00caff'
@@ -28,6 +23,16 @@
             name: '收藏',
             icon: 'icon-collect',
             color: '#e23a00'
+          },
+          {
+            name: '制作海报',
+            icon: 'icon-friend',
+            color: '#ff3fb3'
+          },
+          {
+            name: '充值',
+            icon: 'icon-chongzhi',
+            color: '#aaa'
           },
           {
             name: '签到',
@@ -70,6 +75,10 @@
         }
         if (item.name === '收藏') {
           this.$router.push({name: '收藏'})
+          return false
+        }
+        if (item.name === '制作海报') {
+          this.$router.push({name: '制作海报'})
           return false
         }
         Toast({

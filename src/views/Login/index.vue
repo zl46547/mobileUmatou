@@ -58,16 +58,15 @@
       return {
         isLogin: true,
         user: {
-          mobile: '18115169031',
-          password: '16899199',
+          mobile: '',
+          password: '',
           confirmPwd: ''
         }
       }
     },
     methods: {
       forgetPassword() {
-        this.user.mobile = '18115169031'
-        this.user.password = '16899199'
+        Toast('该功能未开发')
       },
       /**
        * 切换注册页面

@@ -6,7 +6,6 @@
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "start": "npm run dev --host 10.1.44.191 --disableHostCheck=true",
     "unit": "jest --config test/unit/jest.conf.js --coverage",
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit",
@@ -14,6 +13,9 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "clipboard": "^2.0.4",
+    "file-saver": "^2.0.2",
+    "html2canvas": "^1.0.0-rc.5",
     "less": "^3.0.1",
     "less-loader": "^4.1.0",
     "linqjs": "^0.0.6",
@@ -69,6 +71,7 @@
     "shelljs": "^0.7.6",
     "uglifyjs-webpack-plugin": "^1.1.1",
     "url-loader": "^0.5.8",
+    "vconsole": "^3.3.4",
     "vue-jest": "^1.0.2",
     "vue-loader": "^13.3.0",
     "vue-style-loader": "^3.0.1",

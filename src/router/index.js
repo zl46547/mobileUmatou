@@ -20,6 +20,8 @@ const TopicActivity = resolve => require(['@/views/TopicActivity/index.vue'], re
 const User = resolve => require(['@/views/User/index.vue'], resolve)
 const ProductSearch = resolve => require(['@/views/ProductSearch/index.vue'], resolve)
 const Collections = resolve => require(['@/views/Collections/index.vue'], resolve)
+const TKTools = resolve => require(['@/views/TKTools/index.vue'], resolve)
+const TKList = resolve => require(['@/views/TKList/index.vue'], resolve)
 Vue.use(Router)
 
 const router = new Router({
@@ -134,6 +136,16 @@ const router = new Router({
       path: '/login',
       name: '登录',
       component: Login
+    },
+    {
+      path: '/TKTools',
+      name: '制作海报',
+      component: TKTools
+    },
+    {
+      path: '/TKList',
+      name: '海报列表',
+      component: TKList
     }
   ]
 })

@@ -5,10 +5,16 @@ import store from './vuex/store.js' // vuex
 import api from './http/api.js' // http请求
 import linq from 'linqjs'
 import lazyLoad from 'vue-lazyload'
+import VConsole from 'vconsole'
 // 字体样式
 import './assets/font/index.css'
 // 全局消息组件
 import Message from './common/Message/index.js'
+
+if (process.env.NODE_ENV !== 'production') {
+  /* eslint-disable no-new */
+  new VConsole()
+}
 
 Vue.use(Message)
 Vue.use(lazyLoad, {

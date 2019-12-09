@@ -68,7 +68,7 @@
       '💁', '[色]', '[偷笑]', '[愉快]', '[呲牙]', '[玫瑰]', '[爱心]', '[拥抱]', '[太阳]', '[月亮]', '🎉', '🙏', '🎁',
           '[红包]', '[福]', '[跳跳]', '[转圈]', '[蛋糕]', '[西瓜]', '[啤酒]']
         this.result.forEach(item => {
-          copyText += `${bq[Math.floor(Math.random() * 36)]} ${item.keyword}：${item.url} \n`
+          copyText += `${bq[Math.floor(Math.random() * 36)]} ${item.keyword}：${item.url} \n\n`
         })
         /* eslint-disable no-new */
         new Clipboard('.btn', {

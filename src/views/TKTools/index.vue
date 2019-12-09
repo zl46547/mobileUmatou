@@ -9,7 +9,7 @@
           <div class="base-setting-wrap">
             <Uploader
               v-model="form.fileList"
-              multiple
+              :multiple="true"
             />
             <Field
               v-model="textArea"
@@ -22,18 +22,18 @@
             />
             <CellGroup>
               <Field
-                v-model="form.productName"
-                required
-                clearable
-                label="商品名称："
-                placeholder="请输入商品名称"
-              />
-              <Field
                 v-model="form.keyword"
                 required
                 clearable
                 label="商品关键字："
                 placeholder="请输入商品关键字"
+              />
+              <Field
+                v-model="form.productName"
+                required
+                clearable
+                label="商品名称："
+                placeholder="请输入商品名称"
               />
               <Field
                 v-model="form.price"
@@ -156,6 +156,7 @@
   import {Overlay, Switch, Uploader, Field, Cell, CellGroup, Button, Tab, Tabs} from 'vant'
   import html2canvas from 'html2canvas'
   import utils from '../../util/common'
+  import * as types from '../../vuex/types'
 
   export default {
     components: {
@@ -204,9 +205,6 @@
         return null
       }
     },
-    computed: {},
-    mounted() {
-    },
     methods: {
       tabClick(name) {
         let image = document.querySelector('#preview-img')
@@ -219,15 +217,17 @@
       },
       saveAsImage() {
         try {
+          this.$store.commit(types.SET_LOADING, true)
           html2canvas(document.querySelector('#preview-wrap')).then(canvas => {
             let image64 = canvas.toDataURL('image/png', 1)
             let image = document.querySelector('#preview-img')
             image.src = image64
+            this.$store.commit(types.SET_LOADING, false)
           })
           let list = utils.getLocal('TAO_KE_LIST') || []
           let res = list.find(item => item.code === this.form.code)
           if (res) {
-            list = list.filter(item => item.code !== this.form.code)
+            return false
           }
           list.unshift(this.form)
           utils.setLocal('TAO_KE_LIST', list)
@@ -273,7 +273,7 @@
       background-color: #fff;
       overflow-y: auto;
       .base-setting-wrap{
-        margin-top: 20px;
+        margin-top: 1rem;
         max-height: calc(100vh - 10rem);
         overflow: auto;
       }

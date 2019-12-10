@@ -70,7 +70,7 @@
         </div>
       </div>
       <!-- 轮播 -->
-      <div v-if="item.FloorType ===13">
+      <div v-if="item.FloorType ===13" class="width-100">
         <Swipe :autoplay="3000" indicator-color="white">
           <SwipeItem v-for="image in item.AdvInfo.AdvItems"
                      :key="image.Id"
@@ -201,14 +201,20 @@
       .width-50 {
         width: 50%;
         cursor: pointer;
+        padding: .3rem;
+        box-sizing: border-box;
       }
       .width-100 {
         width: 100%;
         cursor: pointer;
+        padding: .3rem;
+        box-sizing: border-box;
       }
       .width-33 {
         width: 33.3%;
         cursor: pointer;
+        padding: .3rem;
+        box-sizing: border-box;
       }
       a {
         color: #666;

@@ -82,7 +82,7 @@
   import { ORDER_STATUS_NAME } from '../../../util/enum'
   import { Button } from 'vant'
   import { deleteOrder, reOrder, confirmOrder } from '../service'
-  import moment from 'moment'
+  import dayjs from 'dayjs'
 
   export default {
     props: {
@@ -108,14 +108,14 @@
        * @param orderItem
        */
       isOverTime (orderItem) {
-        return orderItem.orderStatusCode === 'OS' && (moment(orderItem.orderTimeOut).diff(new Date()) < 0)
+        return orderItem.orderStatusCode === 'OS' && (dayjs(orderItem.orderTimeOut).diff(new Date()) < 0)
       },
       /**
        * 判断订单是否可支付
        * @param orderItem
        */
       isPayStatus (orderItem) {
-        return orderItem.orderStatusCode === 'OS' && (moment(orderItem.orderTimeOut).diff(new Date()) > 0)
+        return orderItem.orderStatusCode === 'OS' && (dayjs(orderItem.orderTimeOut).diff(new Date()) > 0)
       },
 
       /**

@@ -15,7 +15,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import moment from 'moment'
+  import dayjs from 'dayjs'
   import {REMAIN_TIME} from '../../../vuex/types'
   import { getOrderDetail } from '../service'
 
@@ -54,7 +54,7 @@
        */
       getRemainTime () {
         if (this.orderDetail) {
-          let remainTime = moment(this.orderDetail.orderTimeOut).diff(moment())
+          let remainTime = dayjs(this.orderDetail.orderTimeOut).diff(dayjs())
           if (remainTime <= 0) {
             remainTime = 0
           }

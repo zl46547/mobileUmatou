@@ -21,14 +21,14 @@
       <i class="iconfont icon-has-over-time"
          v-if="coupon.status === 3"></i>
       <p class="sub-coupon">副券</p>
-      <p class="sub-coupon">{{moment(coupon.beginTime).format('YYYY-MM-DD')}}</p>
-      <p class="sub-coupon">{{moment(coupon.endTime).format('YYYY-MM-DD')}}</p>
+      <p class="sub-coupon">{{dayjs(coupon.beginTime).format('YYYY-MM-DD')}}</p>
+      <p class="sub-coupon">{{dayjs(coupon.endTime).format('YYYY-MM-DD')}}</p>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import moment from 'moment'
+  import dayjs from 'dayjs'
 
   export default {
     props: {
@@ -43,7 +43,7 @@
     },
     data () {
       return {
-        moment
+        dayjs
       }
     }
   }

@@ -38,6 +38,8 @@ const webpackConfig = merge(baseWebpackConfig, {
     new UglifyJsPlugin({
       uglifyOptions: {
         compress: {
+          drop_debugger: true,
+          drop_console: true,
           warnings: false //警告：true保留警告，false不保留
         }
       },

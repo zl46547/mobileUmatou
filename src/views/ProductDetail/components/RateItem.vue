@@ -25,7 +25,7 @@
       </div>
       <!-- 评论时间、游客回复 -->
       <div class="create-time">
-        <p>{{moment(rateItem.createDate).format('YYYY-MM-DD HH:mm:ss')}}</p>
+        <p>{{dayjs(rateItem.createDate).format('YYYY-MM-DD HH:mm:ss')}}</p>
         <p>
           <i class="iconfont icon-message"></i>
           <span>{{rateItem.replyCount}}</span>
@@ -41,7 +41,7 @@
 
 <script type="text/ecmascript-6">
   import { Rate, ImagePreview } from 'vant'
-  import moment from 'moment'
+  import dayjs from 'dayjs'
 
   export default {
     props: {
@@ -55,7 +55,7 @@
     },
     data () {
       return {
-        moment
+        dayjs
       }
     },
     methods: {

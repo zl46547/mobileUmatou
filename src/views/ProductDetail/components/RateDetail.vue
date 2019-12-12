@@ -40,7 +40,7 @@
   import { getRateList, getRateStatistics } from '../service'
   import { List, Cell } from 'vant'
   import RateItem from './RateItem'
-  import moment from 'moment'
+  import dayjs from 'dayjs'
   import utils from '../../../util/common'
 
   export default {
@@ -55,7 +55,7 @@
     },
     data () {
       return {
-        moment,
+        dayjs,
         activeTag: '全部',
         pullDown: false, // 基础数据下拉状态
         finished: false,

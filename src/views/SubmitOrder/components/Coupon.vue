@@ -37,7 +37,7 @@
   import { ActionSheet } from 'vant'
   import { COUPON_SELECTED } from '../../../vuex/types'
   import { getCoupons } from '../service'
-  import moment from 'moment'
+  import dayjs from 'dayjs'
 
   export default {
     props: {
@@ -81,7 +81,7 @@
         for (let i = 0; i < couponList.length; i++) {
           // 已过期优惠券
           if (couponList[i].status === 1 &&
-            moment(couponList[i].endTime).diff(moment(), 'days') < 0) {
+            dayjs(couponList[i].endTime).diff(dayjs(), 'days') < 0) {
             couponList[i].status = 3
             outOfDate.push(couponList[i])
             continue

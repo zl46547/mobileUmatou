@@ -32,7 +32,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import moment from 'moment'
+  import dayjs from 'dayjs'
   import { getFlashSale } from '../service'
   import {SCROLL_TOP} from '../../../vuex/types'
 
@@ -83,7 +83,7 @@
        */
       formateTime () {
         var nowTime = new Date().getTime()
-        var endTime = moment(moment().format('YYYY-MM-DD 23:59:59')).toDate().getTime()
+        var endTime = dayjs(dayjs().format('YYYY-MM-DD 23:59:59')).toDate().getTime()
         var remainTime = endTime - nowTime
         this.setIntervalFunction = setInterval(() => {
           remainTime -= 1000

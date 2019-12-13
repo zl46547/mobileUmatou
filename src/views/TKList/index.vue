@@ -58,11 +58,23 @@
         lanchApp.open({
           useYingyongbao: inWeixin && isAndroid,
           autodemotion: false,
-          scheme: 'taobao://item.taobao.com/item.html',
-          url: 'https://h5.m.taobao.com/',
-          param: {
-            // k2: 'v2'
+          deeplink: {
+            // 配置scheme方案具体页面及参数，生成请求格式为"protocol://path?param&param"
+            scheme: {
+              android: {
+                // 指定android的scheme协议头
+                protocol: 'taobao://item.taobao.com/item.html',
+                index: { // 页面名称(默认页面请设置为:index)
+                  path: 'https://h5.m.taobao.com/'
+                }
+              }
+            }
           }
+          // scheme: 'taobao://item.taobao.com/item.html',
+          // url: 'https://h5.m.taobao.com/',
+          // param: {
+          //   // k2: 'v2'
+          // }
           // timeout: 2000
         }, (s, d, url) => {
           console.log('callbackout', s, d, url)

@@ -21,7 +21,7 @@ const User = resolve => require(['@/views/User/index.vue'], resolve)
 const ProductSearch = resolve => require(['@/views/ProductSearch/index.vue'], resolve)
 const Collections = resolve => require(['@/views/Collections/index.vue'], resolve)
 const TKTools = resolve => require(['@/views/TKTools/index.vue'], resolve)
-const TKList = resolve => require(['@/views/TKList/index.vue'], resolve)
+const TKAdd = resolve => require(['@/views/TKTools/add.vue'], resolve)
 Vue.use(Router)
 
 const router = new Router({
@@ -138,14 +138,14 @@ const router = new Router({
       component: Login
     },
     {
-      path: '/TKTools',
-      name: '制作海报',
-      component: TKTools
+      path: '/TKAdd',
+      name: '淘客商品添加',
+      component: TKAdd
     },
     {
-      path: '/TKList',
-      name: '海报列表',
-      component: TKList
+      path: '/TKTools',
+      name: '淘客商品列表',
+      component: TKTools
     }
   ]
 })

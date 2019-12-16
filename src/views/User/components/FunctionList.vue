@@ -1,6 +1,9 @@
 <template>
   <div id="functionList">
-    <div class="function" v-for="item in functionList" :key="item.id" @click="showFunction(item)">
+    <div class="function" v-for="item in functionList"
+         :key="item.id"
+         @click="showFunction(item)"
+    >
       <i class="iconfont" :class="item.icon" :style="{'color':item.color}"></i>
       <p>{{item.name}}</p>
     </div>
@@ -25,7 +28,7 @@
             color: '#e23a00'
           },
           {
-            name: '制作海报',
+            name: '淘客商品列表',
             icon: 'icon-friend',
             color: '#ff3fb3'
           },
@@ -77,8 +80,8 @@
           this.$router.push({name: '收藏'})
           return false
         }
-        if (item.name === '制作海报') {
-          this.$router.push({name: '制作海报'})
+        if (item.name === '淘客商品列表') {
+          this.$router.push({name: '淘客商品列表'})
           return false
         }
         Toast({

@@ -18,8 +18,6 @@
       </List>
       <Button type="default" @click="handleCheckAll" class="btn">全选</Button>
       <Button type="primary" @click="handleDelete">删除</Button>
-      <Button type="info" @click="handleCopy" class="btn">复制商品</Button>
-      <Button type="info" @click="handleOpenApp" class="btn">唤醒浙江移动手机营业厅！</Button>
     </div>
   </div>
 </template>
@@ -29,8 +27,6 @@
   import {List, Row, Col, Button, Checkbox, CheckboxGroup} from 'vant'
   import utils from '../../util/common'
   import Clipboard from 'clipboard'
-  // import {LaunchApp, copy, ua, isAndroid, isIos, inWeixin, inWeibo, supportLink} from 'web-launch-app'
-  import {LaunchApp, copy, isAndroid, inWeixin} from 'web-launch-app'
 
   export default {
     components: {
@@ -49,30 +45,7 @@
       }
     },
     computed: {},
-    mounted() {
-      this.table = utils.getLocal('TAO_KE_LIST') || []
-    },
     methods: {
-      handleOpenApp() {
-        const lanchApp = new LaunchApp()
-        lanchApp.open({
-          useYingyongbao: inWeixin && isAndroid,
-          autodemotion: false,
-          scheme: 'taobao://item.taobao.com/item.html',
-          url: 'https://h5.m.taobao.com/',
-          param: {
-            // k2: 'v2'
-          }
-          // timeout: 2000
-        }, (s, d, url) => {
-          console.log('callbackout', s, d, url)
-          s !== 1 && copy(url)
-          return 2
-        })
-
-        // 下载
-        // lanchApp.down()
-      },
       handleCheckAll() {
         if (this.result.length > 0) {
           this.result = []

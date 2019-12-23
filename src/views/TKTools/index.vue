@@ -4,16 +4,18 @@
       <span slot="title">淘客助手</span>
     </Navigator>
     <div class="content">
-      <Button type="info" @click="addProduct">添加商品</Button>
-      <Button type="default" @click="handleCheckAll" class="btn">全选</Button>
-      <Button type="primary" @click="handleDelete">删除</Button>
+      <div class="operate-btn">
+        <Button type="info" @click="addProduct">添加商品</Button>
+        <Button type="default" @click="handleCheckAll" class="btn">全选</Button>
+        <Button type="primary" @click="handleDelete">删除</Button>
+      </div>
       <List
         finished-text="没有更多了"
       >
         <CheckboxGroup v-model="selected">
           <Checkbox :name="item" v-for="item in table" :key="item._id">
             <div class="list-item">
-              <img :src="item.fileList[0]?item.fileList[0].content:null" alt="">
+              <img :src="item.fileList[0]?item.fileList[0].url:null" alt="">
               <div :class="{'warning':getStatus(item)}">
                 <p class="product-name">{{item.productName}}</p>
                 <p class="product-deadline">活动结束时间：{{item.deadline |formatTime}}</p>
@@ -22,6 +24,10 @@
           </Checkbox>
         </CheckboxGroup>
       </List>
+      <div id="empty" v-if="table.length<=0">
+        <i class="iconfont icon-empty-list"></i>
+        <div>您的列表空空如也</div>
+      </div>
     </div>
   </div>
 </template>
@@ -102,7 +108,24 @@
       flex: 1;
       background-color: #fff;
       overflow-y: auto;
-
+      .operate-btn{
+        margin: 2rem 0;
+      }
+      #empty {
+        text-align: center;
+        margin-top: 40%;
+        .iconfont {
+          color: #c2c2c2;
+          margin: auto;
+          font-size: 6rem;
+        }
+        >div{
+          font-size: 1.6rem;
+          white-space: nowrap;
+          padding: 1.5vh;
+          text-align: center;
+        }
+      }
       .list-item {
         display: flex;
         align-items: center;

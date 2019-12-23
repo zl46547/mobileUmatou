@@ -7,10 +7,13 @@
       <Tabs @click="tabClick">
         <Tab title="基础配置">
           <div class="base-setting-wrap">
-            <Uploader
-              v-model="form.fileList"
-              :multiple="true"
-            />
+            <div style="padding:10px 0">
+              <Uploader
+                v-model="form.fileList"
+                :multiple="true"
+                :after-read="onAfterRead"
+              />
+            </div>
             <Field
               v-model="textArea"
               rows="4"
@@ -101,9 +104,7 @@
           <div class="preview">
             <div id="preview-wrap">
               <div class="preview-pic-list">
-                <img :src="form.fileList[0] |formatImage" alt="">
-                <img :src="form.fileList[1] |formatImage" alt="">
-                <img :src="form.fileList[2] |formatImage" alt="">
+                <img :src="item.url" v-for="item in form.fileList" :key="item.url" alt="">
               </div>
               <div class="product-info">
                 <p class="product-name">{{form.productName}}</p>
@@ -166,7 +167,7 @@
   import {Icon, Overlay, Switch, Uploader, Field, Cell, CellGroup, Button, Tab, Tabs} from 'vant'
   import html2canvas from 'html2canvas'
   import * as types from '../../vuex/types'
-  import {addProduct} from './service'
+  import {addProduct, upload} from './service'
   import dayjs from 'dayjs'
 
   export default {
@@ -225,9 +226,63 @@
       }
     },
     methods: {
+      onAfterRead(file) {
+        let formdata = new FormData()// 创建form对象
+        if (file.constructor === Array) {
+          file = this.fileChange(file)
+          file.forEach(item => {
+            formdata.append('file', item.file)
+          })
+        } else {
+          formdata.append('file', file.file)
+        }
+        upload(formdata).then(res => {
+          res.forEach(item => {
+            this.form.fileList.pop()
+          })
+          this.form.fileList = this.form.fileList.concat(res)
+        })
+      },
+      fileChange (fileArr) {
+        // 图片file
+        for (let i = 0; i < fileArr.length; i++) {
+          //  FileReader读取图片
+          let reader = new FileReader()
+          reader.readAsDataURL(fileArr[i])
+          // 注意这里this的指向
+          reader.onloadend = (e) => {
+            let result = e.target.result
+            let img = new Image()
+            img.src = result
+            // 判断图片大小
+            if (fileArr[i].size <= (200 * 1024)) {
+              this.uploadImage(fileArr[i], img.src)
+            } else {
+              img.onload = () => {
+                // 压缩图片
+                let data = this.compress(img)
+                // 将图片信息转为blob二进制
+                let blob = this.dataURItoBlob(data)
+                this.uploadImage(blob, img.src)
+              }
+            }
+          }
+        }
+      },
+      // 压缩图片
+      compress (img) {
+        //
+        let canvas = document.createElement('canvas')
+        let ctx = canvas.getContext('2d')
+        canvas.width = img.width
+        canvas.height = img.height
+        ctx.fillStyle = '#fff'
+        ctx.fillRect(0, 0, canvas.width, canvas.height)
+        ctx.drawImage(img, 0, 0, img.width, img.height)
+        return canvas.toDataURL('image/jpeg', 0.1)
+      },
       datePickerComfirm(val) {
         this.form.deadline = val
-        // this.$emit('selectd', val)
         this.deadlineModal = false
       },
       tabClick(name) {
@@ -239,13 +294,20 @@
       saveAsImage() {
         try {
           this.$store.commit(types.SET_LOADING, true)
-          html2canvas(document.querySelector('#preview-wrap')).then(canvas => {
+          html2canvas(document.querySelector('#preview-wrap'), {
+            useCORS: true,
+            backgroundColor: null
+          }).then(canvas => {
             let image64 = canvas.toDataURL('image/png', 1)
             let image = document.querySelector('#preview-img')
             image.src = image64
             this.$store.commit(types.SET_LOADING, false)
+            addProduct(this.form).then(res => {
+              setTimeout(() => {
+                this.$router.replace({name: '淘客商品列表'})
+              }, 1000)
+            })
           })
-          addProduct(this.form)
         } catch (e) {
           console.log(e)
         }
@@ -256,7 +318,7 @@
         this.form.price = emptyValue[1].replace(/(【在售价】|元)/g, '')
         this.form.afterCouponPrice = emptyValue[2].replace(/(【券后价】|元)/g, '')
         this.form.coupon = (this.form.price - this.form.afterCouponPrice).toFixed(2)
-        this.form.rebate = Number(emptyValue[4].replace(/返利/g, '')).toFixed(2)
+        this.form.rebate = Number(emptyValue[4].replace(/返利/g, '') * 0.7).toFixed(2)
         this.form.afterRebatePrice = (this.form.afterCouponPrice - this.form.rebate).toFixed(2)
         this.form.code = emptyValue[6]
       },
@@ -444,6 +506,10 @@
     .van-cell__title{
       width: 90px;
       flex: none;
+    }
+    .van-uploader__preview {
+      position: relative;
+      margin: 8px!important;
     }
   }
 </style>

@@ -140,12 +140,18 @@ const router = new Router({
     {
       path: '/TKAdd',
       name: '淘客商品添加',
-      component: TKAdd
+      component: TKAdd,
+      meta: {
+        requireAuth: true
+      }
     },
     {
       path: '/TKTools',
       name: '淘客商品列表',
-      component: TKTools
+      component: TKTools,
+      meta: {
+        requireAuth: true
+      }
     }
   ]
 })

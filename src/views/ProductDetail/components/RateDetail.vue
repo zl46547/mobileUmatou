@@ -180,7 +180,7 @@
     }
     .statistics-container {
       transition: all 0.3s ease-in;
-      overflow: hidden;
+      overflow: auto;
       max-height: 2.6rem;
       display: flex;
       align-items: center;

@@ -12,6 +12,17 @@ export const addProductRequest = data => {
   })
 }
 /**
+ * 上传图片
+ * @param data
+ */
+export const uploadRequest = file => {
+  return axios({
+    method: 'post',
+    url: 'upload',
+    data: file
+  })
+}
+/**
  * 删除商品
  * @param data
  */

@@ -1,7 +1,8 @@
 import {
   addProductRequest,
   deleteProductsRequest,
-  getProductsRequest
+  getProductsRequest,
+  uploadRequest
 } from '../api'
 import {Toast} from 'vant'
 Toast.setDefaultOptions({duration: 1000})
@@ -61,6 +62,21 @@ export const deleteProducts = async data => {
 export const getProducts = async id => {
   try {
     let res = await getProductsRequest(id)
+    if (res.data.Data) {
+      return res.data.Data
+    }
+    return null
+  } catch (e) {
+    console.error(e)
+  }
+}
+/**
+ * 上传图片
+ * @param file
+ */
+export const upload = async file => {
+  try {
+    let res = await uploadRequest(file)
     if (res.data.Data) {
       return res.data.Data
     }

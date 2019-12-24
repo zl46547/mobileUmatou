@@ -10,7 +10,6 @@
             <div style="padding:10px 0">
               <Uploader
                 v-model="form.fileList"
-                :multiple="true"
                 :after-read="onAfterRead"
               />
             </div>
@@ -228,14 +227,12 @@
     methods: {
       onAfterRead(file) {
         let formdata = new FormData()// 创建form对象
-        if (file.constructor === Array) {
-          file = this.fileChange(file)
-          file.forEach(item => {
-            formdata.append('file', item.file)
-          })
-        } else {
-          formdata.append('file', file.file)
-        }
+        this.createImage(file.file, (afterCompress) => {
+          formdata.append('file', afterCompress)
+          this.onUpload(formdata)
+        })
+      },
+      onUpload(formdata) {
         upload(formdata).then(res => {
           res.forEach(item => {
             this.form.fileList.pop()
@@ -243,43 +240,45 @@
           this.form.fileList = this.form.fileList.concat(res)
         })
       },
-      fileChange (fileArr) {
-        // 图片file
-        for (let i = 0; i < fileArr.length; i++) {
-          //  FileReader读取图片
-          let reader = new FileReader()
-          reader.readAsDataURL(fileArr[i])
-          // 注意这里this的指向
-          reader.onloadend = (e) => {
-            let result = e.target.result
-            let img = new Image()
-            img.src = result
-            // 判断图片大小
-            if (fileArr[i].size <= (200 * 1024)) {
-              this.uploadImage(fileArr[i], img.src)
-            } else {
-              img.onload = () => {
-                // 压缩图片
-                let data = this.compress(img)
-                // 将图片信息转为blob二进制
-                let blob = this.dataURItoBlob(data)
-                this.uploadImage(blob, img.src)
-              }
+      // 图片上传
+      createImage(file, cb) {
+        let reader = new FileReader()
+        let self = this
+        reader.onload = e => {
+          let result = e.target.result
+          let img = new Image()
+          img.src = result
+          console.log('********未压缩前的图片大小********')
+          console.log(result.length / 1024)
+          if (result.length / 1024 > 50) {
+            img.onload = function() {
+              // 0.6为压缩的程度，数值越小，压缩的文件越小，图片也会越模糊
+              cb(self.compress(img, 0.6))
             }
+          } else {
+            cb(result)
           }
         }
+        // 读取图像
+        reader.readAsDataURL(file)
       },
       // 压缩图片
-      compress (img) {
-        //
+      compress(img, size) {
         let canvas = document.createElement('canvas')
         let ctx = canvas.getContext('2d')
-        canvas.width = img.width
-        canvas.height = img.height
+        let width = img.width
+        let height = img.height
+        canvas.width = width
+        canvas.height = height
+        // 铺底色
         ctx.fillStyle = '#fff'
         ctx.fillRect(0, 0, canvas.width, canvas.height)
-        ctx.drawImage(img, 0, 0, img.width, img.height)
-        return canvas.toDataURL('image/jpeg', 0.1)
+        ctx.drawImage(img, 0, 0, width, height)
+        // 进行最小压缩
+        let ndata = canvas.toDataURL('image/jpeg', size)
+        console.log('*******压缩后的图片大小*******')
+        console.log(ndata.length / 1024)
+        return ndata
       },
       datePickerComfirm(val) {
         this.form.deadline = val

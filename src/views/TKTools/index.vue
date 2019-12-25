@@ -3,12 +3,14 @@
     <Navigator>
       <span slot="title">淘客助手</span>
     </Navigator>
+    <div class="operate-btn">
+      <Button size="small" type="info" @click="addProduct">添加商品</Button>
+      <Button size="small" type="default" @click="handleCheckAll" class="btn">全选</Button>
+      <Button size="small" type="primary" @click="handleDelete">删除</Button>
+      <Button size="small" type="danger" :disabled="selected.length !==1" @click="handleEdit">编辑</Button>
+      <Button size="small" type="warning" ref="copy" :disabled="selected.length !==1" @click="copyCode">复制淘口令</Button>
+    </div>
     <div class="content">
-      <div class="operate-btn">
-        <Button type="info" @click="addProduct">添加商品</Button>
-        <Button type="default" @click="handleCheckAll" class="btn">全选</Button>
-        <Button type="primary" @click="handleDelete">删除</Button>
-      </div>
       <List
         finished-text="没有更多了"
       >
@@ -33,10 +35,13 @@
 </template>
 
 <script type="text/ecmascript-6">
+  /* eslint-disable no-new */
+
   import Navigator from '../../common/Navigator'
-  import {List, Row, Col, Button, Checkbox, CheckboxGroup} from 'vant'
+  import {List, Row, Col, Button, Checkbox, CheckboxGroup, Toast} from 'vant'
   import {getProducts, deleteProducts} from './service'
   import dayjs from 'dayjs'
+  import copy from 'copy-to-clipboard'
 
   export default {
     components: {
@@ -66,14 +71,33 @@
       }
     },
     methods: {
+      /**
+       * 复制淘口令
+       */
+      copyCode() {
+        let code = this.selected[0].code
+        copy(code)
+        Toast.success('复制成功！')
+      },
+      /**
+       * 初始化表格数据
+       */
       initTable() {
         getProducts().then(res => {
           this.table = res
         })
       },
+      /**
+       * 判断是否截单
+       * @param deadline
+       * @returns {boolean}
+       */
       getStatus({deadline}) {
         return dayjs(deadline).diff(new Date(), 'days') < 0
       },
+      /**
+       * 全选
+       */
       handleCheckAll() {
         if (this.selected.length > 0) {
           this.selected = []
@@ -81,14 +105,29 @@
           this.selected = this.table
         }
       },
+      /**
+       * 删除
+       */
       handleDelete() {
         let id = this.selected.map(item => item._id)
         deleteProducts({id}).then(res => {
           this.initTable()
         })
       },
+      /**
+       * 新增
+       */
       addProduct() {
         this.$router.push({name: '淘客商品添加'})
+      },
+      /**
+       * 编辑
+       */
+      handleEdit() {
+        this.$router.push({
+          name: '淘客商品添加',
+          query: {id: this.selected[0]._id}
+        })
       }
     }
   }
@@ -101,16 +140,15 @@
     flex-direction: column;
     height: 100vh;
     overflow: hidden;
-
+    .operate-btn{
+      background-color: #fff;
+      padding: 6rem 0 2rem;
+    }
     .content {
-      margin-top: 4rem;
       padding: 0 2rem;
       flex: 1;
       background-color: #fff;
       overflow-y: auto;
-      .operate-btn{
-        margin: 2rem 0;
-      }
       #empty {
         text-align: center;
         margin-top: 40%;

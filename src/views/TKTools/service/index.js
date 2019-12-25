@@ -59,9 +59,9 @@ export const deleteProducts = async data => {
  * 查询商品列表
  * @param id
  */
-export const getProducts = async id => {
+export const getProducts = async () => {
   try {
-    let res = await getProductsRequest(id)
+    let res = await getProductsRequest()
     if (res.data.Data) {
       return res.data.Data
     }

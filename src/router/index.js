@@ -22,6 +22,7 @@ const ProductSearch = resolve => require(['@/views/ProductSearch/index.vue'], re
 const Collections = resolve => require(['@/views/Collections/index.vue'], resolve)
 const TKTools = resolve => require(['@/views/TKTools/index.vue'], resolve)
 const TKAdd = resolve => require(['@/views/TKTools/add.vue'], resolve)
+const TKActivity = resolve => require(['@/views/TKTools/activity.vue'], resolve)
 Vue.use(Router)
 
 const router = new Router({
@@ -152,6 +153,11 @@ const router = new Router({
       meta: {
         requireAuth: true
       }
+    },
+    {
+      path: '/TKActivity',
+      name: '活动列表',
+      component: TKActivity
     }
   ]
 })

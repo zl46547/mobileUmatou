@@ -248,12 +248,10 @@
           let result = e.target.result
           let img = new Image()
           img.src = result
-          console.log('********未压缩前的图片大小********')
-          console.log(result.length / 1024)
           if (result.length / 1024 > 50) {
             img.onload = function() {
-              // 0.6为压缩的程度，数值越小，压缩的文件越小，图片也会越模糊
-              cb(self.compress(img, 0.6))
+              // 0.1为压缩的程度，数值越小，压缩的文件越小，图片也会越模糊
+              cb(self.compress(img, 0.1))
             }
           } else {
             cb(result)
@@ -276,8 +274,6 @@
         ctx.drawImage(img, 0, 0, width, height)
         // 进行最小压缩
         let ndata = canvas.toDataURL('image/jpeg', size)
-        console.log('*******压缩后的图片大小*******')
-        console.log(ndata.length / 1024)
         return ndata
       },
       datePickerComfirm(val) {
@@ -316,7 +312,7 @@
         this.form.productName = emptyValue[0].replace(/【包邮】/g, '')
         this.form.price = emptyValue[1].replace(/(【在售价】|元)/g, '')
         this.form.afterCouponPrice = emptyValue[2].replace(/(【券后价】|元)/g, '')
-        this.form.coupon = (this.form.price - this.form.afterCouponPrice).toFixed(2)
+        this.form.coupon = parseInt(this.form.price - this.form.afterCouponPrice)
         this.form.rebate = Number(emptyValue[4].replace(/返利/g, '') * 0.7).toFixed(2)
         this.form.afterRebatePrice = (this.form.afterCouponPrice - this.form.rebate).toFixed(2)
         this.form.code = emptyValue[6]

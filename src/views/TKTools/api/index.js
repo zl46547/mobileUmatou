@@ -49,10 +49,9 @@ export const updateProductRequest = data => {
 /**
  * 查看商品列表
  */
-export const getProductsRequest = id => {
+export const getProductsRequest = () => {
   return axios({
     method: 'get',
-    url: 'tkTools/getProducts',
-    params: {id}
+    url: 'tkTools/getProducts'
   })
 }

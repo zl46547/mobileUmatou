@@ -47,6 +47,18 @@ export const updateProductRequest = data => {
 }
 
 /**
+ * 查看商品详情
+ * @param id
+ */
+export const getProductDetailRequest = id => {
+  return axios({
+    method: 'get',
+    url: 'tkTools/getProductDetail',
+    params: {id}
+  })
+}
+
+/**
  * 查看商品列表
  */
 export const getProductsRequest = () => {

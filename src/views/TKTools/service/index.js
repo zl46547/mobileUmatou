@@ -2,7 +2,9 @@ import {
   addProductRequest,
   deleteProductsRequest,
   getProductsRequest,
-  uploadRequest
+  uploadRequest,
+  updateProductRequest,
+  getProductDetailRequest
 } from '../api'
 import {Toast} from 'vant'
 Toast.setDefaultOptions({duration: 1000})
@@ -39,22 +41,36 @@ export const deleteProducts = async data => {
     console.error(e)
   }
 }
-// /**
-//  * 编辑商品
-//  * @param data
-//  */
-// export const updateAddress = async data => {
-//   try {
-//     let res = await updateAddressRequest(data)
-//     if (res.data.Data) {
-//       Toast.success('编辑成功')
-//       return res.data.Data
-//     }
-//     Toast.fail('编辑失败')
-//   } catch (e) {
-//     console.error(e)
-//   }
-// }
+/**
+ * 编辑商品
+ * @param data
+ */
+export const updateProduct = async data => {
+  try {
+    let res = await updateProductRequest(data)
+    if (res.data.Data) {
+      Toast.success('编辑成功')
+      return res.data.Data
+    }
+    Toast.fail('编辑失败')
+  } catch (e) {
+    console.error(e)
+  }
+}
+/**
+ * 查看商品详情
+ * @param id
+ */
+export const getProductDetail = async id => {
+  try {
+    let res = await getProductDetailRequest(id)
+    if (res.data.Data) {
+      return res.data.Data
+    }
+  } catch (e) {
+    console.error(e)
+  }
+}
 /**
  * 查询商品列表
  * @param id

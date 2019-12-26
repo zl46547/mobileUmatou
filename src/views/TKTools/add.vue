@@ -166,7 +166,7 @@
   import {Icon, Overlay, Switch, Uploader, Field, Cell, CellGroup, Button, Tab, Tabs} from 'vant'
   import html2canvas from 'html2canvas'
   import * as types from '../../vuex/types'
-  import {addProduct, upload} from './service'
+  import {addProduct, upload, updateProduct, getProductDetail} from './service'
   import dayjs from 'dayjs'
 
   export default {
@@ -183,6 +183,14 @@
       CellGroup,
       Button,
       Overlay
+    },
+    created() {
+      let {id} = this.$route.query
+      if (id) {
+        getProductDetail(id).then(res => {
+          this.form = res
+        })
+      }
     },
     data() {
       return {
@@ -297,11 +305,23 @@
             let image = document.querySelector('#preview-img')
             image.src = image64
             this.$store.commit(types.SET_LOADING, false)
-            addProduct(this.form).then(res => {
-              setTimeout(() => {
-                this.$router.replace({name: '淘客商品列表'})
-              }, 1000)
-            })
+            let {id} = this.$route.query
+            if (id) {
+              updateProduct({
+                id,
+                ...this.form
+              }).then(res => {
+                setTimeout(() => {
+                  this.$router.push({name: '淘客商品列表'})
+                }, 1000)
+              })
+            } else {
+              addProduct(this.form).then(res => {
+                setTimeout(() => {
+                  this.$router.push({name: '淘客商品列表'})
+                }, 1000)
+              })
+            }
           })
         } catch (e) {
           console.log(e)

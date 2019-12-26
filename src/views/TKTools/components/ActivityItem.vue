@@ -1,45 +1,71 @@
 <template>
     <div class="activity-item">
-      <img :src="detail.fileList[0].url" alt="商品"/>
-      <div class="product-detail">
-        <p class="product-name">{{detail.productName}}</p>
-        <p class="price">
-          <span>原价</span>
-          <span>￥</span>
-          <span>{{detail.price}}</span>
-        </p>
-        <p class="after-rebate-price">
-          <span>到手价</span>
-          <span>￥</span>
-          <span>{{detail.afterRebatePrice}}</span>
-        </p>
+      <div @click="onModalClick">
+        <img :src="detail.fileList[0].url" alt="商品"/>
+        <div class="product-detail">
+          <p class="product-name">{{detail.productName}}</p>
+          <p class="price">
+            <span>原价</span>
+            <span>￥</span>
+            <span>{{detail.price}}</span>
+          </p>
+          <p class="after-rebate-price">
+            <span>到手价</span>
+            <span>￥</span>
+            <span>{{detail.afterRebatePrice}}</span>
+          </p>
+        </div>
+        <div class="product-footer">查看详情</div>
       </div>
-      <div class="product-footer">立即购买</div>
+      <Overlay :show="showModal" @click="showModal = false">
+        <ActivityDetail :detail="detail"/>
+      </Overlay>
     </div>
 </template>
 
 <script>
+  import {Overlay} from 'vant'
+  import ActivityDetail from './ActivityDetail'
   export default {
+    data() {
+      return {
+        showModal: false
+      }
+    },
     props: {
       detail: {
         require: true
       }
     },
-    methods: {},
-    components: {}
+    methods: {
+      onModalClick() {
+        this.showModal = true
+      }
+    },
+    components: {
+      Overlay,
+      ActivityDetail
+    }
   }
 </script>
 
 <style lang="less" scoped>
   @import "../../../less/variables";
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
 
   .activity-item{
-    border-radius: 5rem/@baseFontSize;
+    border-radius: 8px;
     background-color: #fff;
     box-sizing: border-box;
-    width: 46%;
-    margin: 2%;
+    width: 48%;
+    margin: 1%;
     img {
+      border-radius: 8px 8px 0 0;
       width: 100%;
     }
     .product-detail {
@@ -81,6 +107,9 @@
       background-color: @priceColor;
       color: #fff;
       text-align: center;
+      border-radius: 0 0 8px 8px;
+      letter-spacing: 2px;
+      font-size: 1.2rem;
     }
   }
 </style>

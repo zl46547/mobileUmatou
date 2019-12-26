@@ -310,17 +310,9 @@
               updateProduct({
                 id,
                 ...this.form
-              }).then(res => {
-                setTimeout(() => {
-                  this.$router.push({name: '淘客商品列表'})
-                }, 1000)
               })
             } else {
-              addProduct(this.form).then(res => {
-                setTimeout(() => {
-                  this.$router.push({name: '淘客商品列表'})
-                }, 1000)
-              })
+              addProduct(this.form)
             }
           })
         } catch (e) {

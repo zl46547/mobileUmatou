@@ -17,14 +17,24 @@
         </div>
         <div class="product-footer">查看详情</div>
       </div>
-      <Overlay :show="showModal" @click="showModal = false">
-        <ActivityDetail :detail="detail"/>
-      </Overlay>
+      <!--eslint-disable vue/valid-v-model-->
+      <Dialog
+        width="280px"
+        v-model="showModal"
+        :show-cancel-button="false"
+        :show-confirm-button="false"
+        :close-on-click-overlay="true"
+      >
+        <div class="wrapper" @click="showModal = false">
+          <ActivityDetail :detail="detail"/>
+          <div class="close-btn"><Icon name="close"/></div>
+        </div>
+      </Dialog>
     </div>
 </template>
 
 <script>
-  import {Overlay} from 'vant'
+  import {Overlay, Icon, Dialog} from 'vant'
   import ActivityDetail from './ActivityDetail'
   export default {
     data() {
@@ -44,18 +54,31 @@
     },
     components: {
       Overlay,
-      ActivityDetail
+      ActivityDetail,
+      Icon,
+      Dialog: Dialog.Component
     }
   }
 </script>
 
 <style lang="less" scoped>
   @import "../../../less/variables";
+
+  .van-dialog{
+    background-color: transparent;
+    border-radius: 8px;
+  }
   .wrapper {
-    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100%;
+    .close-btn{
+      margin-top: 1rem;
+      text-align: center;
+      font-size: 3rem;
+      color: #fff;
+    }
   }
 
   .activity-item{

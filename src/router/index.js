@@ -156,7 +156,7 @@ const router = new Router({
     },
     {
       path: '/TKActivity',
-      name: '活动列表',
+      name: '活动主页',
       component: TKActivity
     }
   ]

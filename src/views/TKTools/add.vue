@@ -153,6 +153,8 @@
           </div>
           <div class="save-btn-wrap">
             <Button type="primary" @click="saveAsImage">生成图片</Button>
+            <Button type="info" @click="toList">查看列表</Button>
+            <Button type="warning" @click="toActivity">查看活动主页</Button>
           </div>
         </Tab>
       </Tabs>
@@ -163,7 +165,19 @@
 <script type="text/ecmascript-6">
   import Navigator from '../../common/Navigator'
   import DatePicker from '../../common/DatePicker'
-  import {Icon, Overlay, Switch, Uploader, Field, Cell, CellGroup, Button, Tab, Tabs} from 'vant'
+  import {
+    Icon,
+    Overlay,
+    Switch,
+    Uploader,
+    Field,
+    Cell,
+    CellGroup,
+    Button,
+    Tab,
+    Tabs,
+    Dialog
+  } from 'vant'
   import html2canvas from 'html2canvas'
   import * as types from '../../vuex/types'
   import {addProduct, upload, updateProduct, getProductDetail} from './service'
@@ -194,6 +208,7 @@
     },
     data() {
       return {
+        saveStatus: false,
         textArea: '',
         deadlineModal: false,
         form: {
@@ -233,6 +248,30 @@
       }
     },
     methods: {
+      toActivity() {
+        if (this.saveStatus) {
+          this.$router.push({name: '活动主页'})
+          return false
+        }
+        Dialog.confirm({
+          title: '提示',
+          message: '内容未保存，是否继续？'
+        }).then(() => {
+          this.$router.push({name: '活动主页'})
+        })
+      },
+      toList() {
+        if (this.saveStatus) {
+          this.$router.push({name: '淘客商品列表'})
+          return false
+        }
+        Dialog.confirm({
+          title: '提示',
+          message: '内容未保存，是否继续？'
+        }).then(() => {
+          this.$router.push({name: '淘客商品列表'})
+        })
+      },
       onAfterRead(file) {
         let formdata = new FormData()// 创建form对象
         this.createImage(file.file, (afterCompress) => {
@@ -314,6 +353,7 @@
             } else {
               addProduct(this.form)
             }
+            this.saveStatus = true
           })
         } catch (e) {
           console.log(e)

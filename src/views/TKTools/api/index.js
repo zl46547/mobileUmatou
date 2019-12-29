@@ -61,9 +61,10 @@ export const getProductDetailRequest = id => {
 /**
  * 查看商品列表
  */
-export const getProductsRequest = () => {
+export const getProductsRequest = customerGuid => {
   return axios({
     method: 'get',
-    url: 'tkTools/getProducts'
+    url: 'tkTools/getProducts',
+    params: {customer_guid: customerGuid}
   })
 }

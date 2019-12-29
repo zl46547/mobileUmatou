@@ -26,7 +26,7 @@
               <Cell title="截止日期：">
                 <template slot="right-icon">
                   <div class="sp-wrap_text" @click="deadlineModal = true">
-                    <span>{{form.deadline |formateDeadline}}</span>
+                    <span>{{form.deadline | formateDeadline}}</span>
                     <span v-if="!form.deadline">请选择日期</span>
                     <Icon v-if="form.deadline" name="clear"
                           @click="form.deadline=null"/>
@@ -250,14 +250,20 @@
     methods: {
       toActivity() {
         if (this.saveStatus) {
-          this.$router.push({name: '活动主页'})
+          this.$router.push({
+            name: '活动主页',
+            query: {customerGuid: 'e20d8d0d-eaf3-12d4-b4a525b5ba8e'}
+          })
           return false
         }
         Dialog.confirm({
           title: '提示',
           message: '内容未保存，是否继续？'
         }).then(() => {
-          this.$router.push({name: '活动主页'})
+          this.$router.push({
+            name: '活动主页',
+            query: {customerGuid: 'e20d8d0d-eaf3-12d4-b4a525b5ba8e'}
+          })
         })
       },
       toList() {
@@ -296,7 +302,7 @@
           let img = new Image()
           img.src = result
           if (result.length / 1024 > 50) {
-            img.onload = function() {
+            img.onload = function () {
               // 0.1为压缩的程度，数值越小，压缩的文件越小，图片也会越模糊
               cb(self.compress(img, 0.1))
             }
@@ -541,22 +547,22 @@
         text-align: center;
       }
     }
-    .sp-wrap_text{
+    .sp-wrap_text {
       display: flex;
       align-items: center;
     }
-    .van-icon-clear{
+    .van-icon-clear {
       font-size: 1.6rem;
       margin-left: 5px;
       color: #aaa;
     }
-    .van-cell__title{
+    .van-cell__title {
       width: 90px;
       flex: none;
     }
     .van-uploader__preview {
       position: relative;
-      margin: 8px!important;
+      margin: 8px !important;
     }
   }
 </style>

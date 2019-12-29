@@ -73,11 +73,11 @@ export const getProductDetail = async id => {
 }
 /**
  * 查询商品列表
- * @param id
+ * @param customerGuid
  */
-export const getProducts = async () => {
+export const getProducts = async customerGuid => {
   try {
-    let res = await getProductsRequest()
+    let res = await getProductsRequest(customerGuid)
     if (res.data.Data) {
       return res.data.Data
     }

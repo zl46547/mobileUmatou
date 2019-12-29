@@ -11,7 +11,10 @@ class BaseAxiosHelper {
   filterParams (config) {
     let user = store.state.login.user
     if (user) {
-      config.headers.customer_guid = user.customer_guid
+      config.params = {
+        ...config.params,
+        customer_guid: user.customer_guid
+      }
     }
     // 过滤 undefined params
     const { params = {} } = config
@@ -65,7 +68,7 @@ class BaseAxiosHelper {
         }, 2000)
         break
       default:
-        Toast.fail(`${Message || '未知错误'}`)
+        Toast.fail(`${error || '未知错误'}`)
         break
     }
     store.commit('SET_LOADING', false)

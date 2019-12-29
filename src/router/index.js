@@ -158,11 +158,13 @@ const router = new Router({
     {
       path: '/TKActivity',
       name: '活动主页',
+      title: '活动主页',
       component: TKActivity
     },
     {
       path: '/TKActivityDetail',
       name: '活动详情',
+      title: '活动详情',
       component: TKActivityDetail
     }
   ]

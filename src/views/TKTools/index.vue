@@ -20,7 +20,7 @@
               <img :src="item.fileList[0]?item.fileList[0].url:null" alt="">
               <div :class="{'warning':getStatus(item)}">
                 <p class="product-name">{{item.productName}}</p>
-                <p class="product-deadline">活动结束时间：{{item.deadline |formatTime}}</p>
+                <p class="product-deadline">活动结束时间：{{item.deadline | formatTime}}</p>
               </div>
             </div>
           </Checkbox>
@@ -140,7 +140,7 @@
     flex-direction: column;
     height: 100vh;
     overflow: hidden;
-    .operate-btn{
+    .operate-btn {
       background-color: #fff;
       padding: 6rem 0 2rem;
     }
@@ -157,7 +157,7 @@
           margin: auto;
           font-size: 6rem;
         }
-        >div{
+        > div {
           font-size: 1.6rem;
           white-space: nowrap;
           padding: 1.5vh;
@@ -177,10 +177,10 @@
           margin-right: 10px;
           flex: none;
         }
-        .warning{
+        .warning {
           color: red;
         }
-        .product-deadline{
+        .product-deadline {
           font-size: 1.4rem;
           font-weight: bold;
           margin-top: 3px;

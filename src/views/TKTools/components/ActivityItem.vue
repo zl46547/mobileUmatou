@@ -1,46 +1,32 @@
 <template>
-    <div class="activity-item">
-      <div @click="onModalClick">
-        <img :src="detail.fileList[0].url" alt="商品"/>
-        <div class="product-detail">
-          <p class="product-name">{{detail.productName}}</p>
-          <p class="price">
-            <span>原价</span>
-            <span>￥</span>
-            <span>{{detail.price}}</span>
-          </p>
-          <p class="after-rebate-price">
-            <span>到手价</span>
-            <span>￥</span>
-            <span>{{detail.afterRebatePrice}}</span>
-          </p>
-        </div>
-        <div class="product-footer">查看详情</div>
+  <div class="activity-item">
+    <div @click="toDetail">
+      <img :src="detail.fileList[0].url" alt="商品"/>
+      <div class="product-detail">
+        <p class="product-name">{{detail.productName}}</p>
+        <p class="price">
+          <span>原价</span>
+          <span>￥</span>
+          <span>{{detail.price}}</span>
+        </p>
+        <p class="after-rebate-price">
+          <span>到手价</span>
+          <span>￥</span>
+          <span>{{detail.afterRebatePrice}}</span>
+        </p>
       </div>
-      <!--eslint-disable vue/valid-v-model-->
-      <Dialog
-        :width="280"
-        v-model="showModal"
-        :show-cancel-button="false"
-        :show-confirm-button="false"
-        :close-on-click-overlay="true"
-      >
-        <div class="wrapper" @click="showModal = false">
-          <ActivityDetail :detail="detail"/>
-          <div class="close-btn"><Icon name="close"/></div>
-        </div>
-      </Dialog>
+      <div class="product-footer">查看详情</div>
     </div>
+  </div>
 </template>
 
 <script>
-  import {Icon, Dialog} from 'vant'
-  import ActivityDetail from './ActivityDetail'
+  import {Icon} from 'vant'
+  import * as types from '../../../vuex/types'
+
   export default {
     data() {
-      return {
-        showModal: false
-      }
+      return {}
     },
     props: {
       detail: {
@@ -48,14 +34,17 @@
       }
     },
     methods: {
-      onModalClick() {
-        this.showModal = true
+      toDetail() {
+        let scrollTop = this.$parent.$refs.activityContent.scrollTop
+        this.$store.commit(types.SCROLL_TOP, scrollTop)
+        this.$router.push({
+          name: '活动详情',
+          query: {id: this.detail._id}
+        })
       }
     },
     components: {
-      ActivityDetail,
-      Icon,
-      Dialog: Dialog.Component
+      Icon
     }
   }
 </script>
@@ -63,14 +52,15 @@
 <style lang="less" scoped>
   @import "../../../less/variables";
 
-  .van-dialog{
+  .van-dialog {
     background-color: transparent;
     border-radius: 8px;
     margin-top: 50%;
-    transform: translate(-50%,-70%);
+    transform: translate(-50%, -70%);
   }
+
   .wrapper {
-    .close-btn{
+    .close-btn {
       margin-top: 1rem;
       text-align: center;
       font-size: 3rem;
@@ -78,7 +68,7 @@
     }
   }
 
-  .activity-item{
+  .activity-item {
     border-radius: 8px;
     background-color: #fff;
     box-sizing: border-box;
@@ -97,12 +87,12 @@
         width: 100%;
         overflow: hidden;
         font-size: 28rem/@baseFontSize;
-        word-break:break-all;
-        display:-webkit-box;//对象作为伸缩盒子模型显示
-        -webkit-box-orient:vertical;//设置或检索伸缩盒对象的子元素的排列方式
-        -webkit-line-clamp:2;//显示行数## 标题文字 ##
+        word-break: break-all;
+        display: -webkit-box; //对象作为伸缩盒子模型显示
+        -webkit-box-orient: vertical; //设置或检索伸缩盒对象的子元素的排列方式
+        -webkit-line-clamp: 2; //显示行数## 标题文字 ##
       }
-      .after-rebate-price,.price {
+      .after-rebate-price, .price {
         display: flex;
         align-items: baseline;
         padding-bottom: .5rem;
@@ -112,10 +102,10 @@
           font-family: monospace;
         }
       }
-      .after-rebate-price{
+      .after-rebate-price {
         color: @priceColor;
       }
-      .price{
+      .price {
         color: #ddd;
         text-decoration: line-through;
       }

@@ -3,7 +3,7 @@
     <Navigator>
       <span slot="title">内部活动</span>
     </Navigator>
-    <div class="content">
+    <div class="content" ref="activityContent">
       <section class="topic-pic"></section>
       <section class="topic-banner topic-today"></section>
       <div class="list-container">
@@ -49,6 +49,9 @@
     },
     created() {
       this.initTable()
+    },
+    mounted() {
+      this.$refs.activityContent.scrollTop = this.$store.state.common.scrollTop
     },
     filters: {
       formatTime(value) {

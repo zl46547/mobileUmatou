@@ -23,6 +23,7 @@ const Collections = resolve => require(['@/views/Collections/index.vue'], resolv
 const TKTools = resolve => require(['@/views/TKTools/index.vue'], resolve)
 const TKAdd = resolve => require(['@/views/TKTools/add.vue'], resolve)
 const TKActivity = resolve => require(['@/views/TKTools/activity.vue'], resolve)
+const TKActivityDetail = resolve => require(['@/views/TKTools/activityDetail.vue'], resolve)
 Vue.use(Router)
 
 const router = new Router({
@@ -158,6 +159,11 @@ const router = new Router({
       path: '/TKActivity',
       name: '活动主页',
       component: TKActivity
+    },
+    {
+      path: '/TKActivityDetail',
+      name: '活动详情',
+      component: TKActivityDetail
     }
   ]
 })

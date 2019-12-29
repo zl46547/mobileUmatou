@@ -445,7 +445,7 @@
             }
 
             .price-container {
-              margin-bottom: 16px;
+              margin-bottom: .5rem;
               display: flex;
               align-items: center;
 
@@ -482,7 +482,7 @@
             }
 
             .coupon-after-container-bt {
-              margin-bottom: 16px;
+              margin-bottom: .5rem;
             }
 
             .tag {

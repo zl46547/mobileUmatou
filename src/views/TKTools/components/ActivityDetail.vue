@@ -1,6 +1,6 @@
 <template>
   <div id="TK-activity-detail" @click.stop>
-    <Swipe :autoplay="5000" indicator-color="white" :width="280">
+    <Swipe :autoplay="3000" indicator-color="white" :width="280">
       <SwipeItem v-for="item in detail.fileList" :key="item.url">
         <img :src="item.url" alt="" class="swipe-image">
       </SwipeItem>
@@ -47,12 +47,20 @@
           <span class="decimal">{{detail.afterRebatePrice | getDecimal}}</span>
         </div>
       </div>
+      <div class="product-code-copy">
+        <p>复制红框内信息打开→手<i class="iconfont icon-taobao"></i>APP←即可领取优惠券</p>
+      </div>
+      <div class="icopy" :class="{'has-copied':hasCopy,'has-not-copied':!hasCopy}" @click="handleCopy">
+        <span v-if="hasCopy">复制成功，打开<i class="iconfont icon-taobao"></i>即可购买</span>
+        <span v-else>一键复制</span>
+      </div>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import {Swipe, SwipeItem} from 'vant'
+  import copy from 'copy-to-clipboard'
 
   export default {
     props: {
@@ -66,6 +74,7 @@
     },
     data() {
       return {
+        hasCopy: false
       }
     },
     filters: {
@@ -79,6 +88,13 @@
       }
     },
     methods: {
+      handleCopy() {
+        this.hasCopy = true
+        copy(this.detail.code)
+        setTimeout(() => {
+          this.hasCopy = false
+        }, 2000)
+      }
     }
   }
 </script>
@@ -101,10 +117,17 @@
       font-size: 1.8rem;
       color: #333;
       margin-bottom: 10px;
+      text-overflow: ellipsis;
+      width: 100%;
+      overflow: hidden;
+      word-break:break-all;
+      display:-webkit-box;//对象作为伸缩盒子模型显示
+      -webkit-box-orient:vertical;//设置或检索伸缩盒对象的子元素的排列方式
+      -webkit-line-clamp:2;//显示行数## 标题文字 ##
     }
 
     .price-container {
-      margin-bottom: 16px;
+      margin-bottom: .5rem;
       display: flex;
       align-items: center;
 
@@ -141,7 +164,7 @@
     }
 
     .coupon-after-container-bt {
-      margin-bottom: 16px;
+      margin-bottom: .5rem;
     }
 
     .tag {
@@ -151,8 +174,8 @@
       margin-right: 14px;
 
       p {
-        height: 3rem;
-        line-height: 3rem;
+        height: 2.5rem;
+        line-height: 2.5rem;
         text-align: center;
         font-size: 1.4rem;
 
@@ -191,19 +214,48 @@
         font-size: 1.4rem;
       }
     }
+    .product-code-copy{
+      border: 2px dashed #fb6a65;
+      padding: .5rem;
+      border-radius: 5px;
+      margin-top: 1rem;
+      color: #333;
+      font-size: 1.6rem;
+      .iconfont{
+        font-size: 2rem;
+        color: #e84f33;
+      }
+    }
+    .icopy{
+      border-radius: 5px;
+      color: white;
+      font-size: 1.4rem;
+      margin: 1.2rem auto 0;
+      padding: 1rem;
+      text-align: center;
+      .iconfont{
+        margin: 0 .5rem;
+      }
+    }
+    .has-copied{
+      background: #78bd33;
+    }
+    .has-not-copied{
+      background: #fb6a65;
+    }
   }
 
-  .sp-wrap_text{
-    display: flex;
-    align-items: center;
-  }
-  .van-icon-clear{
-    font-size: 1.6rem;
-    margin-left: 5px;
-    color: #aaa;
-  }
-  .van-cell__title{
-    width: 90px;
-    flex: none;
-  }
+  /*.sp-wrap_text{*/
+    /*display: flex;*/
+    /*align-items: center;*/
+  /*}*/
+  /*.van-icon-clear{*/
+    /*font-size: 1.6rem;*/
+    /*margin-left: 5px;*/
+    /*color: #aaa;*/
+  /*}*/
+  /*.van-cell__title{*/
+    /*width: 90px;*/
+    /*flex: none;*/
+  /*}*/
 </style>

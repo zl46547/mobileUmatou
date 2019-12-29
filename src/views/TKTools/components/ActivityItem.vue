@@ -19,7 +19,7 @@
       </div>
       <!--eslint-disable vue/valid-v-model-->
       <Dialog
-        width="280px"
+        :width="280"
         v-model="showModal"
         :show-cancel-button="false"
         :show-confirm-button="false"
@@ -34,7 +34,7 @@
 </template>
 
 <script>
-  import {Overlay, Icon, Dialog} from 'vant'
+  import {Icon, Dialog} from 'vant'
   import ActivityDetail from './ActivityDetail'
   export default {
     data() {
@@ -53,7 +53,6 @@
       }
     },
     components: {
-      Overlay,
       ActivityDetail,
       Icon,
       Dialog: Dialog.Component
@@ -67,12 +66,10 @@
   .van-dialog{
     background-color: transparent;
     border-radius: 8px;
+    margin-top: 50%;
+    transform: translate(-50%,-70%);
   }
   .wrapper {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
     .close-btn{
       margin-top: 1rem;
       text-align: center;

@@ -23,6 +23,14 @@
               @change="handleChange"
             />
             <CellGroup>
+              <Field
+                v-model="form.note"
+                rows="2"
+                autosize
+                label="商品备注"
+                type="textarea"
+                placeholder="满_①_件商品更优惠哦~ _①_件只需_②_元，返利_③_元。"
+              />
               <Cell title="截止日期：">
                 <template slot="right-icon">
                   <div class="sp-wrap_text" @click="deadlineModal = true">
@@ -212,7 +220,7 @@
         textArea: '',
         deadlineModal: false,
         form: {
-          deadline: '',
+          deadline: new Date(),
           fileList: [],
           productName: '',
           price: '',
@@ -221,7 +229,8 @@
           afterCouponPrice: '',
           rebate: '',
           afterRebatePrice: '',
-          isFirstOrder: false
+          isFirstOrder: false,
+          note: ''
         }
       }
     },

@@ -111,6 +111,7 @@
       handleDelete() {
         let id = this.selected.map(item => item._id)
         deleteProducts({id}).then(res => {
+          this.selected = []
           this.initTable()
         })
       },

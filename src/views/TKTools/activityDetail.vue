@@ -1,8 +1,5 @@
 <template>
   <div class="TK-activity-detail">
-    <Navigator>
-      <span slot="title">活动详情</span>
-    </Navigator>
     <div class="content" v-if="detail">
       <Swipe :autoplay="3000" indicator-color="white">
         <SwipeItem v-for="item in detail.fileList" :key="item.url">
@@ -11,12 +8,16 @@
       </Swipe>
       <div class="product-info">
         <p class="product-name">{{detail.productName}}</p>
+        <div class="alert-info" v-if="detail.note">
+          <p class="note-title">推荐</p>
+          <div class="note-text" v-html="getNoteText(detail.note)"></div>
+        </div>
         <p class="price-container" v-if="!detail.isFirstOrder">
           <span class="price-label">原价</span>
           <span class="price">¥{{detail.price}}</span>
         </p>
         <div class="price-container" v-else>
-          <span class="first-order-tag">首单</span>
+          <span class="tag first-order-tag">首单</span>
           <div class="coupon-after-price">
             <span>¥</span>
             <span>{{detail.price | getInteger}}.</span>
@@ -51,6 +52,9 @@
             <span class="decimal">{{detail.afterRebatePrice | getDecimal}}</span>
           </div>
         </div>
+        <div class="note-container">
+
+        </div>
         <div class="product-code-copy">
           <p>复制红框内信息打开→手<i class="iconfont icon-taobao"></i>APP←即可领取优惠券</p>
         </div>
@@ -60,11 +64,11 @@
         </div>
       </div>
     </div>
+    <i class="iconfont icon-fanhui" @click="$router.go(-1)"></i>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import Navigator from '../../common/Navigator'
   import {Swipe, SwipeItem} from 'vant'
   import copy from 'copy-to-clipboard'
   import {getProductDetail} from './service'
@@ -77,7 +81,6 @@
       })
     },
     components: {
-      Navigator,
       Swipe,
       SwipeItem
     },
@@ -98,6 +101,13 @@
       }
     },
     methods: {
+      getNoteText(value) {
+        let noteValueArr = value.replace(/(，|。|？|！)/g, ',').split(',')
+        return `满 <span style="font-size: 1.8rem;color: #f07300">${noteValueArr[0]}</span> 件商品更优惠哦~
+        ${noteValueArr[0]}件只需<span style="font-size: 1.8rem;color: #f07300"> ${noteValueArr[1]}</span> 元,
+        返利<span style="font-size: 1.8rem;color: #f07300"> ${noteValueArr[2] * 0.7.toFixed(2)} </span>元,
+        到手价<span style="font-size: 1.8rem;color: #f07300"> ${(noteValueArr[1] - noteValueArr[2]).toFixed(2)} </span>元`
+      },
       handleCopy() {
         this.hasCopy = true
         copy(this.detail.code)
@@ -117,9 +127,15 @@
     height: 100vh;
     overflow: hidden;
     background-color: #fff;
-
+    .icon-fanhui{
+      display: block;
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      color: #555;
+      font-size: 4rem;
+    }
     .content {
-      margin-top: 4rem;
       flex: 1;
       overflow-y: auto;
       color: #fff;
@@ -147,23 +163,50 @@
       -webkit-line-clamp:2;//显示行数## 标题文字 ##
     }
 
+    .alert-info{
+      background-color: #ffe6f0;
+      border: 1px solid #ffb3d0;
+      padding: 1rem 1.5rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      .note-title{
+        color: rgba(0, 0, 0, 0.85);
+        display: block;
+        margin-bottom: 4px;
+        font-size: 1.8rem;
+      }
+      .note-text{
+        color: rgba(0, 0, 0, 0.65);
+        font-size: 1.5rem;
+      }
+    }
+
     .price-container {
       margin-bottom: .5rem;
       display: flex;
       align-items: center;
-
-      .first-order-tag {
+      .note-text{
+        color: #333;
+        font-size: 1.4rem;
+      }
+      .tag{
         display: inline-block;
-        border: 1px solid #f00000;
-        color: #f00000;
         border-radius: 3px;
         margin-right: 14px;
         text-align: center;
         font-size: 1.4rem;
         width: 38px;
         padding: 3px;
+        flex: none;
       }
-
+      .first-order-tag {
+        border: 1px solid #f00000;
+        color: #f00000;
+      }
+      .note-tag{
+        border: 1px solid #f07300;
+        color: #f07300;
+      }
       .first-order-price {
         color: #ff3a00;
         font-size: 1.4rem;

@@ -1,8 +1,5 @@
 <template>
   <div id="TK-activity">
-    <Navigator>
-      <span slot="title">内部活动</span>
-    </Navigator>
     <div class="content" ref="activityContent">
       <section class="topic-pic"></section>
       <section class="topic-banner topic-today"></section>
@@ -19,11 +16,10 @@
         <div>您的列表空空如也</div>
       </div>
     </div>
-  </div>
+    <img src="../../assets/images/skillBag.png" class="skill-bag"/></div>
 </template>
 
 <script type="text/ecmascript-6">
-  import Navigator from '../../common/Navigator'
   import ActivityItem from './components/ActivityItem'
   import {List, Row, Col, Button, Checkbox, CheckboxGroup} from 'vant'
   import {getProducts, deleteProducts} from './service'
@@ -37,7 +33,6 @@
       List,
       Row,
       VCol: Col,
-      Navigator,
       Button
     },
     data() {
@@ -50,9 +45,6 @@
     created() {
       let { customerGuid } = this.$route.query
       this.initTable(customerGuid)
-    },
-    mounted() {
-      this.$refs.activityContent.scrollTop = this.$store.state.common.scrollTop
     },
     filters: {
       formatTime(value) {
@@ -67,6 +59,9 @@
         getProducts(customerGuid).then(res => {
           this.topicToday = res.filter(item => dayjs(item.create_time).format('YYYY-MM-DD') === dayjs().format('YYYY-MM-DD'))
           this.topicPrevious = res.filter(item => dayjs(item.create_time).format('YYYY-MM-DD') !== dayjs().format('YYYY-MM-DD'))
+          this.$nextTick(() => {
+            this.$refs.activityContent.scrollTop = this.$store.state.common.scrollTop
+          })
         })
       },
       getStatus({deadline}) {
@@ -102,7 +97,6 @@
     background-color: #feca43;
 
     .content {
-      margin-top: 4rem;
       flex: 1;
       overflow-y: auto;
       .list-container{
@@ -147,6 +141,51 @@
           padding: 1.5vh;
           text-align: center;
         }
+      }
+    }
+    .skill-bag{
+      width: 6rem;
+      display: block;
+      position: fixed;
+      bottom: 10rem;
+      right: .1rem;
+      animation: shakeTopx 2s infinite;
+    }
+    @keyframes shakeTopx {
+      0%,
+      100% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+        -webkit-transform-origin: 50% 0;
+        transform-origin: 50% 0;
+      }
+      5% {
+        -webkit-transform: rotate(3deg);
+        transform: rotate(3deg);
+      }
+      10%,
+      20%,
+      30% {
+        -webkit-transform: rotate(-6deg);
+        transform: rotate(-6deg);
+      }
+      15%,
+      25%,
+      35% {
+        -webkit-transform: rotate(6deg);
+        transform: rotate(6deg);
+      }
+      40% {
+        -webkit-transform: rotate(-3deg);
+        transform: rotate(-3deg);
+      }
+      45% {
+        -webkit-transform: rotate(3deg);
+        transform: rotate(3deg);
+      }
+      50% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
       }
     }
   }

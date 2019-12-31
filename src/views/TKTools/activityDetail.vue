@@ -105,7 +105,7 @@
         let noteValueArr = value.replace(/(，|。|？|！)/g, ',').split(',')
         return `满 <span style="font-size: 1.8rem;color: #f07300">${noteValueArr[0]}</span> 件商品更优惠哦~
         ${noteValueArr[0]}件只需<span style="font-size: 1.8rem;color: #f07300"> ${noteValueArr[1]}</span> 元,
-        返利<span style="font-size: 1.8rem;color: #f07300"> ${noteValueArr[2] * 0.7.toFixed(2)} </span>元,
+        返利<span style="font-size: 1.8rem;color: #f07300"> ${0.7 * noteValueArr[2].toFixed(2)} </span>元,
         到手价<span style="font-size: 1.8rem;color: #f07300"> ${(noteValueArr[1] - noteValueArr[2]).toFixed(2)} </span>元`
       },
       handleCopy() {

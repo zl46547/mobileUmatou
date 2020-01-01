@@ -1,8 +1,10 @@
 <template>
   <div id="TK-activity">
     <div class="content" ref="activityContent">
-      <section class="topic-pic"></section>
-      <section class="topic-banner topic-today"></section>
+      <img class="topic-pic" src="../../assets/images/activity/1.jpg" />
+      <img class="topic-pic" src="../../assets/images/activity/2.jpg" />
+      <img class="topic-pic" src="../../assets/images/activity/3.jpg" />
+      <section class="topic-banner topic-today" v-if="topicToday.length>0"></section>
       <div class="list-container">
         <ActivityItem v-for="item in topicToday" :key="item._id" :detail="item"/>
       </div>
@@ -16,7 +18,7 @@
         <div>您的列表空空如也</div>
       </div>
     </div>
-    <img src="../../assets/images/skillBag.png" class="skill-bag"/></div>
+    <img src="../../assets/images/skillBag.png" class="skill-bag" @click="toSkillDetail"/></div>
 </template>
 
 <script type="text/ecmascript-6">
@@ -55,6 +57,9 @@
       }
     },
     methods: {
+      toSkillDetail() {
+        this.$router.push({ name: '锦囊' })
+      },
       initTable(customerGuid) {
         getProducts(customerGuid).then(res => {
           this.topicToday = res.filter(item => dayjs(item.create_time).format('YYYY-MM-DD') === dayjs().format('YYYY-MM-DD'))
@@ -122,10 +127,7 @@
       }
       .topic-pic{
         width: 100%;
-        height: 45rem;
-        background: url(../../assets/images/topic-mian.jpg) no-repeat center;
-        background-size: cover;
-        background-origin: content-box;
+        display: block;
       }
       #empty {
         text-align: center;

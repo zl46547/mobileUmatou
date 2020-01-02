@@ -10,7 +10,7 @@
         <p class="product-name">{{detail.productName}}</p>
         <div class="alert-info" v-if="detail.note">
           <p class="note-title">推荐</p>
-          <div class="note-text" v-html="getNoteText(detail.note)"></div>
+          <div class="note-text" v-html="getNoteText(detail.note,detail.rebateRate)"></div>
         </div>
         <p class="price-container" v-if="!detail.isFirstOrder">
           <span class="price-label">原价</span>
@@ -52,9 +52,9 @@
             <span class="decimal">{{detail.afterRebatePrice | getDecimal}}</span>
           </div>
         </div>
-        <div class="note-container">
-
-        </div>
+        <p class="suggest">
+          商品确认收货后，将订单号发送给小陆就能收到返利啦~
+        </p>
         <div class="product-code-copy">
           <p>复制红框内信息打开→手<i class="iconfont icon-taobao"></i>APP←即可领取优惠券</p>
         </div>
@@ -101,12 +101,13 @@
       }
     },
     methods: {
-      getNoteText(value) {
+      getNoteText(value, rebateRate) {
         let noteValueArr = value.replace(/(，|。|？|！)/g, ',').split(',')
+        let rebate = Number(0.7 * rebateRate * noteValueArr[1]).toFixed(2)
         return `满 <span style="font-size: 1.8rem;color: #f07300">${noteValueArr[0]}</span> 件商品更优惠哦~
         ${noteValueArr[0]}件只需<span style="font-size: 1.8rem;color: #f07300"> ${noteValueArr[1]}</span> 元,
-        返利<span style="font-size: 1.8rem;color: #f07300"> ${0.7 * noteValueArr[2].toFixed(2)} </span>元,
-        到手价<span style="font-size: 1.8rem;color: #f07300"> ${(noteValueArr[1] - noteValueArr[2]).toFixed(2)} </span>元`
+        返利<span style="font-size: 1.8rem;color: #f07300"> ${rebate} </span>元,
+        到手价<span style="font-size: 1.8rem;color: #f07300"> ${(noteValueArr[1] - rebate).toFixed(2)} </span>元`
       },
       handleCopy() {
         this.hasCopy = true
@@ -277,6 +278,11 @@
       .decimal {
         font-size: 1.4rem;
       }
+    }
+    .suggest{
+      color: #fb6a65;
+      font-size: 1.5rem;
+      padding: 1rem 0;
     }
     .product-code-copy{
       border: 2px dashed #fb6a65;

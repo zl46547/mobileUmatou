@@ -29,7 +29,7 @@
                 autosize
                 label="商品备注"
                 type="textarea"
-                placeholder="满_①_件商品更优惠哦~ _①_件只需_②_元，返利_③_元。"
+                placeholder="满_①_件商品更优惠哦~ _①_件只需_②_元"
               />
               <Cell title="截止日期：">
                 <template slot="right-icon">
@@ -81,13 +81,21 @@
                 placeholder="请输入券后价"
               />
               <Field
+                v-model="form.rebateRate"
+                type="number"
+                required
+                clearable
+                label="返利比例："
+                placeholder="请输入返利比例"
+                @change="handleRebateRateChange"
+              />
+              <Field
                 v-model="form.rebate"
                 type="number"
                 required
                 clearable
                 label="返利金额："
                 placeholder="请输入返利金额"
-                @change="handleRebateChange"
               />
               <Field
                 v-model="form.afterRebatePrice"
@@ -184,7 +192,8 @@
     Button,
     Tab,
     Tabs,
-    Dialog
+    Dialog,
+    Toast
   } from 'vant'
   import html2canvas from 'html2canvas'
   import * as types from '../../vuex/types'
@@ -204,7 +213,8 @@
       Cell,
       CellGroup,
       Button,
-      Overlay
+      Overlay,
+      Toast
     },
     created() {
       let {id} = this.$route.query
@@ -227,6 +237,7 @@
           coupon: '',
           code: '',
           afterCouponPrice: '',
+          rebateRate: '',
           rebate: '',
           afterRebatePrice: '',
           isFirstOrder: false,
@@ -376,19 +387,25 @@
       },
       handleChange({target: {value}}) {
         let emptyValue = value.split(/\n|\r/)
+        if (!emptyValue[4].match(/^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$/)) {
+          Toast.fail('请输入佣金比例')
+          this.textArea = ''
+          return false
+        }
         this.form.productName = emptyValue[0].replace(/【包邮】/g, '')
         this.form.price = emptyValue[1].replace(/(【在售价】|元)/g, '')
         this.form.afterCouponPrice = emptyValue[2].replace(/(【券后价】|元)/g, '')
         this.form.coupon = parseInt(this.form.price - this.form.afterCouponPrice)
-        this.form.rebate = Number(emptyValue[4].replace(/返利/g, '') * 0.7).toFixed(2)
+        this.form.rebateRate = emptyValue[4]
+        this.form.rebate = Number(this.form.afterCouponPrice * emptyValue[4] * 0.7).toFixed(2)
         this.form.afterRebatePrice = (this.form.afterCouponPrice - this.form.rebate).toFixed(2)
         this.form.code = emptyValue[6]
       },
       handlePriceChange() {
         this.form.afterCouponPrice = (this.form.price - this.form.coupon).toFixed(2)
       },
-      handleRebateChange() {
-        this.form.afterRebatePrice = (this.form.afterCouponPrice - this.form.rebate).toFixed(2)
+      handleRebateRateChange() {
+        this.form.afterRebatePrice = (this.form.afterCouponPrice * (1 - 0.7 * this.form.rebateRate)).toFixed(2)
       }
     }
   }

@@ -16,13 +16,19 @@
       >
         <CheckboxGroup v-model="selected">
           <Checkbox :name="item" v-for="item in table" :key="item._id">
-            <div class="list-item">
-              <img :src="item.fileList[0]?item.fileList[0].url:null" alt="">
-              <div :class="{'warning':getStatus(item)}">
-                <p class="product-name">{{item.productName}}</p>
-                <p class="product-deadline">活动结束时间：{{item.deadline | formatTime}}</p>
+            <SwipeCell>
+              <div class="list-item">
+                <img :src="item.fileList[0]?item.fileList[0].url:null" alt="">
+                <div :class="getStatus(item)">
+                  <p class="product-name">{{item.productName}}</p>
+                  <p class="product-deadline">活动结束时间：{{item.deadline | formatTime}}</p>
+                </div>
               </div>
-            </div>
+              <template slot="right">
+                <Button square type="primary" text="下架" v-if="item.status" @click="handleUpAndDown(item._id,false)"/>
+                <Button square type="warning" text="上架" v-else @click="handleUpAndDown(item._id,true)"/>
+              </template>
+            </SwipeCell>
           </Checkbox>
         </CheckboxGroup>
       </List>
@@ -38,13 +44,14 @@
   /* eslint-disable no-new */
 
   import Navigator from '../../common/Navigator'
-  import {List, Row, Col, Button, Checkbox, CheckboxGroup, Toast} from 'vant'
-  import {getProducts, deleteProducts} from './service'
+  import {List, Row, Col, Button, Checkbox, CheckboxGroup, Toast, SwipeCell} from 'vant'
+  import {getProducts, deleteProducts, upAndDownProduct} from './service'
   import dayjs from 'dayjs'
   import copy from 'copy-to-clipboard'
 
   export default {
     components: {
+      SwipeCell,
       Checkbox,
       CheckboxGroup,
       List,
@@ -72,6 +79,14 @@
     },
     methods: {
       /**
+       * 上下架
+       */
+      handleUpAndDown(id, status) {
+        upAndDownProduct({id, status}).then(res => {
+          this.initTable()
+        })
+      },
+      /**
        * 复制淘口令
        */
       copyCode() {
@@ -85,15 +100,22 @@
       initTable() {
         getProducts().then(res => {
           this.table = res
+          this.selected = []
         })
       },
       /**
        * 判断是否截单
        * @param deadline
+       * @param status
        * @returns {boolean}
        */
-      getStatus({deadline}) {
-        return dayjs(deadline).diff(new Date(), 'days') < 0
+      getStatus({deadline, status}) {
+        if (!status) {
+          return 'warning'
+        }
+        if (dayjs(deadline).diff(new Date(), 'days') < 0) {
+          return 'error'
+        }
       },
       /**
        * 全选
@@ -111,7 +133,6 @@
       handleDelete() {
         let id = this.selected.map(item => item._id)
         deleteProducts({id}).then(res => {
-          this.selected = []
           this.initTable()
         })
       },
@@ -178,8 +199,11 @@
           margin-right: 10px;
           flex: none;
         }
-        .warning {
+        .error {
           color: red;
+        }
+        .warning {
+          color: orange;
         }
         .product-deadline {
           font-size: 1.4rem;

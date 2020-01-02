@@ -61,9 +61,9 @@
         this.$router.push({ name: '锦囊' })
       },
       initTable(customerGuid) {
-        getProducts(customerGuid).then(res => {
-          this.topicToday = res.filter(item => dayjs(item.create_time).format('YYYY-MM-DD') === dayjs().format('YYYY-MM-DD'))
-          this.topicPrevious = res.filter(item => dayjs(item.create_time).format('YYYY-MM-DD') !== dayjs().format('YYYY-MM-DD'))
+        getProducts(customerGuid, true).then(res => {
+          this.topicToday = res.filter(item => dayjs(item.last_modified_time).format('YYYY-MM-DD') === dayjs().format('YYYY-MM-DD'))
+          this.topicPrevious = res.filter(item => dayjs(item.last_modified_time).format('YYYY-MM-DD') !== dayjs().format('YYYY-MM-DD'))
           this.$nextTick(() => {
             this.$refs.activityContent.scrollTop = this.$store.state.common.scrollTop
           })

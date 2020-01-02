@@ -4,7 +4,8 @@ import {
   getProductsRequest,
   uploadRequest,
   updateProductRequest,
-  getProductDetailRequest
+  getProductDetailRequest,
+  upAndDownProductRequest
 } from '../api'
 import {Toast} from 'vant'
 Toast.setDefaultOptions({duration: 1000})
@@ -57,6 +58,23 @@ export const updateProduct = async data => {
     console.error(e)
   }
 }
+
+/**
+ * 上下架商品
+ * @param data
+ */
+export const upAndDownProduct = async data => {
+  try {
+    let res = await upAndDownProductRequest(data)
+    if (res.data.Data) {
+      Toast.success(res.data.Data)
+    } else {
+      Toast.fail('操作失败')
+    }
+  } catch (e) {
+    console.error(e)
+  }
+}
 /**
  * 查看商品详情
  * @param id
@@ -74,10 +92,11 @@ export const getProductDetail = async id => {
 /**
  * 查询商品列表
  * @param customerGuid
+ * @param status
  */
-export const getProducts = async customerGuid => {
+export const getProducts = async (customerGuid, status) => {
   try {
-    let res = await getProductsRequest(customerGuid)
+    let res = await getProductsRequest(customerGuid, status)
     if (res.data.Data) {
       return res.data.Data
     }

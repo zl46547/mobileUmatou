@@ -47,6 +47,18 @@ export const updateProductRequest = data => {
 }
 
 /**
+ * 上下架商品
+ * @param data
+ */
+export const upAndDownProductRequest = data => {
+  return axios({
+    method: 'post',
+    url: 'tkTools/upAndDownProduct',
+    data
+  })
+}
+
+/**
  * 查看商品详情
  * @param id
  */
@@ -61,10 +73,10 @@ export const getProductDetailRequest = id => {
 /**
  * 查看商品列表
  */
-export const getProductsRequest = customerGuid => {
+export const getProductsRequest = (customerGuid, status) => {
   return axios({
     method: 'get',
     url: 'tkTools/getProducts',
-    params: {customer_guid: customerGuid}
+    params: {customer_guid: customerGuid, status}
   })
 }

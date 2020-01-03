@@ -7,8 +7,7 @@
       <Button size="small" type="info" @click="addProduct">添加商品</Button>
       <Button size="small" type="default" @click="handleCheckAll" class="btn">全选</Button>
       <Button size="small" type="primary" @click="handleDelete">删除</Button>
-      <Button size="small" type="danger" :disabled="selected.length !==1" @click="handleEdit">编辑</Button>
-      <Button size="small" type="warning" ref="copy" :disabled="selected.length !==1" @click="copyCode">复制淘口令</Button>
+      <Button size="small" type="warning" @click="toActivity">查看活动主页</Button>
     </div>
     <div class="content">
       <List
@@ -25,8 +24,10 @@
                 </div>
               </div>
               <template slot="right">
-                <Button square type="primary" text="下架" v-if="item.status" @click="handleUpAndDown(item._id,false)"/>
-                <Button square type="warning" text="上架" v-else @click="handleUpAndDown(item._id,true)"/>
+                <Button size="small" type="primary" text="下架" v-if="item.status" @click="handleUpAndDown(item._id,false)"/>
+                <Button size="small" type="warning" text="上架" v-else @click="handleUpAndDown(item._id,true)"/>
+                <Button size="small" type="info" @click="handleEdit(item._id)">编辑</Button>
+                <Button size="small" type="default" @click="copyCode(item.code)">复制淘口令</Button>
               </template>
             </SwipeCell>
           </Checkbox>
@@ -78,6 +79,12 @@
       }
     },
     methods: {
+      toActivity() {
+        this.$router.push({
+          name: '活动主页',
+          query: {customerGuid: 'e20d8d0d-eaf3-12d4-b4a525b5ba8e'}
+        })
+      },
       /**
        * 上下架
        */
@@ -89,8 +96,7 @@
       /**
        * 复制淘口令
        */
-      copyCode() {
-        let code = this.selected[0].code
+      copyCode(code) {
         copy(code)
         Toast.success('复制成功！')
       },
@@ -145,10 +151,10 @@
       /**
        * 编辑
        */
-      handleEdit() {
+      handleEdit(id) {
         this.$router.push({
           name: '淘客商品添加',
-          query: {id: this.selected[0]._id}
+          query: {id}
         })
       }
     }

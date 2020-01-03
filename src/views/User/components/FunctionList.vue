@@ -16,6 +16,7 @@
     data () {
       return {
         hour: 0,
+        clickCount: 0,
         functionList: [
           {
             name: '地址管理',
@@ -26,11 +27,6 @@
             name: '收藏',
             icon: 'icon-collect',
             color: '#e23a00'
-          },
-          {
-            name: '淘客商品列表',
-            icon: 'icon-friend',
-            color: '#ff3fb3'
           },
           {
             name: '充值',
@@ -80,8 +76,14 @@
           this.$router.push({name: '收藏'})
           return false
         }
-        if (item.name === '淘客商品列表') {
-          this.$router.push({name: '淘客商品列表'})
+        if (item.name === '关于我们') {
+          this.clickCount = this.clickCount + 1
+          if (this.clickCount >= 5) {
+            this.$router.push({name: '淘客商品列表'})
+          }
+          setTimeout(() => {
+            this.clickCount = 0
+          }, 3000)
           return false
         }
         Toast({

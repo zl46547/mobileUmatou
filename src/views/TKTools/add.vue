@@ -113,6 +113,11 @@
                 />
               </Cell>
             </CellGroup>
+            <div class="save-btn-wrap">
+              <Button type="primary" @click="handleSave">保存</Button>
+              <Button type="info" @click="toList">查看列表</Button>
+              <Button type="warning" @click="toActivity">查看活动主页</Button>
+            </div>
           </div>
         </Tab>
         <Tab title="预览">
@@ -169,8 +174,6 @@
           </div>
           <div class="save-btn-wrap">
             <Button type="primary" @click="saveAsImage">生成图片</Button>
-            <Button type="info" @click="toList">查看列表</Button>
-            <Button type="warning" @click="toActivity">查看活动主页</Button>
           </div>
         </Tab>
       </Tabs>
@@ -323,8 +326,8 @@
           img.src = result
           if (result.length / 1024 > 50) {
             img.onload = function () {
-              // 0.1为压缩的程度，数值越小，压缩的文件越小，图片也会越模糊
-              cb(self.compress(img, 0.1))
+              // 0.2为压缩的程度，数值越小，压缩的文件越小，图片也会越模糊
+              cb(self.compress(img, 0.2))
             }
           } else {
             cb(result)
@@ -346,8 +349,7 @@
         ctx.fillRect(0, 0, canvas.width, canvas.height)
         ctx.drawImage(img, 0, 0, width, height)
         // 进行最小压缩
-        let ndata = canvas.toDataURL('image/jpeg', size)
-        return ndata
+        return canvas.toDataURL('image/jpeg', size)
       },
       datePickerComfirm(val) {
         this.form.deadline = val
@@ -370,17 +372,23 @@
             let image = document.querySelector('#preview-img')
             image.src = image64
             this.$store.commit(types.SET_LOADING, false)
-            let {id} = this.$route.query
-            if (id) {
-              updateProduct({
-                id,
-                ...this.form
-              })
-            } else {
-              addProduct(this.form)
-            }
-            this.saveStatus = true
           })
+        } catch (e) {
+          console.log(e)
+        }
+      },
+      handleSave() {
+        try {
+          let {id} = this.$route.query
+          if (id) {
+            updateProduct({
+              id,
+              ...this.form
+            })
+          } else {
+            addProduct(this.form)
+          }
+          this.saveStatus = true
         } catch (e) {
           console.log(e)
         }

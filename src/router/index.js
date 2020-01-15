@@ -25,6 +25,7 @@ const TKAdd = resolve => require(['@/views/TKTools/add.vue'], resolve)
 const TKActivity = resolve => require(['@/views/TKTools/activity.vue'], resolve)
 const TKActivityDetail = resolve => require(['@/views/TKTools/activityDetail.vue'], resolve)
 const TKSkillBag = resolve => require(['@/views/TKTools/skillBag.vue'], resolve)
+const LLTools = resolve => require(['@/views/LLTools/index.vue'], resolve)
 Vue.use(Router)
 
 const router = new Router({
@@ -173,6 +174,12 @@ const router = new Router({
       name: '锦囊',
       title: '锦囊',
       component: TKSkillBag
+    },
+    {
+      path: '/LLTools',
+      name: '联联商品管理',
+      title: '联联商品管理',
+      component: LLTools
     }
   ]
 })

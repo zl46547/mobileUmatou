@@ -30,6 +30,13 @@
           <i class="iconfont icon-close"></i>
           <span>删除</span>
         </div>
+        <div class="btn-item" :class="{'is-hot':getHotStatus(detail)}"
+             v-if="detail.checked"
+             @click.stop="handleChangeHot(detail)"
+        >
+          <i class="iconfont icon-hot" ></i>
+          <span>擦亮</span>
+        </div>
       </div>
     </div>
   </div>
@@ -37,7 +44,8 @@
 
 <script>
   import * as types from '../../../vuex/types'
-  import {addPool,deleteProducts} from '../service'
+  import {addPool, deleteProducts,changeHot} from '../service'
+  import dayjs from 'dayjs'
 
   export default {
     data() {
@@ -49,6 +57,11 @@
       }
     },
     methods: {
+      getHotStatus(props){
+        let startTime = dayjs(dayjs().format('YYYY-MM-DD'))
+        let endTime = dayjs(dayjs(props.last_modified_time).format('YYYY-MM-DD'))
+        return startTime.diff(endTime,'days') === 0
+      },
       toDetail() {
         let scrollTop = this.$parent.$refs.activityContent.scrollTop
         this.$store.commit(types.SCROLL_TOP, scrollTop)
@@ -65,6 +78,11 @@
       handleDelete({id}){
         deleteProducts({id}).then(res=>{
           this.$emit('refresh',id)
+        })
+      },
+      handleChangeHot({id}){
+        changeHot({id}).then(res=>{
+          this.$emit('refreshRubbing',id)
         })
       }
     }
@@ -144,7 +162,7 @@
         .has-marked{
           color: #00b625;
         }
-        .delete{
+        .delete,.is-hot{
           color: #ff3a00;
         }
       }

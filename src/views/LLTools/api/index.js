@@ -46,6 +46,21 @@ export const deleteProductsRequest = data => {
 }
 
 /**
+ * 擦亮商品
+ * @param data
+ */
+export const changeHotRequest = data => {
+  return axios({
+    method: 'post',
+    url: 'lianlian/rubbing',
+    data
+  })
+}
+
+
+
+
+/**
  * 上传图片
  * @param data
  */

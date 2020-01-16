@@ -2,6 +2,7 @@ import {
   getHomeListRequest,
   addPoolRequest,
   deleteProductsRequest,
+  changeHotRequest,
   getProductsRequest,
   uploadRequest,
   updateProductRequest,
@@ -76,6 +77,28 @@ export const deleteProducts = async data => {
     console.error(e)
   }
 }
+
+/**
+ * 擦亮商品
+ * @param data
+ */
+export const changeHot = async data => {
+  try {
+    let res = await changeHotRequest(data)
+    if (res.data.Data) {
+      Toast.success('擦亮成功')
+      return res.data.Data
+    }
+    Toast.fail('擦亮失败')
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+
+
+
+
 /**
  * 编辑商品
  * @param data

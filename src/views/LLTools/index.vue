@@ -15,6 +15,7 @@
           v-for="item in table"
           :key="item.id"
           @refresh="refresh"
+          @refreshRubbing="refreshRubbing"
         />
       </List>
       <div id="empty" v-if="table.length<=0">
@@ -30,8 +31,8 @@
 
   import Navigator from '../../common/Navigator'
   import ActivityItem from './components/ActivityItem'
-  import {List, Row, Col, Button, Checkbox, CheckboxGroup, Toast, SwipeCell} from 'vant'
-  import {getHomeList, getProducts,deleteProducts} from './service'
+  import {List, Row, Col, Button, Checkbox, CheckboxGroup, SwipeCell} from 'vant'
+  import {getHomeList, getProducts} from './service'
 
   export default {
     components: {
@@ -69,8 +70,7 @@
        * 初始化表格数据
        */
       async initTable() {
-        let productRes = await getProducts()
-        this.selected = productRes.map(item=>item.id)
+        this.selected  = await getProducts()
         let {data} = await getHomeList({
           pageSize:10,
           pageIndex:this.pageIndex
@@ -86,20 +86,20 @@
       refresh(id){
         let index = this.table.findIndex(item=>item.id === id)
         this.table[index].checked = !this.table[index].checked
+        this.table[index].last_modified_time = new Date()
+      },
+      refreshRubbing(id){
+        let index = this.table.findIndex(item=>item.id === id)
+        this.table[index].last_modified_time = new Date()
       },
       checkIsSelected(list){
         return list.map(item=>{
-          item.checked = this.selected.includes(item.id);
+          let index = this.selected.findIndex(i=>i.id === item.id)
+          item.checked = index >= 0;
+          if(index >= 0){
+            item.last_modified_time = this.selected[index].last_modified_time
+          }
           return item
-        })
-      },
-      /**
-       * 删除
-       */
-      handleDelete() {
-        let id = this.selected.map(item => item._id)
-        deleteProducts({id}).then(res => {
-          this.initTable()
         })
       }
     }

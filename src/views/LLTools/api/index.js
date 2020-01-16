@@ -57,9 +57,6 @@ export const changeHotRequest = data => {
   })
 }
 
-
-
-
 /**
  * 上传图片
  * @param data

@@ -12,6 +12,7 @@
       >
         <ActivityItem
           :detail="item"
+          user-type="adminPool"
           v-for="item in table"
           :key="item.id"
           @refresh="refresh"
@@ -31,72 +32,66 @@
 
   import Navigator from '../../common/Navigator'
   import ActivityItem from './components/ActivityItem'
-  import {List, Row, Col, Button, Checkbox, CheckboxGroup, SwipeCell} from 'vant'
+  import {List} from 'vant'
   import {getHomeList, getProducts} from './service'
 
   export default {
     components: {
       ActivityItem,
-      SwipeCell,
-      Checkbox,
-      CheckboxGroup,
       List,
-      Row,
-      VCol: Col,
-      Navigator,
-      Button
+      Navigator
     },
     data() {
       return {
         table: [],
         loading: false,
         finished: false,
-        pageIndex:0,
-        selected:[]
+        pageIndex: 0,
+        selected: []
       }
     },
     methods: {
       toActivity() {
         this.$router.push({
-          name: '活动主页',
+          name: '联联主页',
           query: {customerGuid: 'e20d8d0d-eaf3-12d4-b4a525b5ba8e'}
         })
       },
       onLoad() {
-        this.pageIndex = this.pageIndex +1
+        this.pageIndex = this.pageIndex + 1
         this.initTable()
       },
       /**
        * 初始化表格数据
        */
       async initTable() {
-        this.selected  = await getProducts()
+        this.selected = await getProducts()
         let {data} = await getHomeList({
-          pageSize:10,
-          pageIndex:this.pageIndex
+          pageSize: 10,
+          pageIndex: this.pageIndex
         })
         // 加载状态结束
-        this.loading = false;
-        if(this.pageIndex>0){
+        this.loading = false
+        if (this.pageIndex > 0) {
           this.table = this.table.concat(this.checkIsSelected(data))
-        }else{
+        } else {
           this.table = this.checkIsSelected(data)
         }
       },
-      refresh(id){
-        let index = this.table.findIndex(item=>item.id === id)
+      refresh(id) {
+        let index = this.table.findIndex(item => item.id === id)
         this.table[index].checked = !this.table[index].checked
         this.table[index].last_modified_time = new Date()
       },
-      refreshRubbing(id){
-        let index = this.table.findIndex(item=>item.id === id)
+      refreshRubbing(id) {
+        let index = this.table.findIndex(item => item.id === id)
         this.table[index].last_modified_time = new Date()
       },
-      checkIsSelected(list){
-        return list.map(item=>{
-          let index = this.selected.findIndex(i=>i.id === item.id)
-          item.checked = index >= 0;
-          if(index >= 0){
+      checkIsSelected(list) {
+        return list.map(item => {
+          let index = this.selected.findIndex(i => i.id === item.id)
+          item.checked = index >= 0
+          if (index >= 0) {
             item.last_modified_time = this.selected[index].last_modified_time
           }
           return item

@@ -10,6 +10,7 @@ import {
   upAndDownProductRequest
 } from '../api'
 import {Toast} from 'vant'
+
 Toast.setDefaultOptions({duration: 1000})
 
 /**
@@ -94,10 +95,6 @@ export const changeHot = async data => {
     console.error(e)
   }
 }
-
-
-
-
 
 /**
  * 编辑商品

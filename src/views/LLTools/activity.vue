@@ -2,14 +2,12 @@
   <div id="LL-activity">
     <div class="content">
       <List
-        v-model="loading"
         :finished="finished"
         finished-text="没有更多了"
-        @load="onLoad"
       >
         <ActivityItem
           :detail="item"
-          user-type="adminActivity"
+          :user-type="userType"
           v-for="item in table"
           :key="item.id"
           @refresh="refresh"
@@ -32,6 +30,11 @@
   import {getProducts} from './service'
 
   export default {
+    created() {
+      let {userType} = this.$route.query
+      this.userType = userType
+      this.initTable()
+    },
     components: {
       ActivityItem,
       List,
@@ -40,21 +43,15 @@
     data() {
       return {
         table: [],
-        loading: false,
-        finished: false,
-        pageIndex: 0
+        finished: true,
+        userType: null
       }
     },
     methods: {
       toActivity() {
         this.$router.push({
-          name: '联联主页',
-          query: {customerGuid: 'e20d8d0d-eaf3-12d4-b4a525b5ba8e'}
+          name: '联联主页'
         })
-      },
-      onLoad() {
-        this.pageIndex = this.pageIndex + 1
-        this.initTable()
       },
       /**
        * 初始化表格数据
@@ -65,8 +62,6 @@
           item.checked = true
           return item
         })
-        // 加载状态结束
-        this.loading = false
       },
       refresh(id) {
         let index = this.table.findIndex(item => item.id === id)

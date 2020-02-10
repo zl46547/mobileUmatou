@@ -13,7 +13,7 @@ export const addProductRequest = data => {
 }
 /**
  * 上传图片
- * @param data
+ * @param file
  */
 export const uploadRequest = file => {
   return axios({

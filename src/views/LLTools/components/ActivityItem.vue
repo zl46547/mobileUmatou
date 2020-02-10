@@ -1,5 +1,5 @@
 <template>
-  <div class="activity-item">
+  <div class="activity-item" @click="toDetail">
     <img :src="detail.faceImg" alt="商品"/>
     <div class="product-detail">
       <div class="title van-hairline--bottom">
@@ -12,33 +12,31 @@
         </div>
         <span>销售量：{{detail.saleAmount}}</span>
       </div>
-      <!-- customer:用户，adminActivity：管理员活动页面 adminPool：管理员选品池页面 -->
-      <div class="operate-btn van-hairline--top" v-if="userType !=='customer'">
+      <!-- null:用户，admin：管理员活动页面 -->
+      <div class="operate-btn van-hairline--top"
+           v-if="userType ==='admin'"
+      >
         <div class="btn-item image"
-             v-if="detail.checked && userType ==='adminActivity'"
+             v-if="detail.checked && userType ==='admin'"
              @click.stop="handleCreateImage(detail)">
           <i class="iconfont icon-image"></i>
           <span>生成图片</span>
         </div>
         <div class="btn-item"
-             v-if="!detail.checked && userType ==='adminPool'"
+             v-if="!detail.checked && userType ==='admin'"
              @click.stop="handleAdd(detail)">
           <i class="iconfont icon-add"></i>
           <span>添加</span>
         </div>
-        <div class="btn-item has-marked" v-if="detail.checked && userType ==='adminPool'">
-          <i class="iconfont icon-checkbox-marked"></i>
-          <span>已添加</span>
-        </div>
         <div class="btn-item delete"
-             v-if="detail.checked"
+             v-if="detail.checked && userType ==='admin'"
              @click.stop="handleDelete(detail)"
         >
           <i class="iconfont icon-close"></i>
           <span>删除</span>
         </div>
         <div class="btn-item" :class="{'is-hot':getHotStatus(detail)}"
-             v-if="detail.checked"
+             v-if="detail.checked && userType ==='admin'"
              @click.stop="handleChangeHot(detail)"
         >
           <i class="iconfont icon-hot"></i>
@@ -66,6 +64,14 @@
       }
     },
     methods: {
+      toDetail() {
+        this.$router.push({
+          name: '联联详情',
+          query: {
+            id: this.detail.id
+          }
+        })
+      },
       handleCreateImage(props) {
 
       },
@@ -172,16 +178,11 @@
           text-align: center;
           width: 8rem;
         }
-
-        .has-marked {
-          color: #00b625;
-        }
-
         .delete, .is-hot {
           color: #ff3a00;
         }
         .image{
-          color: #1989fa;
+          color: #8c00ff;
         }
       }
     }

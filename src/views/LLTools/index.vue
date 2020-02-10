@@ -12,7 +12,7 @@
       >
         <ActivityItem
           :detail="item"
-          user-type="adminPool"
+          :user-type="userType"
           v-for="item in table"
           :key="item.id"
           @refresh="refresh"
@@ -36,6 +36,10 @@
   import {getHomeList, getProducts} from './service'
 
   export default {
+    created() {
+      let {userType} = this.$route.query
+      this.userType = userType
+    },
     components: {
       ActivityItem,
       List,
@@ -47,14 +51,14 @@
         loading: false,
         finished: false,
         pageIndex: 0,
-        selected: []
+        selected: [],
+        userType: null
       }
     },
     methods: {
       toActivity() {
         this.$router.push({
-          name: '联联主页',
-          query: {customerGuid: 'e20d8d0d-eaf3-12d4-b4a525b5ba8e'}
+          name: '联联主页'
         })
       },
       onLoad() {

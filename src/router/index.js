@@ -27,6 +27,9 @@ const TKActivityDetail = resolve => require(['@/views/TKTools/activityDetail.vue
 const TKSkillBag = resolve => require(['@/views/TKTools/skillBag.vue'], resolve)
 const LLTools = resolve => require(['@/views/LLTools/index.vue'], resolve)
 const LLActivity = resolve => require(['@/views/LLTools/activity.vue'], resolve)
+const LLActivityDetail = resolve => require(['@/views/LLTools/activityDetail.vue'], resolve)
+const HelpEach = resolve => require(['@/views/HelpEach/index.vue'], resolve)
+const HelpEachUser = resolve => require(['@/views/HelpEach/addUser.vue'], resolve)
 Vue.use(Router)
 
 const router = new Router({
@@ -187,6 +190,24 @@ const router = new Router({
       name: '联联活动',
       title: '联联活动',
       component: LLActivity
+    },
+    {
+      path: '/LLActivityDetail',
+      name: '联联详情',
+      title: '联联详情',
+      component: LLActivityDetail
+    },
+    {
+      path: '/helpEach',
+      name: '淘客互助',
+      title: '淘客互助',
+      component: HelpEach
+    },
+    {
+      path: '/helpEachUser',
+      name: '淘客互助用户',
+      title: '淘客互助用户',
+      component: HelpEachUser
     }
   ]
 })

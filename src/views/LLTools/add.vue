@@ -274,8 +274,7 @@
       toActivity() {
         if (this.saveStatus) {
           this.$router.push({
-            name: '活动主页',
-            query: {customerGuid: 'e20d8d0d-eaf3-12d4-b4a525b5ba8e'}
+            name: '活动主页'
           })
           return false
         }
@@ -284,8 +283,7 @@
           message: '内容未保存，是否继续？'
         }).then(() => {
           this.$router.push({
-            name: '活动主页',
-            query: {customerGuid: 'e20d8d0d-eaf3-12d4-b4a525b5ba8e'}
+            name: '活动主页'
           })
         })
       },

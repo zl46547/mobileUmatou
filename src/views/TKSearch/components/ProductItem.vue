@@ -1,23 +1,23 @@
 <template>
-  <div class="activity-item">
-    <div @click="toDetail">
-      <img :src="detail.pict_url" alt="商品"/>
+  <div class="detail-item">
+    <div @click="goToDetail">
+      <img :src="productItem.pict_url" alt="商品"/>
       <div class="product-detail">
-        <p class="product-name">{{detail.title}}</p>
+        <p class="product-name">{{productItem.title}}</p>
         <div class="product-price-info">
           <div class="price">
             <p class="zk-final-price">
               <span>￥</span>
-              <span>{{detail.zk_final_price}}</span>
+              <span>{{productItem.zk_final_price}}</span>
             </p>
             <p class="reserve-price">
               <span>￥</span>
-              <span>{{detail.reserve_price}}</span>
+              <span>{{productItem.reserve_price}}</span>
             </p>
           </div>
-          <div class="coupon" v-if="detail.coupon_info">
+          <div class="coupon" v-if="productItem.coupon_amount">
             <p class="coupon-label">券</p>
-            <p class="coupon-value">{{detail.coupon_info | formatCouponValue}}</p>
+            <p class="coupon-value">{{productItem.coupon_amount}}</p>
           </div>
         </div>
       </div>
@@ -26,37 +26,29 @@
   </div>
 </template>
 
-<script>
-  import {Icon} from 'vant'
-  import * as types from '../../../vuex/types'
-
+<script type="text/ecmascript-6">
+  import { addGoods } from '../service'
   export default {
-    data() {
-      return {}
-    },
-    filters:{
-      formatCouponValue(value){
-        let startIndex = value.indexOf('减') + 1
-        return value.substring(startIndex,value.length-1)
-      }
-    },
     props: {
-      detail: {
-        require: true
+      productItem: {
+        required: true,
+        type: Object
       }
     },
-    methods: {
-      toDetail() {
-        let scrollTop = this.$parent.$refs.activityContent.scrollTop
-        this.$store.commit(types.SCROLL_TOP, scrollTop)
-        this.$router.push({
-          name: '活动详情',
-          query: {id: this.detail._id}
-        })
+    data() {
+      return {
       }
     },
     components: {
-      Icon
+    },
+    methods: {
+      /**
+       * 跳转商品详情页面
+       * @param productId
+       */
+      goToDetail (productId) {
+        this.$router.push({name: '商品详情', params: {productId}})
+      }
     }
   }
 </script>
@@ -64,23 +56,7 @@
 <style lang="less" scoped>
   @import "../../../less/variables";
 
-  .van-dialog {
-    background-color: transparent;
-    border-radius: 8px;
-    margin-top: 50%;
-    transform: translate(-50%, -70%);
-  }
-
-  .wrapper {
-    .close-btn {
-      margin-top: 1rem;
-      text-align: center;
-      font-size: 3rem;
-      color: #fff;
-    }
-  }
-
-  .activity-item {
+  .detail-item {
     border-radius: 8px;
     background-color: #fff;
     box-sizing: border-box;

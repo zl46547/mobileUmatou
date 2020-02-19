@@ -7,6 +7,7 @@ import cart from './modules/cart'
 import order from './modules/order'
 import common from './modules/common'
 import products from './modules/products'
+import tkTools from './modules/tkTools'
 
 Vue.use(Vuex)
 
@@ -17,6 +18,7 @@ export default new Vuex.Store({
     cart,
     order,
     common,
-    products
+    products,
+    tkTools
   }
 })

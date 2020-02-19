@@ -1,31 +1,33 @@
 <template>
   <div id="TK-activity">
+    <Search/>
     <div class="content" ref="activityContent">
-      <img class="topic-pic" src="../../assets/images/activity/1.jpg" />
-      <img class="topic-pic" src="../../assets/images/activity/2.jpg" />
-      <img class="topic-pic" src="../../assets/images/activity/3.jpg" />
-      <section class="topic-banner topic-today" v-if="topicToday.length>0"></section>
-      <div class="list-container">
-        <ActivityItem v-for="item in topicToday" :key="item._id" :detail="item"/>
-      </div>
-      <section class="topic-banner topic-previous"></section>
-      <div class="list-container">
-        <ActivityItem v-for="item in topicPrevious" :key="item._id" :detail="item"/>
-      </div>
-      <section class="topic-banner topic-free"></section>
-      <div id="empty" v-if="topicToday.length<=0 && topicPrevious.length<=0">
+      <div id="empty" v-if="favoritesItem.length<=0">
         <i class="iconfont icon-empty-list"></i>
         <div>您的列表空空如也</div>
       </div>
+      <div class="list-container">
+        <ActivityItem
+          v-for="item in favoritesItem"
+          :key="item.num_iid"
+          :detail="item"/>
+      </div>
     </div>
-    <img src="../../assets/images/skillBag.png" class="skill-bag" @click="toSkillDetail"/></div>
+    <img src="../../assets/images/skillBag.png"
+         class="skill-bag"
+         @click="toSkillDetail"/>
+  </div>
 </template>
 
 <script type="text/ecmascript-6">
   import ActivityItem from './components/ActivityItem'
   import {List, Row, Col, Button, Checkbox, CheckboxGroup} from 'vant'
-  import {getProducts, deleteProducts} from './service'
-  import dayjs from 'dayjs'
+  import Search from '../../common/Search'
+  import {
+    deleteProducts,
+    getFavorites,
+    getFavoritesItem
+  } from './service'
 
   export default {
     components: {
@@ -35,18 +37,20 @@
       List,
       Row,
       VCol: Col,
-      Button
+      Button,
+      Search
     },
     data() {
       return {
+        favorites:[],
+        favoritesItem:[],
         topicToday: [],
         topicPrevious: [],
         selected: []
       }
     },
     created() {
-      let { customerGuid } = this.$route.query
-      this.initTable(customerGuid)
+      this.initTable()
     },
     filters: {
       formatTime(value) {
@@ -60,14 +64,25 @@
       toSkillDetail() {
         this.$router.push({ name: '锦囊' })
       },
-      initTable(customerGuid) {
-        getProducts(customerGuid, true).then(res => {
-          this.topicToday = res.filter(item => dayjs(item.last_modified_time).format('YYYY-MM-DD') === dayjs().format('YYYY-MM-DD'))
-          this.topicPrevious = res.filter(item => dayjs(item.last_modified_time).format('YYYY-MM-DD') !== dayjs().format('YYYY-MM-DD'))
-          this.$nextTick(() => {
-            this.$refs.activityContent.scrollTop = this.$store.state.common.scrollTop
-          })
+      async initTable() {
+        let favoritesRes = await getFavorites()
+        if(!favoritesRes.results){
+          return favoritesRes
+        }
+        this.favorites = favoritesRes.results.tbk_favorites
+        let getFavoritesItemRes = await getFavoritesItem({
+          favorites_id:this.favorites[0].favorites_id
         })
+        if(getFavoritesItemRes.results){
+          this.favoritesItem = getFavoritesItemRes.results.uatm_tbk_item
+        }
+        // getProducts(customerGuid, true).then(res => {
+        //   this.topicToday = res.filter(item => dayjs(item.last_modified_time).format('YYYY-MM-DD') === dayjs().format('YYYY-MM-DD'))
+        //   this.topicPrevious = res.filter(item => dayjs(item.last_modified_time).format('YYYY-MM-DD') !== dayjs().format('YYYY-MM-DD'))
+        //   this.$nextTick(() => {
+        //     this.$refs.activityContent.scrollTop = this.$store.state.common.scrollTop
+        //   })
+        // })
       },
       getStatus({deadline}) {
         return dayjs(deadline).diff(new Date(), 'days') < 0
@@ -102,10 +117,11 @@
     background-color: #feca43;
 
     .content {
+      margin-top: 5rem;
       flex: 1;
       overflow-y: auto;
       .list-container{
-        padding: 1rem;
+        padding: .5rem;
         box-sizing: content-box;
         display: flex;
         flex-wrap: wrap;
@@ -125,10 +141,7 @@
         background-size: cover;
         background-origin: content-box;
       }
-      .topic-pic{
-        width: 100%;
-        display: block;
-      }
+
       #empty {
         text-align: center;
         margin-top: 40%;

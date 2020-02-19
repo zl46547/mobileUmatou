@@ -5,7 +5,9 @@ import {
   uploadRequest,
   updateProductRequest,
   getProductDetailRequest,
-  upAndDownProductRequest
+  upAndDownProductRequest,
+  getFavoritesRequest,
+  getFavoritesItemRequest
 } from '../api'
 import {Toast} from 'vant'
 Toast.setDefaultOptions({duration: 1000})
@@ -105,6 +107,7 @@ export const getProducts = async (customerGuid, status) => {
     console.error(e)
   }
 }
+
 /**
  * 上传图片
  * @param file
@@ -112,6 +115,36 @@ export const getProducts = async (customerGuid, status) => {
 export const upload = async file => {
   try {
     let res = await uploadRequest(file)
+    if (res.data.Data) {
+      return res.data.Data
+    }
+    return null
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+/**
+ * 获取选品列表
+ */
+export const getFavorites = async () => {
+  try {
+    let res = await getFavoritesRequest()
+    if (res.data.Data) {
+      return res.data.Data
+    }
+    return null
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+/**
+ * 获取选品列表
+ */
+export const getFavoritesItem = async params => {
+  try {
+    let res = await getFavoritesItemRequest(params)
     if (res.data.Data) {
       return res.data.Data
     }

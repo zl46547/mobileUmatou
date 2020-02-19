@@ -80,3 +80,24 @@ export const getProductsRequest = (customerGuid, status) => {
     params: {customer_guid: customerGuid, status}
   })
 }
+
+/**
+ * 查看选品分类
+ */
+export const getFavoritesRequest = () => {
+  return axios({
+    method: 'get',
+    url: 'tkTools/getFavorites'
+  })
+}
+
+/**
+ * 查看选品列表
+ */
+export const getFavoritesItemRequest = params => {
+  return axios({
+    method: 'get',
+    url: 'tkTools/getFavoritesItem',
+    params
+  })
+}

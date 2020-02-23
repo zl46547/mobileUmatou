@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import store from '../vuex/store'
 import {USER} from '../vuex/types'
 // 按需加载,当渲染其他页面时才加载其组件,并缓存,减少首屏加载时间
+const AStudy = resolve => require(['@/views/AStudy/index.vue'], resolve)
 const AllOrders = resolve => require(['@/views/AllOrders/index.vue'], resolve)
 const AddressManage = resolve => require(['@/views/AddressManage'], resolve)
 const AddAddress = resolve => require(['@/views/AddAddress'], resolve)
@@ -26,6 +27,9 @@ const TKActivity = resolve => require(['@/views/TKTools/activity.vue'], resolve)
 const TKActivityDetail = resolve => require(['@/views/TKTools/activityDetail.vue'], resolve)
 const TKSkillBag = resolve => require(['@/views/TKTools/skillBag.vue'], resolve)
 const TKSearch = resolve => require(['@/views/TKSearch/index.vue'], resolve)
+const TKDetail = resolve => require(['@/views/TKDetail/index.vue'], resolve)
+const KeywordPanel = resolve => require(['@/views/TKSearch/components/KeywordPanel.vue'], resolve)
+const SearchResult = resolve => require(['@/views/TKSearch/components/SearchResult.vue'], resolve)
 const LLTools = resolve => require(['@/views/LLTools/index.vue'], resolve)
 const LLActivity = resolve => require(['@/views/LLTools/activity.vue'], resolve)
 const LLActivityDetail = resolve => require(['@/views/LLTools/activityDetail.vue'], resolve)
@@ -39,6 +43,10 @@ const router = new Router({
   routes: [
     {
       path: '/',
+      component: AStudy
+    },
+    {
+      path: '/home',
       name: '首页',
       component: Home,
       meta: {
@@ -157,15 +165,28 @@ const router = new Router({
     {
       path: '/TKTools',
       name: '淘客商品列表',
-      component: TKTools,
-      meta: {
-        requireAuth: true
-      }
+      component: TKTools
+    },
+    {
+      path: '/TKDetail',
+      name: '淘客商品详情',
+      component: TKDetail
     },
     {
       path: '/TKSearch',
       name: '淘客商品搜索',
-      component: TKSearch
+      component: TKSearch,
+      redirect: '/TKSearch/keyword',
+      children: [
+        {
+          path: 'keyword',
+          component: KeywordPanel
+        },
+        {
+          path: 'result',
+          component: SearchResult
+        }
+      ]
     },
     {
       path: '/TKActivity',

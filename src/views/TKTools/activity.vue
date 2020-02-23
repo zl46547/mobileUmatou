@@ -24,7 +24,6 @@
   import {List, Row, Col, Button, Checkbox, CheckboxGroup} from 'vant'
   import Search from '../../common/Search'
   import {
-    deleteProducts,
     getFavorites,
     getFavoritesItem
   } from './service'
@@ -42,8 +41,8 @@
     },
     data() {
       return {
-        favorites:[],
-        favoritesItem:[],
+        favorites: [],
+        favoritesItem: [],
         topicToday: [],
         topicPrevious: [],
         selected: []
@@ -52,28 +51,20 @@
     created() {
       this.initTable()
     },
-    filters: {
-      formatTime(value) {
-        if (!value) {
-          return null
-        }
-        return dayjs(value).format('YYYY-MM-DD')
-      }
-    },
     methods: {
       toSkillDetail() {
         this.$router.push({ name: '锦囊' })
       },
       async initTable() {
         let favoritesRes = await getFavorites()
-        if(!favoritesRes.results){
+        if (!favoritesRes.results) {
           return favoritesRes
         }
         this.favorites = favoritesRes.results.tbk_favorites
         let getFavoritesItemRes = await getFavoritesItem({
-          favorites_id:this.favorites[0].favorites_id
+          favorites_id: this.favorites[0].favorites_id
         })
-        if(getFavoritesItemRes.results){
+        if (getFavoritesItemRes.results) {
           this.favoritesItem = getFavoritesItemRes.results.uatm_tbk_item
         }
         // getProducts(customerGuid, true).then(res => {
@@ -83,25 +74,6 @@
         //     this.$refs.activityContent.scrollTop = this.$store.state.common.scrollTop
         //   })
         // })
-      },
-      getStatus({deadline}) {
-        return dayjs(deadline).diff(new Date(), 'days') < 0
-      },
-      handleCheckAll() {
-        if (this.selected.length > 0) {
-          this.selected = []
-        } else {
-          this.selected = this.table
-        }
-      },
-      handleDelete() {
-        let id = this.selected.map(item => item._id)
-        deleteProducts({id}).then(res => {
-          this.initTable()
-        })
-      },
-      addProduct() {
-        this.$router.push({name: '淘客商品添加'})
       }
     }
   }

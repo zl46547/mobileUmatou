@@ -5,7 +5,9 @@
       <i class="iconfont icon-search"></i>
       <Field placeholder="请输入商品名称"
              clearable
-             v-model="keywords"
+             v-model="keyword"
+             autofocus
+             @keyup.enter="handleSearch"
       />
     </div>
     <div class="search-btn" @click="handleSearch()">搜索</div>
@@ -15,27 +17,30 @@
 <script type="text/ecmascript-6">
   import { Field } from 'vant'
   import {
-    MATERIAL_SEARCH_RESULT_REQUEST,
-    MATERIAL_SEARCH_RESULT,
-    HISTORY_SEARCH
+    HISTORY_SEARCH,
+    MATERIAL_SEARCH_RESULT
   } from '../../../vuex/types'
+  import {materialSearch} from '../service'
   export default {
-    props: {
-    },
     data() {
       return {
-        keywords: null
-      }
-    },
-    watch:{
-      keywords(value){
-        if(!value){
-          this.$store.commit(MATERIAL_SEARCH_RESULT, null)
-        }
+        keyword: null
       }
     },
     components: {
       Field
+    },
+    watch: {
+      keyword: {
+        immediate: true,
+        handler(value) {
+          if (!value) {
+            this.$router.replace({
+              path: '/TKSearch/keyword'
+            })
+          }
+        }
+      }
     },
     methods: {
       goBack() {
@@ -45,15 +50,19 @@
        * 点击搜索
        */
       handleSearch() {
-        if (!this.keywords) {
+        if (!this.keyword) {
           return false
         }
-        let params = {
-          keyword: this.keywords,
-        }
-        this.$store.dispatch(MATERIAL_SEARCH_RESULT_REQUEST, params)
-        this.$store.commit(HISTORY_SEARCH, this.keywords)
-      },
+        materialSearch({keyword: this.keyword}).then(res => {
+          if (res.result_list) {
+            this.$store.commit(MATERIAL_SEARCH_RESULT, res.result_list.map_data)
+            this.$store.commit(HISTORY_SEARCH, this.keyword)
+            this.$router.push({
+              path: '/TKSearch/result'
+            })
+          }
+        })
+      }
     }
   }
 </script>

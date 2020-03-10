@@ -10,6 +10,8 @@ import VConsole from 'vconsole'
 import './assets/font/index.css'
 // 全局消息组件
 import Message from './common/Message/index.js'
+// 全局Loading组件
+import Loading from './common/Loading/index.js'
 
 if (process.env.NODE_ENV !== 'production') {
   /* eslint-disable no-new */
@@ -17,6 +19,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 Vue.use(Message)
+Vue.use(Loading)
 Vue.use(lazyLoad, {
   preLoad: 3.3,
   attempt: 1,

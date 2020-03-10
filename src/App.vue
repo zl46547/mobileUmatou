@@ -3,7 +3,7 @@
     <transition name="page-slide">
       <router-view class="position-div"></router-view>
     </transition>
-    <Loading v-show="fetchLoading"></Loading>
+    <!--<Loading v-show="fetchLoading"></Loading>-->
   </div>
 </template>
 `

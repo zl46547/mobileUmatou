@@ -1,5 +1,5 @@
 <template lang="html">
-  <div id="loading">
+  <div id="loading" v-if="visible">
     <div class="spinner">
       <div class="bounce1"></div>
       <div class="bounce2"></div>
@@ -9,7 +9,14 @@
 </template>
 
 <script type="text/ecmascript-6">
-export default {}
+export default {
+  props: {
+    visible: {
+      default: false,
+      type: Boolean
+    }
+  }
+}
 </script>
 
 <style lang="less" scoped>

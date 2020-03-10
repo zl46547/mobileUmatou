@@ -27,7 +27,6 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import { addGoods } from '../service'
   export default {
     props: {
       productItem: {

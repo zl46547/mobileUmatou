@@ -115,12 +115,12 @@
           return false
         }
         this.timeout = 10
+        copy(item.note)
         copyCode({
           id: item._id,
           helpEachUser: this.helpEachUser
         }).then(res => {
           this.initTable()
-          copy(item.note)
           setTimeout(() => {
             this.timeout = 0
           }, 10000)

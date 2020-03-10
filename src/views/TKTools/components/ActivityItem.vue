@@ -34,10 +34,10 @@
     data() {
       return {}
     },
-    filters:{
-      formatCouponValue(value){
+    filters: {
+      formatCouponValue(value) {
         let startIndex = value.indexOf('减') + 1
-        return value.substring(startIndex,value.length-1)
+        return value.substring(startIndex, value.length - 1)
       }
     },
     props: {
@@ -50,8 +50,8 @@
         let scrollTop = this.$parent.$refs.activityContent.scrollTop
         this.$store.commit(types.SCROLL_TOP, scrollTop)
         this.$router.push({
-          name: '活动详情',
-          query: {id: this.detail._id}
+          name: '淘客商品详情',
+          query: {numIid: this.detail.num_iid}
         })
       }
     },

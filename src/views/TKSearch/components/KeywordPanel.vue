@@ -24,11 +24,11 @@
     },
     methods: {
       handleKeyWord(val) {
-        this.$parent.$refs.searchBar.keywords = val
+        this.$parent.$refs.searchBar.keyword = val
         this.$parent.$refs.searchBar.handleSearch()
       },
-      handleDelete(){
-        this.$store.commit(HISTORY_SEARCH,null)
+      handleDelete() {
+        this.$store.commit(HISTORY_SEARCH, null)
       }
     }
   }

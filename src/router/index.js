@@ -26,6 +26,7 @@ const TKActivity = resolve => require(['@/views/TKTools/activity.vue'], resolve)
 const TKActivityDetail = resolve => require(['@/views/TKTools/activityDetail.vue'], resolve)
 const TKSkillBag = resolve => require(['@/views/TKTools/skillBag.vue'], resolve)
 const TKSearch = resolve => require(['@/views/TKSearch/index.vue'], resolve)
+const TKDetail = resolve => require(['@/views/TKDetail/index.vue'], resolve)
 const LLTools = resolve => require(['@/views/LLTools/index.vue'], resolve)
 const LLActivity = resolve => require(['@/views/LLTools/activity.vue'], resolve)
 const LLActivityDetail = resolve => require(['@/views/LLTools/activityDetail.vue'], resolve)
@@ -166,6 +167,11 @@ const router = new Router({
       path: '/TKSearch',
       name: '淘客商品搜索',
       component: TKSearch
+    },
+    {
+      path: '/TKDetail',
+      name: '淘客商品详情',
+      component: TKDetail
     },
     {
       path: '/TKActivity',

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import api from './http/api.js' // http请求
+import api from '../../http/api.js' // http请求
 import lazyLoad from 'vue-lazyload'
 import VConsole from 'vconsole'
 import 'vant/lib/index.css'

@@ -1,5 +1,4 @@
 import { Toast } from 'vant'
-import router from '../router'
 
 class BaseAxiosHelper {
   /**
@@ -54,9 +53,6 @@ class BaseAxiosHelper {
           duration: 2000,
           message: '身份过期，请重新登录'
         })
-        setTimeout(() => {
-          router.push('/login')
-        }, 2000)
         break
       default:
         Toast.fail(`${error || '未知错误'}`)

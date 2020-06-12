@@ -5,7 +5,10 @@
                 <i class="iconfont icon-add"></i>
                 添加口令
             </Button>
-            <i class="iconfont icon-empty" v-if="table.length<=0"></i>
+            <div class="empty-list">
+                <i class="iconfont icon-empty" v-if="table.length<=0"></i>
+                <p>暂无数据~</p>
+            </div>
             <List
                     finished-text="没有更多了"
             >
@@ -34,7 +37,11 @@
                         <Button type="info"
                                 @click="handleDelete(item._id)"
                                 v-if="helpEachUser.nickName === item.nickName"
-                        >删除</Button>
+                        >删除口令</Button>
+                        <Button type="info"
+                                @click="handleShare(item._id)"
+                                v-if="helpEachUser.nickName === item.nickName"
+                        >口令分享</Button>
                     </div>
                 </div>
             </List>
@@ -66,6 +73,7 @@
   import {getProducts, deleteProducts, addProduct, copyCode} from './service'
   import copy from 'copy-to-clipboard'
   import dayjs from 'dayjs'
+  import ShareConfig from '../../../../util/share'
 
   export default {
     components: {
@@ -85,8 +93,23 @@
     },
     created() {
       this.initTable()
+      const shareParams = {
+        title: '标题' || '',
+        desc: '描述' || '',
+        link: `${window.location.origin}${window.location.pathname}#/?id=${this.$route.query.id}`,
+        imgUrl: 'https://pics2.baidu.com/feed/241f95cad1c8a786f4cd4644116a073b71cf507a.jpeg' || ''
+      }
+      ShareConfig.init(
+        shareParams,
+        this.shareSuccess
+      ).execute()
     },
     methods: {
+      shareSuccess (status, data) {
+        if (status) {
+          this.$toast({ type: "success", message: `分享${data.type}成功！` })
+        }
+      },
       beforeAdd(){
         let helpEachUserStr = localStorage.getItem('helpEachUser')
         this.helpEachUser = helpEachUserStr ? JSON.parse(helpEachUserStr) : null
@@ -182,13 +205,21 @@
             flex: 1;
             background-color: #fff;
             overflow-y: auto;
-            .icon-empty{
+            .empty-list{
                 position: absolute;
-                font-size: 10rem;
                 color: #ccc;
                 top: 50%;
                 left: 50%;
-                transform:translate(-50%,-50%)
+                transform:translate(-50%,-50%);
+                .icon-empty{
+                    font-size: 10rem;
+                }
+                p{
+                    text-align: center;
+                    transform:translateX(-10%);
+                    margin-top: 5px;
+                    font-size: 1.3rem;
+                }
             }
             .user-info{
                 display: flex;

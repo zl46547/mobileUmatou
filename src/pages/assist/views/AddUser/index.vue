@@ -62,6 +62,8 @@
     },
     methods: {
       onAfterRead(file) {
+        file.status = 'uploading';
+        file.message = '上传中...';
         let formdata = new FormData()// 创建form对象
         this.createImage(file.file, (afterCompress) => {
           formdata.append('file', afterCompress)
@@ -119,7 +121,7 @@
         }
         localStorage.setItem('helpEachUser', JSON.stringify(this.form))
         this.$toast.success('添加成功')
-        this.$router.replace({path: '/helpEach'})
+        this.$router.replace({path: '/'})
       }
     }
   }

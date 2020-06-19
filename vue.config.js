@@ -44,6 +44,8 @@ module.exports = {
         }
     },
     devServer: {
+        port: 8080,
+        disableHostCheck: true,
         proxy: {
             '/api': {    //将www.exaple.com印射为/apis
                 // target: 'http://192.168.1.101:5000',  // 家里mac

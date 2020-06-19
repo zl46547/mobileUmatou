@@ -4,6 +4,7 @@ import { getWxJsSdk } from "./wxConfig"
 export default class Share {
   constructor (data, cb) {
     this.shareData = data
+    debugger
     // this.isForbidden = isForbidden
     this.cb = cb
   }
@@ -21,29 +22,31 @@ export default class Share {
   }
 
   execute () {
-    if (this.isWx()) {
-      if (wx.miniProgram) {
-        this.setMiniProgramShare()
-      }
-      return this.onWxConfig()
-    } else {
-      return Promise.resolve()
-    }
+    this.onWxConfig()
+    // if (this.isWx()) {
+    //   if (wx.miniProgram) {
+    //     this.setMiniProgramShare()
+    //   }
+    //   return this.onWxConfig()
+    // } else {
+    //   return Promise.resolve()
+    // }
   }
 
   async onWxConfig () {
     const url = window.location.href.split("#")[0]
     const data = await getWxJsSdk(url)
-    if (data.Error === 0) {
-      const wxConfigs = data.Data
+    if (data.status === 200) {
+      const wxConfigs = data.data
       wx.config({
         debug: false,
-        appId: wxConfigs.AppId,
-        timestamp: wxConfigs.Timestamp,
-        nonceStr: wxConfigs.Noncestr,
-        signature: wxConfigs.Signature,
+        appId: wxConfigs.appId,
+        timestamp: wxConfigs.timestamp,
+        nonceStr: wxConfigs.nonceStr,
+        signature: wxConfigs.signature,
         jsApiList: [
           "onMenuShareTimeline",
+          "onMenuShareQQ",
           "onMenuShareAppMessage",
           "showOptionMenu",
           "hideMenuItems",
@@ -64,7 +67,7 @@ export default class Share {
       wx.hideMenuItems({
         menuList: [
           "menuItem:share:timeline",
-          "menuItem:share:qq",
+          // "menuItem:share:qq",
           "menuItem:share:weiboApp",
           "menuItem:share:facebook",
           "menuItem:share:QZone",

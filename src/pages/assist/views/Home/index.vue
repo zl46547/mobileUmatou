@@ -94,10 +94,10 @@
     created() {
       this.initTable()
       const shareParams = {
-        title: '标题' || '',
-        desc: '描述' || '',
-        link: `${window.location.origin}${window.location.pathname}#/?id=${this.$route.query.id}`,
-        imgUrl: 'https://pics2.baidu.com/feed/241f95cad1c8a786f4cd4644116a073b71cf507a.jpeg' || ''
+        title: '标题',
+        desc: '描述',
+        link: `${window.location.origin}${window.location.pathname}#/`,
+        imgUrl: 'https://www.baidu.com/img/flexible/logo/pc/result@2.png' || ''
       }
       ShareConfig.init(
         shareParams,
@@ -105,6 +105,7 @@
       ).execute()
     },
     methods: {
+
       shareSuccess (status, data) {
         if (status) {
           this.$toast({ type: "success", message: `分享${data.type}成功！` })

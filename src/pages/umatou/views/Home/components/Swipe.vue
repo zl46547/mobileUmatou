@@ -1,13 +1,15 @@
 <template>
-  <div id="adverise" v-if="adverseList">
-    <Swipe :autoplay="4000" @change="onChange">
-      <SwipeItem v-for="k in adverseList" :key="k.Id">
+  <div class="swipe-wrap">
+    <div class="swipe-wrap-content" v-if="adverseList">
+      <Swipe :autoplay="4000" @change="onChange">
+        <SwipeItem v-for="k in adverseList" :key="k.Id">
           <img :src="k.PicUrl" @click="goToIndexAdv(k.JumpValue)">
-      </SwipeItem>
-      <div class="custom-indicator" slot="indicator">
-        {{ current + 1 }}/{{adverseList.length}}
-      </div>
-    </Swipe>
+        </SwipeItem>
+        <div class="custom-indicator" slot="indicator">
+          {{ current + 1 }}/{{adverseList.length}}
+        </div>
+      </Swipe>
+    </div>
   </div>
 </template>
 <script type="text/ecmascript-6">
@@ -68,23 +70,28 @@
 
 <style lang="less" scoped>
   @import "../../../../../less/variables";
-
-  #adverise {
+  .swipe-wrap{
     width: 100%;
-    position: relative;
-    img {
-      display: block;
-      width: 100%;
-      cursor: pointer;
-    }
-    .custom-indicator {
-      position: absolute;
-      right: 5rem/@baseFontSize;
-      bottom: 5rem/@baseFontSize;
-      padding: 2rem/@baseFontSize 5rem/@baseFontSize;
-      color: #fff;
-      font-size: 20rem/@baseFontSize;
-      background: rgba(0, 0, 0, 0.1);
+    background: linear-gradient(#57bc2f 10%, #fff 80%);
+    .swipe-wrap-content {
+      width: 90%;
+      margin: auto;
+      position: relative;
+      img {
+        border-radius: 1.5rem;
+        display: block;
+        width: 100%;
+        cursor: pointer;
+      }
+      .custom-indicator {
+        position: absolute;
+        right: 15rem/@baseFontSize;
+        bottom: 15rem/@baseFontSize;
+        padding: 2rem/@baseFontSize 5rem/@baseFontSize;
+        color: #fff;
+        font-size: 20rem/@baseFontSize;
+        background: rgba(0, 0, 0, 0.1);
+      }
     }
   }
 </style>

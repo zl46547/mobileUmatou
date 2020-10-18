@@ -39,8 +39,7 @@
   @import "../../../../../less/variables";
 
   .product {
-    margin-top: 80rem/@baseFontSize;
-    flex: 1;
+    height: calc(100vh - 44px - 5rem);
     overflow-y: auto;
     overflow-x: hidden;
 

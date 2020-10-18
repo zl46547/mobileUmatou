@@ -72,6 +72,8 @@
        */
       showModal () {
         this.openModal = true
+        let defaultSelect = this.couponList.find(item=>item.couponName === this.couponSelected)
+        this.tempSelected =defaultSelect?defaultSelect:''
       },
       formatCouponList (couponList) {
         let useful = []

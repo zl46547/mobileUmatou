@@ -1,9 +1,6 @@
 <template>
   <header  @click="handleCityChange">
-    <div class="address">
-      苏州市
-    </div>
-    <i class="iconfont icon-arrow-down"></i>
+    <span class="logo">优鲜码头</span>
     <div class="search" @click.stop="goToSearch">
       <img src="../../../../assets/images/search.png"/>
     </div>
@@ -33,28 +30,24 @@
     position: absolute;
     left: 0;
     top: 0;
-    background-color: #fff;
     width:100%;
     height: 100rem/@baseFontSize;
     display: flex;
     align-items: center;
     z-index: 999;
-    border-bottom: 1px solid rgba(219, 219, 219, 0.48);
-    .address{
+    background-color: #57bc2f;
+    .logo{
       margin-left: 10rem/@baseFontSize;
-      font-size: 26rem/@baseFontSize;
-      white-space: nowrap;
-    }
-    .icon-arrow-down {
-      padding-left: 7rem/@baseFontSize;
-      font-size: 30rem/@baseFontSize;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #fff;
     }
     .search {
       margin-left: 10rem/@baseFontSize;
       margin-right: 10rem/@baseFontSize;
       cursor: text;
       border-radius: 90rem/@baseFontSize;
-      background-color: #eee;
+      background-color: #fff;
       flex: 1;
       height: 70%;
       display: flex;

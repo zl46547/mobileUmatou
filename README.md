@@ -1,7 +1,7 @@
 # 前言
 本项目是基于vue2.0开发的一个移动端兼PC端在线网上购物平台,模仿某生鲜宅送平台，基本实现了从商品的浏览、商品分类、商品的详情、加入购物车、提交订单、支付、查看订单等一套完整的购物流程，部分小功能后期逐步完善。
 
-该项目是由(vue2.0 + vuex + vue-router + axios + webpack + less)完成的，因为是第一次使用前端框架做项目，有些地方做的还不是那么完美还存在一些小BUG，不过后期我会努力完善的.
+该项目是由(vue2.0 + vuex + vue-router + axios + webpack + less)完成的.
 
 写完这个项目我学到了很多收获了很多知识尤其对vue组件指令、渲染数据、计算属性、绑定事件以及vuex状态管理、vue-router路由的使用有了一定了解.
 
@@ -86,8 +86,8 @@
 ## 安装项目依赖
 npm install 
 
-## 启动服务 浏览器本地访问http://localhost:8080
-npm run dev
+## 启动服务 浏览器本地访问http://localhost:8080/umatou.html#/
+npm run serve
 
 ## 编译打包
 npm run build

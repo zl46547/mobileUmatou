@@ -48,7 +48,6 @@
             groupName: groupItemList[0].productDetail.financeCName
           }
         })
-        console.log(this.groupOrderList)
       }
     }
   }

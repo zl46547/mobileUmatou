@@ -7,6 +7,13 @@ module.exports = {
     outputDir: process.env.DIST_NAME,
     assetsDir: 'static',
     pages: {
+        assist: {
+            entry: './src/pages/assist/assist.js',
+            title: '助力',
+            template: 'public/assist.html',
+            filename: 'assist.html',
+            chunks: ['chunk-vendors', 'chunk-common', 'assist']
+        },
         lianlian: {
             entry: './src/pages/lianlian/lianlian.js',
             title: '联联周边',
@@ -37,6 +44,8 @@ module.exports = {
         }
     },
     devServer: {
+        port: 8080,
+        disableHostCheck: true,
         proxy: {
             '/api': {    //将www.exaple.com印射为/apis
                 // target: 'http://192.168.1.101:5000',  // 家里mac

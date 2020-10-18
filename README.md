@@ -22,7 +22,7 @@
 > [LESS] Less CSS预编译语言，扩充了 CSS 语言,增加了诸如变量、混合(mixin)、运算、函数等。
 
 # 项目预览
-:point_right: [在线预览]http://zl46547.coding.me/umaTouMobile<br>
+:point_right: [在线预览]http://www.umatou.top/umatou.html#/<br>
 
 # 基本功能
 > 首页:

@@ -109,12 +109,10 @@
             background-color: #fff;
             margin-bottom: 8rem/@baseFontSize;
         }
-        .swipe {
+        .swiper-item {
             width: 100%;
-            .swiper-item {
-                display: flex;
-                flex-wrap: wrap;
-            }
+            display: flex;
+            flex-wrap: wrap;
         }
         .menuList-item {
             width: 20%;

@@ -41,7 +41,6 @@ class BaseAxiosHelper {
       return Promise.reject(error)
     }
     const { status, data: { Message } } = error.response
-    console.log(error.response)
     switch (status) {
       case 500:
         if (Message) {

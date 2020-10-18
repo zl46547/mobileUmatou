@@ -68,7 +68,7 @@
         if (this.pullDown) {
           this.$refs.statisticsContainer.style.maxHeight = '2.6rem'
         } else {
-          this.$refs.statisticsContainer.style.maxHeight = '10rem'
+          this.$refs.statisticsContainer.style.maxHeight = '13rem'
         }
         this.pullDown = !this.pullDown
       },
@@ -155,8 +155,7 @@
 <style lang="less" scoped>
 
   .rate {
-    margin-top: 4rem;
-    flex: 1;
+    height: calc(100vh - 44px - 5rem);
     overflow-y: auto;
     overflow-x: hidden;
 
@@ -178,11 +177,11 @@
     }
     .statistics-container {
       transition: all 0.3s ease-in;
-      overflow: auto;
       max-height: 2.6rem;
       display: flex;
       align-items: center;
       flex-wrap: wrap;
+      overflow: auto;
       padding: 1rem;
       padding-bottom: 0;
       .tag-item {

@@ -64,13 +64,13 @@
     border-radius: 8rem/@baseFontSize;
     .useful-bgc {
       cursor: pointer;
-      background: linear-gradient(to bottom right, #ff6058, #ff3fb3);
+      background: linear-gradient(to bottom right, #57bc2f, #a4ec96);
       .content-right {
         &:after {
-          box-shadow: 0 3px #d2288e inset;
+          box-shadow: 0 3px #57bc2f inset;
         }
         &:before {
-          box-shadow: 0 -3px #ce2f37 inset;
+          box-shadow: 0 -3px #57bc2f inset;
         }
       }
     }
@@ -164,7 +164,7 @@
           transform: rotate(135deg);
           border-width: 25px;
           border-style: solid;
-          border-color: transparent #d60000 transparent transparent;
+          border-color: transparent #57bc2f transparent transparent;
         }
       }
     }

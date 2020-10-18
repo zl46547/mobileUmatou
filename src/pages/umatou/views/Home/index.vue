@@ -44,6 +44,7 @@
       }
     },
     mounted () {
+      console.log(this.$router)
       this.contentEle = this.$refs.content
       this.contentEle.addEventListener('scroll', this.getScrollTop)
       let scrollTop = this.$store.state.common.scrollTop

@@ -4,7 +4,6 @@ import { getWxJsSdk } from "./wxConfig"
 export default class Share {
   constructor (data, cb) {
     this.shareData = data
-    debugger
     // this.isForbidden = isForbidden
     this.cb = cb
   }

@@ -30,7 +30,7 @@ module.exports = {
         },
         alliance: {
             entry: './src/pages/alliance/alliance.js',
-            title: '联盟',
+            title: '小陆严选',
             template: 'public/alliance.html',
             filename: 'alliance.html',
             chunks: ['chunk-vendors', 'chunk-common', 'alliance']
